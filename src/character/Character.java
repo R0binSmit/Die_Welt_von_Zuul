@@ -2,7 +2,12 @@ package character;
 
 import java.util.LinkedList;
 
+import gegenstand.Brustplatte;
 import gegenstand.Gegenstand;
+import gegenstand.Hand;
+import gegenstand.Helm;
+import gegenstand.Hose;
+import gegenstand.Schuhe;
 import ort.Raum;
 import zustand.Gesund;
 import zustand.GesundheitsZustand;
@@ -14,6 +19,12 @@ public abstract class Character {
 	protected LinkedList<Gegenstand> gegenstaende;
 	protected String name;
 	protected String beschreibung;
+	protected Hand left;
+	protected Hand right;
+	protected Helm helm;
+	protected Brustplatte brust;
+	protected Hose hose;
+	protected Schuhe schuhe;
 
 	@SuppressWarnings("unchecked")
 	public Character(int maxTraglast, Raum raum, LinkedList<Gegenstand> gegenstaende) {

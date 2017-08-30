@@ -1,6 +1,6 @@
 package gegenstand;
 
-public class Gegenstand {
+public abstract class Gegenstand {
 	private String name, beschreibung;
 	private int gewicht;
 	private boolean essbar = false;
