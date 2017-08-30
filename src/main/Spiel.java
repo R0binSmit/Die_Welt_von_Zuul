@@ -110,6 +110,10 @@ public class Spiel {
 			spieler.toeten(spieler);
 		} else if (befehlswort.equalsIgnoreCase("use")) {
 			nutzeLandschaft(befehl.gibZweitesWort());
+		} else if (befehlswort.equalsIgnoreCase("smallRevival")) {
+			spieler.kleineWiederbelebung(spieler);
+		} else if (befehlswort.equalsIgnoreCase("largeRevial")) {
+			spieler.grosseWiederbelebung(spieler);
 		}
 		return moechteBeenden;
 	}
