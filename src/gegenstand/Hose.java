@@ -1,7 +1,9 @@
 package gegenstand;
 
 public class Hose extends Gegenstand {
-	public Hose(String name, String beschreibung, int gewicht) {
+	private double block;
+	public Hose(String name, String beschreibung, int gewicht, double block) {
 		super(name, beschreibung, gewicht);
+		this.block = block;
 	}
 }

@@ -41,12 +41,12 @@ public class Landkarte {
 		abstellkammer = new Raum("Die Abstellkammer", this);
 		raeume.add(abstellkammer);
 
-		regenschirm = new Waffe("Schirmy", "Ein pinker Regenschirm", 5);
+		regenschirm = new Waffe("Schirmy", "Ein pinker Regenschirm", 5, 10);
 		tasse = new Crafting("Tasse", "Auf Ihr Steht: '#1 Dad'", 2);
-		messer = new Waffe("Messer", "Es hat 'Made with Kinderarbeit' aufgedruckt", 1);
+		messer = new Waffe("Messer", "Es hat 'Made with Kinderarbeit' aufgedruckt", 1, 50);
 		erlenmeyerkolben = new Crafting("Erlenmeyerkolben", "Die Flüssigkeit darin riecht Alkoholisch", 3);
 		ventilator = new Crafting("Ventilator", "Für die schwitzige Jahreszeit", 30);
-		peitsche = new Waffe("Peitsche", "Sie hat 'BDSM' eingraviert", 10);
+		peitsche = new Waffe("Peitsche", "Sie hat 'BDSM' eingraviert", 10, 20);
 		muffin = new Nahrung("Muffin", "Er glitzert :O", 3);
 		muffin.setEssbar(true);
 
