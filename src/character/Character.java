@@ -13,8 +13,6 @@ public abstract class Character {
 	protected int maxTraglast, traglast;
 	protected LinkedList<Gegenstand> gegenstaende;
 	protected String name;
-	protected String test;
-	protected String cooleDinge;
 
 	@SuppressWarnings("unchecked")
 	public Character(int maxTraglast, Raum raum, LinkedList<Gegenstand> gegenstaende) {
