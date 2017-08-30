@@ -37,4 +37,8 @@ public class Gesund implements GesundheitsZustand {
 	public GesundheitsZustand grosseWiederbelebung() {
 		return instance;
 	}
+	
+	public String getName() {
+		return "Gesund";
+	}
 }
