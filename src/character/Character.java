@@ -24,7 +24,7 @@ public abstract class Character {
 	protected Helm helm;
 	protected Brustplatte brust;
 	protected Hose hose;
-	protected Schuhe schuhe;
+	protected Schuhe schu;
 
 	@SuppressWarnings("unchecked")
 	public Character(int maxTraglast, Raum raum, LinkedList<Gegenstand> gegenstaende) {
