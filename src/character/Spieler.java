@@ -22,6 +22,6 @@ public class Spieler extends Character {
 
 	@Override
 	public void interagieren() {
-		
+
 	}
 }

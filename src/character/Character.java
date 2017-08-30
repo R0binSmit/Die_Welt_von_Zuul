@@ -23,9 +23,9 @@ public abstract class Character {
 				: (LinkedList<Gegenstand>) gegenstaende.clone();
 		traglast = ermittleGewicht();
 	}
-	
+
 	public abstract void interagieren();
-	
+
 	public boolean gegenstandAufnehmen(Gegenstand gegenstand) {
 		if (traglast + gegenstand.getGewicht() <= maxTraglast) {
 			gegenstaende.add(gegenstand);
@@ -105,7 +105,7 @@ public abstract class Character {
 	public void kleineHeilung(Character character) {
 		character.zustand = character.zustand.kleineHeilung();
 	}
-	
+
 	public void grosseHeilung(Character character) {
 		character.zustand = character.zustand.grosseHeilung();
 	}
@@ -117,7 +117,7 @@ public abstract class Character {
 	public void schwerVerletzen(Character character) {
 		character.zustand = character.zustand.schwerVerletzen();
 	}
-	
+
 	public void toeten(Character character) {
 		character.zustand = character.zustand.toeten();
 	}

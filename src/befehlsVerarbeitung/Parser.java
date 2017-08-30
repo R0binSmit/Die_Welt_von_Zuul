@@ -1,4 +1,5 @@
 package befehlsVerarbeitung;
+
 import java.util.Scanner;
 
 /**
@@ -26,7 +27,7 @@ public class Parser {
 		befehle = new Befehlswoerter();
 		leser = new Scanner(System.in);
 	}
-	
+
 	public String getBefehle() {
 		return befehle.getBefehle();
 	}

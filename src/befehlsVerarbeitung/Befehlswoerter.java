@@ -10,8 +10,8 @@ package befehlsVerarbeitung;
 
 public class Befehlswoerter {
 	// ein konstantes Array mit den gültigen Befehlswörtern
-	private static final String gueltigeBefehle[] = { "go", "quit", "help",
-			"look", "take", "drop", "eat", "inventory", "heal", "hurt", "stab", "suicide" };
+	private static final String gueltigeBefehle[] = { "go", "quit", "help", "look", "take", "drop", "eat", "inventory",
+			"heal", "hurt", "stab", "suicide", "use" };
 
 	/**
 	 * Konstruktor - initialisiere die Befehlswörter.
@@ -19,7 +19,7 @@ public class Befehlswoerter {
 	public Befehlswoerter() {
 		// nichts zu tun momentan...
 	}
-	
+
 	public String getBefehle() {
 		StringBuilder sb = new StringBuilder("");
 		for (int i = 0; i < gueltigeBefehle.length; i++) {

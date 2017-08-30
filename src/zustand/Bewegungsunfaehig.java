@@ -1,18 +1,19 @@
 package zustand;
+
 public class Bewegungsunfaehig implements GesundheitsZustand {
-private static Bewegungsunfaehig instance = new Bewegungsunfaehig();
-	
+	private static Bewegungsunfaehig instance = new Bewegungsunfaehig();
+
 	private Bewegungsunfaehig() {
 	}
-	
+
 	public static Bewegungsunfaehig getInstance() {
 		return instance;
 	}
-	
+
 	public GesundheitsZustand kleineHeilung() {
 		return Verwundet.getInstance();
 	}
-	
+
 	public GesundheitsZustand grosseHeilung() {
 		return Gesund.getInstance();
 	}
@@ -24,7 +25,7 @@ private static Bewegungsunfaehig instance = new Bewegungsunfaehig();
 	public GesundheitsZustand schwerVerletzen() {
 		return Tod.getInstance();
 	}
-	
+
 	public GesundheitsZustand toeten() {
 		return Tod.getInstance();
 	}

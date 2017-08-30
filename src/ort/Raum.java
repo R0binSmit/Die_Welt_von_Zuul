@@ -1,8 +1,12 @@
 package ort;
+
+import gegenstand.Gegenstand;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import gegenstand.Gegenstand;
+import character.Spieler;
 
 /**
  * Diese Klasse modelliert Räume in der Welt von Zuul.
@@ -17,24 +21,27 @@ import gegenstand.Gegenstand;
  */
 public class Raum {
 	private String beschreibung;
+	private Landkarte land;
 	private HashMap<String, Raum> ausgaenge = new HashMap<String, Raum>();
 	private LinkedList<Gegenstand> gegenstaende = new LinkedList<Gegenstand>();
+	private ArrayList<Landscape> landschaft = new ArrayList<Landscape>();
 
 	/**
 	 * Erzeuge einen Raum mit einer Beschreibung. Ein Raum hat anfangs keine
 	 * Ausgänge.
 	 * 
 	 * @param beschreibung
-	 *            enthält eine Beschreibung in der Form "in einer Küche" oder
-	 *            "auf einem Sportplatz".
+	 *            enthält eine Beschreibung in der Form "in einer Küche" oder "auf
+	 *            einem Sportplatz".
 	 */
-	public Raum(String beschreibung) {
+	public Raum(String beschreibung, Landkarte land) {
 		this.beschreibung = beschreibung;
+		this.land = land;
 	}
 
 	/**
-	 * Definiere die Ausgänge dieses Raums. Jede Richtung führt entweder in
-	 * einen anderen Raum oder ist 'null' (kein Ausgang).
+	 * Definiere die Ausgänge dieses Raums. Jede Richtung führt entweder in einen
+	 * anderen Raum oder ist 'null' (kein Ausgang).
 	 * 
 	 * @param norden
 	 *            Der Nordeingang.
@@ -61,11 +68,16 @@ public class Raum {
 		}
 		return sb.toString();
 	}
-	
+
 	public void gegenstandAblegen(Gegenstand gegenstand) {
 		gegenstaende.add(gegenstand);
 	}
-	
+
+	public void landschaftBauen(Landscape landscape) {
+		landschaft.add(landscape);
+		landscape.setRaum(this);
+	}
+
 	public Gegenstand gegenstandAufheben(String name) {
 		for (Gegenstand gs : gegenstaende) {
 			if (gs.getName().equalsIgnoreCase(name)) {
@@ -75,7 +87,7 @@ public class Raum {
 		}
 		return null;
 	}
-	
+
 	public Gegenstand getGegenstand(String name) {
 		for (Gegenstand gs : gegenstaende) {
 			if (gs.getName().equalsIgnoreCase(name)) {
@@ -84,7 +96,22 @@ public class Raum {
 		}
 		return null;
 	}
-	
+
+	public Landscape getLandschaft(String name) {
+		for (Landscape ls : landschaft) {
+			if (ls.getName().equalsIgnoreCase(name)) {
+				return ls;
+			}
+		}
+		return null;
+	}
+
+	public void onEnterRoomEvent(Spieler spieler) {
+		for (Landscape ls : landschaft) {
+			ls.onEnterRoom(spieler);
+		}
+	}
+
 	public String gegenstaendeToString() {
 		StringBuilder sb = new StringBuilder("");
 		for (Gegenstand gegenstand : gegenstaende) {
@@ -93,11 +120,23 @@ public class Raum {
 		}
 		return sb.toString();
 	}
-	
+
+	public String landschaftToString() {
+		StringBuilder sb = new StringBuilder("");
+		for (Landscape landscape : landschaft) {
+			sb.append(landscape.getName());
+			sb.append(" ");
+		}
+		return sb.toString();
+	}
+
 	public String getLongDesciption() {
 		StringBuilder sb = new StringBuilder("");
 		sb.append("Sie sind ");
 		sb.append(gibBeschreibung());
+		sb.append(System.getProperty("line.separator"));
+		sb.append("Hier ist: ");
+		sb.append(landschaftToString());
 		sb.append(System.getProperty("line.separator"));
 		sb.append("Gegenstände: ");
 		sb.append(gegenstaendeToString());
@@ -112,5 +151,9 @@ public class Raum {
 	 */
 	public String gibBeschreibung() {
 		return beschreibung;
+	}
+
+	public Landkarte getLand() {
+		return land;
 	}
 }

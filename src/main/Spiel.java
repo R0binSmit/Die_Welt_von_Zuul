@@ -1,15 +1,18 @@
 package main;
+
 import befehlsVerarbeitung.Befehl;
 import befehlsVerarbeitung.Parser;
 import character.Spieler;
 import gegenstand.Gegenstand;
+import ort.Landkarte;
+import ort.Landscape;
 import ort.Raum;
 
 /**
- * Dies ist die Hauptklasse der Anwendung "Die Welt von Zuul".
- * "Die Welt von Zuul" ist ein sehr einfaches, textbasiertes Adventure-Game. Ein
- * Spieler kann sich in einer Umgebung bewegen, mehr nicht. Das Spiel sollte auf
- * jeden Fall ausgebaut werden, damit es interessanter wird!
+ * Dies ist die Hauptklasse der Anwendung "Die Welt von Zuul". "Die Welt von
+ * Zuul" ist ein sehr einfaches, textbasiertes Adventure-Game. Ein Spieler kann
+ * sich in einer Umgebung bewegen, mehr nicht. Das Spiel sollte auf jeden Fall
+ * ausgebaut werden, damit es interessanter wird!
  * 
  * Zum Spielen muss eine Instanz dieser Klasse erzeugt werden und an ihr die
  * Methode "spielen" aufgerufen werden.
@@ -25,64 +28,16 @@ import ort.Raum;
 public class Spiel {
 	private Parser parser;
 	private Spieler spieler;
+	private Landkarte land;
 
 	/**
 	 * Erzeuge ein Spiel und initialisiere die interne Raumkarte.
 	 */
 	public Spiel() {
-		raeumeAnlegen();
+		land = new Landkarte();
+		land.raeumeAnlegen();
 		parser = new Parser();
-	}
-
-	/**
-	 * Erzeuge alle Räume und verbinde ihre Ausgänge miteinander.
-	 */
-	private void raeumeAnlegen() {
-		Raum draussen, hoersaal, cafeteria, labor, buero, keller;
-		Gegenstand regenschirm, tasse, messer, erlenmeyerkolben, ventilator, peitsche, muffin;
-
-		// die Räume erzeugen
-		draussen = new Raum("vor dem Haupteingang der Universität");
-		hoersaal = new Raum("in einem Vorlesungssaal");
-		cafeteria = new Raum("in der Cafeteria der Uni");
-		labor = new Raum("in einem Rechnerraum");
-		buero = new Raum("im Verwaltungsbüro der Informatik");
-		keller = new Raum("im Keller des Rechenzentrums");
-		
-		regenschirm = new Gegenstand("Schirmy", "Ein pinker Regenschirm", 5);
-		tasse = new Gegenstand("Tasse", "Auf Ihr Steht: '#1 Dad'", 2);
-		messer = new Gegenstand("Messer", "Es hat 'Made with Kinderarbeit' aufgedruckt", 1);
-		erlenmeyerkolben = new Gegenstand("Erlenmeyerkolben", "Die Flüssigkeit darin riecht Alkoholisch", 3);
-		ventilator = new Gegenstand("Ventilator", "Für die schwitzige Jahreszeit", 30);
-		peitsche = new Gegenstand("Peitsche", "Sie hat 'BDSM' eingraviert", 10);
-		muffin = new Gegenstand("Muffin", "Er glitzert :O", 3);
-		muffin.setEssbar(true);
-
-		// die Ausgänge initialisieren
-		draussen.setzeAusgang("east", hoersaal);
-		draussen.setzeAusgang("south", labor);
-		draussen.setzeAusgang("west", cafeteria);
-		draussen.gegenstandAblegen(regenschirm);
-		
-		hoersaal.setzeAusgang("west", draussen);
-		hoersaal.gegenstandAblegen(tasse);
-		
-		cafeteria.setzeAusgang("east", draussen);
-		cafeteria.gegenstandAblegen(messer);
-		
-		labor.setzeAusgang("north", draussen);
-		labor.setzeAusgang("east", buero);
-		labor.setzeAusgang("down", keller);
-		labor.gegenstandAblegen(erlenmeyerkolben);
-		labor.gegenstandAblegen(muffin);
-		
-		buero.setzeAusgang("west", labor);
-		buero.gegenstandAblegen(ventilator);
-		
-		keller.setzeAusgang("up", labor);
-		keller.gegenstandAblegen(peitsche);
-		
-		spieler = new Spieler(100, draussen, null); // das Spiel startet draussen
+		spieler = new Spieler(100, land.getStartpoint(), null); // das Spiel startet draussen
 	}
 
 	/**
@@ -153,10 +108,12 @@ public class Spiel {
 			spieler.schwerVerletzen(spieler);
 		} else if (befehlswort.equalsIgnoreCase("suicide")) {
 			spieler.toeten(spieler);
+		} else if (befehlswort.equalsIgnoreCase("use")) {
+			nutzeLandschaft(befehl.gibZweitesWort());
 		}
 		return moechteBeenden;
 	}
-	
+
 	public void eat(String name) {
 		Gegenstand gs = spieler.eat(name);
 		if (gs != null) {
@@ -165,7 +122,14 @@ public class Spiel {
 			System.out.println("Gegenstand " + name + " existiert nicht oder ist nicht essbar!");
 		}
 	}
-	
+
+	public void nutzeLandschaft(String name) {
+		Landscape ls = spieler.getAktuellerRaum().getLandschaft(name);
+		if (ls != null) {
+			ls.onUse(spieler);
+		}
+	}
+
 	public void nimmGegenstand(String name) {
 		Gegenstand gs = spieler.getAktuellerRaum().getGegenstand(name);
 		if (gs != null) {
@@ -176,7 +140,7 @@ public class Spiel {
 			}
 		}
 	}
-	
+
 	public void legeGegenstandAb(String name) {
 		Gegenstand gs = spieler.gegenstandAblegen(name);
 		if (gs != null) {
@@ -199,7 +163,7 @@ public class Spiel {
 		System.out.println("Ihnen stehen folgende Befehle zur Verfügung:");
 		System.out.println("	" + parser.getBefehle());
 	}
-	
+
 	private void lookAround(String item) {
 		if (item != null) {
 			Gegenstand gs = spieler.getGegenstand(item);
@@ -215,8 +179,8 @@ public class Spiel {
 	}
 
 	/**
-	 * Versuche, den Raum zu wechseln. Wenn es einen Ausgang gibt, wechsele in
-	 * den neuen Raum, ansonsten gib eine Fehlermeldung aus.
+	 * Versuche, den Raum zu wechseln. Wenn es einen Ausgang gibt, wechsele in den
+	 * neuen Raum, ansonsten gib eine Fehlermeldung aus.
 	 */
 	private void wechsleRaum(Befehl befehl) {
 		if (!befehl.hatZweitesWort()) {
@@ -235,6 +199,7 @@ public class Spiel {
 		} else {
 			spieler.setAktuellerRaum(naechsterRaum);
 			System.out.println(spieler.getAktuellerRaum().getLongDesciption());
+			naechsterRaum.onEnterRoomEvent(spieler);
 		}
 	}
 

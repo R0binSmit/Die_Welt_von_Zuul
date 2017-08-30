@@ -1,4 +1,5 @@
 package befehlsVerarbeitung;
+
 /**
  * Objekte dieser Klasse halten Informationen über Befehle, die der Benutzer
  * eingegeben hat. Ein Befehl besteht momentan aus zwei Zeichenketten: einem
@@ -20,12 +21,12 @@ public class Befehl {
 	private String zweitesWort;
 
 	/**
-	 * Erzeuge ein Befehlsobjekt. Beide Wörter müssen angegeben werden, aber
-	 * jedes oder beide dürfen 'null' sein.
+	 * Erzeuge ein Befehlsobjekt. Beide Wörter müssen angegeben werden, aber jedes
+	 * oder beide dürfen 'null' sein.
 	 * 
 	 * @param erstesWort
-	 *            Das erste Wort des Befehls. Sollte 'null' sein, wenn dieser
-	 *            Befehl als nicht vom Spiel erkannt gekennzeichnet werden soll.
+	 *            Das erste Wort des Befehls. Sollte 'null' sein, wenn dieser Befehl
+	 *            als nicht vom Spiel erkannt gekennzeichnet werden soll.
 	 * @param zweitesWort
 	 *            Das zweite Wort des Befehls.
 	 */
@@ -45,8 +46,8 @@ public class Befehl {
 	}
 
 	/**
-	 * @return Das zweite Wort dieses Befehls. Liefere 'null', wenn es kein
-	 *         zweites Wort gab.
+	 * @return Das zweite Wort dieses Befehls. Liefere 'null', wenn es kein zweites
+	 *         Wort gab.
 	 */
 	public String gibZweitesWort() {
 		return zweitesWort;

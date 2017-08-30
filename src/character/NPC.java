@@ -12,6 +12,6 @@ public class NPC extends Character {
 
 	@Override
 	public void interagieren() {
-		
+
 	}
 }
