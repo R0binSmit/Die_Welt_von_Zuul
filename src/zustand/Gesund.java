@@ -9,18 +9,23 @@ public class Gesund implements GesundheitsZustand {
 		return instance;
 	}
 	
-	@Override
-	public GesundheitsZustand heilen() {
+	public GesundheitsZustand kleineHeilung() {
+		return getInstance();
+	}
+	
+	public GesundheitsZustand grosseHeilung() {
 		return getInstance();
 	}
 
-	@Override
 	public GesundheitsZustand leichtVerletzen() {
 		return Verwundet.getInstance();
 	}
 
-	@Override
 	public GesundheitsZustand schwerVerletzen() {
 		return Bewegungsunfaehig.getInstance();
+	}
+	
+	public GesundheitsZustand toeten() {
+		return Tod.getInstance();
 	}
 }

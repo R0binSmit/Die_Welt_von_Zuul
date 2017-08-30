@@ -9,18 +9,23 @@ private static Bewegungsunfaehig instance = new Bewegungsunfaehig();
 		return instance;
 	}
 	
-	@Override
-	public GesundheitsZustand heilen() {
+	public GesundheitsZustand kleineHeilung() {
 		return Verwundet.getInstance();
 	}
-
-	@Override
-	public GesundheitsZustand leichtVerletzen() {
-		return getInstance();
+	
+	public GesundheitsZustand grosseHeilung() {
+		return Gesund.getInstance();
 	}
 
-	@Override
+	public GesundheitsZustand leichtVerletzen() {
+		return Tod.getInstance();
+	}
+
 	public GesundheitsZustand schwerVerletzen() {
-		return getInstance();
+		return Tod.getInstance();
+	}
+	
+	public GesundheitsZustand toeten() {
+		return Tod.getInstance();
 	}
 }
