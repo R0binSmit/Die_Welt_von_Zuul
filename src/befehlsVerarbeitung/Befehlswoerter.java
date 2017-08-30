@@ -11,7 +11,7 @@ package befehlsVerarbeitung;
 public class Befehlswoerter {
 	// ein konstantes Array mit den gültigen Befehlswörtern
 	private static final String gueltigeBefehle[] = { "go", "quit", "help", "look", "take", "drop", "eat", "inventory",
-			"heal", "hurt", "stab", "suicide", "use" };
+			"heal", "hurt", "stab", "suicide", "use", "smallRevival", "largeRevial" };
 
 	/**
 	 * Konstruktor - initialisiere die Befehlswörter.
