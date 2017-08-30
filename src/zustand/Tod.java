@@ -37,4 +37,8 @@ public class Tod implements GesundheitsZustand {
 	public GesundheitsZustand grosseWiederbelebung() {
 		return Gesund.getInstance();
 	}
+	
+	public String getName() {
+		return "Tod";
+	}
 }

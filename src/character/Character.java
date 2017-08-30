@@ -97,7 +97,7 @@ public abstract class Character {
 		sb.append(maxTraglast);
 		sb.append(System.getProperty("line.separator"));
 		sb.append("Zustand: ");
-		sb.append(zustand.getClass().getName());
+		sb.append(zustand.getName());
 		sb.append(System.getProperty("line.separator"));
 		for (Gegenstand gs : gegenstaende) {
 			sb.append(i);

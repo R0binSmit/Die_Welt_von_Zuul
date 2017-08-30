@@ -8,4 +8,5 @@ public interface GesundheitsZustand {
 	GesundheitsZustand toeten();
 	GesundheitsZustand kleineWiederbelebung();
 	GesundheitsZustand grosseWiederbelebung();
+	String getName();
 }
