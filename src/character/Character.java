@@ -102,16 +102,24 @@ public abstract class Character {
 		return sb.toString();
 	}
 
-	public void heilen() {
-		zustand = zustand.heilen();
+	public void kleineHeilung(Character character) {
+		character.zustand = character.zustand.kleineHeilung();
+	}
+	
+	public void grosseHeilung(Character character) {
+		character.zustand = character.zustand.grosseHeilung();
 	}
 
-	public void leichtVerletzen() {
-		zustand = zustand.leichtVerletzen();
+	public void leichtVerletzen(Character character) {
+		character.zustand = character.zustand.leichtVerletzen();
 	}
 
-	public void schwerVerletzen() {
-		zustand = zustand.schwerVerletzen();
+	public void schwerVerletzen(Character character) {
+		character.zustand = character.zustand.schwerVerletzen();
+	}
+	
+	public void toeten(Character character) {
+		character.zustand = character.zustand.toeten();
 	}
 
 	public Raum getAktuellerRaum() {
