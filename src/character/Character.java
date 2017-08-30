@@ -14,6 +14,7 @@ public abstract class Character {
 	protected LinkedList<Gegenstand> gegenstaende;
 	protected String name;
 	protected String test;
+	protected String cooleDinge;
 
 	@SuppressWarnings("unchecked")
 	public Character(int maxTraglast, Raum raum, LinkedList<Gegenstand> gegenstaende) {
