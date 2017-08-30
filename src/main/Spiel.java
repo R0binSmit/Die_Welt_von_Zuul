@@ -146,11 +146,13 @@ public class Spiel {
 		} else if (befehlswort.equalsIgnoreCase("eat")) {
 			eat(befehl.gibZweitesWort());
 		} else if (befehlswort.equalsIgnoreCase("heal")) {
-			spieler.heilen();
+			spieler.kleineHeilung(spieler);
 		} else if (befehlswort.equalsIgnoreCase("hurt")) {
-			spieler.leichtVerletzen();
+			spieler.leichtVerletzen(spieler);
 		} else if (befehlswort.equalsIgnoreCase("stab")) {
-			spieler.schwerVerletzen();
+			spieler.schwerVerletzen(spieler);
+		} else if (befehlswort.equalsIgnoreCase("suicide")) {
+			spieler.toeten(spieler);
 		}
 		return moechteBeenden;
 	}
