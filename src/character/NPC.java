@@ -6,8 +6,8 @@ import gegenstand.Gegenstand;
 import ort.Raum;
 
 public class NPC extends Character {
-	public NPC(int maxTraglast, Raum raum, LinkedList<Gegenstand> gegenstaende) {
-		super(maxTraglast, raum, gegenstaende);
+	public NPC(String name, int maxTraglast, Raum raum, LinkedList<Gegenstand> gegenstaende) {
+		super(name, maxTraglast, raum, gegenstaende);
 	}
 
 	@Override

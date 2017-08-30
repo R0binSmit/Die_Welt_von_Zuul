@@ -27,8 +27,9 @@ public abstract class Character {
 	protected Schuhe schuhe;
 
 	@SuppressWarnings("unchecked")
-	public Character(int maxTraglast, Raum raum, LinkedList<Gegenstand> gegenstaende) {
+	public Character(String name, int maxTraglast, Raum raum, LinkedList<Gegenstand> gegenstaende) {
 		zustand = Gesund.getInstance();
+		this.name = name;
 		this.aktuellerRaum = raum;
 		this.maxTraglast = maxTraglast;
 		this.gegenstaende = gegenstaende == null ? new LinkedList<Gegenstand>()
