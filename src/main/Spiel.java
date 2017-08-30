@@ -114,8 +114,14 @@ public class Spiel {
 			spieler.kleineWiederbelebung(spieler);
 		} else if (befehlswort.equalsIgnoreCase("largeRevial")) {
 			spieler.grosseWiederbelebung(spieler);
+		} else if (befehlswort.equalsIgnoreCase("talk")) {
+			talk(befehl.gibZweitesWort());
 		}
 		return moechteBeenden;
+	}
+	
+	public void talk(String name) {
+		
 	}
 
 	public void eat(String name) {
