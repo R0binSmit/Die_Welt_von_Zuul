@@ -1,9 +1,12 @@
 package ort;
 
-import gegenstand.Gegenstand;
-
 import java.util.ArrayList;
 import java.util.Random;
+
+import gegenstand.Crafting;
+import gegenstand.Gegenstand;
+import gegenstand.Nahrung;
+import gegenstand.Waffe;
 
 public class Landkarte {
 	private Raum startpoint = null;
@@ -38,13 +41,13 @@ public class Landkarte {
 		abstellkammer = new Raum("Die Abstellkammer", this);
 		raeume.add(abstellkammer);
 
-		regenschirm = new Gegenstand("Schirmy", "Ein pinker Regenschirm", 5);
-		tasse = new Gegenstand("Tasse", "Auf Ihr Steht: '#1 Dad'", 2);
-		messer = new Gegenstand("Messer", "Es hat 'Made with Kinderarbeit' aufgedruckt", 1);
-		erlenmeyerkolben = new Gegenstand("Erlenmeyerkolben", "Die Flüssigkeit darin riecht Alkoholisch", 3);
-		ventilator = new Gegenstand("Ventilator", "Für die schwitzige Jahreszeit", 30);
-		peitsche = new Gegenstand("Peitsche", "Sie hat 'BDSM' eingraviert", 10);
-		muffin = new Gegenstand("Muffin", "Er glitzert :O", 3);
+		regenschirm = new Waffe("Schirmy", "Ein pinker Regenschirm", 5, 10);
+		tasse = new Crafting("Tasse", "Auf Ihr Steht: '#1 Dad'", 2);
+		messer = new Waffe("Messer", "Es hat 'Made with Kinderarbeit' aufgedruckt", 1, 50);
+		erlenmeyerkolben = new Crafting("Erlenmeyerkolben", "Die Flüssigkeit darin riecht Alkoholisch", 3);
+		ventilator = new Crafting("Ventilator", "Für die schwitzige Jahreszeit", 30);
+		peitsche = new Waffe("Peitsche", "Sie hat 'BDSM' eingraviert", 10, 20);
+		muffin = new Nahrung("Muffin", "Er glitzert :O", 3);
 		muffin.setEssbar(true);
 
 		panther = new Teleporter("Panther", "Eine schwarze Raubkatze");

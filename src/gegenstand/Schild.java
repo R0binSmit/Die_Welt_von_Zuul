@@ -1,7 +1,9 @@
 package gegenstand;
 
 public class Schild extends Hand {
-	public Schild(String name, String beschreibung, int gewicht) {
+	private double block;
+	public Schild(String name, String beschreibung, int gewicht, double block) {
 		super(name, beschreibung, gewicht);
+		this.block = block;
 	}
 }
