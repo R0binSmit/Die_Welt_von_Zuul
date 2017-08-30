@@ -37,7 +37,7 @@ public class Spiel {
 		land = new Landkarte();
 		land.raeumeAnlegen();
 		parser = new Parser();
-		spieler = new Spieler(100, land.getStartpoint(), null); // das Spiel startet draussen
+		spieler = new Spieler("Egon", 100, land.getStartpoint(), null); // das Spiel startet draussen
 	}
 
 	/**
