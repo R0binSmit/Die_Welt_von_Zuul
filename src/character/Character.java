@@ -122,6 +122,14 @@ public abstract class Character {
 	public void toeten(Character character) {
 		character.zustand = character.zustand.toeten();
 	}
+	
+	public void kleineWiederbelebung(Character character) {
+		character.zustand = character.zustand.kleineHeilung();
+	}
+	
+	public void grosseWiederbelebung(Character character){
+		character.zustand = character.zustand.grosseHeilung();
+	}
 
 	public Raum getAktuellerRaum() {
 		return aktuellerRaum;
