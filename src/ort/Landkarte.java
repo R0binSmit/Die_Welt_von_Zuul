@@ -3,6 +3,7 @@ package ort;
 import java.util.ArrayList;
 import java.util.Random;
 
+import character.Gegner;
 import gegenstand.Crafting;
 import gegenstand.Gegenstand;
 import gegenstand.Nahrung;
@@ -76,6 +77,7 @@ public class Landkarte {
 		keller.setzeAusgang("up", labor);
 		keller.setzeAusgang("east", abstellkammer);
 		keller.gegenstandAblegen(peitsche);
+		keller.setzeGegner(new Gegner("Blubb" ,10, keller, null));
 
 		abstellkammer.setzeAusgang("west", keller);
 		abstellkammer.landschaftBauen(panther);

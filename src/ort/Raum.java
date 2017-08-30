@@ -1,12 +1,12 @@
 package ort;
 
-import gegenstand.Gegenstand;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import character.Gegner;
 import character.Spieler;
+import gegenstand.Gegenstand;
 
 /**
  * Diese Klasse modelliert Räume in der Welt von Zuul.
@@ -25,7 +25,8 @@ public class Raum {
 	private HashMap<String, Raum> ausgaenge = new HashMap<String, Raum>();
 	private LinkedList<Gegenstand> gegenstaende = new LinkedList<Gegenstand>();
 	private ArrayList<Landscape> landschaft = new ArrayList<Landscape>();
-
+	private LinkedList<Gegner> gegner = new LinkedList<Gegner>();
+	
 	/**
 	 * Erzeuge einen Raum mit einer Beschreibung. Ein Raum hat anfangs keine
 	 * Ausgänge.
@@ -71,6 +72,14 @@ public class Raum {
 
 	public void gegenstandAblegen(Gegenstand gegenstand) {
 		gegenstaende.add(gegenstand);
+	}
+	
+	public void setzeGegner(Gegner gegner) {
+		this.gegner.add(gegner);
+	}
+	
+	public void enterneGegner(Gegner gegner) {
+		this.gegner.remove(gegner);
 	}
 
 	public void landschaftBauen(Landscape landscape) {
@@ -129,6 +138,15 @@ public class Raum {
 		}
 		return sb.toString();
 	}
+	
+	private String gegnerToString() {
+		StringBuilder sb = new StringBuilder("");
+		for(Gegner gn : gegner) {
+			sb.append(gn.getName());
+			sb.append(" ");
+		}
+		return sb.toString();
+	}
 
 	public String getLongDesciption() {
 		StringBuilder sb = new StringBuilder("");
@@ -143,6 +161,8 @@ public class Raum {
 		sb.append(System.getProperty("line.separator"));
 		sb.append("Ausgänge: ");
 		sb.append(ausgaengeToString());
+		sb.append("Gegner:");
+		sb.append(gegnerToString());
 		return sb.toString();
 	}
 
