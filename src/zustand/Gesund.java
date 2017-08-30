@@ -29,4 +29,12 @@ public class Gesund implements GesundheitsZustand {
 	public GesundheitsZustand toeten() {
 		return Tod.getInstance();
 	}
+	
+	public GesundheitsZustand kleineWiederbelebung() {
+		return instance;
+	}
+	
+	public GesundheitsZustand grosseWiederbelebung() {
+		return instance;
+	}
 }
