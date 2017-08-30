@@ -161,7 +161,8 @@ public class Raum {
 		sb.append(System.getProperty("line.separator"));
 		sb.append("Ausgänge: ");
 		sb.append(ausgaengeToString());
-		sb.append("Gegner:");
+		sb.append(System.getProperty("line.separator"));
+		sb.append("Gegner: ");
 		sb.append(gegnerToString());
 		return sb.toString();
 	}
