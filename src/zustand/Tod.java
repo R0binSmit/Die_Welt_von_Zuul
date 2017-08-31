@@ -41,4 +41,8 @@ public class Tod implements GesundheitsZustand {
 	public String getName() {
 		return "Tod";
 	}
+	
+	public boolean isMovable() {
+		return false;
+	}
 }

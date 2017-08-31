@@ -41,4 +41,8 @@ public class Gesund implements GesundheitsZustand {
 	public String getName() {
 		return "Gesund";
 	}
+
+	public boolean isMovable() {
+		return true;
+	}
 }

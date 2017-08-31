@@ -41,4 +41,8 @@ public class Bewegungsunfaehig implements GesundheitsZustand {
 	public String getName() {
 		return "Bewegungsunfähig";
 	}
+	
+	public boolean isMovable() {
+		return false;
+	}
 }

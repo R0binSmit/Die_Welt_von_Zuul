@@ -41,4 +41,8 @@ public class Verwundet implements GesundheitsZustand {
 	public String getName() {
 		return "Verwundet";
 	}
+	
+	public boolean isMovable() {
+		return true;
+	}
 }

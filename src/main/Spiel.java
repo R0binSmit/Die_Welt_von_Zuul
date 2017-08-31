@@ -7,6 +7,8 @@ import gegenstand.Gegenstand;
 import ort.Landkarte;
 import ort.Landscape;
 import ort.Raum;
+import zustand.Bewegungsunfaehig;
+import zustand.Tod;
 
 /**
  * Dies ist die Hauptklasse der Anwendung "Die Welt von Zuul". "Die Welt von
@@ -87,7 +89,10 @@ public class Spiel {
 		if (befehlswort.equalsIgnoreCase("help")) {
 			hilfstextAusgeben();
 		} else if (befehlswort.equalsIgnoreCase("go")) {
+			if(spieler.getZustand().isMovable())
 			wechsleRaum(befehl);
+			else
+				System.out.println("Sie können sich nicht bewegen!");
 		} else if (befehlswort.equalsIgnoreCase("quit")) {
 			moechteBeenden = beenden(befehl);
 		} else if (befehlswort.equalsIgnoreCase("look")) {

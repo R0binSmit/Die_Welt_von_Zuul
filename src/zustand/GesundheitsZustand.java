@@ -9,4 +9,5 @@ public interface GesundheitsZustand {
 	GesundheitsZustand kleineWiederbelebung();
 	GesundheitsZustand grosseWiederbelebung();
 	String getName();
+	boolean isMovable();
 }
