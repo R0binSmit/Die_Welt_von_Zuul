@@ -4,11 +4,12 @@ public abstract class Gegenstand {
 	private String name, beschreibung;
 	private int gewicht;
 	private boolean essbar = false;
-
-	public Gegenstand(String name, String beschreibung, int gewicht) {
+	
+	public Gegenstand(String name, String beschreibung, int gewicht, boolean essbar) {
 		this.name = name;
 		this.beschreibung = beschreibung;
 		this.gewicht = gewicht;
+		this.essbar = essbar;
 	}
 
 	public String toString() {

@@ -48,8 +48,7 @@ public class Landkarte {
 		erlenmeyerkolben = new Crafting("Erlenmeyerkolben", "Die Flüssigkeit darin riecht Alkoholisch", 3);
 		ventilator = new Crafting("Ventilator", "Für die schwitzige Jahreszeit", 30);
 		peitsche = new Waffe("Peitsche", "Sie hat 'BDSM' eingraviert", 10, 20);
-		muffin = new Nahrung("Muffin", "Er glitzert :O", 3);
-		muffin.setEssbar(true);
+		muffin = new Nahrung("Muffin", "Er glitzert :O", 3, true);
 
 		panther = new Teleporter("Panther", "Eine schwarze Raubkatze");
 
