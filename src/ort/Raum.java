@@ -177,4 +177,8 @@ public class Raum {
 	public Landkarte getLand() {
 		return land;
 	}
+	
+	public LinkedList<Gegner> getGegnerList() {
+		return gegner;
+	}
 }
