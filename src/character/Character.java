@@ -15,7 +15,7 @@ import zustand.GesundheitsZustand;
 public abstract class Character {
 	protected Raum aktuellerRaum;
 	protected GesundheitsZustand zustand;
-	protected int maxTraglast, traglast;
+	protected int maxTraglast, traglast, geld;
 	protected LinkedList<Gegenstand> gegenstaende;
 	protected String name;
 	protected String beschreibung;
@@ -37,12 +37,11 @@ public abstract class Character {
 		traglast = ermittleGewicht();
 	}
 
-	public abstract void interagieren();
+	public abstract void interagieren(Spieler spieler);
 
 	public boolean gegenstandAufnehmen(Gegenstand gegenstand) {
 		if (traglast + gegenstand.getGewicht() <= maxTraglast) {
 			gegenstaende.add(gegenstand);
-			aktuellerRaum.gegenstandAufheben(gegenstand.getName());
 			traglast += gegenstand.getGewicht();
 			return true;
 		} else {
@@ -54,7 +53,6 @@ public abstract class Character {
 		Gegenstand gs = getGegenstand(name);
 		if (gs != null) {
 			gegenstaende.remove(gs);
-			aktuellerRaum.gegenstandAblegen(gs);
 			traglast = ermittleGewicht();
 		}
 		return gs;
@@ -99,6 +97,9 @@ public abstract class Character {
 		sb.append("/");
 		sb.append(maxTraglast);
 		sb.append(System.getProperty("line.separator"));
+		sb.append("Geld: ");
+		sb.append(geld);
+		sb.append(System.getProperty("line.separator"));
 		sb.append("Zustand: ");
 		sb.append(zustand.getName());
 		sb.append(System.getProperty("line.separator"));
@@ -110,6 +111,10 @@ public abstract class Character {
 			sb.append(i);
 			sb.append(". Gewicht: ");
 			sb.append(gs.getGewicht());
+			sb.append(System.getProperty("line.separator"));
+			sb.append(i);
+			sb.append(". Preis: ");
+			sb.append(gs.getPreis());
 			sb.append(System.getProperty("line.separator"));
 			sb.append(System.getProperty("line.separator"));
 			i++;
@@ -239,5 +244,13 @@ public abstract class Character {
 
 	public void setSchuhe(Schuhe schuhe) {
 		this.schuhe = schuhe;
+	}
+
+	public int getGeld() {
+		return geld;
+	}
+
+	public void setGeld(int geld) {
+		this.geld = geld;
 	}
 }

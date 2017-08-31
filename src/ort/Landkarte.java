@@ -1,9 +1,11 @@
 package ort;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Random;
 
 import character.Gegner;
+import character.Kaufmann;
 import character.NPC;
 import gegenstand.Crafting;
 import gegenstand.Gegenstand;
@@ -43,13 +45,13 @@ public class Landkarte {
 		abstellkammer = new Raum("Die Abstellkammer", this);
 		raeume.add(abstellkammer);
 
-		regenschirm = new Waffe("Schirmy", "Ein pinker Regenschirm", 5, 10);
-		tasse = new Crafting("Tasse", "Auf Ihr Steht: '#1 Dad'", 2);
-		messer = new Waffe("Messer", "Es hat 'Made with Kinderarbeit' aufgedruckt", 1, 50);
-		erlenmeyerkolben = new Crafting("Erlenmeyerkolben", "Die Flüssigkeit darin riecht Alkoholisch", 3);
-		ventilator = new Crafting("Ventilator", "Für die schwitzige Jahreszeit", 30);
-		peitsche = new Waffe("Peitsche", "Sie hat 'BDSM' eingraviert", 10, 20);
-		muffin = new Nahrung("Muffin", "Er glitzert :O", 3, true);
+		regenschirm = new Waffe("Schirmy", "Ein pinker Regenschirm", 5, 20, 10);
+		tasse = new Crafting("Tasse", "Auf Ihr Steht: '#1 Dad'", 2, 20);
+		messer = new Waffe("Messer", "Es hat 'Made with Kinderarbeit' aufgedruckt", 1, 30, 50);
+		erlenmeyerkolben = new Crafting("Erlenmeyerkolben", "Die Flüssigkeit darin riecht Alkoholisch", 3, 5);
+		ventilator = new Crafting("Ventilator", "Für die schwitzige Jahreszeit", 30, 70);
+		peitsche = new Waffe("Peitsche", "Sie hat 'BDSM' eingraviert", 10, 150, 20);
+		muffin = new Nahrung("Muffin", "Er glitzert :O", 3, 15);
 
 		panther = new Teleporter("Panther", "Eine schwarze Raubkatze");
 
@@ -64,6 +66,12 @@ public class Landkarte {
 
 		hoersaal.setzeAusgang("west", draussen);
 		hoersaal.gegenstandAblegen(tasse);
+		LinkedList<Gegenstand> items = new LinkedList<Gegenstand>();
+		items.add(ventilator);
+		items.add(tasse);
+		Kaufmann kaufmann = new Kaufmann("Walter", 200, hoersaal, items);
+		kaufmann.setText("Hallo, ich bin Walter möchtest du meine Waren begutachten?");
+		hoersaal.setzeNPC(kaufmann);
 
 		cafeteria.setzeAusgang("east", draussen);
 		cafeteria.gegenstandAblegen(messer);

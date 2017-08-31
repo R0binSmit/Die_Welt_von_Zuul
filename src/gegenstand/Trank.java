@@ -1,7 +1,7 @@
 package gegenstand;
 
 public class Trank extends Gegenstand {
-	public Trank(String name, String beschreibung, int gewicht) {
-		super(name, beschreibung, gewicht, true);
+	public Trank(String name, String beschreibung, int gewicht, int preis) {
+		super(name, beschreibung, gewicht, preis, true);
 	}
 }

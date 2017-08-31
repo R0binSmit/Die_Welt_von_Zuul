@@ -2,14 +2,15 @@ package gegenstand;
 
 public abstract class Gegenstand {
 	private String name, beschreibung;
-	private int gewicht;
+	private int gewicht, preis;
 	private boolean essbar = false;
 	
-	public Gegenstand(String name, String beschreibung, int gewicht, boolean essbar) {
+	public Gegenstand(String name, String beschreibung, int gewicht, int preis, boolean essbar) {
 		this.name = name;
 		this.beschreibung = beschreibung;
 		this.gewicht = gewicht;
 		this.essbar = essbar;
+		this.preis = preis;
 	}
 
 	public String toString() {
@@ -35,5 +36,13 @@ public abstract class Gegenstand {
 
 	public void setEssbar(boolean essbar) {
 		this.essbar = essbar;
+	}
+
+	public int getPreis() {
+		return preis;
+	}
+
+	public void setPreis(int preis) {
+		this.preis = preis;
 	}
 }

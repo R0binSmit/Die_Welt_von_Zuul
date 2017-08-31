@@ -2,6 +2,7 @@ package main;
 
 import befehlsVerarbeitung.Befehl;
 import befehlsVerarbeitung.Parser;
+import character.NPC;
 import character.Spieler;
 import gegenstand.Gegenstand;
 import ort.Landkarte;
@@ -38,6 +39,7 @@ public class Spiel {
 		land.raeumeAnlegen();
 		parser = new Parser();
 		spieler = new Spieler("Egon", 100, land.getStartpoint(), null); // das Spiel startet draussen
+		spieler.setGeld(300);
 	}
 
 	/**
@@ -124,7 +126,12 @@ public class Spiel {
 	}
 	
 	public void talk(String name) {
-		spieler.getAktuellerRaum().getNPC(name).interagieren();
+		NPC npc = spieler.getAktuellerRaum().getNPC(name);
+		if (npc != null) {
+			npc.interagieren(spieler);
+		} else {
+			System.out.println("Diesen NPC gibt es nicht!");
+		}
 	}
 
 	public void eat(String name) {
@@ -147,6 +154,7 @@ public class Spiel {
 		Gegenstand gs = spieler.getAktuellerRaum().getGegenstand(name);
 		if (gs != null) {
 			if (spieler.gegenstandAufnehmen(gs)) {
+				spieler.getAktuellerRaum().gegenstandAufheben(name);
 				System.out.println(gs.getName() + " Aufgehoben");
 			} else {
 				System.out.println("Der Gegenstand " + gs.getName() + " ist zu schwer");
@@ -157,6 +165,7 @@ public class Spiel {
 	public void legeGegenstandAb(String name) {
 		Gegenstand gs = spieler.gegenstandAblegen(name);
 		if (gs != null) {
+			spieler.getAktuellerRaum().gegenstandAblegen(gs);
 			System.out.println(gs.getName() + " abgelegt");
 		} else {
 			System.out.println("Den Gegenstand " + name + " gibt es in deinem Inventar nicht");

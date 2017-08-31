@@ -6,13 +6,13 @@ import gegenstand.Gegenstand;
 import ort.Raum;
 
 public class NPC extends Character {
-	private String text;
+	protected String text;
 	public NPC(String name, int maxTraglast, Raum raum, LinkedList<Gegenstand> gegenstaende) {
 		super(name, maxTraglast, raum, gegenstaende);
 	}
 
 	@Override
-	public void interagieren() {
+	public void interagieren(Spieler spieler) {
 		System.out.println(text);
 	}
 
