@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import character.Gegner;
+import character.NPC;
 import gegenstand.Crafting;
 import gegenstand.Gegenstand;
 import gegenstand.Nahrung;
@@ -57,6 +58,9 @@ public class Landkarte {
 		draussen.setzeAusgang("south", labor);
 		draussen.setzeAusgang("west", cafeteria);
 		draussen.gegenstandAblegen(regenschirm);
+		NPC np = new NPC("Karsten", 100, draussen, null);
+		np.setText("Hi, ich heisse Marvin");
+		draussen.setzeNPC(np);
 
 		hoersaal.setzeAusgang("west", draussen);
 		hoersaal.gegenstandAblegen(tasse);

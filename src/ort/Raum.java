@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 import character.Gegner;
+import character.NPC;
 import character.Spieler;
 import gegenstand.Gegenstand;
 
@@ -26,7 +27,8 @@ public class Raum {
 	private LinkedList<Gegenstand> gegenstaende = new LinkedList<Gegenstand>();
 	private ArrayList<Landscape> landschaft = new ArrayList<Landscape>();
 	private LinkedList<Gegner> gegner = new LinkedList<Gegner>();
-	
+	private LinkedList<NPC> npc = new LinkedList<NPC>();
+
 	/**
 	 * Erzeuge einen Raum mit einer Beschreibung. Ein Raum hat anfangs keine
 	 * Ausgänge.
@@ -73,13 +75,30 @@ public class Raum {
 	public void gegenstandAblegen(Gegenstand gegenstand) {
 		gegenstaende.add(gegenstand);
 	}
-	
+
 	public void setzeGegner(Gegner gegner) {
 		this.gegner.add(gegner);
 	}
-	
+
 	public void enterneGegner(Gegner gegner) {
 		this.gegner.remove(gegner);
+	}
+	
+	public void setzeNPC(NPC npc) {
+		this.npc.add(npc);
+	}
+
+	public void enterneNPC(NPC npc) {
+		this.npc.remove(npc);
+	}
+	
+	public NPC getNPC(String name) {
+		for (NPC np : npc) {
+			if (np.getName().equalsIgnoreCase(name)) {
+				return np;
+			}
+		}
+		return null;
 	}
 
 	public void landschaftBauen(Landscape landscape) {
@@ -138,11 +157,20 @@ public class Raum {
 		}
 		return sb.toString();
 	}
-	
+
 	private String gegnerToString() {
 		StringBuilder sb = new StringBuilder("");
-		for(Gegner gn : gegner) {
+		for (Gegner gn : gegner) {
 			sb.append(gn.getName());
+			sb.append(" ");
+		}
+		return sb.toString();
+	}
+
+	private String npcsToString() {
+		StringBuilder sb = new StringBuilder("");
+		for (NPC np : npc) {
+			sb.append(np.getName());
 			sb.append(" ");
 		}
 		return sb.toString();
@@ -164,6 +192,9 @@ public class Raum {
 		sb.append(System.getProperty("line.separator"));
 		sb.append("Gegner: ");
 		sb.append(gegnerToString());
+		sb.append(System.getProperty("line.separator"));
+		sb.append("NPC's: ");
+		sb.append(npcsToString());
 		return sb.toString();
 	}
 
@@ -177,7 +208,7 @@ public class Raum {
 	public Landkarte getLand() {
 		return land;
 	}
-	
+
 	public LinkedList<Gegner> getGegnerList() {
 		return gegner;
 	}

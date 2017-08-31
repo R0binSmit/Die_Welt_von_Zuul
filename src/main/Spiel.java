@@ -7,8 +7,6 @@ import gegenstand.Gegenstand;
 import ort.Landkarte;
 import ort.Landscape;
 import ort.Raum;
-import zustand.Bewegungsunfaehig;
-import zustand.Tod;
 
 /**
  * Dies ist die Hauptklasse der Anwendung "Die Welt von Zuul". "Die Welt von
@@ -126,7 +124,7 @@ public class Spiel {
 	}
 	
 	public void talk(String name) {
-		
+		spieler.getAktuellerRaum().getNPC(name).interagieren();
 	}
 
 	public void eat(String name) {
