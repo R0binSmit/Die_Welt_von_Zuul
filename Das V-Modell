@@ -1,0 +1,7 @@
+Das V-Modell
+
+Die Entstehung des V-Modells
+Das V-Modell wurde erstmals von dem Softwareingenieur Barry W. Boehm im Jahre 1979 vorgeschlagen, jedoch nicht genauer spezifiziert. Nachdem die Informationstechnologie immer interessanter für das Militär wurde, haben diese IABG (Industrieanlagen-Betriebsgesellschaft mbH) 1986 mit einem neuen Projekt beauftragt. Dieses Projekt hatte das Ziel, ein standardisiertes Vorgehen für die Softwareentwicklung zu entwerfen um interne Softwareprojekte unter bestimmten Mindestanforderungen umzusetzen und die Kosten der Entwicklung transparenter zu gestalten. Im Jahre 1997 wurde es offiziell veröffentlicht und empfohlen.
+
+Vorgangsdefinition
+Das V-Modell ist ein standardisiertes Vorgehendmodell, die alleinig für die Softwareentwicklung entworfen wurde. Dabei basiert es auf dem schon bekannten Wasserfallmodell. Dementsprechend ähneln sich beide Modelle sehr, denn beide Modelle fangen bei der „Systemanforderungsanalyse“ an und ähneln sich bis hin zur „Implementierung“. Wobei hier ein starker Fokus auf dem Testing der Software liegt. 
