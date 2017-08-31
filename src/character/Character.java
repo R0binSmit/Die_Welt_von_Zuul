@@ -68,6 +68,8 @@ public abstract class Character {
 			if (essen.getName().equalsIgnoreCase("muffin")) {
 				maxTraglast += 10;
 			}
+		} else {
+			essen = null;
 		}
 		return essen;
 	}
