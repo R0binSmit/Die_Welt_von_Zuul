@@ -89,8 +89,31 @@ public abstract class Character {
 		return null;
 	}
 
-	public String showStatus() {
+	public String getInventory() {
+		StringBuilder sb = new StringBuilder();
 		int i = 1;
+		sb.append("Gegenstände im Inventar: ");
+		sb.append(System.getProperty("line.separator"));
+		for (Gegenstand gs : gegenstaende) {
+			sb.append(i);
+			sb.append(". Gegenstand: ");
+			sb.append(System.getProperty("line.separator"));
+			sb.append("Name: ");
+			sb.append(gs.getName());
+			sb.append(System.getProperty("line.separator"));
+			sb.append("Gewicht: ");
+			sb.append(gs.getGewicht());
+			sb.append(System.getProperty("line.separator"));
+			sb.append("Preis: ");
+			sb.append(gs.getPreis());
+			sb.append(System.getProperty("line.separator"));
+			sb.append(System.getProperty("line.separator"));
+			i++;
+		}
+		return sb.toString();
+	}
+	
+	public String getStatus() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Gewicht: ");
 		sb.append(traglast);
@@ -103,22 +126,6 @@ public abstract class Character {
 		sb.append("Zustand: ");
 		sb.append(zustand.getName());
 		sb.append(System.getProperty("line.separator"));
-		for (Gegenstand gs : gegenstaende) {
-			sb.append(i);
-			sb.append(". Gegenstand: ");
-			sb.append(gs.getName());
-			sb.append(System.getProperty("line.separator"));
-			sb.append(i);
-			sb.append(". Gewicht: ");
-			sb.append(gs.getGewicht());
-			sb.append(System.getProperty("line.separator"));
-			sb.append(i);
-			sb.append(". Preis: ");
-			sb.append(gs.getPreis());
-			sb.append(System.getProperty("line.separator"));
-			sb.append(System.getProperty("line.separator"));
-			i++;
-		}
 		return sb.toString();
 	}
 

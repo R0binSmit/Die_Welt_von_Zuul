@@ -17,33 +17,19 @@ public class Kaufmann extends NPC {
 		Parser pr = new Parser();
 		Befehl befehl;
 		do {
-			System.out.println("Dies sind meine Gegenstände: ");
-			for (Gegenstand gs : gegenstaende) {
-				System.out.println("Name: " + gs.getName());
-				System.out.println("Preis: " + gs.getPreis());
-				System.out.println();
-			}
-			
+			System.out.println(getInventory());
 			befehl = pr.liefereBefehl();
 			if (befehl.gibBefehlswort().equalsIgnoreCase("take")) {
-				Gegenstand verkauf = getGegenstand(befehl.gibZweitesWort());
-				if (verkauf != null && spieler.getGeld() >= verkauf.getPreis()) {
-					spieler.gegenstandAufnehmen(gegenstandAblegen(verkauf.getName()));
-					geld += verkauf.getPreis();
-					spieler.setGeld(spieler.getGeld() - verkauf.getPreis());
+				if (trade(this, spieler, befehl.gibZweitesWort())) {
 					System.out.println("Handel durchgeführt");
 				} else {
 					System.out.println("Der Gegenstand existiert nicht oder ist zu teuer für sie");
 				}
 			} else if (befehl.gibBefehlswort().equalsIgnoreCase("drop")) {
-				Gegenstand kauf = spieler.getGegenstand(befehl.gibZweitesWort());
-				if (kauf != null && geld >= kauf.getPreis()) {
-					gegenstandAufnehmen(spieler.gegenstandAblegen(kauf.getName()));
-					geld -= kauf.getPreis();
-					spieler.setGeld(spieler.getGeld() + kauf.getPreis());
+				if (trade(spieler, this, befehl.gibZweitesWort())) {
 					System.out.println("Handel durchgeführt");
 				} else {
-					System.out.println("Der Gegenstand existiert nicht oder ist zu teuer für den Händler");
+					System.out.println("Der Gegenstand existiert nicht oder ist zu teuer für sie");
 				}
 			} else if (befehl.gibBefehlswort().equalsIgnoreCase("quit")) {
 				System.out.println("Handel beendet");
@@ -52,5 +38,16 @@ public class Kaufmann extends NPC {
 				System.out.println("Diesen Befehl gibt es hier nicht!");
 			}
 		} while (true);
+	}
+	
+	public boolean trade(Character verkauf, Character kauf, String gegenstand) {
+		Gegenstand ware = verkauf.getGegenstand(gegenstand);
+		if (ware != null && kauf.getGeld() >= ware.getPreis()) {
+			kauf.gegenstandAufnehmen(verkauf.gegenstandAblegen(ware.getName()));
+			verkauf.setGeld(verkauf.getGeld() + ware.getPreis());
+			kauf.setGeld(kauf.getGeld() - ware.getPreis());
+			return true;
+		}
+		return false;
 	}
 }

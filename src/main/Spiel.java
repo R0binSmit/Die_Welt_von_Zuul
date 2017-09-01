@@ -102,7 +102,7 @@ public class Spiel {
 		} else if (befehlswort.equalsIgnoreCase("drop")) {
 			legeGegenstandAb(befehl.gibZweitesWort());
 		} else if (befehlswort.equalsIgnoreCase("inventory")) {
-			System.out.println(spieler.showStatus());
+			System.out.println(spieler.getInventory());
 		} else if (befehlswort.equalsIgnoreCase("eat")) {
 			eat(befehl.gibZweitesWort());
 		} else if (befehlswort.equalsIgnoreCase("heal")) {
@@ -121,6 +121,8 @@ public class Spiel {
 			spieler.grosseWiederbelebung(spieler);
 		} else if (befehlswort.equalsIgnoreCase("talk")) {
 			talk(befehl.gibZweitesWort());
+		} else if (befehlswort.equalsIgnoreCase("status")) {
+			System.out.println(spieler.getStatus());
 		}
 		return moechteBeenden;
 	}
