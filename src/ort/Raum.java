@@ -105,6 +105,15 @@ public class Raum {
 		landschaft.add(landscape);
 		landscape.setRaum(this);
 	}
+	
+	public void landschaftEntfernen(String name) {
+		for (Landscape ls : landschaft) {
+			if (ls.getName().equalsIgnoreCase(name)) {
+				landschaft.remove(ls);
+				break;
+			}
+		}
+	}
 
 	public Gegenstand gegenstandAufheben(String name) {
 		for (Gegenstand gs : gegenstaende) {
@@ -135,7 +144,8 @@ public class Raum {
 	}
 
 	public void onEnterRoomEvent(Spieler spieler) {
-		for (Landscape ls : landschaft) {
+		for (int i = landschaft.size() - 1; i >= 0; i--) {
+			Landscape ls = landschaft.get(i); 
 			ls.onEnterRoom(spieler);
 		}
 	}
