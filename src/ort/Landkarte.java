@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
+import character.NPC;
 import gegenstand.Crafting;
 import gegenstand.Gegenstand;
 
@@ -20,13 +21,17 @@ public class Landkarte {
 	 */
 	public void raeumeAnlegen() {
 		Raum draussen, hoersaal, cafeteria, labor, buero, keller, abstellkammer;
-		Gegenstand kanninchen;
-		Landscape panther;
+		Gegenstand kanninchen, lachs;
+		Landscape panther, goldteller;
 		ArrayList<Raum> destination = new ArrayList<Raum>();
 		HashMap<LandscapeResponse, String> landscapeResponse = new HashMap<LandscapeResponse, String>();
+		ArrayList<Runnable> execute = new ArrayList<Runnable>();
+		NPC schnurrkatze;
 
 		// die Räume erzeugen
-		draussen = new Raum("vor dem Haupteingang der Universität", this);
+		draussen = new Raum("Haupteingang der Universität" + System.getProperty("line.separator") + 
+				"Das Gelände ist verlassen, in dieser dunklen Nacht. Die Gerüchte besagen in den Tiefen dieses Ortes würde die" + System.getProperty("line.separator") +
+				"Menschheit antworten finden. Vielleicht sogar Erlösung. Bist du deswegen hier?", this);
 		raeume.add(draussen);
 		startpoint = draussen;
 		hoersaal = new Raum("in einem Vorlesungssaal", this);
@@ -58,6 +63,7 @@ public class Landkarte {
 
 		// Gegenstände
 		kanninchen = new Crafting("Kanninchen", "Ein weißes Kanninchen", 5, 1000);
+		lachs = new Crafting("Lachs", "Herrlicher, roter Lachs", 2, 50);
 
 		// Gegenstände ablegen
 		cafeteria.gegenstandAblegen(kanninchen);
@@ -75,9 +81,21 @@ public class Landkarte {
 		destination.add(buero);
 		destination.add(keller);
 		panther = new Teleporter("Panther", "Eine schwarze Raubkatze", landscapeResponse, "Kanninchen", destination);
-
+		
+		execute.add(() -> System.out.println("Es schnurrt!"));
+		goldteller = new Sammler("Goldteller", "Ein goldener Teller", landscapeResponse, "Kanninchen", execute);
 		// Landschaft setzen
 		abstellkammer.landschaftBauen(panther);
+		draussen.landschaftBauen(goldteller);
+		
+		//NPC initalisieren
+		schnurrkatze = new NPC("Schnurrkatze", 100, draussen, null);
+		schnurrkatze.setText("Die schwarze Katze schnurrt. Und spricht. Die Menschheit musste sich schnell an derlei Dinge gewöhnen." + System.getProperty("line.separator") +
+		"'Lachs', maunzt sie." + System.getProperty("line.separator") +
+		"'Der Mensch möge mir Lachs aus der Cafeteria bringen, damit ich ihm ein Geheimnis verrate." + System.getProperty("line.separator") +
+		"Lege er es auf meinen Teller. Nun hinfort!'" + System.getProperty("line.separator"));
+		//NPC setzen
+		draussen.setzeNPC(schnurrkatze);
 
 		/*
 		 * Raum draussen, hoersaal, cafeteria, labor, buero, keller, abstellkammer;

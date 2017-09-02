@@ -2,6 +2,8 @@ package character;
 
 import java.util.LinkedList;
 
+import Verhalten.AngriffsVerhalten;
+import Verhalten.NPCAngriffVerhalten;
 import gegenstand.Brustplatte;
 import gegenstand.Gegenstand;
 import gegenstand.Hand;
@@ -17,6 +19,7 @@ public abstract class Character {
 	protected GesundheitsZustand zustand;
 	protected int maxTraglast, traglast, geld;
 	protected LinkedList<Gegenstand> gegenstaende;
+	protected AngriffsVerhalten angriffsVerhalten;
 	protected String name;
 	protected String beschreibung;
 	protected Hand left;
@@ -35,6 +38,7 @@ public abstract class Character {
 		this.gegenstaende = gegenstaende == null ? new LinkedList<Gegenstand>()
 				: (LinkedList<Gegenstand>) gegenstaende.clone();
 		traglast = ermittleGewicht();
+		angriffsVerhalten = NPCAngriffVerhalten.getInstance();
 	}
 
 	public abstract void interagieren(Spieler spieler);

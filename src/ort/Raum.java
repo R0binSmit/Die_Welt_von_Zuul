@@ -188,7 +188,6 @@ public class Raum {
 
 	public String getLongDesciption() {
 		StringBuilder sb = new StringBuilder("");
-		sb.append("Sie sind ");
 		sb.append(gibBeschreibung());
 		sb.append(System.getProperty("line.separator"));
 		sb.append("Hier ist: ");

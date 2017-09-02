@@ -2,6 +2,7 @@ package character;
 
 import java.util.LinkedList;
 
+import Verhalten.SpielerAngriffVerhalten;
 import gegenstand.Gegenstand;
 import ort.Raum;
 
@@ -10,6 +11,7 @@ public class Spieler extends Character {
 
 	public Spieler(String name, int maxTraglast, Raum raum, LinkedList<Gegenstand> gegenstaende) {
 		super(name, maxTraglast, raum, gegenstaende);
+		this.angriffsVerhalten = SpielerAngriffVerhalten.getInstance();
 	}
 
 	public boolean isHauptSpieler() {

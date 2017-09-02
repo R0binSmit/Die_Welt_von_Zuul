@@ -67,6 +67,15 @@ public class Spiel {
 		System.out.println("Willkommen zu Zuul!");
 		System.out.println("Tippen sie 'help', wenn Sie Hilfe brauchen.");
 		System.out.println();
+		System.out.println("Seltsame Ereignisse haben ihre Schatten vorausgeworfen." + System.getProperty("line.separator") +
+				"Über Nacht viel der Goldpreis auf 3 US-Dollar pro Feinunze und die Menscheit strebte nach einen neuen Wertanlage:" + System.getProperty("line.separator") +
+				"Lutetium!" + System.getProperty("line.separator") +
+				"Niemand weiß, was dann geschah. Vielleicht gruben wir zu tief, vielleicht ließen wir uns auf falsche Götzen ein," + System.getProperty("line.separator") +
+				"fest steht, dass das Ende der Welt über uns kam." + System.getProperty("line.separator") +
+				"Nur hatten die Propheten keine Ahnung, wie seltsam das Ende werden würde." + System.getProperty("line.separator") +
+				"Jetzt stehst du alleine vor der Universität. In der Ferne schnurrt eine Katze." + System.getProperty("line.separator") +
+				"");
+		System.out.println();
 		System.out.println(spieler.getAktuellerRaum().getLongDesciption());
 	}
 
