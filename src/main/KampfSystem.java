@@ -68,8 +68,6 @@ public class KampfSystem {
 				System.out.println(gg.getName() + " greift " + choosSpieler.getName());
 				gegnerRandomAngriff(gg, choosSpieler);
 			}
-			
-			break;
 		} while (checkAllStatusDead(spielerGroup) == true || checkAllStatusDeadGegner(gegnerGroup) == true);
 	}
 
@@ -77,7 +75,7 @@ public class KampfSystem {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Sie kämpfen gegen: ");
 		for (character.Character gg : gegnerGroup) {
-			sb.append(gg.getName() + " ");
+			sb.append(gg.getName() + " [" + gg.getZustand().getClass().getName() +"] ");
 		}
 		return sb.toString();
 	}
@@ -102,7 +100,7 @@ public class KampfSystem {
 	
 	private character.Character getRandomCharakterFromSpieler(){
 		Random randomObj = new Random();
-		int spielerIndex = randomObj.nextInt(spielerGroup.size() +1);
+		int spielerIndex = randomObj.nextInt(spielerGroup.size());
 		return spielerGroup.get(spielerIndex);
 	}
 	
@@ -119,7 +117,7 @@ public class KampfSystem {
 	private String getGegnerGroupToString()
 	{
 		StringBuilder sb = new StringBuilder();
-		for(int i = 0; i <= gegnerGroup.size(); i++){
+		for(int i = 0; i <= gegnerGroup.size() -1; i++){
 			sb.append(i + ". " + gegnerGroup.get(i).getName());
 		}
 		return sb.toString();
