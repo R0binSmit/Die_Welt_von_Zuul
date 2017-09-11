@@ -10,16 +10,17 @@ import zustand.Tod;
 
 public class KampfSystem {
 	private final static String WELCOMETEXT = "Sie sind in ein Kampf verwickelt worden!";
-	LinkedList<Character> spielerGroup = new LinkedList<Character>();
-	LinkedList<Character> gegnerGroup = new LinkedList<Character>();
+	LinkedList<character.Character> spielerGroup = new LinkedList<character.Character>();
+	LinkedList<character.Gegner> gegnerGroup = new LinkedList<character.Gegner>();
 	Scanner scanner = new Scanner(System.in);
 
-	public KampfSystem() {
-
+	public KampfSystem(LinkedList<character.Character> spielerGroup, LinkedList<character.Gegner> gegnerGroup) {
+		this.spielerGroup = spielerGroup;
+		this.gegnerGroup = gegnerGroup;
 	}
 
 	public boolean checkKampfStart(Raum raum) {
-		if (raum.getGegnerList().size() > 0) {
+		if (raum.getGegnerList().isEmpty() == false) {
 			return true;
 		}
 		return false;
@@ -30,8 +31,8 @@ public class KampfSystem {
 		System.out.println(getGegnerBeschreibung());
 
 		do {
-			for(Character sp : spielerGroup){
-				Character gegner = null;
+			for(character.Character sp : spielerGroup){
+				character.Gegner gegner = null;
 				
 				System.out.println(sp.getName() + " ist drann. Was möchtest Sie ausführen?");
 				System.out.println("1. LeichterAngriff");
@@ -62,27 +63,27 @@ public class KampfSystem {
 				}
 			}
 			
-			for(Character gg : gegnerGroup){
-				Character choosSpieler = getRandomCharakterFromSpieler();				
+			for(character.Character gg : gegnerGroup){
+				character.Character choosSpieler = getRandomCharakterFromSpieler();				
 				System.out.println(gg.getName() + " greift " + choosSpieler.getName());
 				gegnerRandomAngriff(gg, choosSpieler);
 			}
 			
 			break;
-		} while (checkAllStatusDead(spielerGroup) == true || checkAllStatusDead(gegnerGroup) == true);
+		} while (checkAllStatusDead(spielerGroup) == true || checkAllStatusDeadGegner(gegnerGroup) == true);
 	}
 
 	private String getGegnerBeschreibung() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Sie kämpfen gegen: ");
-		for (Character gg : gegnerGroup) {
+		for (character.Character gg : gegnerGroup) {
 			sb.append(gg.getName() + " ");
 		}
 		return sb.toString();
 	}
 
-	private boolean checkAllStatusDead(LinkedList<Character> character) {
-		for (Character ch : character) {
+	private boolean checkAllStatusDead(LinkedList<character.Character> character) {
+		for (character.Character ch : character) {
 			if (ch.getZustand() != Tod.getInstance()) {
 				return false;
 			}
@@ -90,13 +91,22 @@ public class KampfSystem {
 		return true;
 	}
 	
-	private Character getRandomCharakterFromSpieler(){
+	private boolean checkAllStatusDeadGegner(LinkedList<character.Gegner> gegner) {
+		for (character.Gegner ch : gegner) {
+			if (ch.getZustand() != Tod.getInstance()) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	private character.Character getRandomCharakterFromSpieler(){
 		Random randomObj = new Random();
 		int spielerIndex = randomObj.nextInt(spielerGroup.size() +1);
 		return spielerGroup.get(spielerIndex);
 	}
 	
-	private void gegnerRandomAngriff(Character gg, Character sp){
+	private void gegnerRandomAngriff(character.Character gg, character.Character sp){
 		Random randomObj = new Random();
 		int randomNumber = randomObj.nextInt(101);
 		

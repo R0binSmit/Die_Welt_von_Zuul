@@ -1,5 +1,7 @@
 package main;
 
+import java.util.LinkedList;
+
 import befehlsVerarbeitung.Befehl;
 import befehlsVerarbeitung.Parser;
 import character.NPC;
@@ -30,6 +32,7 @@ public class Spiel {
 	private Parser parser;
 	private Spieler spieler;
 	private Landkarte land;
+	private KampfSystem kampfSystem;
 
 	/**
 	 * Erzeuge ein Spiel und initialisiere die interne Raumkarte.
@@ -232,7 +235,13 @@ public class Spiel {
 		} else {
 			spieler.setAktuellerRaum(naechsterRaum);
 			System.out.println(spieler.getAktuellerRaum().getLongDesciption());
+			LinkedList<character.Character> spielerGroup = new LinkedList<character.Character>();
+			spielerGroup.add(spieler);
+			kampfSystem = new KampfSystem(spielerGroup, naechsterRaum.getGegnerList());
 			naechsterRaum.onEnterRoomEvent(spieler);
+			if(kampfSystem.checkKampfStart(naechsterRaum)) {
+				kampfSystem.startKampf();
+			}
 		}
 	}
 

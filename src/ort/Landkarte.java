@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
+import character.Gegner;
 import character.NPC;
 import gegenstand.Crafting;
 import gegenstand.Gegenstand;
@@ -96,7 +97,7 @@ public class Landkarte {
 		"Lege er es auf meinen Teller. Nun hinfort!'" + System.getProperty("line.separator"));
 		//NPC setzen
 		draussen.setzeNPC(schnurrkatze);
-
+		 keller.setzeGegner(new Gegner("Blubb",10, keller, null));
 		/*
 		 * Raum draussen, hoersaal, cafeteria, labor, buero, keller, abstellkammer;
 		 * Gegenstand regenschirm, tasse, messer, erlenmeyerkolben, ventilator,
