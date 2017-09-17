@@ -1,5 +1,6 @@
 package main;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import befehlsVerarbeitung.Befehl;
@@ -30,6 +31,7 @@ import ort.Raum;
 
 public class Spiel {
 	private Parser parser;
+	private HashMap<String, Spieler> party = new HashMap<String, Spieler>();
 	private Spieler spieler;
 	private Landkarte land;
 	private KampfSystem kampfSystem;
@@ -41,7 +43,9 @@ public class Spiel {
 		land = new Landkarte();
 		land.raeumeAnlegen();
 		parser = new Parser();
-		spieler = new Spieler("Egon", 100, land.getStartpoint(), null); // das Spiel startet draussen
+		party.put("Dave", new Spieler("Dave", 100, land.getStartpoint(), null));
+		party.put("Egon", new Spieler("Egon", 100, land.getStartpoint(), null));
+		spieler = party.get("Dave");
 		spieler.setGeld(300);
 	}
 
@@ -131,12 +135,24 @@ public class Spiel {
 			spieler.kleineWiederbelebung(spieler);
 		} else if (befehlswort.equalsIgnoreCase("largeRevial")) {
 			spieler.grosseWiederbelebung(spieler);
-		} else if (befehlswort.equalsIgnoreCase("talk")) {
+		} else if (befehlswort.equalsIgnoreCase("talk")) { 
 			talk(befehl.gibZweitesWort());
 		} else if (befehlswort.equalsIgnoreCase("status")) {
 			System.out.println(spieler.getStatus());
+		} else if (befehlswort.equalsIgnoreCase("changePlayer")) {
+			changePlayer(befehl.gibZweitesWort());
 		}
 		return moechteBeenden;
+	}
+	
+	public void changePlayer(String name) {
+		Spieler zw = party.get(name);
+		if (zw != null) {
+			spieler = zw;
+			System.out.println("du spielst nun als " + name + ".");
+		} else {
+			System.out.println("Diesen Spieler gibt es nicht!");
+		}
 	}
 	
 	public void talk(String name) {
