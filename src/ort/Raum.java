@@ -245,4 +245,8 @@ public class Raum {
 	public LinkedList<Gegner> getGegnerList() {
 		return gegner;
 	}
+
+	public HashMap<String, Raum> getAusgaenge() {
+		return ausgaenge;
+	}
 }

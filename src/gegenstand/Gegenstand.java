@@ -27,7 +27,9 @@ public abstract class Gegenstand {
 	}
 	
 	public void show() {
-		ZuulUI.gc.drawImage(image, pos.getX(), pos.getY());
+		double x = pos.getX() - image.getWidth() * 0.5;
+		double y = pos.getY() - image.getHeight() * 0.5;
+		ZuulUI.gc.drawImage(image, x, y);
 	}
 
 	public String getName() {

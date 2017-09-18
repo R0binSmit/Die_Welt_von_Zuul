@@ -8,7 +8,7 @@ import befehlsVerarbeitung.Parser;
 import character.NPC;
 import character.Spieler;
 import gegenstand.Gegenstand;
-import javafx.scene.image.Image;
+import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 import ort.Landkarte;
 import ort.Landscape;
@@ -47,9 +47,7 @@ public class Spiel {
 		land.raeumeAnlegen();
 		parser = new Parser();
 		party.put("Dave", new Spieler("Dave", 100, land.getStartpoint(), 20, 20,
-				new Image(ZuulUI.class.getResourceAsStream("/Bilder/Dave.png")), null));
-		// party.put("Egon", new Spieler("Egon", 100, land.getStartpoint(), 40, 40, new
-		// Image("../Bilder/Dave.png"), null));
+				Landkarte.linkToImage("/Bilder/Dave.png"), null));
 		spieler = party.get("Dave");
 		spieler.setGeld(300);
 
@@ -75,6 +73,10 @@ public class Spiel {
 		});
 	}
 
+	public boolean intersects(double x1, double y1, double w1, double h1, double x2, double y2, double w2, double h2) {
+		return ((x1 + w1 > x2 && x1 < x2 + w2) && (y1 + h1 > y2 && y1 < y2 + h2));
+	}
+
 	/**
 	 * Die Hauptmethode zum Spielen. Läuft bis zum Ende des Spiels in einer
 	 * Schleife.
@@ -88,7 +90,40 @@ public class Spiel {
 		}
 
 		ZuulUI.gc.clearRect(0, 0, ZuulUI.gc.getCanvas().getWidth(), ZuulUI.gc.getCanvas().getHeight());
+
 		spieler.getAktuellerRaum().show();
+
+		Point2D pos = spieler.getPos();
+		pos = new Point2D(pos.getX() - spieler.getW() / 2 , pos.getY() - spieler.getH() / 2);
+		HashMap<String, Raum> ausgeange = spieler.getAktuellerRaum().getAusgaenge();
+		if (ausgeange.get("north") != null) {
+			ZuulUI.gc.fillRect(300, 0, 200, 50);
+			if (intersects(300, 0, 200, 50, pos.getX(), pos.getY(), spieler.getW(), spieler.getH())) {
+				spieler.setPos(new Point2D(pos.getX(), 700));
+			}
+		}
+
+		if (ausgeange.get("east") != null) {
+			ZuulUI.gc.fillRect(750, 300, 50, 200);
+			if (intersects(750, 300, 50, 200, pos.getX(), pos.getY(), spieler.getW(), spieler.getH())) {
+				spieler.setPos(new Point2D(100, pos.getY()));
+			}
+		}
+
+		if (ausgeange.get("south") != null) {
+			ZuulUI.gc.fillRect(300, 750, 200, 50);
+			if (intersects(300, 750, 200, 50, pos.getX(), pos.getY(), spieler.getW(), spieler.getH())) {
+				spieler.setPos(new Point2D(pos.getX(), 100));
+			}
+		}
+
+		if (ausgeange.get("west") != null) {
+			ZuulUI.gc.fillRect(0, 300, 50, 200);
+			if (intersects(0, 300, 50, 200, pos.getX(), pos.getY(), spieler.getW(), spieler.getH())) {
+				spieler.setPos(new Point2D(700, pos.getY()));
+			}
+		}
+
 		spieler.show();
 	}
 

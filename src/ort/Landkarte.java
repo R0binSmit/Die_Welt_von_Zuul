@@ -16,6 +16,10 @@ public class Landkarte {
 	public Landkarte() {
 
 	}
+	
+	public static Image linkToImage(String link) {
+		return new Image(ZuulUI.class.getResourceAsStream(link));
+	}
 
 	/**
 	 * Erzeuge alle Räume und verbinde ihre Ausgänge miteinander.
@@ -33,11 +37,15 @@ public class Landkarte {
 		
 		Gegenstand ente;
 		
-		ente = new Crafting("Ente", "I A", 3, 5, new Image(ZuulUI.class.getResourceAsStream("/Bilder/Ente.png")), 10, 200, true);
-		Gegner monster = new Gegner("Waldo", 20, draussen, 30, 30, new Image(ZuulUI.class.getResourceAsStream("/Bilder/Monster.png")), null);
+		ente = new Crafting("Ente", "I A", 3, 5, linkToImage("/Bilder/Ente.png"), 10, 200, true);
+		Gegner monster = new Gegner("Waldo", 20, draussen, 30, 30, linkToImage("/Bilder/Monster.png"), null);
 		
 		draussen.gegenstandAblegen(ente);
 		draussen.setzeGegner(monster);
+		draussen.setzeAusgang("north", draussen);
+		draussen.setzeAusgang("east", draussen);
+		draussen.setzeAusgang("south", draussen);
+		draussen.setzeAusgang("west", draussen);
 		/*
 		 * Gegenstand kanninchen, lachs; Landscape panther, goldteller; ArrayList<Raum>
 		 * destination = new ArrayList<Raum>(); HashMap<LandscapeResponse, String>

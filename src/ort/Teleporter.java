@@ -5,13 +5,14 @@ import java.util.HashMap;
 import java.util.Random;
 
 import character.Spieler;
+import javafx.scene.image.Image;
 
 public class Teleporter extends Landscape {
 	private String key;
 	private ArrayList<Raum> destination;
 
-	public Teleporter(String name, String beschreibung, HashMap<LandscapeResponse, String> landscapeResponse, String key, ArrayList<Raum> destination) {
-		super(name, beschreibung, landscapeResponse);
+	public Teleporter(String name, String beschreibung, Image image, int x, int y, HashMap<LandscapeResponse, String> landscapeResponse, String key, ArrayList<Raum> destination) {
+		super(name, beschreibung, image, x, y, landscapeResponse);
 		this.key = key;
 		this.destination = destination;
 	}

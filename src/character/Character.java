@@ -51,7 +51,9 @@ public abstract class Character {
 	}
 	
 	public void show() {
-		ZuulUI.gc.drawImage(image, pos.getX(), pos.getY());
+		double x = pos.getX() - image.getWidth() * 0.5;
+		double y = pos.getY() - image.getHeight() * 0.5;
+		ZuulUI.gc.drawImage(image, x, y);
 	}
 
 	public abstract void interagieren(Spieler spieler);
@@ -276,5 +278,21 @@ public abstract class Character {
 
 	public void setGeld(int geld) {
 		this.geld = geld;
+	}
+
+	public Point2D getPos() {
+		return pos;
+	}
+	
+	public double getW() {
+		return image.getWidth();
+	}
+	
+	public double getH() {
+		return image.getHeight();
+	}
+
+	public void setPos(Point2D pos) {
+		this.pos = pos;
 	}
 }

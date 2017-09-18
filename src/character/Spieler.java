@@ -35,6 +35,8 @@ public class Spieler extends Character {
 			break;
 		case D:
 			pos = pos.add(new Point2D(speed, 0));
+			break;
+		default:
 		}
 	}
 
