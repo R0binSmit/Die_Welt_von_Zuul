@@ -4,12 +4,12 @@ import java.util.LinkedList;
 
 import Verhalten.AngriffsVerhalten;
 import Verhalten.NPCAngriffVerhalten;
-import gegenstand.Brustplatte;
-import gegenstand.Gegenstand;
-import gegenstand.Hand;
-import gegenstand.Helm;
-import gegenstand.Hose;
-import gegenstand.Schuhe;
+import item.Brustplatte;
+import item.Gegenstand;
+import item.Hand;
+import item.Helm;
+import item.Hose;
+import item.Schuhe;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import main.ZuulUI;

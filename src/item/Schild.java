@@ -1,4 +1,4 @@
-package gegenstand;
+package item;
 
 import javafx.scene.image.Image;
 

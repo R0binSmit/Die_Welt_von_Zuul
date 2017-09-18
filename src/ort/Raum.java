@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import character.Gegner;
 import character.NPC;
 import character.Spieler;
-import gegenstand.Gegenstand;
+import item.Gegenstand;
 import javafx.scene.image.Image;
 import main.ZuulUI;
 

@@ -1,4 +1,4 @@
-package gegenstand;
+package item;
 
 public interface Hand {
 	

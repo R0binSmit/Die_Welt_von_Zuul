@@ -2,7 +2,7 @@ package character;
 
 import java.util.LinkedList;
 
-import gegenstand.Gegenstand;
+import item.Gegenstand;
 import javafx.scene.image.Image;
 import ort.Raum;
 

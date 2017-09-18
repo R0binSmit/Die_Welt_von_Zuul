@@ -7,7 +7,7 @@ import befehlsVerarbeitung.Befehl;
 import befehlsVerarbeitung.Parser;
 import character.NPC;
 import character.Spieler;
-import gegenstand.Gegenstand;
+import item.Gegenstand;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 import ort.Landkarte;

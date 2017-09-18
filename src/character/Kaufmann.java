@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 import befehlsVerarbeitung.Befehl;
 import befehlsVerarbeitung.Parser;
-import gegenstand.Gegenstand;
+import item.Gegenstand;
 import javafx.scene.image.Image;
 import ort.Raum;
 

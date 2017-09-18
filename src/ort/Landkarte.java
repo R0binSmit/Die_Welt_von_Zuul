@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import character.Gegner;
-import gegenstand.Crafting;
-import gegenstand.Gegenstand;
+import item.Crafting;
+import item.Gegenstand;
 import javafx.scene.image.Image;
 import main.ZuulUI;
 
