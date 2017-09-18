@@ -3,10 +3,8 @@ package main;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
-
 import character.Character;
 import ort.Raum;
-import zustand.Tod;
 
 public class KampfSystem {
 	private final static String WELCOMETEXT = "Sie sind in ein Kampf verwickelt worden!";
@@ -47,19 +45,24 @@ public class KampfSystem {
 				
 				switch(angriffNum){
 				case 1:
-					sp.leichtVerletzen(gegnerGroup.get(gegnerIndex));
+					// TODO fix no more zustand.
+					//sp.leichtVerletzen(gegnerGroup.get(gegnerIndex));
 					break;
 				case 2:
-					sp.schwerVerletzen(gegnerGroup.get(gegnerIndex));
+					//TODO fix no more zustand.
+					//sp.schwerVerletzen(gegnerGroup.get(gegnerIndex));
 					break;
 				case 3:
-					sp.kleineHeilung(gegnerGroup.get(gegnerIndex));
+					//TODO fix no more zustand.
+					//sp.kleineHeilung(gegnerGroup.get(gegnerIndex));
 					break;
 				case 4:
-					sp.grosseHeilung(gegnerGroup.get(gegnerIndex));
+					//TODO fix no more zustand. 
+					//sp.grosseHeilung(gegnerGroup.get(gegnerIndex));
 					break;
 				default:
-					sp.leichtVerletzen(gegnerGroup.get(gegnerIndex));
+					//TODO fix no more zustand.
+					//sp.leichtVerletzen(gegnerGroup.get(gegnerIndex));
 				}
 			}
 			
@@ -74,26 +77,30 @@ public class KampfSystem {
 	private String getGegnerBeschreibung() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Sie kämpfen gegen: ");
-		for (character.Character gg : gegnerGroup) {
+		
+		//TODO fix no more zustand.
+		/*for (character.Character gg : gegnerGroup) {
 			sb.append(gg.getName() + " [" + gg.getZustand().getClass().getName() +"] ");
-		}
+		}*/
 		return sb.toString();
 	}
 
 	private boolean checkAllStatusDead(LinkedList<character.Character> character) {
 		for (character.Character ch : character) {
-			if (ch.getZustand() != Tod.getInstance()) {
+			//TODO fix no more zustand.
+			/*if (ch.getZustand() != Tod.getInstance()) {
 				return false;
-			}
+			}*/
 		}
 		return true;
 	}
 	
 	private boolean checkAllStatusDeadGegner(LinkedList<character.Gegner> gegner) {
 		for (character.Gegner ch : gegner) {
-			if (ch.getZustand() != Tod.getInstance()) {
+			//TODO fox no more zustand.
+			/*if (ch.getZustand() != Tod.getInstance()) {
 				return false;
-			}
+			}*/
 		}
 		return true;
 	}
@@ -107,11 +114,11 @@ public class KampfSystem {
 	private void gegnerRandomAngriff(character.Character gg, character.Character sp){
 		Random randomObj = new Random();
 		int randomNumber = randomObj.nextInt(101);
-		
-		if(randomNumber >= 75)
+		//TODO fix no more zustand.
+		/*f(randomNumber >= 75)
 			gg.leichtVerletzen(sp);
 		else
-			gg.schwerVerletzen(sp);
+			gg.schwerVerletzen(sp);*/
 	}
 	
 	private String getGegnerGroupToString()

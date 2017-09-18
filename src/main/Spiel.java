@@ -168,10 +168,11 @@ public class Spiel {
 		if (befehlswort.equalsIgnoreCase("help")) {
 			hilfstextAusgeben();
 		} else if (befehlswort.equalsIgnoreCase("go")) {
-			if (spieler.getZustand().isMovable())
+			//TODO fix no more zustand.
+			/*if (spieler.getZustand().isMovable())
 				wechsleRaum(befehl);
 			else
-				System.out.println("Sie können sich nicht bewegen!");
+				System.out.println("Sie können sich nicht bewegen!");*/
 		} else if (befehlswort.equalsIgnoreCase("quit")) {
 			moechteBeenden = beenden(befehl);
 		} else if (befehlswort.equalsIgnoreCase("look")) {
@@ -185,19 +186,25 @@ public class Spiel {
 		} else if (befehlswort.equalsIgnoreCase("eat")) {
 			eat(befehl.gibZweitesWort());
 		} else if (befehlswort.equalsIgnoreCase("heal")) {
-			spieler.kleineHeilung(spieler);
+			//TODO fix no more zustand. 
+			//spieler.kleineHeilung(spieler);
 		} else if (befehlswort.equalsIgnoreCase("hurt")) {
-			spieler.leichtVerletzen(spieler);
+			//TODO fix no more zustand. 
+			//pieler.leichtVerletzen(spieler);
 		} else if (befehlswort.equalsIgnoreCase("stab")) {
-			spieler.schwerVerletzen(spieler);
+			//TODO fix no more zustand. 
+			//spieler.schwerVerletzen(spieler);
 		} else if (befehlswort.equalsIgnoreCase("suicide")) {
-			spieler.toeten(spieler);
+			//TODO fix no more zustand. 
+			//spieler.toeten(spieler);
 		} else if (befehlswort.equalsIgnoreCase("use")) {
 			nutzeLandschaft(befehl.gibZweitesWort());
 		} else if (befehlswort.equalsIgnoreCase("smallRevival")) {
-			spieler.kleineWiederbelebung(spieler);
+			//TODO fix no more zustand. 
+			//spieler.kleineWiederbelebung(spieler);
 		} else if (befehlswort.equalsIgnoreCase("largeRevial")) {
-			spieler.grosseWiederbelebung(spieler);
+			//TODO fix no more zustand. 
+			//spieler.grosseWiederbelebung(spieler);
 		} else if (befehlswort.equalsIgnoreCase("talk")) {
 			talk(befehl.gibZweitesWort());
 		} else if (befehlswort.equalsIgnoreCase("status")) {

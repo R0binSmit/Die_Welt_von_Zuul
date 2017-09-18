@@ -14,12 +14,9 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import main.ZuulUI;
 import ort.Raum;
-import zustand.Gesund;
-import zustand.GesundheitsZustand;
 
 public abstract class Character {
 	protected Raum aktuellerRaum;
-	protected GesundheitsZustand zustand;
 	protected int maxTraglast, traglast, geld;
 	protected LinkedList<Gegenstand> gegenstaende;
 	protected AngriffsVerhalten angriffsVerhalten;
@@ -28,17 +25,9 @@ public abstract class Character {
 	
 	protected String name;
 	protected String beschreibung;
-	
-	protected Hand left;
-	protected Hand right;
-	protected Helm helm;
-	protected Brustplatte brust;
-	protected Hose hose;
-	protected Schuhe schuhe;
 
 	@SuppressWarnings("unchecked")
 	public Character(String name, int maxTraglast, Raum raum, int x, int y, Image image, LinkedList<Gegenstand> gegenstaende) {
-		zustand = Gesund.getInstance();
 		this.name = name;
 		this.aktuellerRaum = raum;
 		this.maxTraglast = maxTraglast;
@@ -143,38 +132,12 @@ public abstract class Character {
 		sb.append(geld);
 		sb.append(System.getProperty("line.separator"));
 		sb.append("Zustand: ");
-		sb.append(zustand.getName());
+		//TODO fix no more zustand.
+		//sb.append(zustand.getName());
 		sb.append(System.getProperty("line.separator"));
 		return sb.toString();
 	}
 
-	public void kleineHeilung(Character character) {
-		character.zustand = character.zustand.kleineHeilung();
-	}
-
-	public void grosseHeilung(Character character) {
-		character.zustand = character.zustand.grosseHeilung();
-	}
-
-	public void leichtVerletzen(Character character) {
-		character.zustand = character.zustand.leichtVerletzen();
-	}
-
-	public void schwerVerletzen(Character character) {
-		character.zustand = character.zustand.schwerVerletzen();
-	}
-
-	public void toeten(Character character) {
-		character.zustand = character.zustand.toeten();
-	}
-	
-	public void kleineWiederbelebung(Character character) {
-		character.zustand = character.zustand.kleineHeilung();
-	}
-	
-	public void grosseWiederbelebung(Character character){
-		character.zustand = character.zustand.grosseHeilung();
-	}
 
 	public Raum getAktuellerRaum() {
 		return aktuellerRaum;
@@ -182,10 +145,6 @@ public abstract class Character {
 
 	public void setAktuellerRaum(Raum aktuellerRaum) {
 		this.aktuellerRaum = aktuellerRaum;
-	}
-
-	public GesundheitsZustand getZustand() {
-		return zustand;
 	}
 
 	public int getMaxTraglast() {
@@ -208,34 +167,6 @@ public abstract class Character {
 		return beschreibung;
 	}
 
-	public Hand getLeft() {
-		return left;
-	}
-
-	public Hand getRight() {
-		return right;
-	}
-
-	public Helm getHelm() {
-		return helm;
-	}
-
-	public Brustplatte getBrust() {
-		return brust;
-	}
-
-	public Hose getHose() {
-		return hose;
-	}
-
-	public Schuhe getSchuhe() {
-		return schuhe;
-	}
-
-	public void setZustand(GesundheitsZustand zustand) {
-		this.zustand = zustand;
-	}
-
 	public void setTraglast(int traglast) {
 		this.traglast = traglast;
 	}
@@ -246,30 +177,6 @@ public abstract class Character {
 
 	public void setBeschreibung(String beschreibung) {
 		this.beschreibung = beschreibung;
-	}
-
-	public void setLeft(Hand left) {
-		this.left = left;
-	}
-
-	public void setRight(Hand right) {
-		this.right = right;
-	}
-
-	public void setHelm(Helm helm) {
-		this.helm = helm;
-	}
-
-	public void setBrust(Brustplatte brust) {
-		this.brust = brust;
-	}
-
-	public void setHose(Hose hose) {
-		this.hose = hose;
-	}
-
-	public void setSchuhe(Schuhe schuhe) {
-		this.schuhe = schuhe;
 	}
 
 	public int getGeld() {
