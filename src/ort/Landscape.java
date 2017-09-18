@@ -20,6 +20,10 @@ public abstract class Landscape {
 	public abstract void onEnterRoom(Spieler spieler);
 
 	public abstract void onUse(Spieler spieler);
+	
+	public void show() {
+		
+	}
 
 	public String getName() {
 		return name;

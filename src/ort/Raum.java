@@ -8,6 +8,8 @@ import character.Gegner;
 import character.NPC;
 import character.Spieler;
 import gegenstand.Gegenstand;
+import javafx.scene.image.Image;
+import main.ZuulUI;
 
 /**
  * Diese Klasse modelliert Räume in der Welt von Zuul.
@@ -28,6 +30,7 @@ public class Raum {
 	private ArrayList<Landscape> landschaft = new ArrayList<Landscape>();
 	private LinkedList<Gegner> gegner = new LinkedList<Gegner>();
 	private LinkedList<NPC> npc = new LinkedList<NPC>();
+	private Image bg;
 
 	/**
 	 * Erzeuge einen Raum mit einer Beschreibung. Ein Raum hat anfangs keine
@@ -37,9 +40,10 @@ public class Raum {
 	 *            enthält eine Beschreibung in der Form "in einer Küche" oder "auf
 	 *            einem Sportplatz".
 	 */
-	public Raum(String beschreibung, Landkarte land) {
+	public Raum(String beschreibung, Landkarte land, Image bg) {
 		this.beschreibung = beschreibung;
 		this.land = land;
+		this.bg = bg;
 	}
 
 	/**
@@ -57,6 +61,26 @@ public class Raum {
 	 */
 	public void setzeAusgang(String richtung, Raum raum) {
 		ausgaenge.put(richtung, raum);
+	}
+	
+	public void show() {
+		ZuulUI.gc.drawImage(bg, 0, 0);
+		
+		for (Gegenstand gs : gegenstaende) {
+			gs.show();
+		}
+		
+		for (Landscape ls : landschaft) {
+			ls.show();
+		}
+		
+		for (NPC np :npc) {
+			np.show();
+		}
+		
+		for (Gegner g : gegner) {
+			g.show();
+		}
 	}
 
 	public Raum getAusgang(String richtung) {

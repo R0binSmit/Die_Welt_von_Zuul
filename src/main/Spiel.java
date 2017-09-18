@@ -8,6 +8,8 @@ import befehlsVerarbeitung.Parser;
 import character.NPC;
 import character.Spieler;
 import gegenstand.Gegenstand;
+import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import ort.Landkarte;
 import ort.Landscape;
 import ort.Raum;
@@ -32,6 +34,7 @@ import ort.Raum;
 public class Spiel {
 	private Parser parser;
 	private HashMap<String, Spieler> party = new HashMap<String, Spieler>();
+	private HashMap<KeyCode, Runnable> actions = new HashMap<KeyCode, Runnable>();
 	private Spieler spieler;
 	private Landkarte land;
 	private KampfSystem kampfSystem;
@@ -43,28 +46,50 @@ public class Spiel {
 		land = new Landkarte();
 		land.raeumeAnlegen();
 		parser = new Parser();
-		party.put("Dave", new Spieler("Dave", 100, land.getStartpoint(), null));
-		party.put("Egon", new Spieler("Egon", 100, land.getStartpoint(), null));
+		party.put("Dave", new Spieler("Dave", 100, land.getStartpoint(), 20, 20,
+				new Image(ZuulUI.class.getResourceAsStream("/Bilder/Dave.png")), null));
+		// party.put("Egon", new Spieler("Egon", 100, land.getStartpoint(), 40, 40, new
+		// Image("../Bilder/Dave.png"), null));
 		spieler = party.get("Dave");
 		spieler.setGeld(300);
+
+		setActions();
+		willkommenstextAusgeben();
+	}
+
+	private void setActions() {
+		actions.put(KeyCode.W, () -> {
+			spieler.move(KeyCode.W);
+		});
+
+		actions.put(KeyCode.A, () -> {
+			spieler.move(KeyCode.A);
+		});
+
+		actions.put(KeyCode.S, () -> {
+			spieler.move(KeyCode.S);
+		});
+
+		actions.put(KeyCode.D, () -> {
+			spieler.move(KeyCode.D);
+		});
 	}
 
 	/**
 	 * Die Hauptmethode zum Spielen. Läuft bis zum Ende des Spiels in einer
 	 * Schleife.
 	 */
-	public void spielen() {
-		willkommenstextAusgeben();
-
-		// Die Hauptschleife. Hier lesen wir wiederholt Befehle ein
-		// und führen sie aus, bis das Spiel beendet wird.
-
-		boolean beendet = false;
-		while (!beendet) {
-			Befehl befehl = parser.liefereBefehl();
-			beendet = verarbeiteBefehl(befehl);
+	public void update(HashMap<KeyCode, Boolean> keys) {
+		for (KeyCode key : keys.keySet()) {
+			try {
+				actions.get(key).run();
+			} catch (Exception ex) {
+			}
 		}
-		System.out.println("Danke für dieses Spiel. Auf Wiedersehen.");
+
+		ZuulUI.gc.clearRect(0, 0, ZuulUI.gc.getCanvas().getWidth(), ZuulUI.gc.getCanvas().getHeight());
+		spieler.getAktuellerRaum().show();
+		spieler.show();
 	}
 
 	/**
@@ -74,16 +99,19 @@ public class Spiel {
 		System.out.println("Willkommen zu Zuul!");
 		System.out.println("Tippen sie 'help', wenn Sie Hilfe brauchen.");
 		System.out.println();
-		System.out.println("Seltsame Ereignisse haben ihre Schatten vorausgeworfen." + System.getProperty("line.separator") +
-				"Über Nacht viel der Goldpreis auf 3 US-Dollar pro Feinunze und die Menscheit strebte nach einen neuen Wertanlage:" + System.getProperty("line.separator") +
-				"Lutetium!" + System.getProperty("line.separator") +
-				"Niemand weiß, was dann geschah. Vielleicht gruben wir zu tief, vielleicht ließen wir uns auf falsche Götzen ein," + System.getProperty("line.separator") +
-				"fest steht, dass das Ende der Welt über uns kam." + System.getProperty("line.separator") +
-				"Nur hatten die Propheten keine Ahnung, wie seltsam das Ende werden würde." + System.getProperty("line.separator") +
-				"Jetzt stehst du alleine vor der Universität. In der Ferne schnurrt eine Katze." + System.getProperty("line.separator") +
-				"");
+		System.out.println("Seltsame Ereignisse haben ihre Schatten vorausgeworfen."
+				+ System.getProperty("line.separator")
+				+ "Über Nacht viel der Goldpreis auf 3 US-Dollar pro Feinunze und die Menscheit strebte nach einen neuen Wertanlage:"
+				+ System.getProperty("line.separator") + "Lutetium!" + System.getProperty("line.separator")
+				+ "Niemand weiß, was dann geschah. Vielleicht gruben wir zu tief, vielleicht ließen wir uns auf falsche Götzen ein,"
+				+ System.getProperty("line.separator") + "fest steht, dass das Ende der Welt über uns kam."
+				+ System.getProperty("line.separator")
+				+ "Nur hatten die Propheten keine Ahnung, wie seltsam das Ende werden würde."
+				+ System.getProperty("line.separator")
+				+ "Jetzt stehst du alleine vor der Universität. In der Ferne schnurrt eine Katze."
+				+ System.getProperty("line.separator") + "");
 		System.out.println();
-		System.out.println(spieler.getAktuellerRaum().getLongDesciption());
+		// System.out.println(spieler.getAktuellerRaum().getLongDesciption());
 	}
 
 	/**
@@ -105,8 +133,8 @@ public class Spiel {
 		if (befehlswort.equalsIgnoreCase("help")) {
 			hilfstextAusgeben();
 		} else if (befehlswort.equalsIgnoreCase("go")) {
-			if(spieler.getZustand().isMovable())
-			wechsleRaum(befehl);
+			if (spieler.getZustand().isMovable())
+				wechsleRaum(befehl);
 			else
 				System.out.println("Sie können sich nicht bewegen!");
 		} else if (befehlswort.equalsIgnoreCase("quit")) {
@@ -135,7 +163,7 @@ public class Spiel {
 			spieler.kleineWiederbelebung(spieler);
 		} else if (befehlswort.equalsIgnoreCase("largeRevial")) {
 			spieler.grosseWiederbelebung(spieler);
-		} else if (befehlswort.equalsIgnoreCase("talk")) { 
+		} else if (befehlswort.equalsIgnoreCase("talk")) {
 			talk(befehl.gibZweitesWort());
 		} else if (befehlswort.equalsIgnoreCase("status")) {
 			System.out.println(spieler.getStatus());
@@ -144,7 +172,7 @@ public class Spiel {
 		}
 		return moechteBeenden;
 	}
-	
+
 	public void changePlayer(String name) {
 		Spieler zw = party.get(name);
 		if (zw != null) {
@@ -154,7 +182,7 @@ public class Spiel {
 			System.out.println("Diesen Spieler gibt es nicht!");
 		}
 	}
-	
+
 	public void talk(String name) {
 		NPC npc = spieler.getAktuellerRaum().getNPC(name);
 		if (npc != null) {
@@ -255,7 +283,7 @@ public class Spiel {
 			spielerGroup.add(spieler);
 			kampfSystem = new KampfSystem(spielerGroup, naechsterRaum.getGegnerList());
 			naechsterRaum.onEnterRoomEvent(spieler);
-			if(kampfSystem.checkKampfStart(naechsterRaum)) {
+			if (kampfSystem.checkKampfStart(naechsterRaum)) {
 				kampfSystem.startKampf();
 			}
 		}

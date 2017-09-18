@@ -10,6 +10,9 @@ import gegenstand.Hand;
 import gegenstand.Helm;
 import gegenstand.Hose;
 import gegenstand.Schuhe;
+import javafx.geometry.Point2D;
+import javafx.scene.image.Image;
+import main.ZuulUI;
 import ort.Raum;
 import zustand.Gesund;
 import zustand.GesundheitsZustand;
@@ -20,8 +23,12 @@ public abstract class Character {
 	protected int maxTraglast, traglast, geld;
 	protected LinkedList<Gegenstand> gegenstaende;
 	protected AngriffsVerhalten angriffsVerhalten;
+	protected Point2D pos;
+	protected Image image;
+	
 	protected String name;
 	protected String beschreibung;
+	
 	protected Hand left;
 	protected Hand right;
 	protected Helm helm;
@@ -30,7 +37,7 @@ public abstract class Character {
 	protected Schuhe schuhe;
 
 	@SuppressWarnings("unchecked")
-	public Character(String name, int maxTraglast, Raum raum, LinkedList<Gegenstand> gegenstaende) {
+	public Character(String name, int maxTraglast, Raum raum, int x, int y, Image image, LinkedList<Gegenstand> gegenstaende) {
 		zustand = Gesund.getInstance();
 		this.name = name;
 		this.aktuellerRaum = raum;
@@ -39,6 +46,12 @@ public abstract class Character {
 				: (LinkedList<Gegenstand>) gegenstaende.clone();
 		traglast = ermittleGewicht();
 		angriffsVerhalten = NPCAngriffVerhalten.getInstance();
+		pos = new Point2D(x, y);
+		this.image = image;
+	}
+	
+	public void show() {
+		ZuulUI.gc.drawImage(image, pos.getX(), pos.getY());
 	}
 
 	public abstract void interagieren(Spieler spieler);

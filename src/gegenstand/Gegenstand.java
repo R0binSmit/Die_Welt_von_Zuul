@@ -1,21 +1,33 @@
 package gegenstand;
 
+import javafx.geometry.Point2D;
+import javafx.scene.image.Image;
+import main.ZuulUI;
+
 public abstract class Gegenstand {
 	private String name, beschreibung;
 	private int gewicht, preis;
 	private boolean essbar = false;
+	private Image image;
+	private Point2D pos;
 	
-	public Gegenstand(String name, String beschreibung, int gewicht, int preis, boolean essbar) {
+	public Gegenstand(String name, String beschreibung, int gewicht, int preis, Image image, Point2D pos, boolean essbar) {
 		this.name = name;
 		this.beschreibung = beschreibung;
 		this.gewicht = gewicht;
 		this.essbar = essbar;
 		this.preis = preis;
+		this.image = image;
+		this.pos = pos;
 	}
 
 	public String toString() {
 		return "Name: " + name + System.getProperty("line.separator") + "Beschreibung: " + beschreibung
 				+ System.getProperty("line.separator") + "Gewicht: " + gewicht;
+	}
+	
+	public void show() {
+		ZuulUI.gc.drawImage(image, pos.getX(), pos.getY());
 	}
 
 	public String getName() {

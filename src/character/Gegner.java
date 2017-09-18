@@ -3,11 +3,13 @@ package character;
 import java.util.LinkedList;
 
 import gegenstand.Gegenstand;
+import javafx.scene.image.Image;
 import ort.Raum;
 
 public class Gegner extends Character {
-	public Gegner(String name, int maxTraglast, Raum raum, LinkedList<Gegenstand> gegenstaende) {
-		super(name, maxTraglast, raum, gegenstaende);
+	public Gegner(String name, int maxTraglast, Raum raum, int x, int y, Image image,
+			LinkedList<Gegenstand> gegenstaende) {
+		super(name, maxTraglast, raum, x, y, image, gegenstaende);
 	}
 
 	@Override

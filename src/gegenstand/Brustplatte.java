@@ -1,7 +1,9 @@
 package gegenstand;
 
+import javafx.scene.image.Image;
+
 public class Brustplatte extends Verteidigung {
-	public Brustplatte(String name, String beschreibung, int gewicht, int preis, double block) {
-		super(name, beschreibung, gewicht, preis, block);
+	public Brustplatte(String name, String beschreibung, int gewicht, int preis, Image image, int x, int y, double block) {
+		super(name, beschreibung, gewicht, preis, image, x, y, block);
 	}
 }
