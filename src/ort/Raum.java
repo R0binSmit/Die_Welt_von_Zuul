@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import character.Gegner;
 import character.NPC;
 import character.Spieler;
-import item.Gegenstand;
+import item.Item;
 import javafx.scene.image.Image;
 import main.ZuulUI;
 
@@ -26,7 +26,7 @@ public class Raum {
 	private String beschreibung;
 	private Landkarte land;
 	private HashMap<String, Raum> ausgaenge = new HashMap<String, Raum>();
-	private LinkedList<Gegenstand> gegenstaende = new LinkedList<Gegenstand>();
+	private LinkedList<Item> gegenstaende = new LinkedList<Item>();
 	private ArrayList<Landscape> landschaft = new ArrayList<Landscape>();
 	private LinkedList<Gegner> gegner = new LinkedList<Gegner>();
 	private LinkedList<NPC> npc = new LinkedList<NPC>();
@@ -66,7 +66,7 @@ public class Raum {
 	public void show() {
 		ZuulUI.gc.drawImage(bg, 0, 0);
 		
-		for (Gegenstand gs : gegenstaende) {
+		for (Item gs : gegenstaende) {
 			gs.show();
 		}
 		
@@ -96,7 +96,7 @@ public class Raum {
 		return sb.toString();
 	}
 
-	public void gegenstandAblegen(Gegenstand gegenstand) {
+	public void gegenstandAblegen(Item gegenstand) {
 		gegenstaende.add(gegenstand);
 	}
 
@@ -139,8 +139,8 @@ public class Raum {
 		}
 	}
 
-	public Gegenstand gegenstandAufheben(String name) {
-		for (Gegenstand gs : gegenstaende) {
+	public Item gegenstandAufheben(String name) {
+		for (Item gs : gegenstaende) {
 			if (gs.getName().equalsIgnoreCase(name)) {
 				gegenstaende.remove(gs);
 				return gs;
@@ -149,8 +149,8 @@ public class Raum {
 		return null;
 	}
 
-	public Gegenstand getGegenstand(String name) {
-		for (Gegenstand gs : gegenstaende) {
+	public Item getGegenstand(String name) {
+		for (Item gs : gegenstaende) {
 			if (gs.getName().equalsIgnoreCase(name)) {
 				return gs;
 			}
@@ -176,7 +176,7 @@ public class Raum {
 
 	public String gegenstaendeToString() {
 		StringBuilder sb = new StringBuilder("");
-		for (Gegenstand gegenstand : gegenstaende) {
+		for (Item gegenstand : gegenstaende) {
 			sb.append(gegenstand.getName());
 			sb.append(" ");
 		}

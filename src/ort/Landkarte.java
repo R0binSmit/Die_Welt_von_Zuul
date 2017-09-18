@@ -5,7 +5,7 @@ import java.util.Random;
 
 import character.Gegner;
 import item.Crafting;
-import item.Gegenstand;
+import item.Item;
 import javafx.scene.image.Image;
 import main.ZuulUI;
 
@@ -35,7 +35,7 @@ public class Landkarte {
 		raeume.add(draussen);
 		startpoint = draussen;
 		
-		Gegenstand ente;
+		Item ente;
 		
 		ente = new Crafting("Ente", "I A", 3, 5, linkToImage("/Bilder/Ente.png"), 10, 200, true);
 		Gegner monster = new Gegner("Waldo", 20, draussen, 30, 30, linkToImage("/Bilder/Monster.png"), null);

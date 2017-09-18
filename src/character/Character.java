@@ -4,12 +4,7 @@ import java.util.LinkedList;
 
 import Verhalten.AngriffsVerhalten;
 import Verhalten.NPCAngriffVerhalten;
-import item.Brustplatte;
-import item.Gegenstand;
-import item.Hand;
-import item.Helm;
-import item.Hose;
-import item.Schuhe;
+import item.Item;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import main.ZuulUI;
@@ -18,7 +13,7 @@ import ort.Raum;
 public abstract class Character {
 	protected Raum aktuellerRaum;
 	protected int maxTraglast, traglast, geld;
-	protected LinkedList<Gegenstand> gegenstaende;
+	protected LinkedList<Item> gegenstaende;
 	protected AngriffsVerhalten angriffsVerhalten;
 	protected Point2D pos;
 	protected Image image;
@@ -27,12 +22,12 @@ public abstract class Character {
 	protected String beschreibung;
 
 	@SuppressWarnings("unchecked")
-	public Character(String name, int maxTraglast, Raum raum, int x, int y, Image image, LinkedList<Gegenstand> gegenstaende) {
+	public Character(String name, int maxTraglast, Raum raum, int x, int y, Image image, LinkedList<Item> gegenstaende) {
 		this.name = name;
 		this.aktuellerRaum = raum;
 		this.maxTraglast = maxTraglast;
-		this.gegenstaende = gegenstaende == null ? new LinkedList<Gegenstand>()
-				: (LinkedList<Gegenstand>) gegenstaende.clone();
+		this.gegenstaende = gegenstaende == null ? new LinkedList<Item>()
+				: (LinkedList<Item>) gegenstaende.clone();
 		traglast = ermittleGewicht();
 		angriffsVerhalten = NPCAngriffVerhalten.getInstance();
 		pos = new Point2D(x, y);
@@ -47,7 +42,7 @@ public abstract class Character {
 
 	public abstract void interagieren(Spieler spieler);
 
-	public boolean gegenstandAufnehmen(Gegenstand gegenstand) {
+	public boolean gegenstandAufnehmen(Item gegenstand) {
 		if (traglast + gegenstand.getGewicht() <= maxTraglast) {
 			gegenstaende.add(gegenstand);
 			traglast += gegenstand.getGewicht();
@@ -57,8 +52,8 @@ public abstract class Character {
 		}
 	}
 
-	public Gegenstand gegenstandAblegen(String name) {
-		Gegenstand gs = getGegenstand(name);
+	public Item gegenstandAblegen(String name) {
+		Item gs = getGegenstand(name);
 		if (gs != null) {
 			gegenstaende.remove(gs);
 			traglast = ermittleGewicht();
@@ -66,8 +61,8 @@ public abstract class Character {
 		return gs;
 	}
 
-	public Gegenstand eat(String name) {
-		Gegenstand essen = getGegenstand(name);
+	public Item eat(String name) {
+		Item essen = getGegenstand(name);
 		if (essen != null && essen.isEssbar()) {
 			gegenstaende.remove(essen);
 			traglast = ermittleGewicht();
@@ -82,14 +77,14 @@ public abstract class Character {
 
 	public int ermittleGewicht() {
 		int gewicht = 0;
-		for (Gegenstand gs : gegenstaende) {
+		for (Item gs : gegenstaende) {
 			gewicht += gs.getGewicht();
 		}
 		return gewicht;
 	}
 
-	public Gegenstand getGegenstand(String name) {
-		for (Gegenstand gs : gegenstaende) {
+	public Item getGegenstand(String name) {
+		for (Item gs : gegenstaende) {
 			if (gs.getName().equalsIgnoreCase(name)) {
 				return gs;
 			}
@@ -102,7 +97,7 @@ public abstract class Character {
 		int i = 1;
 		sb.append("Gegenstände im Inventar: ");
 		sb.append(System.getProperty("line.separator"));
-		for (Gegenstand gs : gegenstaende) {
+		for (Item gs : gegenstaende) {
 			sb.append(i);
 			sb.append(". Gegenstand: ");
 			sb.append(System.getProperty("line.separator"));
@@ -155,7 +150,7 @@ public abstract class Character {
 		return traglast;
 	}
 
-	public LinkedList<Gegenstand> getGegenstaende() {
+	public LinkedList<Item> getGegenstaende() {
 		return gegenstaende;
 	}
 

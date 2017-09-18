@@ -7,7 +7,7 @@ import befehlsVerarbeitung.Befehl;
 import befehlsVerarbeitung.Parser;
 import character.NPC;
 import character.Spieler;
-import item.Gegenstand;
+import item.Item;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 import ort.Landkarte;
@@ -235,7 +235,7 @@ public class Spiel {
 	}
 
 	public void eat(String name) {
-		Gegenstand gs = spieler.eat(name);
+		Item gs = spieler.eat(name);
 		if (gs != null) {
 			System.out.println(gs.getName() + " gegessen");
 		} else {
@@ -251,7 +251,7 @@ public class Spiel {
 	}
 
 	public void nimmGegenstand(String name) {
-		Gegenstand gs = spieler.getAktuellerRaum().getGegenstand(name);
+		Item gs = spieler.getAktuellerRaum().getGegenstand(name);
 		if (gs != null) {
 			if (spieler.gegenstandAufnehmen(gs)) {
 				spieler.getAktuellerRaum().gegenstandAufheben(name);
@@ -263,7 +263,7 @@ public class Spiel {
 	}
 
 	public void legeGegenstandAb(String name) {
-		Gegenstand gs = spieler.gegenstandAblegen(name);
+		Item gs = spieler.gegenstandAblegen(name);
 		if (gs != null) {
 			spieler.getAktuellerRaum().gegenstandAblegen(gs);
 			System.out.println(gs.getName() + " abgelegt");
@@ -288,7 +288,7 @@ public class Spiel {
 
 	private void lookAround(String item) {
 		if (item != null) {
-			Gegenstand gs = spieler.getGegenstand(item);
+			Item gs = spieler.getGegenstand(item);
 			gs = gs != null ? gs : spieler.getAktuellerRaum().getGegenstand(item);
 			if (gs != null) {
 				System.out.println(gs.getBeschreibung());

@@ -4,13 +4,13 @@ import java.util.LinkedList;
 
 import befehlsVerarbeitung.Befehl;
 import befehlsVerarbeitung.Parser;
-import item.Gegenstand;
+import item.Item;
 import javafx.scene.image.Image;
 import ort.Raum;
 
 public class Kaufmann extends NPC {
 	public Kaufmann(String name, int maxTraglast, Raum raum, int x, int y, Image image,
-			LinkedList<Gegenstand> gegenstaende) {
+			LinkedList<Item> gegenstaende) {
 		super(name, maxTraglast, raum, x, y, image, gegenstaende);
 	}
 
@@ -43,7 +43,7 @@ public class Kaufmann extends NPC {
 	}
 	
 	public boolean trade(Character verkauf, Character kauf, String gegenstand) {
-		Gegenstand ware = verkauf.getGegenstand(gegenstand);
+		Item ware = verkauf.getGegenstand(gegenstand);
 		if (ware != null && kauf.getGeld() >= ware.getPreis()) {
 			kauf.gegenstandAufnehmen(verkauf.gegenstandAblegen(ware.getName()));
 			verkauf.setGeld(verkauf.getGeld() + ware.getPreis());
