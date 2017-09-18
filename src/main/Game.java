@@ -31,7 +31,7 @@ import ort.Raum;
  * @version 2008.03.30
  */
 
-public class Spiel {
+public class Game {
 	private Parser parser;
 	private HashMap<String, Player> party = new HashMap<String, Player>();
 	private HashMap<KeyCode, Runnable> actions = new HashMap<KeyCode, Runnable>();
@@ -42,7 +42,7 @@ public class Spiel {
 	/**
 	 * Erzeuge ein Spiel und initialisiere die interne Raumkarte.
 	 */
-	public Spiel() {
+	public Game() {
 		land = new Landkarte();
 		land.raeumeAnlegen();
 		parser = new Parser();

@@ -20,7 +20,7 @@ public class ZuulUI extends Application {
 
 	private Timeline tl;
 	
-	Spiel meinSpiel = new Spiel();
+	Game meinSpiel = new Game();
 	private HashMap<KeyCode, Boolean> keys = new HashMap<KeyCode, Boolean>();
 
 	public void init() throws Exception {
