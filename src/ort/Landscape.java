@@ -2,7 +2,7 @@ package ort;
 
 import java.util.HashMap;
 
-import character.Spieler;
+import character.Player;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import main.ZuulUI;
@@ -24,9 +24,9 @@ public abstract class Landscape {
 		pos = new Point2D(x, y);
 	}
 
-	public abstract void onEnterRoom(Spieler spieler);
+	public abstract void onEnterRoom(Player spieler);
 
-	public abstract void onUse(Spieler spieler);
+	public abstract void onUse(Player spieler);
 	
 	public void show() {
 		double x = pos.getX() - image.getWidth() * 0.5;

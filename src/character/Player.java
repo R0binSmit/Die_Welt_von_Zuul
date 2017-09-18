@@ -9,10 +9,10 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import ort.Raum;
 
-public class Spieler extends Character {
+public class Player extends Character {
 	boolean hauptSpieler = false;
 
-	public Spieler(String name, int maxTraglast, Raum raum, int x, int y, Image image, LinkedList<Item> gegenstaende) {
+	public Player(String name, int maxTraglast, Raum raum, int x, int y, Image image, LinkedList<Item> gegenstaende) {
 		super(name, maxTraglast, raum, x, y, image, gegenstaende);
 		this.angriffsVerhalten = SpielerAngriffVerhalten.getInstance();
 	}
@@ -45,7 +45,7 @@ public class Spieler extends Character {
 	}
 
 	@Override
-	public void interagieren(Spieler Spieler) {
+	public void interagieren(Player Spieler) {
 
 	}
 }

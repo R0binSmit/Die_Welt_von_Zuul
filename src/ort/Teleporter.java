@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-import character.Spieler;
+import character.Player;
 import javafx.scene.image.Image;
 
 public class Teleporter extends Landscape {
@@ -17,11 +17,11 @@ public class Teleporter extends Landscape {
 		this.destination = destination;
 	}
 
-	public void onUse(Spieler spieler) {
+	public void onUse(Player spieler) {
 		System.out.println(getResponse(LandscapeResponse.USE_RESPONSE));
 	}
 
-	public void onEnterRoom(Spieler spieler) {
+	public void onEnterRoom(Player spieler) {
 		Raum currentDestination;
 		
 		System.out.println();

@@ -9,10 +9,10 @@ import ort.Raum;
 public class KampfSystem {
 	private final static String WELCOMETEXT = "Sie sind in ein Kampf verwickelt worden!";
 	LinkedList<character.Character> spielerGroup = new LinkedList<character.Character>();
-	LinkedList<character.Gegner> gegnerGroup = new LinkedList<character.Gegner>();
+	LinkedList<character.Enemy> gegnerGroup = new LinkedList<character.Enemy>();
 	Scanner scanner = new Scanner(System.in);
 
-	public KampfSystem(LinkedList<character.Character> spielerGroup, LinkedList<character.Gegner> gegnerGroup) {
+	public KampfSystem(LinkedList<character.Character> spielerGroup, LinkedList<character.Enemy> gegnerGroup) {
 		this.spielerGroup = spielerGroup;
 		this.gegnerGroup = gegnerGroup;
 	}
@@ -30,7 +30,7 @@ public class KampfSystem {
 
 		do {
 			for(character.Character sp : spielerGroup){
-				character.Gegner gegner = null;
+				character.Enemy gegner = null;
 				
 				System.out.println(sp.getName() + " ist drann. Was möchtest Sie ausführen?");
 				System.out.println("1. LeichterAngriff");
@@ -95,8 +95,8 @@ public class KampfSystem {
 		return true;
 	}
 	
-	private boolean checkAllStatusDeadGegner(LinkedList<character.Gegner> gegner) {
-		for (character.Gegner ch : gegner) {
+	private boolean checkAllStatusDeadGegner(LinkedList<character.Enemy> gegner) {
+		for (character.Enemy ch : gegner) {
 			//TODO fox no more zustand.
 			/*if (ch.getZustand() != Tod.getInstance()) {
 				return false;

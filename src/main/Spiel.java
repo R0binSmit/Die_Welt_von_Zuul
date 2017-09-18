@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import befehlsVerarbeitung.Befehl;
 import befehlsVerarbeitung.Parser;
 import character.NPC;
-import character.Spieler;
+import character.Player;
 import item.Item;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
@@ -33,9 +33,9 @@ import ort.Raum;
 
 public class Spiel {
 	private Parser parser;
-	private HashMap<String, Spieler> party = new HashMap<String, Spieler>();
+	private HashMap<String, Player> party = new HashMap<String, Player>();
 	private HashMap<KeyCode, Runnable> actions = new HashMap<KeyCode, Runnable>();
-	private Spieler spieler;
+	private Player spieler;
 	private Landkarte land;
 	private KampfSystem kampfSystem;
 
@@ -46,7 +46,7 @@ public class Spiel {
 		land = new Landkarte();
 		land.raeumeAnlegen();
 		parser = new Parser();
-		party.put("Dave", new Spieler("Dave", 100, land.getStartpoint(), 20, 20,
+		party.put("Dave", new Player("Dave", 100, land.getStartpoint(), 20, 20,
 				Landkarte.linkToImage("/Bilder/Dave.png"), null));
 		spieler = party.get("Dave");
 		spieler.setGeld(300);
@@ -216,7 +216,7 @@ public class Spiel {
 	}
 
 	public void changePlayer(String name) {
-		Spieler zw = party.get(name);
+		Player zw = party.get(name);
 		if (zw != null) {
 			spieler = zw;
 			System.out.println("du spielst nun als " + name + ".");

@@ -8,13 +8,13 @@ import item.Item;
 import javafx.scene.image.Image;
 import ort.Raum;
 
-public class Kaufmann extends NPC {
-	public Kaufmann(String name, int maxTraglast, Raum raum, int x, int y, Image image,
+public class Trader extends NPC {
+	public Trader(String name, int maxTraglast, Raum raum, int x, int y, Image image,
 			LinkedList<Item> gegenstaende) {
 		super(name, maxTraglast, raum, x, y, image, gegenstaende);
 	}
 
-	public void interagieren(Spieler spieler) {
+	public void interagieren(Player spieler) {
 		System.out.println(text);
 		Parser pr = new Parser();
 		Befehl befehl;

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import character.Gegner;
+import character.Enemy;
 import character.NPC;
-import character.Spieler;
+import character.Player;
 import item.Item;
 import javafx.scene.image.Image;
 import main.ZuulUI;
@@ -28,7 +28,7 @@ public class Raum {
 	private HashMap<String, Raum> ausgaenge = new HashMap<String, Raum>();
 	private LinkedList<Item> gegenstaende = new LinkedList<Item>();
 	private ArrayList<Landscape> landschaft = new ArrayList<Landscape>();
-	private LinkedList<Gegner> gegner = new LinkedList<Gegner>();
+	private LinkedList<Enemy> gegner = new LinkedList<Enemy>();
 	private LinkedList<NPC> npc = new LinkedList<NPC>();
 	private Image bg;
 
@@ -78,7 +78,7 @@ public class Raum {
 			np.show();
 		}
 		
-		for (Gegner g : gegner) {
+		for (Enemy g : gegner) {
 			g.show();
 		}
 	}
@@ -100,11 +100,11 @@ public class Raum {
 		gegenstaende.add(gegenstand);
 	}
 
-	public void setzeGegner(Gegner gegner) {
+	public void setzeGegner(Enemy gegner) {
 		this.gegner.add(gegner);
 	}
 
-	public void enterneGegner(Gegner gegner) {
+	public void enterneGegner(Enemy gegner) {
 		this.gegner.remove(gegner);
 	}
 	
@@ -167,7 +167,7 @@ public class Raum {
 		return null;
 	}
 
-	public void onEnterRoomEvent(Spieler spieler) {
+	public void onEnterRoomEvent(Player spieler) {
 		for (int i = landschaft.size() - 1; i >= 0; i--) {
 			Landscape ls = landschaft.get(i); 
 			ls.onEnterRoom(spieler);
@@ -194,7 +194,7 @@ public class Raum {
 
 	private String gegnerToString() {
 		StringBuilder sb = new StringBuilder("");
-		for (Gegner gn : gegner) {
+		for (Enemy gn : gegner) {
 			sb.append(gn.getName());
 			sb.append(" ");
 		}
@@ -242,7 +242,7 @@ public class Raum {
 		return land;
 	}
 
-	public LinkedList<Gegner> getGegnerList() {
+	public LinkedList<Enemy> getGegnerList() {
 		return gegner;
 	}
 

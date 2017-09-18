@@ -3,7 +3,7 @@ package ort;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import character.Spieler;
+import character.Player;
 import javafx.scene.image.Image;
 
 public class Sammler extends Landscape {
@@ -18,7 +18,7 @@ public class Sammler extends Landscape {
 		this.execute = execute;
 	}
 
-	public void onUse(Spieler spieler) {
+	public void onUse(Player spieler) {
 		if (spieler.getGegenstand(key) == null) {
 			System.out.println(getResponse(LandscapeResponse.USE_RESPONSE));
 		}
@@ -32,7 +32,7 @@ public class Sammler extends Landscape {
 		}
 	}
 
-	public void onEnterRoom(Spieler spieler) {
+	public void onEnterRoom(Player spieler) {
 
 	}
 

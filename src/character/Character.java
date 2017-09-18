@@ -40,7 +40,7 @@ public abstract class Character {
 		ZuulUI.gc.drawImage(image, x, y);
 	}
 
-	public abstract void interagieren(Spieler spieler);
+	public abstract void interagieren(Player spieler);
 
 	public boolean gegenstandAufnehmen(Item gegenstand) {
 		if (traglast + gegenstand.getGewicht() <= maxTraglast) {
