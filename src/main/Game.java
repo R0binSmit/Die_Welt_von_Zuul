@@ -34,7 +34,6 @@ import ort.Raum;
 
 public class Game {
 	private Parser parser;
-	private HashMap<String, Player> party = new HashMap<String, Player>();
 	private HashMap<KeyCode, Runnable> actions = new HashMap<KeyCode, Runnable>();
 	private Player spieler;
 	private Landkarte land;
@@ -49,9 +48,8 @@ public class Game {
 		land = new Landkarte(gc);
 		land.raeumeAnlegen();
 		parser = new Parser();
-		party.put("Dave", new Player("Dave", 100, land.getStartpoint(), 20, 20,
-				Usefull.linkToImage("/Bilder/Dave.png"), gc, null));
-		spieler = party.get("Dave");
+		spieler = new Player("Dave", 100, land.getStartpoint(), 20, 20,
+				Usefull.linkToImage("/Bilder/Dave.png"), gc, null);
 		spieler.setGeld(300);
 		this.gc = gc;
 		tv = new Textverwaltung(gc);
@@ -177,22 +175,6 @@ public class Game {
 		String befehlswort = befehl.gibBefehlswort();
 		if (befehlswort.equalsIgnoreCase("help")) {
 			hilfstextAusgeben();
-		} else if (befehlswort.equalsIgnoreCase("go")) {
-			//TODO fix no more zustand.
-			/*if (spieler.getZustand().isMovable())
-				wechsleRaum(befehl);
-			else
-				System.out.println("Sie können sich nicht bewegen!");*/
-		} else if (befehlswort.equalsIgnoreCase("quit")) {
-			moechteBeenden = beenden(befehl);
-		} else if (befehlswort.equalsIgnoreCase("look")) {
-			lookAround(befehl.gibZweitesWort());
-		} else if (befehlswort.equalsIgnoreCase("take")) {
-			nimmGegenstand(befehl.gibZweitesWort());
-		} else if (befehlswort.equalsIgnoreCase("drop")) {
-			legeGegenstandAb(befehl.gibZweitesWort());
-		} else if (befehlswort.equalsIgnoreCase("inventory")) {
-			System.out.println(spieler.getInventory());
 		} else if (befehlswort.equalsIgnoreCase("eat")) {
 			eat(befehl.gibZweitesWort());
 		} else if (befehlswort.equalsIgnoreCase("heal")) {
@@ -219,20 +201,8 @@ public class Game {
 			talk(befehl.gibZweitesWort());
 		} else if (befehlswort.equalsIgnoreCase("status")) {
 			System.out.println(spieler.getStatus());
-		} else if (befehlswort.equalsIgnoreCase("changePlayer")) {
-			changePlayer(befehl.gibZweitesWort());
 		}
 		return moechteBeenden;
-	}
-
-	public void changePlayer(String name) {
-		Player zw = party.get(name);
-		if (zw != null) {
-			spieler = zw;
-			System.out.println("du spielst nun als " + name + ".");
-		} else {
-			System.out.println("Diesen Spieler gibt es nicht!");
-		}
 	}
 
 	public void talk(String name) {
