@@ -3,8 +3,6 @@ package main;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import befehlsVerarbeitung.Befehl;
-import befehlsVerarbeitung.Parser;
 import character.NPC;
 import character.Player;
 import item.Item;
