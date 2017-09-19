@@ -33,7 +33,6 @@ import ort.Raum;
  */
 
 public class Game {
-	private Parser parser;
 	private HashMap<KeyCode, Runnable> actions = new HashMap<KeyCode, Runnable>();
 	private Player spieler;
 	private Landkarte land;
