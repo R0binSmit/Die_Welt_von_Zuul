@@ -105,7 +105,7 @@ public class Game {
 			gc.fillRect(300, 0, 200, 50);
 			if (Usefull.intersects(300, 0, 200, 50, pos.getX(), pos.getY(), spieler.getW(), spieler.getH())) {
 				spieler.setPos(new Point2D(spieler.getPos().getX(), 700));
-				wechsleRaum(new Befehl(null, "north"));
+				wechsleRaum("north");
 			}
 		}
 
@@ -113,7 +113,7 @@ public class Game {
 			gc.fillRect(750, 300, 50, 200);
 			if (Usefull.intersects(750, 300, 50, 200, pos.getX(), pos.getY(), spieler.getW(), spieler.getH())) {
 				spieler.setPos(new Point2D(100, spieler.getPos().getY()));
-				wechsleRaum(new Befehl(null, "east"));
+				wechsleRaum("east");
 			}
 		}
 
@@ -121,7 +121,7 @@ public class Game {
 			gc.fillRect(300, 750, 200, 50);
 			if (Usefull.intersects(300, 750, 200, 50, pos.getX(), pos.getY(), spieler.getW(), spieler.getH())) {
 				spieler.setPos(new Point2D(spieler.getPos().getX(), 100));
-				wechsleRaum(new Befehl(null, "south"));
+				wechsleRaum("south");
 			}
 		}
 
@@ -129,7 +129,7 @@ public class Game {
 			gc.fillRect(0, 300, 50, 200);
 			if (Usefull.intersects(0, 300, 50, 200, pos.getX(), pos.getY(), spieler.getW(), spieler.getH())) {
 				spieler.setPos(new Point2D(700, spieler.getPos().getY()));
-				wechsleRaum(new Befehl(null, "west"));
+				wechsleRaum("west");
 			}
 		}
 
@@ -233,8 +233,7 @@ public class Game {
 	 * Versuche, den Raum zu wechseln. Wenn es einen Ausgang gibt, wechsele in den
 	 * neuen Raum, ansonsten gib eine Fehlermeldung aus.
 	 */
-	private void wechsleRaum(Befehl befehl) {
-		String richtung = befehl.gibZweitesWort();
+	private void wechsleRaum(String richtung) {
 		Raum naechsterRaum = spieler.getAktuellerRaum().getAusgang(richtung);
 		spieler.setAktuellerRaum(naechsterRaum);
 		tv.addText(spieler.getAktuellerRaum().getLongDesciption());
