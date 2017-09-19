@@ -6,15 +6,17 @@ import java.util.Random;
 import character.Enemy;
 import item.Crafting;
 import item.Item;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.ZuulUI;
 
 public class Landkarte {
 	private Raum startpoint = null;
 	private ArrayList<Raum> raeume = new ArrayList<Raum>();
+	private GraphicsContext gc;
 
-	public Landkarte() {
-
+	public Landkarte(GraphicsContext gc) {
+		this.gc = gc;
 	}
 	
 	public static Image linkToImage(String link) {
@@ -25,27 +27,26 @@ public class Landkarte {
 	 * Erzeuge alle Räume und verbinde ihre Ausgänge miteinander.
 	 */
 	public void raeumeAnlegen() {
-		Raum draussen;// , hoersaal, cafeteria, labor, buero, keller, abstellkammer;
+		Raum draussen, cafeteria;// , hoersaal, cafeteria, labor, buero, keller, abstellkammer;
 
 		draussen = new Raum("Haupteingang der Universität" + System.getProperty("line.separator")
 				+ "Das Gelände ist verlassen, in dieser dunklen Nacht. Die Gerüchte besagen in den Tiefen dieses Ortes würde die"
 				+ System.getProperty("line.separator")
 				+ "Menschheit antworten finden. Vielleicht sogar Erlösung. Bist du deswegen hier?", this,
-				new Image(ZuulUI.class.getResourceAsStream("/Bilder/Draussen.png")));
+				new Image(ZuulUI.class.getResourceAsStream("/Bilder/Draussen.png")), gc);
+		cafeteria = new Raum("test", this, linkToImage("/Bilder/Cafeteria.png"), gc);
 		raeume.add(draussen);
 		startpoint = draussen;
 		
 		Item ente;
 		
-		ente = new Crafting("Ente", "I A", 3, 5, linkToImage("/Bilder/Ente.png"), 10, 200, true);
-		Enemy monster = new Enemy("Waldo", 20, draussen, 30, 30, linkToImage("/Bilder/Monster.png"), null);
+		ente = new Crafting("Ente", "I A", 3, 5, linkToImage("/Bilder/Ente.png"), 10, 200, gc, true);
+		Enemy monster = new Enemy("Waldo", 20, draussen, 30, 30, linkToImage("/Bilder/Monster.png"), gc, null);
 		
 		draussen.gegenstandAblegen(ente);
 		draussen.setzeGegner(monster);
-		draussen.setzeAusgang("north", draussen);
-		draussen.setzeAusgang("east", draussen);
-		draussen.setzeAusgang("south", draussen);
-		draussen.setzeAusgang("west", draussen);
+		draussen.setzeAusgang("west", cafeteria);
+		cafeteria.setzeAusgang("east", draussen);
 		/*
 		 * Gegenstand kanninchen, lachs; Landscape panther, goldteller; ArrayList<Raum>
 		 * destination = new ArrayList<Raum>(); HashMap<LandscapeResponse, String>

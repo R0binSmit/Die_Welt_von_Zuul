@@ -6,8 +6,8 @@ import Verhalten.AngriffsVerhalten;
 import Verhalten.NPCAngriffVerhalten;
 import item.Item;
 import javafx.geometry.Point2D;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import main.ZuulUI;
 import ort.Raum;
 
 public abstract class Character {
@@ -20,9 +20,10 @@ public abstract class Character {
 	
 	protected String name;
 	protected String beschreibung;
+	protected GraphicsContext gc;
 
 	@SuppressWarnings("unchecked")
-	public Character(String name, int maxTraglast, Raum raum, int x, int y, Image image, LinkedList<Item> gegenstaende) {
+	public Character(String name, int maxTraglast, Raum raum, int x, int y, Image image, GraphicsContext gc, LinkedList<Item> gegenstaende) {
 		this.name = name;
 		this.aktuellerRaum = raum;
 		this.maxTraglast = maxTraglast;
@@ -32,12 +33,13 @@ public abstract class Character {
 		angriffsVerhalten = NPCAngriffVerhalten.getInstance();
 		pos = new Point2D(x, y);
 		this.image = image;
+		this.gc = gc;
 	}
 	
 	public void show() {
 		double x = pos.getX() - image.getWidth() * 0.5;
 		double y = pos.getY() - image.getHeight() * 0.5;
-		ZuulUI.gc.drawImage(image, x, y);
+		gc.drawImage(image, x, y);
 	}
 
 	public abstract void interagieren(Player spieler);

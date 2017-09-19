@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import Verhalten.SpielerAngriffVerhalten;
 import item.Item;
 import javafx.geometry.Point2D;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import ort.Raum;
@@ -12,8 +13,8 @@ import ort.Raum;
 public class Player extends Character {
 	boolean hauptSpieler = false;
 
-	public Player(String name, int maxTraglast, Raum raum, int x, int y, Image image, LinkedList<Item> gegenstaende) {
-		super(name, maxTraglast, raum, x, y, image, gegenstaende);
+	public Player(String name, int maxTraglast, Raum raum, int x, int y, Image image, GraphicsContext gc, LinkedList<Item> gegenstaende) {
+		super(name, maxTraglast, raum, x, y, image, gc, gegenstaende);
 		this.angriffsVerhalten = SpielerAngriffVerhalten.getInstance();
 	}
 

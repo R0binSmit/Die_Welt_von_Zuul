@@ -9,6 +9,7 @@ import character.NPC;
 import character.Player;
 import item.Item;
 import javafx.geometry.Point2D;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import ort.Landkarte;
 import ort.Landscape;
@@ -38,18 +39,22 @@ public class Game {
 	private Player spieler;
 	private Landkarte land;
 	private KampfSystem kampfSystem;
+	private Textverwaltung tv;
+	private GraphicsContext gc;
 
 	/**
 	 * Erzeuge ein Spiel und initialisiere die interne Raumkarte.
 	 */
-	public Game() {
-		land = new Landkarte();
+	public Game(GraphicsContext gc) {
+		land = new Landkarte(gc);
 		land.raeumeAnlegen();
 		parser = new Parser();
 		party.put("Dave", new Player("Dave", 100, land.getStartpoint(), 20, 20,
-				Landkarte.linkToImage("/Bilder/Dave.png"), null));
+				Landkarte.linkToImage("/Bilder/Dave.png"), gc, null));
 		spieler = party.get("Dave");
 		spieler.setGeld(300);
+		this.gc = gc;
+		tv = new Textverwaltung(gc);
 
 		setActions();
 		willkommenstextAusgeben();
@@ -89,7 +94,7 @@ public class Game {
 			}
 		}
 
-		ZuulUI.gc.clearRect(0, 0, ZuulUI.gc.getCanvas().getWidth(), ZuulUI.gc.getCanvas().getHeight());
+		gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 
 		spieler.getAktuellerRaum().show();
 
@@ -97,44 +102,49 @@ public class Game {
 		pos = new Point2D(pos.getX() - spieler.getW() / 2 , pos.getY() - spieler.getH() / 2);
 		HashMap<String, Raum> ausgeange = spieler.getAktuellerRaum().getAusgaenge();
 		if (ausgeange.get("north") != null) {
-			ZuulUI.gc.fillRect(300, 0, 200, 50);
+			gc.fillRect(300, 0, 200, 50);
 			if (intersects(300, 0, 200, 50, pos.getX(), pos.getY(), spieler.getW(), spieler.getH())) {
-				spieler.setPos(new Point2D(pos.getX(), 700));
+				spieler.setPos(new Point2D(spieler.getPos().getX(), 700));
+				wechsleRaum(new Befehl(null, "north"));
 			}
 		}
 
 		if (ausgeange.get("east") != null) {
-			ZuulUI.gc.fillRect(750, 300, 50, 200);
+			gc.fillRect(750, 300, 50, 200);
 			if (intersects(750, 300, 50, 200, pos.getX(), pos.getY(), spieler.getW(), spieler.getH())) {
-				spieler.setPos(new Point2D(100, pos.getY()));
+				spieler.setPos(new Point2D(100, spieler.getPos().getY()));
+				wechsleRaum(new Befehl(null, "east"));
 			}
 		}
 
 		if (ausgeange.get("south") != null) {
-			ZuulUI.gc.fillRect(300, 750, 200, 50);
+			gc.fillRect(300, 750, 200, 50);
 			if (intersects(300, 750, 200, 50, pos.getX(), pos.getY(), spieler.getW(), spieler.getH())) {
-				spieler.setPos(new Point2D(pos.getX(), 100));
+				spieler.setPos(new Point2D(spieler.getPos().getX(), 100));
+				wechsleRaum(new Befehl(null, "south"));
 			}
 		}
 
 		if (ausgeange.get("west") != null) {
-			ZuulUI.gc.fillRect(0, 300, 50, 200);
+			gc.fillRect(0, 300, 50, 200);
 			if (intersects(0, 300, 50, 200, pos.getX(), pos.getY(), spieler.getW(), spieler.getH())) {
-				spieler.setPos(new Point2D(700, pos.getY()));
+				spieler.setPos(new Point2D(700, spieler.getPos().getY()));
+				wechsleRaum(new Befehl(null, "west"));
 			}
 		}
 
 		spieler.show();
+		tv.refresh();
 	}
 
 	/**
 	 * Einen Begrüßungstext für den Spieler ausgeben.
 	 */
 	private void willkommenstextAusgeben() {
-		System.out.println("Willkommen zu Zuul!");
-		System.out.println("Tippen sie 'help', wenn Sie Hilfe brauchen.");
-		System.out.println();
-		System.out.println("Seltsame Ereignisse haben ihre Schatten vorausgeworfen."
+		tv.addText("Willkommen zu Zuul!");
+		tv.addText("Tippen sie 'help', wenn Sie Hilfe brauchen.");
+		tv.addText();
+		tv.addText("Seltsame Ereignisse haben ihre Schatten vorausgeworfen."
 				+ System.getProperty("line.separator")
 				+ "Über Nacht viel der Goldpreis auf 3 US-Dollar pro Feinunze und die Menscheit strebte nach einen neuen Wertanlage:"
 				+ System.getProperty("line.separator") + "Lutetium!" + System.getProperty("line.separator")
@@ -317,17 +327,17 @@ public class Game {
 		Raum naechsterRaum = spieler.getAktuellerRaum().getAusgang(richtung);
 
 		if (naechsterRaum == null) {
-			System.out.println("Dort ist keine Tür!");
+			tv.addText("Dort ist keine Tür!");
 		} else {
 			spieler.setAktuellerRaum(naechsterRaum);
-			System.out.println(spieler.getAktuellerRaum().getLongDesciption());
+			tv.addText(spieler.getAktuellerRaum().getLongDesciption());
 			LinkedList<character.Character> spielerGroup = new LinkedList<character.Character>();
 			spielerGroup.add(spieler);
-			kampfSystem = new KampfSystem(spielerGroup, naechsterRaum.getGegnerList());
+			//kampfSystem = new KampfSystem(spielerGroup, naechsterRaum.getGegnerList());
 			naechsterRaum.onEnterRoomEvent(spieler);
-			if (kampfSystem.checkKampfStart(naechsterRaum)) {
-				kampfSystem.startKampf();
-			}
+			//if (kampfSystem.checkKampfStart(naechsterRaum)) {
+			//	kampfSystem.startKampf();
+			//}
 		}
 	}
 

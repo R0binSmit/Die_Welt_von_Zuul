@@ -16,11 +16,11 @@ import javafx.util.Duration;
 
 public class ZuulUI extends Application {
 	private Canvas can;
-	public static GraphicsContext gc;
+	private GraphicsContext gc;
 
 	private Timeline tl;
 	
-	Game meinSpiel = new Game();
+	Game meinSpiel;
 	private HashMap<KeyCode, Boolean> keys = new HashMap<KeyCode, Boolean>();
 
 	public void init() throws Exception {
@@ -82,6 +82,8 @@ public class ZuulUI extends Application {
 		stage.setResizable(false);
 		stage.setScene(scene);
 		stage.show();
+		
+		meinSpiel = new Game(gc);
 	}
 	
 	private void draw() {
