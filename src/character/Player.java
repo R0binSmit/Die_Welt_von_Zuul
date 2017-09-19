@@ -21,7 +21,7 @@ public class Player extends Character {
 	public void interagieren() {
 		Item item = aktuellerRaum.getInteraktions(pos, (int) image.getWidth());
 		if (item != null) {
-			aktuellerRaum.gegenstandAufheben(item.getName());
+			gegenstandAufnehmen(aktuellerRaum.gegenstandAufheben(item.getName()));
 		}
 	}
 

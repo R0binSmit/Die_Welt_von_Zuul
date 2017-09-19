@@ -68,12 +68,33 @@ public class Raum {
 	}
 	
 	public Item getInteraktions(Point2D pos, int maxDist) {
+		Item closest = null;
+		double minDist = Double.MAX_VALUE;
 		for (Item item : gegenstaende) {
 			if(Usefull.intersects(pos.getX(), pos.getY(), maxDist, maxDist, item.getX(), item.getY(), item.getW(), item.getH())) {
-				return item;
+				double dist = pos.distance(new Point2D(item.getX(), item.getY()));
+				if (dist < minDist) {
+					closest = item;
+					minDist = dist;
+				}
 			}
 		}
-		return null;
+		return closest;
+	}
+	
+	private Item getClosestItem(Point2D pos, int maxDist) {
+		Item closest = null;
+		double minDist = Double.MAX_VALUE;
+		for (Item item : gegenstaende) {
+			if(Usefull.intersects(pos.getX(), pos.getY(), maxDist, maxDist, item.getX(), item.getY(), item.getW(), item.getH())) {
+				double dist = pos.distance(new Point2D(item.getX(), item.getY()));
+				if (dist < minDist) {
+					closest = item;
+					minDist = dist;
+				}
+			}
+		}
+		return closest;
 	}
 	
 	public void show() {
