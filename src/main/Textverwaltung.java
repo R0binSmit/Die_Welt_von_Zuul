@@ -3,6 +3,8 @@ package main;
 import java.util.LinkedList;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 public class Textverwaltung {
 	private GraphicsContext gc;
@@ -36,6 +38,11 @@ public class Textverwaltung {
 	}
 
 	public void refresh() {
+		Paint p = gc.getFill();
+		gc.setFill(Color.rgb(230, 230, 255));
+		gc.fillRect(0, 0, 300, 210);
+		gc.setFill(p);
+		
 		int y = 200;
 		for (int i = texte.size() - 1; i >= 0; i--) {
 			if (y < 15) {

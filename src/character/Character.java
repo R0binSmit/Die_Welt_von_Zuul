@@ -43,9 +43,9 @@ public abstract class Character {
 		double y = pos.getY() - image.getHeight() * 0.5;
 		gc.drawImage(image, x, y);
 		
-		int dist = 50;
+		int dist = 10;
 		for (Item item : gegenstaende) {
-			item.showAt(dist, 50);
+			item.showAt(dist, 750);
 		}
 		
 		equipment.show();
