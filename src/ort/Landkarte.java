@@ -8,6 +8,7 @@ import item.Crafting;
 import item.Item;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import main.Usefull;
 import main.ZuulUI;
 
 public class Landkarte {
@@ -19,9 +20,7 @@ public class Landkarte {
 		this.gc = gc;
 	}
 	
-	public static Image linkToImage(String link) {
-		return new Image(ZuulUI.class.getResourceAsStream(link));
-	}
+	
 
 	/**
 	 * Erzeuge alle Räume und verbinde ihre Ausgänge miteinander.
@@ -34,14 +33,14 @@ public class Landkarte {
 				+ System.getProperty("line.separator")
 				+ "Menschheit antworten finden. Vielleicht sogar Erlösung. Bist du deswegen hier?", this,
 				new Image(ZuulUI.class.getResourceAsStream("/Bilder/Draussen.png")), gc);
-		cafeteria = new Raum("test", this, linkToImage("/Bilder/Cafeteria.png"), gc);
+		cafeteria = new Raum("test", this, Usefull.linkToImage("/Bilder/Cafeteria.png"), gc);
 		raeume.add(draussen);
 		startpoint = draussen;
 		
 		Item ente;
 		
-		ente = new Crafting("Ente", "I A", 3, 5, linkToImage("/Bilder/Ente.png"), 10, 200, gc, true);
-		Enemy monster = new Enemy("Waldo", 20, draussen, 30, 30, linkToImage("/Bilder/Monster.png"), gc, null);
+		ente = new Crafting("Ente", "I A", 3, 5, Usefull.linkToImage("/Bilder/Ente.png"), 10, 200, gc, true);
+		Enemy monster = new Enemy("Waldo", 20, draussen, 30, 30, Usefull.linkToImage("/Bilder/Monster.png"), gc, null);
 		
 		draussen.gegenstandAblegen(ente);
 		draussen.setzeGegner(monster);

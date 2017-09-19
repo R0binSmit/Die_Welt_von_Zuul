@@ -17,25 +17,25 @@ public abstract class Character {
 	protected AngriffsVerhalten angriffsVerhalten;
 	protected Point2D pos;
 	protected Image image;
-	
+
 	protected String name;
 	protected String beschreibung;
 	protected GraphicsContext gc;
 
 	@SuppressWarnings("unchecked")
-	public Character(String name, int maxTraglast, Raum raum, int x, int y, Image image, GraphicsContext gc, LinkedList<Item> gegenstaende) {
+	public Character(String name, int maxTraglast, Raum raum, int x, int y, Image image, GraphicsContext gc,
+			LinkedList<Item> gegenstaende) {
 		this.name = name;
 		this.aktuellerRaum = raum;
 		this.maxTraglast = maxTraglast;
-		this.gegenstaende = gegenstaende == null ? new LinkedList<Item>()
-				: (LinkedList<Item>) gegenstaende.clone();
+		this.gegenstaende = gegenstaende == null ? new LinkedList<Item>() : (LinkedList<Item>) gegenstaende.clone();
 		traglast = ermittleGewicht();
 		angriffsVerhalten = NPCAngriffVerhalten.getInstance();
 		pos = new Point2D(x, y);
 		this.image = image;
 		this.gc = gc;
 	}
-	
+
 	public void show() {
 		double x = pos.getX() - image.getWidth() * 0.5;
 		double y = pos.getY() - image.getHeight() * 0.5;
@@ -117,7 +117,7 @@ public abstract class Character {
 		}
 		return sb.toString();
 	}
-	
+
 	public String getStatus() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Gewicht: ");
@@ -129,12 +129,11 @@ public abstract class Character {
 		sb.append(geld);
 		sb.append(System.getProperty("line.separator"));
 		sb.append("Zustand: ");
-		//TODO fix no more zustand.
-		//sb.append(zustand.getName());
+		// TODO fix no more zustand.
+		// sb.append(zustand.getName());
 		sb.append(System.getProperty("line.separator"));
 		return sb.toString();
 	}
-
 
 	public Raum getAktuellerRaum() {
 		return aktuellerRaum;
@@ -187,11 +186,11 @@ public abstract class Character {
 	public Point2D getPos() {
 		return pos;
 	}
-	
+
 	public double getW() {
 		return image.getWidth();
 	}
-	
+
 	public double getH() {
 		return image.getHeight();
 	}

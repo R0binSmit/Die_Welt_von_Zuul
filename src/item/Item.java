@@ -59,4 +59,20 @@ public abstract class Item implements IItem {
 	public void setPreis(int preis) {
 		this.preis = preis;
 	}
+	
+	public double getX() {
+		return pos.getX();
+	}
+	
+	public double getY() {
+		return pos.getY();
+	}
+	
+	public double getW() {
+		return image.getWidth();
+	}
+	
+	public double getH() {
+		return image.getHeight();
+	}
 }

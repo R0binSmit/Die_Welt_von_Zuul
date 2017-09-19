@@ -8,8 +8,10 @@ import character.Enemy;
 import character.NPC;
 import character.Player;
 import item.Item;
+import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import main.Usefull;
 
 /**
  * Diese Klasse modelliert Räume in der Welt von Zuul.
@@ -63,6 +65,15 @@ public class Raum {
 	 */
 	public void setzeAusgang(String richtung, Raum raum) {
 		ausgaenge.put(richtung, raum);
+	}
+	
+	public Item getInteraktions(Point2D pos, int maxDist) {
+		for (Item item : gegenstaende) {
+			if(Usefull.intersects(pos.getX(), pos.getY(), maxDist, maxDist, item.getX(), item.getY(), item.getW(), item.getH())) {
+				return item;
+			}
+		}
+		return null;
 	}
 	
 	public void show() {

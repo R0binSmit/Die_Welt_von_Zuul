@@ -50,7 +50,7 @@ public class Game {
 		land.raeumeAnlegen();
 		parser = new Parser();
 		party.put("Dave", new Player("Dave", 100, land.getStartpoint(), 20, 20,
-				Landkarte.linkToImage("/Bilder/Dave.png"), gc, null));
+				Usefull.linkToImage("/Bilder/Dave.png"), gc, null));
 		spieler = party.get("Dave");
 		spieler.setGeld(300);
 		this.gc = gc;
@@ -76,10 +76,10 @@ public class Game {
 		actions.put(KeyCode.D, () -> {
 			spieler.move(KeyCode.D);
 		});
-	}
-
-	public boolean intersects(double x1, double y1, double w1, double h1, double x2, double y2, double w2, double h2) {
-		return ((x1 + w1 > x2 && x1 < x2 + w2) && (y1 + h1 > y2 && y1 < y2 + h2));
+		
+		actions.put(KeyCode.E, () -> {
+			spieler.interagieren();
+		});
 	}
 
 	/**
@@ -103,7 +103,7 @@ public class Game {
 		HashMap<String, Raum> ausgeange = spieler.getAktuellerRaum().getAusgaenge();
 		if (ausgeange.get("north") != null) {
 			gc.fillRect(300, 0, 200, 50);
-			if (intersects(300, 0, 200, 50, pos.getX(), pos.getY(), spieler.getW(), spieler.getH())) {
+			if (Usefull.intersects(300, 0, 200, 50, pos.getX(), pos.getY(), spieler.getW(), spieler.getH())) {
 				spieler.setPos(new Point2D(spieler.getPos().getX(), 700));
 				wechsleRaum(new Befehl(null, "north"));
 			}
@@ -111,7 +111,7 @@ public class Game {
 
 		if (ausgeange.get("east") != null) {
 			gc.fillRect(750, 300, 50, 200);
-			if (intersects(750, 300, 50, 200, pos.getX(), pos.getY(), spieler.getW(), spieler.getH())) {
+			if (Usefull.intersects(750, 300, 50, 200, pos.getX(), pos.getY(), spieler.getW(), spieler.getH())) {
 				spieler.setPos(new Point2D(100, spieler.getPos().getY()));
 				wechsleRaum(new Befehl(null, "east"));
 			}
@@ -119,7 +119,7 @@ public class Game {
 
 		if (ausgeange.get("south") != null) {
 			gc.fillRect(300, 750, 200, 50);
-			if (intersects(300, 750, 200, 50, pos.getX(), pos.getY(), spieler.getW(), spieler.getH())) {
+			if (Usefull.intersects(300, 750, 200, 50, pos.getX(), pos.getY(), spieler.getW(), spieler.getH())) {
 				spieler.setPos(new Point2D(spieler.getPos().getX(), 100));
 				wechsleRaum(new Befehl(null, "south"));
 			}
@@ -127,7 +127,7 @@ public class Game {
 
 		if (ausgeange.get("west") != null) {
 			gc.fillRect(0, 300, 50, 200);
-			if (intersects(0, 300, 50, 200, pos.getX(), pos.getY(), spieler.getW(), spieler.getH())) {
+			if (Usefull.intersects(0, 300, 50, 200, pos.getX(), pos.getY(), spieler.getW(), spieler.getH())) {
 				spieler.setPos(new Point2D(700, spieler.getPos().getY()));
 				wechsleRaum(new Befehl(null, "west"));
 			}

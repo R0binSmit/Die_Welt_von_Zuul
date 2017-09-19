@@ -17,6 +17,13 @@ public class Player extends Character {
 		super(name, maxTraglast, raum, x, y, image, gc, gegenstaende);
 		this.angriffsVerhalten = SpielerAngriffVerhalten.getInstance();
 	}
+	
+	public void interagieren() {
+		Item item = aktuellerRaum.getInteraktions(pos, (int) image.getWidth());
+		if (item != null) {
+			aktuellerRaum.gegenstandAufheben(item.getName());
+		}
+	}
 
 	public boolean isHauptSpieler() {
 		return hauptSpieler;
