@@ -18,7 +18,7 @@ public abstract class Character {
 	protected AngriffsVerhalten angriffsVerhalten;
 	protected Point2D pos;
 	protected Image image;
-	protected Equipment equipment;
+	protected Equipment equipment = new Equipment();
 
 	protected String name;
 	protected String beschreibung;

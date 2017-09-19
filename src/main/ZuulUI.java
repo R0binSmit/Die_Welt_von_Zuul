@@ -19,7 +19,7 @@ public class ZuulUI extends Application {
 	private GraphicsContext gc;
 
 	private Timeline tl;
-	
+
 	Game meinSpiel;
 	private HashMap<KeyCode, Boolean> keys = new HashMap<KeyCode, Boolean>();
 
@@ -28,7 +28,6 @@ public class ZuulUI extends Application {
 			draw();
 		}));
 		tl.setCycleCount(Timeline.INDEFINITE);
-		tl.play();
 	}
 
 	/**
@@ -50,7 +49,7 @@ public class ZuulUI extends Application {
 
 		root.getChildren().add(can);
 		// root.setStyle("-fx-background-color: #000000");
-		
+
 		scene.setOnMousePressed(e -> {
 			MouseButton mb = e.getButton();
 			if (mb == MouseButton.PRIMARY) {
@@ -60,7 +59,7 @@ public class ZuulUI extends Application {
 				keys.put(KeyCode.F21, true);
 			}
 		});
-		
+
 		scene.setOnMouseReleased(e -> {
 			MouseButton mb = e.getButton();
 			if (mb == MouseButton.PRIMARY) {
@@ -70,22 +69,25 @@ public class ZuulUI extends Application {
 				keys.remove(KeyCode.F21);
 			}
 		});
-		
+
 		scene.setOnKeyPressed(e -> {
 			keys.put(e.getCode(), true);
+
+			meinSpiel.verarbeiteBefehl(e.getCode());
 		});
-		
+
 		scene.setOnKeyReleased(e -> {
 			keys.remove(e.getCode());
 		});
-		
+
 		stage.setResizable(false);
 		stage.setScene(scene);
 		stage.show();
-		
+
 		meinSpiel = new Game(gc);
+		tl.play();
 	}
-	
+
 	private void draw() {
 		meinSpiel.update(keys);
 	}

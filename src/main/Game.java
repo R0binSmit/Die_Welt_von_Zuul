@@ -48,8 +48,8 @@ public class Game {
 		land = new Landkarte(gc);
 		land.raeumeAnlegen();
 		parser = new Parser();
-		spieler = new Player("Dave", 100, land.getStartpoint(), 20, 20,
-				Usefull.linkToImage("/Bilder/Dave.png"), gc, null);
+		spieler = new Player("Dave", 100, land.getStartpoint(), 20, 20, Usefull.linkToImage("/Bilder/Dave.png"), gc,
+				null);
 		spieler.setGeld(300);
 		this.gc = gc;
 		tv = new Textverwaltung(gc);
@@ -74,9 +74,13 @@ public class Game {
 		actions.put(KeyCode.D, () -> {
 			spieler.move(KeyCode.D);
 		});
-		
+
 		actions.put(KeyCode.E, () -> {
 			spieler.interagieren();
+		});
+
+		actions.put(KeyCode.H, () -> {
+
 		});
 	}
 
@@ -97,7 +101,7 @@ public class Game {
 		spieler.getAktuellerRaum().show();
 
 		Point2D pos = spieler.getPos();
-		pos = new Point2D(pos.getX() - spieler.getW() / 2 , pos.getY() - spieler.getH() / 2);
+		pos = new Point2D(pos.getX() - spieler.getW() / 2, pos.getY() - spieler.getH() / 2);
 		HashMap<String, Raum> ausgeange = spieler.getAktuellerRaum().getAusgaenge();
 		if (ausgeange.get("north") != null) {
 			gc.fillRect(300, 0, 200, 50);
@@ -142,8 +146,7 @@ public class Game {
 		tv.addText("Willkommen zu Zuul!");
 		tv.addText("Tippen sie 'help', wenn Sie Hilfe brauchen.");
 		tv.addText();
-		tv.addText("Seltsame Ereignisse haben ihre Schatten vorausgeworfen."
-				+ System.getProperty("line.separator")
+		tv.addText("Seltsame Ereignisse haben ihre Schatten vorausgeworfen." + System.getProperty("line.separator")
 				+ "Über Nacht viel der Goldpreis auf 3 US-Dollar pro Feinunze und die Menscheit strebte nach einen neuen Wertanlage:"
 				+ System.getProperty("line.separator") + "Lutetium!" + System.getProperty("line.separator")
 				+ "Niemand weiß, was dann geschah. Vielleicht gruben wir zu tief, vielleicht ließen wir uns auf falsche Götzen ein,"
@@ -164,45 +167,10 @@ public class Game {
 	 *            Der zu verarbeitende Befehl.
 	 * @return 'true', wenn der Befehl das Spiel beendet, 'false' sonst.
 	 */
-	private boolean verarbeiteBefehl(Befehl befehl) {
-		boolean moechteBeenden = false;
-
-		if (befehl.istUnbekannt()) {
-			System.out.println("Ich weiß nicht, was Sie meinen...");
-			return false;
-		}
-
-		String befehlswort = befehl.gibBefehlswort();
-		if (befehlswort.equalsIgnoreCase("help")) {
+	public void verarbeiteBefehl(KeyCode key) {
+		if (key == KeyCode.H) {
 			hilfstextAusgeben();
-		} else if (befehlswort.equalsIgnoreCase("eat")) {
-			eat(befehl.gibZweitesWort());
-		} else if (befehlswort.equalsIgnoreCase("heal")) {
-			//TODO fix no more zustand. 
-			//spieler.kleineHeilung(spieler);
-		} else if (befehlswort.equalsIgnoreCase("hurt")) {
-			//TODO fix no more zustand. 
-			//pieler.leichtVerletzen(spieler);
-		} else if (befehlswort.equalsIgnoreCase("stab")) {
-			//TODO fix no more zustand. 
-			//spieler.schwerVerletzen(spieler);
-		} else if (befehlswort.equalsIgnoreCase("suicide")) {
-			//TODO fix no more zustand. 
-			//spieler.toeten(spieler);
-		} else if (befehlswort.equalsIgnoreCase("use")) {
-			nutzeLandschaft(befehl.gibZweitesWort());
-		} else if (befehlswort.equalsIgnoreCase("smallRevival")) {
-			//TODO fix no more zustand. 
-			//spieler.kleineWiederbelebung(spieler);
-		} else if (befehlswort.equalsIgnoreCase("largeRevial")) {
-			//TODO fix no more zustand. 
-			//spieler.grosseWiederbelebung(spieler);
-		} else if (befehlswort.equalsIgnoreCase("talk")) {
-			talk(befehl.gibZweitesWort());
-		} else if (befehlswort.equalsIgnoreCase("status")) {
-			System.out.println(spieler.getStatus());
 		}
-		return moechteBeenden;
 	}
 
 	public void talk(String name) {
@@ -259,25 +227,8 @@ public class Game {
 	 * Beschreibung aus, sowie eine Liste der Befehlswörter.
 	 */
 	private void hilfstextAusgeben() {
-		System.out.println("Sie haben sich verlaufen. Sie sind allein.");
-		System.out.println("Sie irren auf dem Unigelände herum.");
-		System.out.println();
-		System.out.println("Ihnen stehen folgende Befehle zur Verfügung:");
-		System.out.println("	" + parser.getBefehle());
-	}
-
-	private void lookAround(String item) {
-		if (item != null) {
-			Item gs = spieler.getGegenstand(item);
-			gs = gs != null ? gs : spieler.getAktuellerRaum().getGegenstand(item);
-			if (gs != null) {
-				System.out.println(gs.getBeschreibung());
-			} else {
-				System.out.println("Diesen Gegenstand gibt es nicht in diesem Raum oder deinem Inventar");
-			}
-		} else {
-			System.out.println(spieler.getAktuellerRaum().getLongDesciption());
-		}
+		tv.addText("Sie haben sich verlaufen. Sie sind allein.");
+		tv.addText("Sie irren auf dem Unigelände herum.");
 	}
 
 	/**
@@ -285,44 +236,16 @@ public class Game {
 	 * neuen Raum, ansonsten gib eine Fehlermeldung aus.
 	 */
 	private void wechsleRaum(Befehl befehl) {
-		if (!befehl.hatZweitesWort()) {
-			// Gibt es kein zweites Wort, wissen wir nicht, wohin...
-			System.out.println("Wohin möchten Sie gehen?");
-			return;
-		}
-
 		String richtung = befehl.gibZweitesWort();
-
-		// Wir versuchen den Raum zu verlassen.
 		Raum naechsterRaum = spieler.getAktuellerRaum().getAusgang(richtung);
-
-		if (naechsterRaum == null) {
-			tv.addText("Dort ist keine Tür!");
-		} else {
-			spieler.setAktuellerRaum(naechsterRaum);
-			tv.addText(spieler.getAktuellerRaum().getLongDesciption());
-			LinkedList<character.Character> spielerGroup = new LinkedList<character.Character>();
-			spielerGroup.add(spieler);
-			//kampfSystem = new KampfSystem(spielerGroup, naechsterRaum.getGegnerList());
-			naechsterRaum.onEnterRoomEvent(spieler);
-			//if (kampfSystem.checkKampfStart(naechsterRaum)) {
-			//	kampfSystem.startKampf();
-			//}
-		}
-	}
-
-	/**
-	 * "quit" wurde eingegeben. Überprüfe den Rest des Befehls, ob das Spiel
-	 * wirklich beendet werden soll.
-	 * 
-	 * @return 'true', wenn der Befehl das Spiel beendet, 'false' sonst.
-	 */
-	private boolean beenden(Befehl befehl) {
-		if (befehl.hatZweitesWort()) {
-			System.out.println("Was soll beendet werden?");
-			return false;
-		} else {
-			return true; // Das Spiel soll beendet werden.
-		}
+		spieler.setAktuellerRaum(naechsterRaum);
+		tv.addText(spieler.getAktuellerRaum().getLongDesciption());
+		LinkedList<character.Character> spielerGroup = new LinkedList<character.Character>();
+		spielerGroup.add(spieler);
+		// kampfSystem = new KampfSystem(spielerGroup, naechsterRaum.getGegnerList());
+		naechsterRaum.onEnterRoomEvent(spieler);
+		// if (kampfSystem.checkKampfStart(naechsterRaum)) {
+		// kampfSystem.startKampf();
+		// }
 	}
 }
