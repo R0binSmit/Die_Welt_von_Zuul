@@ -64,4 +64,20 @@ public abstract class Landscape {
 	public String getResponse(LandscapeResponse lr) {
 		return landscapeResponse.get(lr);
 	}
+	
+	public double getX() {
+		return pos.getX();
+	}
+	
+	public double getY() {
+		return pos.getY();
+	}
+	
+	public double getW() {
+		return image.getWidth();
+	}
+	
+	public double getH() {
+		return image.getHeight();
+	}
 }
