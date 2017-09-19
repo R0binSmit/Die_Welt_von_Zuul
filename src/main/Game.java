@@ -46,7 +46,6 @@ public class Game {
 	public Game(GraphicsContext gc) {
 		land = new Landkarte(gc);
 		land.raeumeAnlegen();
-		parser = new Parser();
 		spieler = new Player("Dave", 100, land.getStartpoint(), 20, 20, Usefull.linkToImage("/Bilder/Dave.png"), gc,
 				null);
 		spieler.setGeld(300);
