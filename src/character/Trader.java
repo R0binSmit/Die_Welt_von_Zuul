@@ -2,8 +2,6 @@ package character;
 
 import java.util.LinkedList;
 
-import befehlsVerarbeitung.Befehl;
-import befehlsVerarbeitung.Parser;
 import item.Item;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -15,7 +13,7 @@ public class Trader extends NPC {
 		super(name, maxTraglast, raum, x, y, image, gc, gegenstaende);
 	}
 
-	public void interagieren(Player spieler) {
+	/*public void interagieren(Player spieler) {
 		System.out.println(text);
 		Parser pr = new Parser();
 		Befehl befehl;
@@ -41,7 +39,7 @@ public class Trader extends NPC {
 				System.out.println("Diesen Befehl gibt es hier nicht!");
 			}
 		} while (true);
-	}
+	}*/
 	
 	public boolean trade(Character verkauf, Character kauf, String gegenstand) {
 		Item ware = verkauf.getGegenstand(gegenstand);
