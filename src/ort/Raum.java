@@ -14,11 +14,11 @@ import javafx.scene.image.Image;
 import main.Usefull;
 
 /**
- * Diese Klasse modelliert Räume in der Welt von Zuul.
+ * Diese Klasse modelliert RÃ¤ume in der Welt von Zuul.
  * 
- * Ein "Raum" repräsentiert einen Ort in der virtuellen Landschaft des Spiels.
- * Ein Raum ist mit anderen Räumen über Ausgänge verbunden. Mögliche Ausgänge
- * liegen im Norden, Osten, Süden und Westen. Für jede Richtung hält ein Raum
+ * Ein "Raum" reprÃ¤sentiert einen Ort in der virtuellen Landschaft des Spiels.
+ * Ein Raum ist mit anderen RÃ¤umen Ã¼ber AusgÃ¤nge verbunden. MÃ¶gliche AusgÃ¤nge
+ * liegen im Norden, Osten, SÃ¼den und Westen. FÃ¼r jede Richtung hÃ¤lt ein Raum
  * eine Referenz auf den benachbarten Raum.
  * 
  * @author Michael Kolling and David J. Barnes
@@ -37,10 +37,10 @@ public class Raum {
 
 	/**
 	 * Erzeuge einen Raum mit einer Beschreibung. Ein Raum hat anfangs keine
-	 * Ausgänge.
+	 * AusgÃ¤nge.
 	 * 
 	 * @param beschreibung
-	 *            enthält eine Beschreibung in der Form "in einer Küche" oder "auf
+	 *            enthÃ¤lt eine Beschreibung in der Form "in einer KÃ¼che" oder "auf
 	 *            einem Sportplatz".
 	 */
 	public Raum(String beschreibung, Landkarte land, Image bg, GraphicsContext gc) {
@@ -51,7 +51,7 @@ public class Raum {
 	}
 
 	/**
-	 * Definiere die Ausgänge dieses Raums. Jede Richtung führt entweder in einen
+	 * Definiere die AusgÃ¤nge dieses Raums. Jede Richtung fÃ¼hrt entweder in einen
 	 * anderen Raum oder ist 'null' (kein Ausgang).
 	 * 
 	 * @param norden
@@ -59,7 +59,7 @@ public class Raum {
 	 * @param osten
 	 *            Der Osteingang.
 	 * @param sueden
-	 *            Der Südeingang.
+	 *            Der SÃ¼deingang.
 	 * @param westen
 	 *            Der Westeingang.
 	 */
@@ -67,14 +67,14 @@ public class Raum {
 		ausgaenge.put(richtung, raum);
 	}
 	
-	public Item getInteraktions(Point2D pos, int maxDist) {
-		Item closest = null;
+	public Landscape getClosestLandscape(Point2D pos, int maxDist) {
+		Landscape closest = null;
 		double minDist = Double.MAX_VALUE;
-		for (Item item : gegenstaende) {
-			if(Usefull.intersects(pos.getX(), pos.getY(), maxDist, maxDist, item.getX(), item.getY(), item.getW(), item.getH())) {
-				double dist = pos.distance(new Point2D(item.getX(), item.getY()));
+		for (Landscape landscape : landschaft) {
+			if(Usefull.intersects(pos.getX(), pos.getY(), maxDist, maxDist, landscape.getX(), landscape.getY(), landscape.getW(), landscape.getH())) {
+				double dist = pos.distance(new Point2D(landscape.getX(), landscape.getY()));
 				if (dist < minDist) {
-					closest = item;
+					closest = landscape;
 					minDist = dist;
 				}
 			}
@@ -82,7 +82,7 @@ public class Raum {
 		return closest;
 	}
 	
-	private Item getClosestItem(Point2D pos, int maxDist) {
+	public Item getClosestItem(Point2D pos, int maxDist) {
 		Item closest = null;
 		double minDist = Double.MAX_VALUE;
 		for (Item item : gegenstaende) {
@@ -251,10 +251,10 @@ public class Raum {
 		sb.append("Hier ist: ");
 		sb.append(landschaftToString());
 		sb.append(System.getProperty("line.separator"));
-		sb.append("Gegenstände: ");
+		sb.append("GegenstÃ¤nde: ");
 		sb.append(gegenstaendeToString());
 		sb.append(System.getProperty("line.separator"));
-		sb.append("Ausgänge: ");
+		sb.append("AusgÃ¤nge: ");
 		sb.append(ausgaengeToString());
 		sb.append(System.getProperty("line.separator"));
 		sb.append("Gegner: ");

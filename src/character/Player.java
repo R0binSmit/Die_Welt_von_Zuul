@@ -8,6 +8,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
+import ort.Landscape;
 import ort.Raum;
 
 public class Player extends Character {
@@ -19,10 +20,19 @@ public class Player extends Character {
 	}
 	
 	public void interagieren() {
-		Item item = aktuellerRaum.getInteraktions(pos, (int) image.getWidth());
-		if (item != null) {
+		Item item = aktuellerRaum.getClosestItem(pos, (int) image.getWidth());
+		Landscape landscape = aktuellerRaum.getClosestLandscape(pos, (int)image.getWidth());
+		double itemDist = 0;
+		double landscapeDist = 0;
+		
+		//TODO unterscheiden wenn beides 0?
+		if(item != null)
+			itemDist = pos.distance(new Point2D(item.getX(), item.getY()));
+		
+		if(itemDist < landscapeDist)
+			landscape.onUse(this);
+		else
 			gegenstandAufnehmen(aktuellerRaum.gegenstandAufheben(item.getName()));
-		}
 	}
 
 	public boolean isHauptSpieler() {
@@ -52,7 +62,6 @@ public class Player extends Character {
 		this.hauptSpieler = hauptSpieler;
 	}
 
-	@Override
 	public void interagieren(Player Spieler) {
 
 	}
