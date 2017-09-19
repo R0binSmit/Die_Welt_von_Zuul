@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import Verhalten.AngriffsVerhalten;
 import Verhalten.NPCAngriffVerhalten;
+import equipment.Equipment;
 import item.Item;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
@@ -17,6 +18,7 @@ public abstract class Character {
 	protected AngriffsVerhalten angriffsVerhalten;
 	protected Point2D pos;
 	protected Image image;
+	protected Equipment equipment;
 
 	protected String name;
 	protected String beschreibung;
@@ -40,6 +42,13 @@ public abstract class Character {
 		double x = pos.getX() - image.getWidth() * 0.5;
 		double y = pos.getY() - image.getHeight() * 0.5;
 		gc.drawImage(image, x, y);
+		
+		int dist = 50;
+		for (Item item : gegenstaende) {
+			item.showAt(dist, 50);
+		}
+		
+		equipment.show();
 	}
 
 	public abstract void interagieren(Player spieler);

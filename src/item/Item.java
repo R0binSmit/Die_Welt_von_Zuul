@@ -31,6 +31,10 @@ public abstract class Item implements IItem {
 	public void show() {
 		gc.drawImage(image, pos.getX(), pos.getY());
 	}
+	
+	public void showAt(double x, double y) {
+		gc.drawImage(image, x, y);
+	}
 
 	public String getName() {
 		return name;

@@ -15,6 +15,32 @@ public class Equipment implements IEquipment {
 		
 	}
 	
+	public void show() {
+		if (helmet != null) {
+			helmet.showAt(700, 600);
+		}
+		
+		if (breastplate != null) {
+			breastplate.showAt(700, 650);
+		}
+		
+		if (leftHand != null) {
+			leftHand.showAt(650, 650);
+		}
+		
+		if (rightHand != null) {
+			rightHand.showAt(750, 650);
+		}
+		
+		if (trousers != null) {
+			trousers.showAt(700, 700);
+		}
+		
+		if (shoes != null) {
+			shoes.showAt(700, 750);
+		}
+		}
+	
 	public int getDamage() {
 		int damage = 0;
 		if(leftHand != null) 
