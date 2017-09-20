@@ -35,8 +35,11 @@ public class Inventory implements IShowable {
 	}
 	
 	public void addItems(LinkedList<Item> items) {
-		for(Item item : items) {
-			addItem(item);
+		if(items != null)
+		{
+			for(Item item : items) {
+				addItem(item);
+			}
 		}
 	}
 	
