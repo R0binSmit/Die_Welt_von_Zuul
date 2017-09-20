@@ -3,80 +3,62 @@ package item;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import main.IShowable;
+import main.IUsable;
 
-public abstract class Item implements IItem {
-	protected String name, beschreibung;
-	protected int gewicht, preis;
-	protected boolean essbar = false;
+public abstract class Item implements IUsable, IShowable {
+	protected String name, description;
+	protected int price;
 	protected Image image;
-	protected Point2D pos;
-	protected GraphicsContext gc;
+	protected Point2D position;
+	protected GraphicsContext graphicsContext;
 	
-	public Item(String name, String beschreibung, int gewicht, int preis, Image image, Point2D pos, GraphicsContext gc, boolean essbar) {
+	public Item(String name, String description, int price, Image image, Point2D position, GraphicsContext graphicsContext) {
 		this.name = name;
-		this.beschreibung = beschreibung;
-		this.gewicht = gewicht;
-		this.essbar = essbar;
-		this.preis = preis;
+		this.description = description;
+		this.price = price;
 		this.image = image;
-		this.pos = pos;
-		this.gc = gc;
+		this.position = position;
+		this.graphicsContext = graphicsContext;
 	}
 
 	public String toString() {
-		return "Name: " + name + System.getProperty("line.separator") + "Beschreibung: " + beschreibung
-				+ System.getProperty("line.separator") + "Gewicht: " + gewicht;
+		return "Item = name: " + getName() + ", description: " + getDescription() + ", price: " + getPrice();
 	}
 	
 	public void show() {
-		gc.drawImage(image, pos.getX(), pos.getY());
+		graphicsContext.drawImage(image, position.getX(), position.getY());
 	}
 	
 	public void showAt(double x, double y) {
-		gc.drawImage(image, x, y);
+		graphicsContext.drawImage(image, x, y);
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public String getBeschreibung() {
-		return beschreibung;
+	public String getDescription() {
+		return description;
 	}
 
-	public int getGewicht() {
-		return gewicht;
-	}
-
-	public boolean isEssbar() {
-		return essbar;
-	}
-
-	public void setEssbar(boolean essbar) {
-		this.essbar = essbar;
-	}
-
-	public int getPreis() {
-		return preis;
-	}
-
-	public void setPreis(int preis) {
-		this.preis = preis;
+	public int getPrice() {
+		return price;
 	}
 	
 	public double getX() {
-		return pos.getX();
+		return position.getX();
 	}
 	
 	public double getY() {
-		return pos.getY();
+		return position.getY();
 	}
 	
-	public double getW() {
+	public double getWidth() {
 		return image.getWidth();
 	}
 	
-	public double getH() {
+	public double getHeight() {
 		return image.getHeight();
 	}
 }

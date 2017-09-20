@@ -43,10 +43,10 @@ public class Trader extends NPC {
 	
 	public boolean trade(Character verkauf, Character kauf, String gegenstand) {
 		Item ware = verkauf.getGegenstand(gegenstand);
-		if (ware != null && kauf.getGeld() >= ware.getPreis()) {
+		if (ware != null && kauf.getGeld() >= ware.getPrice()) {
 			kauf.pickUpItem(verkauf.gegenstandAblegen(ware.getName()));
-			verkauf.setGeld(verkauf.getGeld() + ware.getPreis());
-			kauf.setGeld(kauf.getGeld() - ware.getPreis());
+			verkauf.setGeld(verkauf.getGeld() + ware.getPrice());
+			kauf.setGeld(kauf.getGeld() - ware.getPrice());
 			return true;
 		}
 		return false;

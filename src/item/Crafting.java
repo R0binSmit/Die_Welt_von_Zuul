@@ -5,13 +5,12 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class Crafting extends Item {
-	public Crafting(String name, String beschreibung, int gewicht, int preis, Image image, int x, int y, GraphicsContext gc,
+	public Crafting(String name, String description, int price, Image image, int x, int y, GraphicsContext graphicsContext,
 			boolean essbar) {
-		super(name, beschreibung, gewicht, preis, image, new Point2D(x, y), gc, essbar);
+		super(name, description, price, image, new Point2D(x, y), graphicsContext);
 	}
 
 	public void use(Character character) {
-		// TODO Auto-generated method stub
 		
 	}
 }

@@ -39,7 +39,7 @@ public class Equipment implements IEquipment {
 		if (shoes != null) {
 			shoes.showAt(700, 750);
 		}
-		}
+	}
 	
 	public int getDamage() {
 		int damage = 0;
@@ -67,5 +67,19 @@ public class Equipment implements IEquipment {
 			armor += shoes.getArmor();
 		
 		return armor;
+	}
+	
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("Equipment :");
+		stringBuilder.append("\r\n");
+		stringBuilder.append(helmet.toString());
+		stringBuilder.append("\r\n");
+		stringBuilder.append(breastplate.toString());
+		stringBuilder.append("\r\n");
+		stringBuilder.append(trousers.toString());
+		stringBuilder.append("\r\n");
+		stringBuilder.append(shoes.toString());	
+		return stringBuilder.toString();
 	}
 }

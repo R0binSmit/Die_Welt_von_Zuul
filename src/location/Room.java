@@ -86,7 +86,7 @@ public class Room {
 		Item closest = null;
 		double minDist = Double.MAX_VALUE;
 		for (Item item : gegenstaende) {
-			if(Usefull.intersects(pos.getX(), pos.getY(), maxDist, maxDist, item.getX(), item.getY(), item.getW(), item.getH())) {
+			if(Usefull.intersects(pos.getX(), pos.getY(), maxDist, maxDist, item.getX(), item.getY(), item.getWidth(), item.getHeight())) {
 				double dist = pos.distance(new Point2D(item.getX(), item.getY()));
 				if (dist < minDist) {
 					closest = item;

@@ -5,11 +5,11 @@ import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class Weapon extends Item implements IItem, IEquipment {
+public class Weapon extends Item {
 	private int damage;
 	
-	public Weapon(String name, String beschreibung, int gewicht, int preis, Image image, int x, int y, GraphicsContext gc, int damage) {
-		super(name, beschreibung, gewicht, preis, image, new Point2D(x, y), gc, false);
+	public Weapon(String name, String description, int price, Image image, int x, int y, GraphicsContext graphicsContext, int damage) {
+		super(name, description, price, image, new Point2D(x, y), graphicsContext);
 		this.damage = damage;
 	}
 	

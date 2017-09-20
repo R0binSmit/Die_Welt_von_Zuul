@@ -70,16 +70,6 @@ public abstract class Character {
 		return gs;
 	}
 
-	public Item eat(String name) {
-		Item essen = getGegenstand(name);
-		if (essen != null && essen.isEssbar()) {
-			gegenstaende.remove(essen);
-		} else {
-			essen = null;
-		}
-		return essen;
-	}
-
 	public Item getGegenstand(String name) {
 		for (Item gs : gegenstaende) {
 			if (gs.getName().equalsIgnoreCase(name)) {
@@ -87,30 +77,6 @@ public abstract class Character {
 			}
 		}
 		return null;
-	}
-
-	public String getInventory() {
-		StringBuilder sb = new StringBuilder();
-		int i = 1;
-		sb.append("Gegenstände im Inventar: ");
-		sb.append(System.getProperty("line.separator"));
-		for (Item gs : gegenstaende) {
-			sb.append(i);
-			sb.append(". Gegenstand: ");
-			sb.append(System.getProperty("line.separator"));
-			sb.append("Name: ");
-			sb.append(gs.getName());
-			sb.append(System.getProperty("line.separator"));
-			sb.append("Gewicht: ");
-			sb.append(gs.getGewicht());
-			sb.append(System.getProperty("line.separator"));
-			sb.append("Preis: ");
-			sb.append(gs.getPreis());
-			sb.append(System.getProperty("line.separator"));
-			sb.append(System.getProperty("line.separator"));
-			i++;
-		}
-		return sb.toString();
 	}
 
 	public String getStatus() {

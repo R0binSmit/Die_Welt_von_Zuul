@@ -178,15 +178,6 @@ public class Game {
 		}
 	}
 
-	public void eat(String name) {
-		Item item = player.eat(name);
-		if (item != null) {
-			System.out.println(item.getName() + " gegessen");
-		} else {
-			System.out.println("Gegenstand " + name + " existiert nicht oder ist nicht essbar!");
-		}
-	}
-
 	public void nutzeLandschaft(String name) {
 		Landscape ls = player.getRoom().getLandschaft(name);
 		if (ls != null) {
