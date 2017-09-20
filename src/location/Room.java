@@ -108,7 +108,7 @@ public class Room {
 	}
 	
 	public void update(Player player) {
-		for (int i = gegner.size() - 1; i >= 0; i++) {
+		for (int i = gegner.size() - 1; i >= 0; i--) {
 			Enemy g = gegner.get(i);
 			g.move(player.getPosition());
 			if (!g.update()) {
