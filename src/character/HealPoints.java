@@ -50,6 +50,10 @@ public class HealPoints implements IShowable {
 		else
 			currentHealPoints -= healPoints;
 	}
+	
+	public boolean getIsUsable() {
+		return isUsable;
+	}
 
 	public void show() {
 		// TODO SHOW

@@ -43,9 +43,7 @@ public class Game {
 	public Game(GraphicsContext gc) {
 		land = new Worldmap(gc);
 		land.raeumeAnlegen();
-		player = new Player("Dave", 100, land.getStartpoint(), 20, 20, Usefull.linkToImage("/Bilder/Dave.png"), gc,
-				null);
-		player.setGeld(300);
+		player = new Player("Dave", "Ich liebe dich", land.getStartpoint(), 20, 20, Usefull.linkToImage("/Bilder/Dave.png"), gc, null);
 		this.gc = gc;
 		textbox = new TextBox(gc);
 
@@ -96,37 +94,37 @@ public class Game {
 		player.getRoom().show();
 		player.getRoom().update(player);
 
-		Point2D pos = player.getPos();
-		pos = new Point2D(pos.getX() - player.getW() / 2, pos.getY() - player.getH() / 2);
+		Point2D pos = player.getPosition();
+		pos = new Point2D(pos.getX() - player.getWidth() / 2, pos.getY() - player.getHeight() / 2);
 		HashMap<String, Room> exits = player.getRoom().getAusgaenge();
 		if (exits.get("north") != null) {
 			gc.fillRect(300, 0, 200, 50);
-			if (Usefull.intersects(300, 0, 200, 50, pos.getX(), pos.getY(), player.getW(), player.getH())) {
-				player.setPos(new Point2D(player.getPos().getX(), 700));
+			if (Usefull.intersects(300, 0, 200, 50, pos.getX(), pos.getY(), player.getWidth(), player.getHeight())) {
+				player.setPosition(new Point2D(player.getPosition().getX(), 700));
 				changeRoom("north");
 			}
 		}
 
 		if (exits.get("east") != null) {
 			gc.fillRect(750, 300, 50, 200);
-			if (Usefull.intersects(750, 300, 50, 200, pos.getX(), pos.getY(), player.getW(), player.getH())) {
-				player.setPos(new Point2D(100, player.getPos().getY()));
+			if (Usefull.intersects(750, 300, 50, 200, pos.getX(), pos.getY(), player.getWidth(), player.getHeight())) {
+				player.setPosition(new Point2D(100, player.getPosition().getY()));
 				changeRoom("east");
 			}
 		}
 
 		if (exits.get("south") != null) {
 			gc.fillRect(300, 750, 200, 50);
-			if (Usefull.intersects(300, 750, 200, 50, pos.getX(), pos.getY(), player.getW(), player.getH())) {
-				player.setPos(new Point2D(player.getPos().getX(), 100));
+			if (Usefull.intersects(300, 750, 200, 50, pos.getX(), pos.getY(), player.getWidth(), player.getHeight())) {
+				player.setPosition(new Point2D(player.getPosition().getX(), 100));
 				changeRoom("south");
 			}
 		}
 
 		if (exits.get("west") != null) {
 			gc.fillRect(0, 300, 50, 200);
-			if (Usefull.intersects(0, 300, 50, 200, pos.getX(), pos.getY(), player.getW(), player.getH())) {
-				player.setPos(new Point2D(700, player.getPos().getY()));
+			if (Usefull.intersects(0, 300, 50, 200, pos.getX(), pos.getY(), player.getWidth(), player.getHeight())) {
+				player.setPosition(new Point2D(700, player.getPosition().getY()));
 				changeRoom("west");
 			}
 		}
@@ -195,7 +193,7 @@ public class Game {
 	}
 
 	public void legeGegenstandAb(String name) {
-		Item item = player.gegenstandAblegen(name);
+		Item item = player.dropItem(name);
 		if (item != null) {
 			player.getRoom().addItem(item);
 			System.out.println(item.getName() + " abgelegt");

@@ -29,7 +29,7 @@ public class Teleporter extends Landscape {
 		
 		if (spieler.getGegenstand(key) != null) {
 			System.out.println(landscapeResponse.get(LandscapeResponse.REMOVE_RESPONSE));
-			spieler.gegenstandAblegen(key);
+			spieler.dropItem(key);
 			getRaum().landschaftEntfernen(getName());
 			return;
 		}

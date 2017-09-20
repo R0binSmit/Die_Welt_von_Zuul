@@ -14,23 +14,22 @@ import location.Room;
 public class Player extends Character {
 	boolean hauptSpieler = false;
 
-	public Player(String name, int maxTraglast, Room raum, int x, int y, Image image, GraphicsContext gc, LinkedList<Item> gegenstaende) {
-		super(name, maxTraglast, raum, x, y, image, gc, gegenstaende);
-		this.angriffsVerhalten = SpielerAngriffVerhalten.getInstance();
+	public Player(String name, String description, Room room, int x, int y, Image image, GraphicsContext graphicsContext, LinkedList<Item> items) {
+		super(name, description, room, x, y, image, graphicsContext, items);
 	}
 	
 	public void interagieren() {
-		Item item = room.getClosestItem(pos, (int) image.getWidth());
-		Landscape landscape = room.getClosestLandscape(pos, (int)image.getWidth());
+		Item item = room.getClosestItem(position, (int) image.getWidth());
+		Landscape landscape = room.getClosestLandscape(position, (int)image.getWidth());
 		double itemDist = 0;
 		double landscapeDist = 0;
 		
 		//TODO unterscheiden wenn beides 0?
 		if(item != null)
-			itemDist = pos.distance(new Point2D(item.getX(), item.getY()));
+			itemDist = position.distance(new Point2D(item.getX(), item.getY()));
 		
 		if(landscape != null)
-			landscapeDist = pos.distance(new Point2D(landscape.getX(), landscape.getY()));
+			landscapeDist = position.distance(new Point2D(landscape.getX(), landscape.getY()));
 		
 		if(itemDist < landscapeDist)
 			landscape.onUse(this);
@@ -41,7 +40,7 @@ public class Player extends Character {
 	public void show() {
 		super.show();
 		int dist = 10;
-		for (Item item : gegenstaende) {
+		for (Item item : inventory.getLinkedListFromItems()) {
 			item.showAt(dist, 750);
 		}
 		
@@ -56,16 +55,16 @@ public class Player extends Character {
 		final int speed = 5;
 		switch (key) {
 		case W:
-			pos = pos.add(new Point2D(0, -speed));
+			position = position.add(new Point2D(0, -speed));
 			break;
 		case A:
-			pos = pos.add(new Point2D(-speed, 0));
+			position = position.add(new Point2D(-speed, 0));
 			break;
 		case S:
-			pos = pos.add(new Point2D(0, speed));
+			position = position.add(new Point2D(0, speed));
 			break;
 		case D:
-			pos = pos.add(new Point2D(speed, 0));
+			position = position.add(new Point2D(speed, 0));
 			break;
 		default:
 		}

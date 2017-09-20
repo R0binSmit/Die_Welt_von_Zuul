@@ -8,9 +8,8 @@ import javafx.scene.image.Image;
 import location.Room;
 
 public class NPC extends Character {
-	public NPC(String name, int maxTraglast, Room raum, int x, int y, Image image, GraphicsContext gc,
-			LinkedList<Item> gegenstaende) {
-		super(name, maxTraglast, raum, x, y, image, gc, gegenstaende);
+	public NPC(String name, String description, Room room, int x, int y, Image image, GraphicsContext graphicsContext, LinkedList<Item> items) {
+		super(name, description, room, x, y, image, graphicsContext, items);
 	}
 
 	protected String text;

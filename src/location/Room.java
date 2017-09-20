@@ -119,7 +119,7 @@ public class Room {
 	
 	public void update(Player player) {
 		for (Enemy g : gegner) {
-			g.move(player.getPos());
+			g.move(player.getPosition());
 			g.update();
 		}
 	}

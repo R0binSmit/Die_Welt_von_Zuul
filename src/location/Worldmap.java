@@ -40,7 +40,7 @@ public class Worldmap {
 		Item ente;
 		
 		ente = new Crafting("Ente", "I A", 5, Usefull.linkToImage("/Bilder/Ente.png"), 10, 200, gc, true);
-		Enemy monster = new Enemy("Waldo", 20, draussen, 700, 700, Usefull.linkToImage("/Bilder/Monster.png"), gc, null);
+		Enemy monster = new Enemy("Waldo", "Ein super toller Gegner", draussen, 700, 700, Usefull.linkToImage("/Bilder/Monster.png"), gc, null);
 		
 		draussen.addItem(ente);
 		draussen.setzeGegner(monster);

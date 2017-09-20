@@ -15,74 +15,69 @@ import location.Room;
 import main.Usefull;
 
 public abstract class Character {
+	protected String name;
+	protected String description;
 	protected Room room;
-	protected int hp, maxHP, geld;
-	protected LinkedList<Item> gegenstaende;
-	protected AngriffsVerhalten angriffsVerhalten;
-	protected Point2D pos;
+	protected Point2D position;
 	protected Image image;
 	protected Equipment equipment = new Equipment();
+	protected Inventory inventory = new Inventory();
+	protected HealPoints healPoints = new HealPoints();
+	protected GraphicsContext graphicsContext;
+	protected int money;
 
-	protected String name;
-	protected String beschreibung;
-	protected GraphicsContext gc;
-
-	@SuppressWarnings("unchecked")
-	public Character(String name, int maxTraglast, Room raum, int x, int y, Image image, GraphicsContext gc,
-			LinkedList<Item> gegenstaende) {
+	public Character(String name, String description , Room room, int x, int y, Image image, GraphicsContext graphicsContext, LinkedList<Item> items) {
 		this.name = name;
-		this.room = raum;
-		this.gegenstaende = gegenstaende == null ? new LinkedList<Item>() : (LinkedList<Item>) gegenstaende.clone();
-		angriffsVerhalten = NPCAngriffVerhalten.getInstance();
-		pos = new Point2D(x, y); 
+		this.description = description;
+		this.room = room;
+		position = new Point2D(x, y); 
 		this.image = image;
-		this.gc = gc;
+		this.graphicsContext = graphicsContext;
+		inventory.addItems(items);
 	}
 
 	public void show() {
-		double x = pos.getX() - image.getWidth() * 0.5;
-		double y = pos.getY() - image.getHeight() * 0.5;
-		gc.drawImage(image, x, y);
+		double x = position.getX() - image.getWidth() * 0.5;
+		double y = position.getY() - image.getHeight() * 0.5;
+		graphicsContext.drawImage(image, x, y);
 		
 		x -= 50;
 		y += image.getHeight() + 30;
 		double w = 2 * 50 + image.getWidth();
 		
-		Paint p = gc.getFill();
-		gc.setFill(Color.WHITE);
-		gc.fillRect(x, y, w, 10);
-		gc.setFill(Color.RED);
-		gc.fillRect(x, y + 1, Usefull.map(hp, 0, maxHP, 0, w), 8);
-		gc.setFill(p);
+		Paint p = graphicsContext.getFill();
+		graphicsContext.setFill(Color.WHITE);
+		graphicsContext.fillRect(x, y, w, 10);
+		graphicsContext.setFill(Color.RED);
+		graphicsContext.fillRect(x, y + 1, Usefull.map(healPoints.getCurrentHealPoints(), 0, healPoints.getMaxHealPoints(), 0, w), 8);
+		graphicsContext.setFill(p);
 	}
 
 	public abstract void interact(Player spieler);
 
-	public void pickUpItem(Item gegenstand) {
-			gegenstaende.add(gegenstand);
+	public void pickUpItem(Item item) {
+			inventory.addItem(item);
 	}
 
-	public Item gegenstandAblegen(String name) {
-		Item gs = getGegenstand(name);
-		if (gs != null) {
-			gegenstaende.remove(gs);
-		}
-		return gs;
-	}
-
-	public Item getGegenstand(String name) {
-		for (Item gs : gegenstaende) {
-			if (gs.getName().equalsIgnoreCase(name)) {
-				return gs;
+	public Item dropItem(String itemName) {
+		Item item = null;
+		if(healPoints.getIsUsable()) {
+			item = inventory.getFirstItemByName(itemName);
+			if(item != null) {
+				inventory.removeFirstItemByName(name);
 			}
 		}
-		return null;
+		return item;
+	}
+
+	public Item getGegenstand(String itemName) {
+		return inventory.getFirstItemByName(itemName);
 	}
 
 	public String getStatus() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Geld: ");
-		sb.append(geld);
+		sb.append(money);
 		sb.append(System.getProperty("line.separator"));
 		sb.append("Zustand: ");
 		// TODO fix no more zustand.
@@ -100,46 +95,38 @@ public abstract class Character {
 	}
 
 	public LinkedList<Item> getGegenstaende() {
-		return gegenstaende;
+		return inventory.getLinkedListFromItems();
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public String getBeschreibung() {
-		return beschreibung;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public int getMoney() {
+		return money;
+	}
+	
+	public void setMoney(int money) {
+		this.money = money;
 	}
 
-	public void setBeschreibung(String beschreibung) {
-		this.beschreibung = beschreibung;
+	public Point2D getPosition() {
+		return position;
 	}
 
-	public int getGeld() {
-		return geld;
-	}
-
-	public void setGeld(int geld) {
-		this.geld = geld;
-	}
-
-	public Point2D getPos() {
-		return pos;
-	}
-
-	public double getW() {
+	public double getWidth() {
 		return image.getWidth();
 	}
 
-	public double getH() {
+	public double getHeight() {
 		return image.getHeight();
 	}
 
-	public void setPos(Point2D pos) {
-		this.pos = pos;
+	public void setPosition(Point2D pos) {
+		this.position = pos;
 	}
 }

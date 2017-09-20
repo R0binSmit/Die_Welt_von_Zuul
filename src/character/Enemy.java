@@ -12,13 +12,12 @@ public class Enemy extends Character {
 	private Point2D velocity = new Point2D(0, 0), acceleration = new Point2D(0, 0);
 	private double maxSpeed = 5, maxForce = 0.05;
 	
-	public Enemy(String name, int maxTraglast, Room raum, int x, int y, Image image, GraphicsContext gc,
-			LinkedList<Item> gegenstaende) {
-		super(name, maxTraglast, raum, x, y, image, gc, gegenstaende);
+	public Enemy(String name, String description, Room room, int x, int y, Image image, GraphicsContext graphicsContext, LinkedList<Item> items) {
+		super(name, description, room, x, y, image, graphicsContext, items);
 	}
 	
 	public void move(Point2D target) {
-		Point2D desired = target.subtract(pos);
+		Point2D desired = target.subtract(position);
 		desired = desired.normalize();
 		desired = desired.multiply(maxSpeed);
 		
@@ -41,7 +40,7 @@ public class Enemy extends Character {
 			velocity = velocity.normalize();
 			velocity = velocity.multiply(maxSpeed);
 		}
-		pos = pos.add(velocity);
+		position = position.add(velocity);
 		acceleration = acceleration.multiply(0);
 	}
 
