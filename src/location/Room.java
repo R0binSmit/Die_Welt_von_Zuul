@@ -116,6 +116,13 @@ public class Room {
 			g.show();
 		}
 	}
+	
+	public void update(Player player) {
+		for (Enemy g : gegner) {
+			g.move(player.getPos());
+			g.update();
+		}
+	}
 
 	public Room getExit(String richtung) {
 		return ausgaenge.get(richtung);

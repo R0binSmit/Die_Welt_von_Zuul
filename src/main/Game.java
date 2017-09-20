@@ -94,6 +94,7 @@ public class Game {
 		gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 
 		player.getRoom().show();
+		player.getRoom().update(player);
 
 		Point2D pos = player.getPos();
 		pos = new Point2D(pos.getX() - player.getW() / 2, pos.getY() - player.getH() / 2);
