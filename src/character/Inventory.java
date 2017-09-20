@@ -12,12 +12,7 @@ public class Inventory implements IShowable {
 	private LinkedList<Item> listOfItems = new LinkedList<Item>();
 	
 	public Inventory(){
-		maxSpace = 10;
-		currentUsedSpace = 0;
-	}
-	
-	Inventory(int maxSpace){
-		this.maxSpace = maxSpace;
+		maxSpace = 5;
 		currentUsedSpace = 0;
 	}
 	
