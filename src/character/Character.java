@@ -34,7 +34,7 @@ public abstract class Character {
 		this.room = raum;
 		this.gegenstaende = gegenstaende == null ? new LinkedList<Item>() : (LinkedList<Item>) gegenstaende.clone();
 		angriffsVerhalten = NPCAngriffVerhalten.getInstance();
-		pos = new Point2D(x, y);
+		pos = new Point2D(x, y); 
 		this.image = image;
 		this.gc = gc;
 	}
