@@ -6,11 +6,11 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
-public class Textverwaltung {
+public class TextBox {
 	private GraphicsContext gc;
 	LinkedList<String> texte = new LinkedList<String>();
 
-	public Textverwaltung(GraphicsContext gc) {
+	public TextBox(GraphicsContext gc) {
 		this.gc = gc;
 	}
 

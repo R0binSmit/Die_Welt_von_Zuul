@@ -5,10 +5,10 @@ import java.util.LinkedList;
 import item.Item;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import ort.Raum;
+import location.Room;
 
 public class Trader extends NPC {
-	public Trader(String name, int maxTraglast, Raum raum, int x, int y, Image image, GraphicsContext gc,
+	public Trader(String name, int maxTraglast, Room raum, int x, int y, Image image, GraphicsContext gc,
 			LinkedList<Item> gegenstaende) {
 		super(name, maxTraglast, raum, x, y, image, gc, gegenstaende);
 	}
@@ -44,7 +44,7 @@ public class Trader extends NPC {
 	public boolean trade(Character verkauf, Character kauf, String gegenstand) {
 		Item ware = verkauf.getGegenstand(gegenstand);
 		if (ware != null && kauf.getGeld() >= ware.getPreis()) {
-			kauf.gegenstandAufnehmen(verkauf.gegenstandAblegen(ware.getName()));
+			kauf.pickUpItem(verkauf.gegenstandAblegen(ware.getName()));
 			verkauf.setGeld(verkauf.getGeld() + ware.getPreis());
 			kauf.setGeld(kauf.getGeld() - ware.getPreis());
 			return true;

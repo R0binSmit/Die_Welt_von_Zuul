@@ -1,4 +1,4 @@
-package ort;
+package location;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,9 +10,9 @@ import javafx.scene.image.Image;
 
 public class Teleporter extends Landscape {
 	private String key;
-	private ArrayList<Raum> destination;
+	private ArrayList<Room> destination;
 
-	public Teleporter(String name, String beschreibung, Image image, int x, int y, GraphicsContext gc, HashMap<LandscapeResponse, String> landscapeResponse, String key, ArrayList<Raum> destination) {
+	public Teleporter(String name, String beschreibung, Image image, int x, int y, GraphicsContext gc, HashMap<LandscapeResponse, String> landscapeResponse, String key, ArrayList<Room> destination) {
 		super(name, beschreibung, image, x, y, gc, landscapeResponse);
 		this.key = key;
 		this.destination = destination;
@@ -23,7 +23,7 @@ public class Teleporter extends Landscape {
 	}
 
 	public void onEnterRoom(Player spieler) {
-		Raum currentDestination;
+		Room currentDestination;
 		
 		System.out.println();
 		
@@ -46,10 +46,10 @@ public class Teleporter extends Landscape {
 		} while (currentDestination == getRaum());
 		}
 
-		spieler.setAktuellerRaum(currentDestination);
+		spieler.setRoom(currentDestination);
 		System.out.println(getResponse(LandscapeResponse.ENTER_RESPONSE));
-		System.out.println(spieler.getAktuellerRaum().getLongDesciption());
-		spieler.getAktuellerRaum().onEnterRoomEvent(spieler);
+		System.out.println(spieler.getRoom().getLongDesciption());
+		spieler.getRoom().onEnterRoomEvent(spieler);
 	}
 
 }

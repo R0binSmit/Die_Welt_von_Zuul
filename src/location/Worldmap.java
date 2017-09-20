@@ -1,4 +1,4 @@
-package ort;
+package location;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -11,12 +11,12 @@ import javafx.scene.image.Image;
 import main.Usefull;
 import main.ZuulUI;
 
-public class Landkarte {
-	private Raum startpoint = null;
-	private ArrayList<Raum> raeume = new ArrayList<Raum>();
+public class Worldmap {
+	private Room startpoint = null;
+	private ArrayList<Room> raeume = new ArrayList<Room>();
 	private GraphicsContext gc;
 
-	public Landkarte(GraphicsContext gc) {
+	public Worldmap(GraphicsContext gc) {
 		this.gc = gc;
 	}
 	
@@ -26,14 +26,14 @@ public class Landkarte {
 	 * Erzeuge alle Räume und verbinde ihre Ausgänge miteinander.
 	 */
 	public void raeumeAnlegen() {
-		Raum draussen, cafeteria;// , hoersaal, cafeteria, labor, buero, keller, abstellkammer;
+		Room draussen, cafeteria;// , hoersaal, cafeteria, labor, buero, keller, abstellkammer;
 
-		draussen = new Raum("Haupteingang der Universität" + System.getProperty("line.separator")
+		draussen = new Room("Haupteingang der Universität" + System.getProperty("line.separator")
 				+ "Das Gelände ist verlassen, in dieser dunklen Nacht. Die Gerüchte besagen in den Tiefen dieses Ortes würde die"
 				+ System.getProperty("line.separator")
 				+ "Menschheit antworten finden. Vielleicht sogar Erlösung. Bist du deswegen hier?", this,
 				new Image(ZuulUI.class.getResourceAsStream("/Bilder/Draussen.png")), gc);
-		cafeteria = new Raum("test", this, Usefull.linkToImage("/Bilder/Cafeteria.png"), gc);
+		cafeteria = new Room("test", this, Usefull.linkToImage("/Bilder/Cafeteria.png"), gc);
 		raeume.add(draussen);
 		startpoint = draussen;
 		
@@ -42,7 +42,7 @@ public class Landkarte {
 		ente = new Crafting("Ente", "I A", 3, 5, Usefull.linkToImage("/Bilder/Ente.png"), 10, 200, gc, true);
 		Enemy monster = new Enemy("Waldo", 20, draussen, 30, 30, Usefull.linkToImage("/Bilder/Monster.png"), gc, null);
 		
-		draussen.gegenstandAblegen(ente);
+		draussen.addItem(ente);
 		draussen.setzeGegner(monster);
 		draussen.setzeAusgang("west", cafeteria);
 		cafeteria.setzeAusgang("east", draussen);
@@ -174,11 +174,11 @@ public class Landkarte {
 		 */
 	}
 
-	public Raum getStartpoint() {
+	public Room getStartpoint() {
 		return startpoint;
 	}
 
-	public Raum getRandomRoom() {
+	public Room getRandomRoom() {
 		Random randomNumber = new Random();
 		int roomNumber = randomNumber.nextInt(raeume.size());
 

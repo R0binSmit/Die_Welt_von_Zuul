@@ -1,4 +1,4 @@
-package ort;
+package location;
 
 import java.util.HashMap;
 
@@ -11,7 +11,7 @@ import main.ZuulUI;
 public abstract class Landscape {
 	protected String name;
 	protected String beschreibung;
-	protected Raum raum;
+	protected Room raum;
 	protected HashMap<LandscapeResponse, String> landscapeResponse;
 	protected Point2D pos;
 	protected Image image;
@@ -53,11 +53,11 @@ public abstract class Landscape {
 		this.beschreibung = beschreibung;
 	}
 
-	public Raum getRaum() {
+	public Room getRaum() {
 		return raum;
 	}
 
-	public void setRaum(Raum raum) {
+	public void setRaum(Room raum) {
 		this.raum = raum;
 	}
 	

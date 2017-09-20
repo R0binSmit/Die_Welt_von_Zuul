@@ -9,9 +9,9 @@ import item.Item;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
-import ort.Landkarte;
-import ort.Landscape;
-import ort.Raum;
+import location.Worldmap;
+import location.Landscape;
+import location.Room;
 
 /**
  * Dies ist die Hauptklasse der Anwendung "Die Welt von Zuul". "Die Welt von
@@ -32,47 +32,46 @@ import ort.Raum;
 
 public class Game {
 	private HashMap<KeyCode, Runnable> actions = new HashMap<KeyCode, Runnable>();
-	private Player spieler;
-	private Landkarte land;
-	private KampfSystem kampfSystem;
-	private Textverwaltung tv;
+	private Player player;
+	private Worldmap land;
+	private TextBox textbox;
 	private GraphicsContext gc;
 
 	/**
 	 * Erzeuge ein Spiel und initialisiere die interne Raumkarte.
 	 */
 	public Game(GraphicsContext gc) {
-		land = new Landkarte(gc);
+		land = new Worldmap(gc);
 		land.raeumeAnlegen();
-		spieler = new Player("Dave", 100, land.getStartpoint(), 20, 20, Usefull.linkToImage("/Bilder/Dave.png"), gc,
+		player = new Player("Dave", 100, land.getStartpoint(), 20, 20, Usefull.linkToImage("/Bilder/Dave.png"), gc,
 				null);
-		spieler.setGeld(300);
+		player.setGeld(300);
 		this.gc = gc;
-		tv = new Textverwaltung(gc);
+		textbox = new TextBox(gc);
 
 		setActions();
-		willkommenstextAusgeben();
+		outputWelcomeText();
 	}
 
 	private void setActions() {
 		actions.put(KeyCode.W, () -> {
-			spieler.move(KeyCode.W);
+			player.move(KeyCode.W);
 		});
 
 		actions.put(KeyCode.A, () -> {
-			spieler.move(KeyCode.A);
+			player.move(KeyCode.A);
 		});
 
 		actions.put(KeyCode.S, () -> {
-			spieler.move(KeyCode.S);
+			player.move(KeyCode.S);
 		});
 
 		actions.put(KeyCode.D, () -> {
-			spieler.move(KeyCode.D);
+			player.move(KeyCode.D);
 		});
 
 		actions.put(KeyCode.E, () -> {
-			spieler.interagieren();
+			player.interagieren();
 		});
 
 		actions.put(KeyCode.H, () -> {
@@ -94,55 +93,55 @@ public class Game {
 
 		gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 
-		spieler.getAktuellerRaum().show();
+		player.getRoom().show();
 
-		Point2D pos = spieler.getPos();
-		pos = new Point2D(pos.getX() - spieler.getW() / 2, pos.getY() - spieler.getH() / 2);
-		HashMap<String, Raum> ausgeange = spieler.getAktuellerRaum().getAusgaenge();
-		if (ausgeange.get("north") != null) {
+		Point2D pos = player.getPos();
+		pos = new Point2D(pos.getX() - player.getW() / 2, pos.getY() - player.getH() / 2);
+		HashMap<String, Room> exits = player.getRoom().getAusgaenge();
+		if (exits.get("north") != null) {
 			gc.fillRect(300, 0, 200, 50);
-			if (Usefull.intersects(300, 0, 200, 50, pos.getX(), pos.getY(), spieler.getW(), spieler.getH())) {
-				spieler.setPos(new Point2D(spieler.getPos().getX(), 700));
-				wechsleRaum("north");
+			if (Usefull.intersects(300, 0, 200, 50, pos.getX(), pos.getY(), player.getW(), player.getH())) {
+				player.setPos(new Point2D(player.getPos().getX(), 700));
+				changeRoom("north");
 			}
 		}
 
-		if (ausgeange.get("east") != null) {
+		if (exits.get("east") != null) {
 			gc.fillRect(750, 300, 50, 200);
-			if (Usefull.intersects(750, 300, 50, 200, pos.getX(), pos.getY(), spieler.getW(), spieler.getH())) {
-				spieler.setPos(new Point2D(100, spieler.getPos().getY()));
-				wechsleRaum("east");
+			if (Usefull.intersects(750, 300, 50, 200, pos.getX(), pos.getY(), player.getW(), player.getH())) {
+				player.setPos(new Point2D(100, player.getPos().getY()));
+				changeRoom("east");
 			}
 		}
 
-		if (ausgeange.get("south") != null) {
+		if (exits.get("south") != null) {
 			gc.fillRect(300, 750, 200, 50);
-			if (Usefull.intersects(300, 750, 200, 50, pos.getX(), pos.getY(), spieler.getW(), spieler.getH())) {
-				spieler.setPos(new Point2D(spieler.getPos().getX(), 100));
-				wechsleRaum("south");
+			if (Usefull.intersects(300, 750, 200, 50, pos.getX(), pos.getY(), player.getW(), player.getH())) {
+				player.setPos(new Point2D(player.getPos().getX(), 100));
+				changeRoom("south");
 			}
 		}
 
-		if (ausgeange.get("west") != null) {
+		if (exits.get("west") != null) {
 			gc.fillRect(0, 300, 50, 200);
-			if (Usefull.intersects(0, 300, 50, 200, pos.getX(), pos.getY(), spieler.getW(), spieler.getH())) {
-				spieler.setPos(new Point2D(700, spieler.getPos().getY()));
-				wechsleRaum("west");
+			if (Usefull.intersects(0, 300, 50, 200, pos.getX(), pos.getY(), player.getW(), player.getH())) {
+				player.setPos(new Point2D(700, player.getPos().getY()));
+				changeRoom("west");
 			}
 		}
 
-		spieler.show();
-		tv.refresh();
+		player.show();
+		textbox.refresh();
 	}
 
 	/**
 	 * Einen Begrüßungstext für den Spieler ausgeben.
 	 */
-	private void willkommenstextAusgeben() {
-		tv.addText("Willkommen zu Zuul!");
-		tv.addText("Tippen sie 'help', wenn Sie Hilfe brauchen.");
-		tv.addText();
-		tv.addText("Seltsame Ereignisse haben ihre Schatten vorausgeworfen." + System.getProperty("line.separator")
+	private void outputWelcomeText() {
+		textbox.addText("Willkommen zu Zuul!");
+		textbox.addText("Tippen sie 'help', wenn Sie Hilfe brauchen.");
+		textbox.addText();
+		textbox.addText("Seltsame Ereignisse haben ihre Schatten vorausgeworfen." + System.getProperty("line.separator")
 				+ "Über Nacht viel der Goldpreis auf 3 US-Dollar pro Feinunze und die Menscheit strebte nach einen neuen Wertanlage:"
 				+ System.getProperty("line.separator") + "Lutetium!" + System.getProperty("line.separator")
 				+ "Niemand weiß, was dann geschah. Vielleicht gruben wir zu tief, vielleicht ließen wir uns auf falsche Götzen ein,"
@@ -163,54 +162,54 @@ public class Game {
 	 *            Der zu verarbeitende Befehl.
 	 * @return 'true', wenn der Befehl das Spiel beendet, 'false' sonst.
 	 */
-	public void verarbeiteBefehl(KeyCode key) {
+	public void processCommand(KeyCode key) {
 		if (key == KeyCode.H) {
-			hilfstextAusgeben();
+			printHelp();
 		}
 	}
 
 	public void talk(String name) {
-		NPC npc = spieler.getAktuellerRaum().getNPC(name);
+		NPC npc = player.getRoom().getNPC(name);
 		if (npc != null) {
-			npc.interagieren(spieler);
+			npc.interact(player);
 		} else {
 			System.out.println("Diesen NPC gibt es nicht!");
 		}
 	}
 
 	public void eat(String name) {
-		Item gs = spieler.eat(name);
-		if (gs != null) {
-			System.out.println(gs.getName() + " gegessen");
+		Item item = player.eat(name);
+		if (item != null) {
+			System.out.println(item.getName() + " gegessen");
 		} else {
 			System.out.println("Gegenstand " + name + " existiert nicht oder ist nicht essbar!");
 		}
 	}
 
 	public void nutzeLandschaft(String name) {
-		Landscape ls = spieler.getAktuellerRaum().getLandschaft(name);
+		Landscape ls = player.getRoom().getLandschaft(name);
 		if (ls != null) {
-			ls.onUse(spieler);
+			ls.onUse(player);
 		}
 	}
 
 	public void nimmGegenstand(String name) {
-		Item gs = spieler.getAktuellerRaum().getGegenstand(name);
-		if (gs != null) {
-			if (spieler.gegenstandAufnehmen(gs)) {
-				spieler.getAktuellerRaum().gegenstandAufheben(name);
-				System.out.println(gs.getName() + " Aufgehoben");
+		Item item = player.getRoom().getGegenstand(name);
+		if (item != null) {
+			if (player.pickUpItem(item)) {
+				player.getRoom().removeItem(name);
+				System.out.println(item.getName() + " Aufgehoben");
 			} else {
-				System.out.println("Der Gegenstand " + gs.getName() + " ist zu schwer");
+				System.out.println("Der Gegenstand " + item.getName() + " ist zu schwer");
 			}
 		}
 	}
 
 	public void legeGegenstandAb(String name) {
-		Item gs = spieler.gegenstandAblegen(name);
-		if (gs != null) {
-			spieler.getAktuellerRaum().gegenstandAblegen(gs);
-			System.out.println(gs.getName() + " abgelegt");
+		Item item = player.gegenstandAblegen(name);
+		if (item != null) {
+			player.getRoom().addItem(item);
+			System.out.println(item.getName() + " abgelegt");
 		} else {
 			System.out.println("Den Gegenstand " + name + " gibt es in deinem Inventar nicht");
 		}
@@ -222,25 +221,21 @@ public class Game {
 	 * Gib Hilfsinformationen aus. Hier geben wir eine etwas alberne und unklare
 	 * Beschreibung aus, sowie eine Liste der Befehlswörter.
 	 */
-	private void hilfstextAusgeben() {
-		tv.addText("Sie haben sich verlaufen. Sie sind allein.");
-		tv.addText("Sie irren auf dem Unigelände herum.");
+	private void printHelp() {
+		textbox.addText("Sie haben sich verlaufen. Sie sind allein.");
+		textbox.addText("Sie irren auf dem Unigelände herum.");
 	}
 
 	/**
 	 * Versuche, den Raum zu wechseln. Wenn es einen Ausgang gibt, wechsele in den
 	 * neuen Raum, ansonsten gib eine Fehlermeldung aus.
 	 */
-	private void wechsleRaum(String richtung) {
-		Raum naechsterRaum = spieler.getAktuellerRaum().getAusgang(richtung);
-		spieler.setAktuellerRaum(naechsterRaum);
-		tv.addText(spieler.getAktuellerRaum().getLongDesciption());
+	private void changeRoom(String direction) {
+		Room nextRoom = player.getRoom().getExit(direction);
+		player.setRoom(nextRoom);
+		textbox.addText(player.getRoom().getLongDesciption());
 		LinkedList<character.Character> spielerGroup = new LinkedList<character.Character>();
-		spielerGroup.add(spieler);
-		// kampfSystem = new KampfSystem(spielerGroup, naechsterRaum.getGegnerList());
-		naechsterRaum.onEnterRoomEvent(spieler);
-		// if (kampfSystem.checkKampfStart(naechsterRaum)) {
-		// kampfSystem.startKampf();
-		// }
+		spielerGroup.add(player);
+		nextRoom.onEnterRoomEvent(player);
 	}
 }

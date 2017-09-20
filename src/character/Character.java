@@ -9,10 +9,10 @@ import item.Item;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import ort.Raum;
+import location.Room;
 
 public abstract class Character {
-	protected Raum aktuellerRaum;
+	protected Room room;
 	protected int maxTraglast, traglast, geld;
 	protected LinkedList<Item> gegenstaende;
 	protected AngriffsVerhalten angriffsVerhalten;
@@ -25,10 +25,10 @@ public abstract class Character {
 	protected GraphicsContext gc;
 
 	@SuppressWarnings("unchecked")
-	public Character(String name, int maxTraglast, Raum raum, int x, int y, Image image, GraphicsContext gc,
+	public Character(String name, int maxTraglast, Room raum, int x, int y, Image image, GraphicsContext gc,
 			LinkedList<Item> gegenstaende) {
 		this.name = name;
-		this.aktuellerRaum = raum;
+		this.room = raum;
 		this.maxTraglast = maxTraglast;
 		this.gegenstaende = gegenstaende == null ? new LinkedList<Item>() : (LinkedList<Item>) gegenstaende.clone();
 		traglast = ermittleGewicht();
@@ -51,9 +51,9 @@ public abstract class Character {
 		equipment.show();
 	}
 
-	public abstract void interagieren(Player spieler);
+	public abstract void interact(Player spieler);
 
-	public boolean gegenstandAufnehmen(Item gegenstand) {
+	public boolean pickUpItem(Item gegenstand) {
 		if (traglast + gegenstand.getGewicht() <= maxTraglast) {
 			gegenstaende.add(gegenstand);
 			traglast += gegenstand.getGewicht();
@@ -144,12 +144,12 @@ public abstract class Character {
 		return sb.toString();
 	}
 
-	public Raum getAktuellerRaum() {
-		return aktuellerRaum;
+	public Room getRoom() {
+		return room;
 	}
 
-	public void setAktuellerRaum(Raum aktuellerRaum) {
-		this.aktuellerRaum = aktuellerRaum;
+	public void setRoom(Room aktuellerRaum) {
+		this.room = aktuellerRaum;
 	}
 
 	public int getMaxTraglast() {

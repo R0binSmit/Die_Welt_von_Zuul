@@ -1,4 +1,4 @@
-package ort;
+package location;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,10 +24,10 @@ import main.Usefull;
  * @author Michael Kolling and David J. Barnes
  * @version 2008.03.30
  */
-public class Raum {
+public class Room {
 	private String beschreibung;
-	private Landkarte land;
-	private HashMap<String, Raum> ausgaenge = new HashMap<String, Raum>();
+	private Worldmap land;
+	private HashMap<String, Room> ausgaenge = new HashMap<String, Room>();
 	private LinkedList<Item> gegenstaende = new LinkedList<Item>();
 	private ArrayList<Landscape> landschaft = new ArrayList<Landscape>();
 	private LinkedList<Enemy> gegner = new LinkedList<Enemy>();
@@ -43,7 +43,7 @@ public class Raum {
 	 *            enthält eine Beschreibung in der Form "in einer Küche" oder "auf
 	 *            einem Sportplatz".
 	 */
-	public Raum(String beschreibung, Landkarte land, Image bg, GraphicsContext gc) {
+	public Room(String beschreibung, Worldmap land, Image bg, GraphicsContext gc) {
 		this.beschreibung = beschreibung;
 		this.land = land;
 		this.bg = bg;
@@ -63,7 +63,7 @@ public class Raum {
 	 * @param westen
 	 *            Der Westeingang.
 	 */
-	public void setzeAusgang(String richtung, Raum raum) {
+	public void setzeAusgang(String richtung, Room raum) {
 		ausgaenge.put(richtung, raum);
 	}
 	
@@ -117,7 +117,7 @@ public class Raum {
 		}
 	}
 
-	public Raum getAusgang(String richtung) {
+	public Room getExit(String richtung) {
 		return ausgaenge.get(richtung);
 	}
 
@@ -130,7 +130,7 @@ public class Raum {
 		return sb.toString();
 	}
 
-	public void gegenstandAblegen(Item gegenstand) {
+	public void addItem(Item gegenstand) {
 		gegenstaende.add(gegenstand);
 	}
 
@@ -173,7 +173,7 @@ public class Raum {
 		}
 	}
 
-	public Item gegenstandAufheben(String name) {
+	public Item removeItem(String name) {
 		for (Item gs : gegenstaende) {
 			if (gs.getName().equalsIgnoreCase(name)) {
 				gegenstaende.remove(gs);
@@ -272,7 +272,7 @@ public class Raum {
 		return beschreibung;
 	}
 
-	public Landkarte getLand() {
+	public Worldmap getLand() {
 		return land;
 	}
 
@@ -280,7 +280,7 @@ public class Raum {
 		return gegner;
 	}
 
-	public HashMap<String, Raum> getAusgaenge() {
+	public HashMap<String, Room> getAusgaenge() {
 		return ausgaenge;
 	}
 }

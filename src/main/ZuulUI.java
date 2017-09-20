@@ -20,7 +20,7 @@ public class ZuulUI extends Application {
 
 	private Timeline tl;
 
-	Game meinSpiel;
+	Game game;
 	private HashMap<KeyCode, Boolean> keys = new HashMap<KeyCode, Boolean>();
 
 	public void init() throws Exception {
@@ -72,8 +72,7 @@ public class ZuulUI extends Application {
 
 		scene.setOnKeyPressed(e -> {
 			keys.put(e.getCode(), true);
-
-			meinSpiel.verarbeiteBefehl(e.getCode());
+			game.processCommand(e.getCode());
 		});
 
 		scene.setOnKeyReleased(e -> {
@@ -84,11 +83,11 @@ public class ZuulUI extends Application {
 		stage.setScene(scene);
 		stage.show();
 
-		meinSpiel = new Game(gc);
+		game = new Game(gc);
 		tl.play();
 	}
 
 	private void draw() {
-		meinSpiel.update(keys);
+		game.update(keys);
 	}
 }

@@ -4,20 +4,20 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
 import character.Character;
-import ort.Raum;
+import location.Room;
 
-public class KampfSystem {
+public class BattleSystem {
 	private final static String WELCOMETEXT = "Sie sind in ein Kampf verwickelt worden!";
 	LinkedList<character.Character> spielerGroup = new LinkedList<character.Character>();
 	LinkedList<character.Enemy> gegnerGroup = new LinkedList<character.Enemy>();
 	Scanner scanner = new Scanner(System.in);
 
-	public KampfSystem(LinkedList<character.Character> spielerGroup, LinkedList<character.Enemy> gegnerGroup) {
+	public BattleSystem(LinkedList<character.Character> spielerGroup, LinkedList<character.Enemy> gegnerGroup) {
 		this.spielerGroup = spielerGroup;
 		this.gegnerGroup = gegnerGroup;
 	}
 
-	public boolean checkKampfStart(Raum raum) {
+	public boolean checkKampfStart(Room raum) {
 		if (raum.getGegnerList().isEmpty() == false) {
 			return true;
 		}
