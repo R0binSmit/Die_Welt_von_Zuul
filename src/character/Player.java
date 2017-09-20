@@ -29,6 +29,9 @@ public class Player extends Character {
 		if(item != null)
 			itemDist = pos.distance(new Point2D(item.getX(), item.getY()));
 		
+		if(landscape != null)
+			landscapeDist = pos.distance(new Point2D(landscape.getX(), landscape.getY()));
+		
 		if(itemDist < landscapeDist)
 			landscape.onUse(this);
 		else
