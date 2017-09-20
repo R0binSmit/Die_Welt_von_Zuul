@@ -2,7 +2,6 @@ package character;
 
 import java.util.LinkedList;
 
-import Verhalten.SpielerAngriffVerhalten;
 import item.Item;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;

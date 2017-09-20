@@ -2,8 +2,6 @@ package character;
 
 import java.util.LinkedList;
 
-import Verhalten.AngriffsVerhalten;
-import Verhalten.NPCAngriffVerhalten;
 import equipment.Equipment;
 import item.Item;
 import javafx.geometry.Point2D;
@@ -26,11 +24,12 @@ public abstract class Character {
 	protected GraphicsContext graphicsContext;
 	protected int money;
 
-	public Character(String name, String description , Room room, int x, int y, Image image, GraphicsContext graphicsContext, LinkedList<Item> items) {
+	public Character(String name, String description, Room room, int x, int y, Image image,
+			GraphicsContext graphicsContext, LinkedList<Item> items) {
 		this.name = name;
 		this.description = description;
 		this.room = room;
-		position = new Point2D(x, y); 
+		position = new Point2D(x, y);
 		this.image = image;
 		this.graphicsContext = graphicsContext;
 		inventory.addItems(items);
@@ -40,30 +39,31 @@ public abstract class Character {
 		double x = position.getX() - image.getWidth() * 0.5;
 		double y = position.getY() - image.getHeight() * 0.5;
 		graphicsContext.drawImage(image, x, y);
-		
+
 		x -= 50;
 		y += image.getHeight() + 30;
 		double w = 2 * 50 + image.getWidth();
-		
+
 		Paint p = graphicsContext.getFill();
 		graphicsContext.setFill(Color.WHITE);
 		graphicsContext.fillRect(x, y, w, 10);
 		graphicsContext.setFill(Color.RED);
-		graphicsContext.fillRect(x, y + 1, Usefull.map(healPoints.getCurrentHealPoints(), 0, healPoints.getMaxHealPoints(), 0, w), 8);
+		graphicsContext.fillRect(x + 1, y + 1,
+				Usefull.map(healPoints.getCurrentHealPoints(), 0, healPoints.getMaxHealPoints(), 0, w - 2), 8);
 		graphicsContext.setFill(p);
 	}
 
 	public abstract void interact(Player spieler);
 
 	public void pickUpItem(Item item) {
-			inventory.addItem(item);
+		inventory.addItem(item);
 	}
 
 	public Item dropItem(String itemName) {
 		Item item = null;
-		if(healPoints.getIsUsable()) {
+		if (healPoints.getIsUsable()) {
 			item = inventory.getFirstItemByName(itemName);
-			if(item != null) {
+			if (item != null) {
 				inventory.removeFirstItemByName(name);
 			}
 		}
@@ -109,7 +109,7 @@ public abstract class Character {
 	public int getMoney() {
 		return money;
 	}
-	
+
 	public void setMoney(int money) {
 		this.money = money;
 	}
