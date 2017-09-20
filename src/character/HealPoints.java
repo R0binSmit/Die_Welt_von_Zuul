@@ -1,21 +1,31 @@
 package character;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import main.IShowable;
+import main.Usefull;
 
 public class HealPoints implements IShowable {
 	int maxHealPoints;
 	int currentHealPoints;
 	boolean isUsable;
+	private GraphicsContext graphicsContext;
+	private Character character;
 	
-	HealPoints(){
+	HealPoints(Character character, GraphicsContext graphicsContext){
 		maxHealPoints = 100;
 		currentHealPoints = maxHealPoints;
 		isUsable =  true;
+		this.graphicsContext = graphicsContext;
+		this.character = character;
 	}
 	
-	HealPoints(int maxHealPoints){
+	HealPoints(Character character, GraphicsContext graphicsContext, int maxHealPoints){
 		this.maxHealPoints = maxHealPoints;
 		currentHealPoints = maxHealPoints;
 		isUsable = true;
+		this.graphicsContext = graphicsContext;
+		this.character = character;
 	}
 	
 	public int getMaxHealPoints() {
@@ -56,7 +66,16 @@ public class HealPoints implements IShowable {
 	}
 
 	public void show() {
-		// TODO SHOW
-		
+		double x = character.getPosition().getX() - 50;
+		double y = character.getPosition().getY() + character.getWidth() + 20;
+		double w = 100;
+
+		Paint p = graphicsContext.getFill();
+		graphicsContext.setFill(Color.WHITE);
+		graphicsContext.fillRect(x, y, w, 10);
+		graphicsContext.setFill(Color.RED);
+		graphicsContext.fillRect(x + 1, y + 1,
+				Usefull.map(currentHealPoints, 0, maxHealPoints, 0, w - 2), 8);
+		graphicsContext.setFill(p);
 	}
 }

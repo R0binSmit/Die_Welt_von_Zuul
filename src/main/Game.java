@@ -9,9 +9,10 @@ import item.Item;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
-import location.Worldmap;
+import location.Door;
 import location.Landscape;
 import location.Room;
+import location.Worldmap;
 
 /**
  * Dies ist die Hauptklasse der Anwendung "Die Welt von Zuul". "Die Welt von
@@ -43,7 +44,8 @@ public class Game {
 	public Game(GraphicsContext gc) {
 		land = new Worldmap(gc);
 		land.raeumeAnlegen();
-		player = new Player("Dave", "Ich liebe dich", land.getStartpoint(), 20, 20, Usefull.linkToImage("/Bilder/Dave.png"), gc, null);
+		player = new Player("Dave", "Ich liebe dich", land.getStartpoint(), 20, 20,
+				Usefull.linkToImage("/Bilder/Dave.png"), gc, null);
 		this.gc = gc;
 		textbox = new TextBox(gc);
 
@@ -96,36 +98,14 @@ public class Game {
 
 		Point2D pos = player.getPosition();
 		pos = new Point2D(pos.getX() - player.getWidth() / 2, pos.getY() - player.getHeight() / 2);
-		HashMap<String, Room> exits = player.getRoom().getAusgaenge();
-		if (exits.get("north") != null) {
-			gc.fillRect(300, 0, 200, 50);
-			if (Usefull.intersects(300, 0, 200, 50, pos.getX(), pos.getY(), player.getWidth(), player.getHeight())) {
-				player.setPosition(new Point2D(player.getPosition().getX(), 700));
-				changeRoom("north");
-			}
-		}
-
-		if (exits.get("east") != null) {
-			gc.fillRect(750, 300, 50, 200);
-			if (Usefull.intersects(750, 300, 50, 200, pos.getX(), pos.getY(), player.getWidth(), player.getHeight())) {
-				player.setPosition(new Point2D(100, player.getPosition().getY()));
-				changeRoom("east");
-			}
-		}
-
-		if (exits.get("south") != null) {
-			gc.fillRect(300, 750, 200, 50);
-			if (Usefull.intersects(300, 750, 200, 50, pos.getX(), pos.getY(), player.getWidth(), player.getHeight())) {
-				player.setPosition(new Point2D(player.getPosition().getX(), 100));
-				changeRoom("south");
-			}
-		}
-
-		if (exits.get("west") != null) {
-			gc.fillRect(0, 300, 50, 200);
-			if (Usefull.intersects(0, 300, 50, 200, pos.getX(), pos.getY(), player.getWidth(), player.getHeight())) {
-				player.setPosition(new Point2D(700, player.getPosition().getY()));
-				changeRoom("west");
+		
+		for (Door door : player.getRoom().getAusgaenge()) {
+			door.show();
+			if (Usefull.intersects(door.getX(), door.getY(), door.getWidth(), door.getHeight(), pos.getX(), pos.getY(),
+					player.getWidth(), player.getHeight())) {
+				door.changeRoom(player);
+				textbox.addText(player.getRoom().getLongDesciption());
+				break;
 			}
 		}
 
@@ -211,18 +191,5 @@ public class Game {
 	private void printHelp() {
 		textbox.addText("Sie haben sich verlaufen. Sie sind allein.");
 		textbox.addText("Sie irren auf dem Unigelände herum.");
-	}
-
-	/**
-	 * Versuche, den Raum zu wechseln. Wenn es einen Ausgang gibt, wechsele in den
-	 * neuen Raum, ansonsten gib eine Fehlermeldung aus.
-	 */
-	private void changeRoom(String direction) {
-		Room nextRoom = player.getRoom().getExit(direction);
-		player.setRoom(nextRoom);
-		textbox.addText(player.getRoom().getLongDesciption());
-		LinkedList<character.Character> spielerGroup = new LinkedList<character.Character>();
-		spielerGroup.add(player);
-		nextRoom.onEnterRoomEvent(player);
 	}
 }

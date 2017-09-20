@@ -44,8 +44,6 @@ public class Worldmap {
 		
 		draussen.addItem(ente);
 		draussen.setzeGegner(monster);
-		draussen.setzeAusgang("west", cafeteria);
-		cafeteria.setzeAusgang("east", draussen);
 		/*
 		 * Gegenstand kanninchen, lachs; Landscape panther, goldteller; ArrayList<Raum>
 		 * destination = new ArrayList<Raum>(); HashMap<LandscapeResponse, String>

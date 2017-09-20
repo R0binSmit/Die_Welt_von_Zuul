@@ -7,10 +7,7 @@ import item.Item;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import location.Room;
-import main.Usefull;
 
 public abstract class Character {
 	protected String name;
@@ -20,7 +17,7 @@ public abstract class Character {
 	protected Image image;
 	protected Equipment equipment = new Equipment();
 	protected Inventory inventory = new Inventory();
-	protected HealPoints healPoints = new HealPoints();
+	protected HealPoints healPoints;
 	protected GraphicsContext graphicsContext;
 	protected int money;
 
@@ -33,6 +30,7 @@ public abstract class Character {
 		this.image = image;
 		this.graphicsContext = graphicsContext;
 		inventory.addItems(items);
+		healPoints = new HealPoints(this, graphicsContext);
 	}
 
 	public void show() {
@@ -40,17 +38,7 @@ public abstract class Character {
 		double y = position.getY() - image.getHeight() * 0.5;
 		graphicsContext.drawImage(image, x, y);
 
-		x -= 50;
-		y += image.getHeight() + 30;
-		double w = 2 * 50 + image.getWidth();
-
-		Paint p = graphicsContext.getFill();
-		graphicsContext.setFill(Color.WHITE);
-		graphicsContext.fillRect(x, y, w, 10);
-		graphicsContext.setFill(Color.RED);
-		graphicsContext.fillRect(x + 1, y + 1,
-				Usefull.map(healPoints.getCurrentHealPoints(), 0, healPoints.getMaxHealPoints(), 0, w - 2), 8);
-		graphicsContext.setFill(p);
+		healPoints.show();
 	}
 
 	public abstract void interact(Player spieler);

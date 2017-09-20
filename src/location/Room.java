@@ -27,7 +27,7 @@ import main.Usefull;
 public class Room {
 	private String beschreibung;
 	private Worldmap land;
-	private HashMap<String, Room> ausgaenge = new HashMap<String, Room>();
+	private ArrayList<Door> ausgaenge = new ArrayList<Door>();
 	private LinkedList<Item> gegenstaende = new LinkedList<Item>();
 	private ArrayList<Landscape> landschaft = new ArrayList<Landscape>();
 	private LinkedList<Enemy> gegner = new LinkedList<Enemy>();
@@ -63,8 +63,8 @@ public class Room {
 	 * @param westen
 	 *            Der Westeingang.
 	 */
-	public void setzeAusgang(String richtung, Room raum) {
-		ausgaenge.put(richtung, raum);
+	public void setzeAusgang(Image image, GraphicsContext gc, Point2D pos, Point2D nextPos, Room nextRoom) {
+		ausgaenge.add(new Door(image, gc, pos, nextPos, nextRoom));
 	}
 	
 	public Landscape getClosestLandscape(Point2D pos, int maxDist) {
@@ -124,18 +124,9 @@ public class Room {
 		}
 	}
 
-	public Room getExit(String richtung) {
+	/*public Room getExit(String richtung) {
 		return ausgaenge.get(richtung);
-	}
-
-	public String ausgaengeToString() {
-		StringBuilder sb = new StringBuilder("");
-		for (String key : ausgaenge.keySet()) {
-			sb.append(key);
-			sb.append(" ");
-		}
-		return sb.toString();
-	}
+	}*/
 
 	public void addItem(Item gegenstand) {
 		gegenstaende.add(gegenstand);
@@ -261,9 +252,6 @@ public class Room {
 		sb.append("Gegenstände: ");
 		sb.append(gegenstaendeToString());
 		sb.append(System.getProperty("line.separator"));
-		sb.append("Ausgänge: ");
-		sb.append(ausgaengeToString());
-		sb.append(System.getProperty("line.separator"));
 		sb.append("Gegner: ");
 		sb.append(gegnerToString());
 		sb.append(System.getProperty("line.separator"));
@@ -287,7 +275,7 @@ public class Room {
 		return gegner;
 	}
 
-	public HashMap<String, Room> getAusgaenge() {
+	public ArrayList<Door> getAusgaenge() {
 		return ausgaenge;
 	}
 }
