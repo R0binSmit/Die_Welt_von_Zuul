@@ -46,6 +46,10 @@ public abstract class Item implements IUsable, IShowable {
 		return price;
 	}
 	
+	public void setPosition(Point2D position) {
+		this.position = position;
+	}
+	
 	public double getX() {
 		return position.getX();
 	}

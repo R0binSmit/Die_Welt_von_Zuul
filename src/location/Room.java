@@ -1,7 +1,6 @@
 package location;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 
 import character.Enemy;
@@ -53,15 +52,6 @@ public class Room {
 	/**
 	 * Definiere die Ausgänge dieses Raums. Jede Richtung führt entweder in einen
 	 * anderen Raum oder ist 'null' (kein Ausgang).
-	 * 
-	 * @param norden
-	 *            Der Nordeingang.
-	 * @param osten
-	 *            Der Osteingang.
-	 * @param sueden
-	 *            Der Südeingang.
-	 * @param westen
-	 *            Der Westeingang.
 	 */
 	public void setzeAusgang(Image image, GraphicsContext gc, Point2D pos, Point2D nextPos, Room nextRoom) {
 		ausgaenge.add(new Door(image, gc, pos, nextPos, nextRoom));
@@ -118,9 +108,13 @@ public class Room {
 	}
 	
 	public void update(Player player) {
-		for (Enemy g : gegner) {
+		for (int i = gegner.size() - 1; i >= 0; i++) {
+			Enemy g = gegner.get(i);
 			g.move(player.getPosition());
-			g.update();
+			if (!g.update()) {
+				g.dropItems();
+				gegner.remove(g);
+			}
 		}
 	}
 

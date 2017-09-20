@@ -1,6 +1,7 @@
 package character;
 
 import java.util.LinkedList;
+import java.util.Random;
 
 import equipment.Equipment;
 import item.Item;
@@ -60,6 +61,14 @@ public abstract class Character {
 
 	public Item getGegenstand(String itemName) {
 		return inventory.getFirstItemByName(itemName);
+	}
+	
+	public void dropItems() {
+		Random r = new Random();
+		for (Item item : inventory.getLinkedListFromItems()) {
+			item.setPosition(new Point2D(position.getX() + (r.nextInt(101) - 50), position.getY() + (r.nextInt(101) - 50)));
+			room.addItem(item);
+		}
 	}
 
 	public String getStatus() {

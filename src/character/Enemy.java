@@ -16,7 +16,14 @@ public class Enemy extends Character {
 		super(name, description, room, x, y, image, graphicsContext, items);
 	}
 	
+	public void attack() {
+		
+	}
+	
 	public void move(Point2D target) {
+		if (target.distance(position) < image.getWidth() * 0.5) {
+			
+		}
 		Point2D desired = target.subtract(position);
 		desired = desired.normalize();
 		desired = desired.multiply(maxSpeed);
@@ -34,7 +41,10 @@ public class Enemy extends Character {
 		acceleration = acceleration.add(force);
 	}
 	
-	public void update() {
+	public boolean update() {
+		if (healPoints.getCurrentHealPoints() <= 0) {
+			return false;
+		}
 		velocity = velocity.add(acceleration);
 		if(velocity.magnitude() > maxSpeed) {
 			velocity = velocity.normalize();
@@ -42,6 +52,7 @@ public class Enemy extends Character {
 		}
 		position = position.add(velocity);
 		acceleration = acceleration.multiply(0);
+		return true;
 	}
 
 	@Override

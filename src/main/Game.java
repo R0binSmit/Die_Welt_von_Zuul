@@ -1,7 +1,6 @@
 package main;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 
 import character.NPC;
 import character.Player;
@@ -11,7 +10,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import location.Door;
 import location.Landscape;
-import location.Room;
 import location.Worldmap;
 
 /**
