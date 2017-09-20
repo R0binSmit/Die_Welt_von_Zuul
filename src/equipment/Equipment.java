@@ -52,8 +52,8 @@ public class Equipment implements IEquipment {
 		return damage;
 	}
 
-	public int getArmor() {
-		int armor = 0;
+	public double getArmor() {
+		double armor = 0;
 		if(helmet != null)
 			armor += helmet.getArmor();
 		

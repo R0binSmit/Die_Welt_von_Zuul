@@ -36,6 +36,10 @@ public class HealPoints implements IShowable {
 		return currentHealPoints;
 	}
 	
+	public void setCurrentHealPoints(int healPoints) {
+		this.currentHealPoints = healPoints;
+	}
+	
 	public String toString() {
 		return currentHealPoints + "/" + maxHealPoints;
 	}

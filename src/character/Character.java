@@ -130,4 +130,12 @@ public abstract class Character {
 	public int getHP() {
 		return healPoints.getCurrentHealPoints();
 	}
+	
+	public void setHP(int hp) {
+		healPoints.setCurrentHealPoints(hp);
+	}
+	
+	public double getDefense() {
+		return equipment.getArmor();
+	}
 }

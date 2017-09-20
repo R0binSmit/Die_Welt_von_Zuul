@@ -18,11 +18,14 @@ public class Enemy extends Character {
 	
 	public void attack(Player target) {
 		int hp = target.getHP();
+		int dmg = equipment.getDamage();
+		hp -= dmg * target.getDefense();
+		target.setHP(hp);
 	}
 	
 	public void move(Player target) {
 		if (target.getPosition().distance(position) < image.getWidth() * 0.5) {
-			
+			attack(target);
 		}
 		Point2D desired = target.getPosition().subtract(position);
 		desired = desired.normalize();
