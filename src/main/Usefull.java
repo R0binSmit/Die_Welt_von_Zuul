@@ -10,4 +10,8 @@ public class Usefull {
 	public static Image linkToImage(String link) {
 		return new Image(ZuulUI.class.getResourceAsStream(link));
 	}
+	
+	public static double map(double value, double min, double max, double nMin, double nMax) {
+		return ((value - min) / (max - min)) * (nMax - nMin) + nMin;
+	}
 }

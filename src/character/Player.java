@@ -37,6 +37,16 @@ public class Player extends Character {
 		else
 			pickUpItem(room.removeItem(item.getName()));
 	}
+	
+	public void show() {
+		super.show();
+		int dist = 10;
+		for (Item item : gegenstaende) {
+			item.showAt(dist, 750);
+		}
+		
+		equipment.show();
+	}
 
 	public boolean isHauptSpieler() {
 		return hauptSpieler;

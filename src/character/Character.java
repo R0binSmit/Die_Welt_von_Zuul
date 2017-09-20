@@ -9,11 +9,14 @@ import item.Item;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import location.Room;
+import main.Usefull;
 
 public abstract class Character {
 	protected Room room;
-	protected int maxTraglast, traglast, geld;
+	protected int hp, maxHP, geld;
 	protected LinkedList<Item> gegenstaende;
 	protected AngriffsVerhalten angriffsVerhalten;
 	protected Point2D pos;
@@ -29,9 +32,7 @@ public abstract class Character {
 			LinkedList<Item> gegenstaende) {
 		this.name = name;
 		this.room = raum;
-		this.maxTraglast = maxTraglast;
 		this.gegenstaende = gegenstaende == null ? new LinkedList<Item>() : (LinkedList<Item>) gegenstaende.clone();
-		traglast = ermittleGewicht();
 		angriffsVerhalten = NPCAngriffVerhalten.getInstance();
 		pos = new Point2D(x, y);
 		this.image = image;
@@ -43,31 +44,28 @@ public abstract class Character {
 		double y = pos.getY() - image.getHeight() * 0.5;
 		gc.drawImage(image, x, y);
 		
-		int dist = 10;
-		for (Item item : gegenstaende) {
-			item.showAt(dist, 750);
-		}
+		x -= 50;
+		y += image.getHeight() + 30;
+		double w = 2 * 50 + image.getWidth();
 		
-		equipment.show();
+		Paint p = gc.getFill();
+		gc.setFill(Color.WHITE);
+		gc.fillRect(x, y, w, 10);
+		gc.setFill(Color.RED);
+		gc.fillRect(x, y + 1, Usefull.map(hp, 0, maxHP, 0, w), 8);
+		gc.setFill(p);
 	}
 
 	public abstract void interact(Player spieler);
 
-	public boolean pickUpItem(Item gegenstand) {
-		if (traglast + gegenstand.getGewicht() <= maxTraglast) {
+	public void pickUpItem(Item gegenstand) {
 			gegenstaende.add(gegenstand);
-			traglast += gegenstand.getGewicht();
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	public Item gegenstandAblegen(String name) {
 		Item gs = getGegenstand(name);
 		if (gs != null) {
 			gegenstaende.remove(gs);
-			traglast = ermittleGewicht();
 		}
 		return gs;
 	}
@@ -76,22 +74,10 @@ public abstract class Character {
 		Item essen = getGegenstand(name);
 		if (essen != null && essen.isEssbar()) {
 			gegenstaende.remove(essen);
-			traglast = ermittleGewicht();
-			if (essen.getName().equalsIgnoreCase("muffin")) {
-				maxTraglast += 10;
-			}
 		} else {
 			essen = null;
 		}
 		return essen;
-	}
-
-	public int ermittleGewicht() {
-		int gewicht = 0;
-		for (Item gs : gegenstaende) {
-			gewicht += gs.getGewicht();
-		}
-		return gewicht;
 	}
 
 	public Item getGegenstand(String name) {
@@ -129,11 +115,6 @@ public abstract class Character {
 
 	public String getStatus() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Gewicht: ");
-		sb.append(traglast);
-		sb.append("/");
-		sb.append(maxTraglast);
-		sb.append(System.getProperty("line.separator"));
 		sb.append("Geld: ");
 		sb.append(geld);
 		sb.append(System.getProperty("line.separator"));
@@ -152,14 +133,6 @@ public abstract class Character {
 		this.room = aktuellerRaum;
 	}
 
-	public int getMaxTraglast() {
-		return maxTraglast;
-	}
-
-	public int getTraglast() {
-		return traglast;
-	}
-
 	public LinkedList<Item> getGegenstaende() {
 		return gegenstaende;
 	}
@@ -170,10 +143,6 @@ public abstract class Character {
 
 	public String getBeschreibung() {
 		return beschreibung;
-	}
-
-	public void setTraglast(int traglast) {
-		this.traglast = traglast;
 	}
 
 	public void setName(String name) {
