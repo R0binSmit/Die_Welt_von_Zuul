@@ -45,7 +45,7 @@ public class Game {
 		player = new Player("Dave", "Ich liebe dich", land.getStartpoint(), 20, 20,
 				Usefull.linkToImage("/Bilder/Dave.png"), gc, null);
 		this.gc = gc;
-		textbox = new TextBox(gc);
+		textbox = TextBox.newTextBox(gc);
 
 		setActions();
 		outputWelcomeText();

@@ -7,10 +7,18 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
 public class TextBox {
+	public static TextBox textBox = null;
 	private GraphicsContext gc;
 	LinkedList<String> texte = new LinkedList<String>();
+	
+	public static TextBox newTextBox(GraphicsContext gc) {
+		if (textBox == null) {
+			textBox = new TextBox(gc);
+		}
+		return textBox;
+	}
 
-	public TextBox(GraphicsContext gc) {
+	private TextBox(GraphicsContext gc) {
 		this.gc = gc;
 	}
 
@@ -53,5 +61,13 @@ public class TextBox {
 			gc.fillText(texte.get(i), 10, y);
 			y -= 15;
 		}
+	}
+
+	public GraphicsContext getGc() {
+		return gc;
+	}
+
+	public void setGc(GraphicsContext gc) {
+		this.gc = gc;
 	}
 }

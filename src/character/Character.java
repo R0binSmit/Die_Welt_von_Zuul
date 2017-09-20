@@ -126,4 +126,8 @@ public abstract class Character {
 	public void setPosition(Point2D pos) {
 		this.position = pos;
 	}
+	
+	public int getHP() {
+		return healPoints.getCurrentHealPoints();
+	}
 }

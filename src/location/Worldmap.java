@@ -45,7 +45,7 @@ public class Worldmap {
 		
 		draussen.addItem(ente);
 		draussen.setzeGegner(monster);
-		draussen.setzeAusgang(Usefull.linkToImage("/Bilder/tuer1.png"), gc, new Point2D(0, 400), new Point2D(700, 400), cafeteria);
+		//draussen.setzeAusgang(Usefull.linkToImage("/Bilder/tuer1.png"), gc, new Point2D(0, 400), new Point2D(700, 400), cafeteria);
 		/*
 		 * Gegenstand kanninchen, lachs; Landscape panther, goldteller; ArrayList<Raum>
 		 * destination = new ArrayList<Raum>(); HashMap<LandscapeResponse, String>

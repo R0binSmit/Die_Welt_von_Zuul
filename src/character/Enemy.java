@@ -16,15 +16,15 @@ public class Enemy extends Character {
 		super(name, description, room, x, y, image, graphicsContext, items);
 	}
 	
-	public void attack() {
-		
+	public void attack(Player target) {
+		int hp = target.getHP();
 	}
 	
-	public void move(Point2D target) {
-		if (target.distance(position) < image.getWidth() * 0.5) {
+	public void move(Player target) {
+		if (target.getPosition().distance(position) < image.getWidth() * 0.5) {
 			
 		}
-		Point2D desired = target.subtract(position);
+		Point2D desired = target.getPosition().subtract(position);
 		desired = desired.normalize();
 		desired = desired.multiply(maxSpeed);
 		
