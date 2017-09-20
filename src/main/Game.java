@@ -196,12 +196,9 @@ public class Game {
 	public void nimmGegenstand(String name) {
 		Item item = player.getRoom().getGegenstand(name);
 		if (item != null) {
-			if (player.pickUpItem(item)) {
-				player.getRoom().removeItem(name);
-				System.out.println(item.getName() + " Aufgehoben");
-			} else {
-				System.out.println("Der Gegenstand " + item.getName() + " ist zu schwer");
-			}
+			player.pickUpItem(item);
+			player.getRoom().removeItem(name);
+			System.out.println(item.getName() + " Aufgehoben");
 		}
 	}
 
