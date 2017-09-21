@@ -21,6 +21,7 @@ public class ZuulUI extends Application {
 	private GraphicsContext gc;
 	private HashMap<KeyCode, Boolean> keys = new HashMap<KeyCode, Boolean>();
 	private Timeline tl;
+	private double mouseX, mouseY;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -58,6 +59,8 @@ public class ZuulUI extends Application {
 		//Eventhandler um Mauseingaben abzufanden
 		scene.setOnMousePressed(e -> {
 			MouseButton mb = e.getButton();
+			mouseX = e.getX();
+			mouseY = e.getY();
 			
 			if (mb == MouseButton.PRIMARY) {
 				keys.put(KeyCode.F20, true);
@@ -101,12 +104,20 @@ public class ZuulUI extends Application {
 		stage.show();
 
 		//Gameklasse initialisieren
-		game = new Game(gc);
+		game = new Game(gc, this);
 		
 		//Gc für Textbox festlegen
 		TextBox.newTextBox().setGc(gc);
 		
 		//Timeline starten
 		tl.play();
+	}
+
+	public double getMouseX() {
+		return mouseX;
+	}
+
+	public double getMouseY() {
+		return mouseY;
 	}
 }
