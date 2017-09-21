@@ -37,8 +37,7 @@ public class Room {
 	private TextBox textbox = TextBox.newTextBox();
 
 	/**
-	 * Erzeuge einen Raum. Ein Raum hat anfangs keine
-	 * AusgÃ¤nge.
+	 * Erzeuge einen Raum. Ein Raum hat anfangs keine AusgÃ¤nge.
 	 * 
 	 * @param description
 	 *            enthält eine Beschreibung
@@ -56,8 +55,9 @@ public class Room {
 
 	/**
 	 * Gegenstand zum Raum hinzufügen
+	 * 
 	 * @param item
-	 * Der Gegenstand der hinzugefügt werden soll
+	 *            Der Gegenstand der hinzugefügt werden soll
 	 */
 	public void addItem(Item item) {
 		items.add(item);
@@ -65,8 +65,9 @@ public class Room {
 
 	/**
 	 * Gegner aus dem Raum entfernen
+	 * 
 	 * @param enemy
-	 * der zu erntfernende Gegner
+	 *            der zu erntfernende Gegner
 	 */
 	public void removeEnemy(Enemy enemy) {
 		this.enemys.remove(enemy);
@@ -74,8 +75,9 @@ public class Room {
 
 	/**
 	 * NPC aus dem Raum entfernen
+	 * 
 	 * @param enemys
-	 * der zu erntfernende NPC
+	 *            der zu erntfernende NPC
 	 */
 	public void removeNPC(NPC npc) {
 		this.npc.remove(npc);
@@ -85,6 +87,16 @@ public class Room {
 		return exits;
 	}
 
+	/**
+	 * Methode, die einem das Item zurückgibt, die am nächsten zu einer bestimmten
+	 * Position ist
+	 * 
+	 * @param pos
+	 *            Die Position von der aus die Entfernung gemmessen wird
+	 * @param maxDist
+	 *            Die Maximaldistanz, die das Item entfernt liegen darf
+	 * @return Das Item, das am nächsten an dem Punkt dran ist
+	 */
 	public Item getClosestItem(Point2D pos, int maxDist) {
 		Item closest = null;
 		double minDist = Double.MAX_VALUE;
@@ -101,6 +113,16 @@ public class Room {
 		return closest;
 	}
 
+	/**
+	 * Methode, die einem die Landscape zurückgibt, die am nächsten zu einer bestimmten
+	 * Position ist
+	 * 
+	 * @param pos
+	 *            Die Position von der aus die Entfernung gemmessen wird
+	 * @param maxDist
+	 *            Die Maximaldistanz, die die Landscape entfernt liegen darf
+	 * @return Die Landscape, die am nächsten an dem Punkt dran ist
+	 */
 	public Landscape getClosestLandscape(Point2D pos, int maxDist) {
 		Landscape closest = null;
 		double minDist = Double.MAX_VALUE;
@@ -190,10 +212,6 @@ public class Room {
 		return null;
 	}
 
-	/**
-	 * Definiere die AusgÃ¤nge dieses Raums. Jede Richtung fÃ¼hrt entweder in einen
-	 * anderen Raum oder ist 'null' (kein Ausgang).
-	 */
 	public void setExit(Image image, GraphicsContext gc, Point2D position, Point2D nextPlayerPosition, Room nextRoom) {
 		exits.add(new Door(image, gc, position, nextPlayerPosition, nextRoom));
 	}
@@ -206,6 +224,9 @@ public class Room {
 		this.npc.add(npc);
 	}
 
+	/**
+	 * Anzeigen des Raums und der Objekte darin
+	 */
 	public void show() {
 		gc.drawImage(backGround, 0, 0);
 
@@ -230,7 +251,13 @@ public class Room {
 		}
 	}
 
+	/**
+	 * Update der Dinge die sich im Raum befinden
+	 * @param player
+	 * Spieler mit dem Updates gemacht werden
+	 */
 	public void update(Player player) {
+		//Alle Gegner zum Bewegen bringen
 		for (int i = enemys.size() - 1; i >= 0; i--) {
 			Enemy g = enemys.get(i);
 			g.move(player);
@@ -240,9 +267,9 @@ public class Room {
 			}
 		}
 
+		//Bei allen Türen abfragen ob der Spieler darauf steht, und ihn bewegen wenn ja
 		Point2D pos = player.getPosition();
 		pos = new Point2D(pos.getX() - player.getWidth() / 2, pos.getY() - player.getHeight() / 2);
-
 		for (Door door : exits) {
 			if (Usefull.intersects(door.getX(), door.getY(), door.getWidth(), door.getHeight(), pos.getX(), pos.getY(),
 					player.getWidth(), player.getHeight())) {
