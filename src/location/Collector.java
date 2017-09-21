@@ -19,6 +19,7 @@ public class Collector extends Landscape {
 		super(name, beschreibung, image, x, y, gc, landscapeResponse);
 		this.key = key;
 		this.amount = amount;
+		this.maxAmount = maxAmount;
 		this.execute = execute;
 	}
 
@@ -32,7 +33,7 @@ public class Collector extends Landscape {
 		if (player.getItem(key) == null) {
 			textbox.addText(getResponse(LandscapeResponse.USE_RESPONSE));
 		}
-
+		
 		else if (amount + 1 < maxAmount) {
 			player.dropItem(key);
 			amount += 1;
