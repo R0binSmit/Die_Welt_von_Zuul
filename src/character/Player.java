@@ -45,14 +45,16 @@ public class Player extends Character {
 	 * In einem Radius um sich herum alle Gegner angreifen
 	 */
 	public void attack() {
-		if (cooldown <= 0) {
-			cooldown = 10;
-			for (Enemy enemy : room.getGegnerList()) {
-				if (position.distance(enemy.position) < 200) {
-					int hp = enemy.getHP();
-					int dmg = equipment.getDamage() + 10;
-					hp -= dmg * (1 - enemy.getDefense());
-					enemy.setHP(hp);
+		if(healthPoints.getIsUsable()) {
+			if (cooldown <= 0) {
+				cooldown = 10;
+				for (Enemy enemy : room.getGegnerList()) {
+					if (position.distance(enemy.position) < 200) {
+						int hp = enemy.getHP();
+						int dmg = equipment.getDamage() + 10;
+						hp -= dmg * (1 - enemy.getDefense());
+						enemy.setHP(hp);
+					}
 				}
 			}
 		}
@@ -66,38 +68,42 @@ public class Player extends Character {
 	 */
 	@Override
 	public void interact(Player Spieler) {
-
+		if(healthPoints.getIsUsable()) {
+			
+		}
 	}
 
 	/**
 	 * Dadurch kann der Spieler mit seiner Umwelt interagieren
 	 */
 	public void interagieren() {
-		Item item = room.getClosestItem(position, (int) image.getWidth());
-		Landscape landscape = room.getClosestLandscape(position, (int) image.getWidth());
-		NPC npc = room.getClosestNPC(position, (int) image.getWidth());
-		double itemDist = 1000;
-		double landscapeDist = 1000;
-		double npcDist = 1000;
+		if(healthPoints.getIsUsable()) {
+			Item item = room.getClosestItem(position, (int) image.getWidth());
+			Landscape landscape = room.getClosestLandscape(position, (int) image.getWidth());
+			NPC npc = room.getClosestNPC(position, (int) image.getWidth());
+			double itemDist = 1000;
+			double landscapeDist = 1000;
+			double npcDist = 1000;
 
-		// TODO unterscheiden wenn beides 0?
-		if (item != null)
-			itemDist = position.distance(new Point2D(item.getX(), item.getY()));
+			// TODO unterscheiden wenn beides 0?
+			if (item != null)
+				itemDist = position.distance(new Point2D(item.getX(), item.getY()));
 
-		if (landscape != null)
-			landscapeDist = position.distance(new Point2D(landscape.getX(), landscape.getY()));
+			if (landscape != null)
+				landscapeDist = position.distance(new Point2D(landscape.getX(), landscape.getY()));
 
-		if(npc != null)
-			npcDist = position.distance(new Point2D(npc.getPosition().getX(), npc.getPosition().getY()));
-		
-		if (itemDist < landscapeDist && itemDist < npcDist)
-			pickUpItem(room.removeItem(item.getName()));
+			if(npc != null)
+				npcDist = position.distance(new Point2D(npc.getPosition().getX(), npc.getPosition().getY()));
 			
-		if(landscapeDist < itemDist && landscapeDist < npcDist)
-			landscape.onUse(this);
-		
-		if(npcDist < landscapeDist && npcDist < itemDist)
-			npc.interact(this);
+			if (itemDist < landscapeDist && itemDist < npcDist)
+				pickUpItem(room.removeItem(item.getName()));
+				
+			if(landscapeDist < itemDist && landscapeDist < npcDist)
+				landscape.onUse(this);
+			
+			if(npcDist < landscapeDist && npcDist < itemDist)
+				npc.interact(this);
+		}
 	}
 
 	/**
@@ -107,29 +113,31 @@ public class Player extends Character {
 	 *            Taste die gedrückt wurde
 	 */
 	public void move(KeyCode key) {
-		final int speed = 5;
-		Point2D position = new Point2D(this.position.getX(), this.position.getY());
-		switch (key) {
-		case W:
-			position = position.add(new Point2D(0, -speed));
-			break;
-		case A:
-			position = position.add(new Point2D(-speed, 0));
-			break;
-		case S:
-			position = position.add(new Point2D(0, speed));
-			break;
-		case D:
-			position = position.add(new Point2D(speed, 0));
-			break;
-		default:
-		}
+		if(healthPoints.getIsUsable()){
+			final int speed = 5;
+			Point2D position = new Point2D(this.position.getX(), this.position.getY());
+			switch (key) {
+			case W:
+				position = position.add(new Point2D(0, -speed));
+				break;
+			case A:
+				position = position.add(new Point2D(-speed, 0));
+				break;
+			case S:
+				position = position.add(new Point2D(0, speed));
+				break;
+			case D:
+				position = position.add(new Point2D(speed, 0));
+				break;
+			default:
+			}
 
-		if (position.getX() - image.getWidth() * 0.5 > 0
-				&& position.getX() + image.getWidth() * 0.5 < graphicsContext.getCanvas().getWidth()
-				&& position.getY() - image.getHeight() * 0.5 > 0
-				&& position.getY() + image.getHeight() * 0.5 < graphicsContext.getCanvas().getHeight()) {
-			this.position = position;
+			if (position.getX() - image.getWidth() * 0.5 > 0
+					&& position.getX() + image.getWidth() * 0.5 < graphicsContext.getCanvas().getWidth()
+					&& position.getY() - image.getHeight() * 0.5 > 0
+					&& position.getY() + image.getHeight() * 0.5 < graphicsContext.getCanvas().getHeight()) {
+				this.position = position;
+			}
 		}
 	}
 
