@@ -36,7 +36,7 @@ public class Enemy extends Character {
 	 * @param items
 	 *            Items die der Gegner von anfang an dabei hat
 	 */
-	public Enemy(String name, String description, Room room, int x, int y, Image image, int maxSpeed, int maxForce, int range,
+	public Enemy(String name, String description, Room room, int x, int y, Image image, int maxSpeed, double maxForce, int range,
 			GraphicsContext graphicsContext, LinkedList<Item> items) {
 		super(name, description, room, x, y, image, graphicsContext, items);
 		this.maxSpeed = maxSpeed;

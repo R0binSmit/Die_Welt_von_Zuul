@@ -86,7 +86,7 @@ public class TextBox {
 	public void show() {
 		//Hintergrund Recheck einfügen
 		Paint p = gc.getFill();
-		gc.setFill(Color.rgb(230, 230, 255, 0.5));
+		gc.setFill(Color.rgb(230, 230, 255, 0.9));
 		gc.fillRect(0, 0, 300, 210);
 		gc.setFill(p);
 
