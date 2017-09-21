@@ -106,7 +106,6 @@ public class Game {
 	 */
 	public void processCommand(KeyCode key) {
 		int dist = 10;
-		LinkedList<Item> items;
 		switch (key) {
 		case H:
 			printHelp();
