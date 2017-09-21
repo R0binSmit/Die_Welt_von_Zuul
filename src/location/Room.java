@@ -91,21 +91,47 @@ public class Room {
 	 * Methode, die einem das Item zurückgibt, die am nächsten zu einer bestimmten
 	 * Position ist
 	 * 
-	 * @param pos
+	 * @param position
 	 *            Die Position von der aus die Entfernung gemmessen wird
 	 * @param maxDist
 	 *            Die Maximaldistanz, die das Item entfernt liegen darf
 	 * @return Das Item, das am nächsten an dem Punkt dran ist
 	 */
-	public Item getClosestItem(Point2D pos, int maxDist) {
+	public Item getClosestItem(Point2D position, int maxDist) {
 		Item closest = null;
 		double minDist = Double.MAX_VALUE;
 		for (Item item : items) {
-			if (Usefull.intersects(pos.getX(), pos.getY(), maxDist, maxDist, item.getX(), item.getY(), item.getWidth(),
+			if (Usefull.intersects(position.getX(), position.getY(), maxDist, maxDist, item.getX(), item.getY(), item.getWidth(),
 					item.getHeight())) {
-				double dist = pos.distance(new Point2D(item.getX(), item.getY()));
+				double dist = position.distance(new Point2D(item.getX(), item.getY()));
 				if (dist < minDist) {
 					closest = item;
+					minDist = dist;
+				}
+			}
+		}
+		return closest;
+	}
+	
+	/**
+	 * Methode, die einem den NPC zurückgibt, die am nächsten zu einer bestimmten
+	 * Position ist
+	 * 
+	 * @param position
+	 *            Die Position von der aus die Entfernung gemmessen wird
+	 * @param maxDist
+	 *            Die Maximaldistanz, die das Item entfernt liegen darf
+	 * @return Das Item, das am nächsten an dem Punkt dran ist
+	 */
+	public NPC getClosestNPC(Point2D position, int maxDist) {
+		NPC closest = null;
+		double minDist = Double.MAX_VALUE;
+		for(NPC currentNpc : npc) {
+			if(Usefull.intersects(position.getX(), position.getY(), maxDist, maxDist, currentNpc.getPosition().getX(), currentNpc.getPosition().getY(), currentNpc.getWidth(),
+					currentNpc.getHeight())) {
+				double dist = position.distance(new Point2D(currentNpc.getPosition().getX(), currentNpc.getPosition().getY()));
+				if (dist < minDist) {
+					closest = currentNpc;
 					minDist = dist;
 				}
 			}
@@ -117,19 +143,19 @@ public class Room {
 	 * Methode, die einem die Landscape zurückgibt, die am nächsten zu einer bestimmten
 	 * Position ist
 	 * 
-	 * @param pos
+	 * @param position
 	 *            Die Position von der aus die Entfernung gemmessen wird
 	 * @param maxDist
 	 *            Die Maximaldistanz, die die Landscape entfernt liegen darf
 	 * @return Die Landscape, die am nächsten an dem Punkt dran ist
 	 */
-	public Landscape getClosestLandscape(Point2D pos, int maxDist) {
+	public Landscape getClosestLandscape(Point2D position, int maxDist) {
 		Landscape closest = null;
 		double minDist = Double.MAX_VALUE;
 		for (Landscape landscape : landscape) {
-			if (Usefull.intersects(pos.getX(), pos.getY(), maxDist, maxDist, landscape.getX(), landscape.getY(),
+			if (Usefull.intersects(position.getX(), position.getY(), maxDist, maxDist, landscape.getX(), landscape.getY(),
 					landscape.getWidth(), landscape.getHeight())) {
-				double dist = pos.distance(new Point2D(landscape.getX(), landscape.getY()));
+				double dist = position.distance(new Point2D(landscape.getX(), landscape.getY()));
 				if (dist < minDist) {
 					closest = landscape;
 					minDist = dist;

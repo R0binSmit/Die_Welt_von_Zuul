@@ -6,13 +6,15 @@ import item.Item;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import location.Room;
+import main.TextBox;
 
 /**
  * Klasse mit der alle NPCs dargestellt werden
  */
 public class NPC extends Character {
 	protected String text;
-
+	protected TextBox textbox = TextBox.newTextBox();
+	
 	/**
 	 * Konstruktor für alle NPCs
 	 * 
@@ -49,7 +51,7 @@ public class NPC extends Character {
 	 */
 	@Override
 	public void interact(Player spieler) {
-		System.out.println(text);
+		textbox.addText(text);
 	}
 
 	public void setText(String text) {
