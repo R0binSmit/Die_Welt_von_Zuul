@@ -6,12 +6,29 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.IShowable;
 
+/**
+ * Diese Klasse wird zur Modellierung von Türen verwendet
+ */
 public class Door implements IShowable {
 	private GraphicsContext gc;
 	private Image image;
 	private Room nextRoom;
 	private Point2D position, nextPos;
 
+	/**
+	 * Konstructor um Türen zu definieren
+	 * 
+	 * @param image
+	 *            Aussehen der Tür
+	 * @param gc
+	 *            GraphicsContext zum zeichnen der Tür
+	 * @param position
+	 *            Koordinaten der Tür
+	 * @param nextPos
+	 *            Koordinaten zu den der Spieler beim betreten der Tür gebracht wird
+	 * @param nextRoom
+	 *            Raum zu dem der Spieler gebracht wird
+	 */
 	public Door(Image image, GraphicsContext gc, Point2D position, Point2D nextPos, Room nextRoom) {
 		super();
 		this.image = image;
@@ -21,6 +38,11 @@ public class Door implements IShowable {
 		this.nextRoom = nextRoom;
 	}
 
+	/**
+	 * Wird beim Raumwechsel aufgerufen
+	 * @param player
+	 * Spieler der den Raum wechselt
+	 */
 	public void changeRoom(Player player) {
 		player.setRoom(nextRoom);
 		player.setPosition(nextPos);
@@ -43,6 +65,9 @@ public class Door implements IShowable {
 		return position.getY();
 	}
 
+	/**
+	 * Anzeigen der Türen
+	 */
 	@Override
 	public void show() {
 		gc.drawImage(image, position.getX(), position.getY());
