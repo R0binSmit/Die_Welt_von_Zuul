@@ -69,6 +69,33 @@ public class Equipment implements IEquipment {
 		return armor;
 	}
 	
+	public void equipItem(Defense defense) {
+		switch(defense.getDefenseType()) {
+			case HELMET:
+				helmet = defense;
+				break;
+			case BREASTPLATE:
+				breastplate = defense;
+				break;
+			case TROUSERS:
+				trousers = defense;
+				break;
+			case SHOES:
+				shoes = defense;
+				break;
+			default:		
+		}
+	}
+	
+	public void equipItem(Weapon weapon) {
+		if(leftHand == null)
+			leftHand = weapon;
+		else if(rightHand == null)
+			rightHand = weapon;
+		else
+			leftHand = weapon;
+	}
+	
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("Equipment :");
