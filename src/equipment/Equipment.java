@@ -40,19 +40,19 @@ public class Equipment implements IEquipment {
 			break;
 		case BREASTPLATE:
 			if(breastplate != null) {
-				currentUsedDefense = helmet;
+				currentUsedDefense = breastplate;
 			}
 			breastplate = defense;
 			break;
 		case TROUSERS:
 			if(trousers != null) {
-				currentUsedDefense = helmet;
+				currentUsedDefense = trousers;
 			}
 			trousers = defense;
 			break;
 		case SHOES:
 			if(shoes != null) {
-				currentUsedDefense = helmet;
+				currentUsedDefense = shoes;
 			}
 			shoes = defense;
 			break;
@@ -70,17 +70,17 @@ public class Equipment implements IEquipment {
 	 * @return Die Waffe, die ersetzt wird (falls eine ersetzt werden muss).
 	 */
 	public Item equipItem(Weapon weapon) {
-		Item currentUsedDefense = null;
+		Item currentUsedWeapon = null;
 		
 		if (leftHand == null)
 			leftHand = weapon;
 		else if (rightHand == null)
 			rightHand = weapon;
 		else {
-			currentUsedDefense = leftHand;
+			currentUsedWeapon = leftHand;
 			leftHand = weapon;
 		}
-		return currentUsedDefense;
+		return currentUsedWeapon;
 	}
 
 	/**

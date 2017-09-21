@@ -112,6 +112,7 @@ public abstract class Character implements IShowable {
 	 */
 	public void equipItem(Weapon weapon) {
 		Item lastWeapon = equipment.equipItem(weapon);
+		inventory.removeFirstItemByName(weapon.getName());
 		if(lastWeapon != null) {
 			inventory.addItem(lastWeapon);
 		}
