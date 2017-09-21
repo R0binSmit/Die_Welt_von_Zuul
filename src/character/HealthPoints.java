@@ -5,64 +5,64 @@ import javafx.scene.paint.Paint;
 import main.IShowable;
 import main.Usefull;
 
-public class HealPoints implements IShowable {
-	int maxHealPoints;
-	int currentHealPoints;
+public class HealthPoints implements IShowable {
+	int maxHealthPoints;
+	int currentHealthPoints;
 	boolean isUsable;
 	private GraphicsContext graphicsContext;
 	private Character character;
 	
-	HealPoints(Character character, GraphicsContext graphicsContext){
-		maxHealPoints = 100;
-		currentHealPoints = maxHealPoints;
+	HealthPoints(Character character, GraphicsContext graphicsContext){
+		maxHealthPoints = 100;
+		currentHealthPoints = maxHealthPoints;
 		isUsable =  true;
 		this.graphicsContext = graphicsContext;
 		this.character = character;
 	}
 	
-	HealPoints(Character character, GraphicsContext graphicsContext, int maxHealPoints){
-		this.maxHealPoints = maxHealPoints;
-		currentHealPoints = maxHealPoints;
+	HealthPoints(Character character, GraphicsContext graphicsContext, int maxHealPoints){
+		this.maxHealthPoints = maxHealPoints;
+		currentHealthPoints = maxHealPoints;
 		isUsable = true;
 		this.graphicsContext = graphicsContext;
 		this.character = character;
 	}
 	
-	public int getMaxHealPoints() {
-		return maxHealPoints;
+	public int getMaxHealthPoints() {
+		return maxHealthPoints;
 	}
 	
-	public int getCurrentHealPoints() {
-		return currentHealPoints;
+	public int getCurrentHealthPoints() {
+		return currentHealthPoints;
 	}
 	
 	public void setCurrentHealPoints(int healPoints) {
-		this.currentHealPoints = healPoints;
+		this.currentHealthPoints = healPoints;
 	}
 	
 	public String toString() {
-		return currentHealPoints + "/" + maxHealPoints;
+		return currentHealthPoints + "/" + maxHealthPoints;
 	}
 	
 	public void addHealPoints(int healPoints) {
-		if((currentHealPoints + healPoints) > maxHealPoints) {
-			currentHealPoints = maxHealPoints;
+		if((currentHealthPoints + healPoints) > maxHealthPoints) {
+			currentHealthPoints = maxHealthPoints;
 			isUsable = true;
 		}
 		else{
-			currentHealPoints += healPoints;
+			currentHealthPoints += healPoints;
 			isUsable = true;
 		}
 	}
 	
 	public void dropHealPoints(int healPoints) {
-		if((currentHealPoints - healPoints) <= 0)
+		if((currentHealthPoints - healPoints) <= 0)
 		{
-			currentHealPoints = 0;
+			currentHealthPoints = 0;
 			isUsable = false;
 		}
 		else
-			currentHealPoints -= healPoints;
+			currentHealthPoints -= healPoints;
 	}
 	
 	public boolean getIsUsable() {
@@ -79,7 +79,7 @@ public class HealPoints implements IShowable {
 		graphicsContext.fillRect(x, y, w, 10);
 		graphicsContext.setFill(Color.RED);
 		graphicsContext.fillRect(x + 1, y + 1,
-				Usefull.map(currentHealPoints, 0, maxHealPoints, 0, w - 2), 8);
+				Usefull.map(currentHealthPoints, 0, maxHealthPoints, 0, w - 2), 8);
 		graphicsContext.setFill(p);
 	}
 }
