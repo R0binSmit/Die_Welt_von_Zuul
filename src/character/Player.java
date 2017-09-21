@@ -46,11 +46,11 @@ public class Player extends Character {
 	 */
 	public void attack() {
 		if (cooldown <= 0) {
-			cooldown = 100;
+			cooldown = 10;
 			for (Enemy enemy : room.getGegnerList()) {
-				if (position.distance(enemy.position) < 100) {
+				if (position.distance(enemy.position) < 200) {
 					int hp = enemy.getHP();
-					int dmg = equipment.getDamage() + 100;
+					int dmg = equipment.getDamage() + 1;
 					hp -= dmg * (1 - enemy.getDefense());
 					enemy.setHP(hp);
 				}

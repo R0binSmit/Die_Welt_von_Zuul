@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Random;
 
+import character.Enemy;
 import character.NPC;
 import item.Item;
 import javafx.geometry.Point2D;
@@ -36,35 +37,44 @@ public class Worldmap {
 	public void createRooms() {
 		Room outside, cafeteria;// , hoersaal, cafeteria, labor, buero, keller, abstellkammer;
 		NPC purrCat;
+		Enemy karpfen;
 		Landscape goldPlate;
 		HashMap<LandscapeResponse, String> landscapeResponse = new HashMap<LandscapeResponse, String>();
 		LinkedList<Item> items = new LinkedList<Item>();
 
-		outside = new Room("Haupteingang der Universität" + System.getProperty("line.separator")
+		outside = new Room(System.getProperty("line.separator") + "Haupteingang der Universität"
+				+ System.getProperty("line.separator")
 				+ "Das Gelände ist verlassen, in dieser dunklen Nacht. Die Gerüchte besagen in den Tiefen dieses Ortes würde die"
 				+ System.getProperty("line.separator")
 				+ "Menschheit antworten finden. Vielleicht sogar Erlösung. Bist du deswegen hier?", this,
 				Usefull.linkToImage("/Bilder/Draussen.png"), gc);
 
-		cafeteria = new Room("test", this, Usefull.linkToImage("/Bilder/Cafeteria.png"), gc);
+		cafeteria = new Room(System.getProperty("line.separator")
+		+"Cafeteria" + System.getProperty("line.separator") + "Einst für den Festschmaus der Menschen bereitet, herrscht nun der König der Karpfen über diesen Ort!", this,
+				Usefull.linkToImage("/Bilder/Cafeteria.png"), gc);
 		rooms.add(outside);
 		rooms.add(cafeteria);
 		startPoint = outside;
 
 		// Ausgänge
-		outside.setExit(Usefull.linkToImage("/Bilder/Ente.png"), gc, new Point2D(0, 400), new Point2D(700, 400),
+		outside.setExit(Usefull.linkToImage("/Bilder/tuer1.png"), gc, new Point2D(-20, 400), new Point2D(700, 400),
 				cafeteria);
-		cafeteria.setExit(Usefull.linkToImage("/Bilder/Ente.png"), gc, new Point2D(760, 400),
-				new Point2D(100, 400), outside);
+		cafeteria.setExit(Usefull.linkToImage("/Bilder/tuer1.png"), gc, new Point2D(730, 400), new Point2D(100, 400),
+				outside);
 
 		// NPC
 		purrCat = new NPC("Schnurrkatze", "Ein schnurrende Katze", outside, 700, 100,
 				Usefull.linkToImage("/Bilder/Schnurrkatze_klein.png"), gc, null);
-		purrCat.setText("Maunz!");
+		purrCat.setText(System.getProperty("line.separator") + "Die Katze schnurrt. Und spricht. Die Menschheit musste sich schnell an derlei Dinge gewöhnen." +
+				 System.getProperty("line.separator") +
+				 "'Lachs', maunzt sie." + System.getProperty("line.separator") +
+				 "'Der Mensch möge mir Lachs aus der Cafeteria im Westen bringen, damit ich ihm ein Geheimnis verrate." + System.getProperty("line.separator") +
+				 "Lege er es auf meinen Teller. Nun hinfort!'" +
+				 System.getProperty("line.separator"));
 		outside.setNPC(purrCat);
 
 		// Landschaft
-		landscapeResponse.put(LandscapeResponse.USE_RESPONSE, "Die Schnurrkatze blickt hungrig auf den Teller!");
+		landscapeResponse.put(LandscapeResponse.USE_RESPONSE, System.getProperty("line.separator") + "Die Schnurrkatze blickt hungrig auf den Teller! Dann blickt sie dich an. Fordernd.");
 
 		goldPlate = new Collector("Goldteller", "Ein goldener Teller",
 				Usefull.linkToImage("/Bilder/Goldteller_klein.png"), 600, 160, gc, landscapeResponse, "String", 0, 1,
@@ -74,7 +84,8 @@ public class Worldmap {
 		// Gegenstände
 
 		// Gegner
-
+		karpfen = new Enemy("Karpfenkönig", "Der König der Karpfen", cafeteria, 200, 700, Usefull.linkToImage("/Bilder/karpfenkoenig_klein.png"), 3, 0.05, 70, gc, null);
+		cafeteria.setEnemy(karpfen);
 		/*
 		 * Gegenstand kanninchen, lachs; Landscape panther, goldteller; ArrayList<Raum>
 		 * destination = new ArrayList<Raum>(); HashMap<LandscapeResponse, String>
