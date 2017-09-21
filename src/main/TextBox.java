@@ -7,8 +7,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
 /**
- * @author Frank Stellt die Textbox die in der oberen linken Ecke gezeigt wird
- *         dar.
+ * Stellt die Textbox die in der oberen linken Ecke gezeigt wird dar.
  */
 public class TextBox {
 	private static TextBox textBox = new TextBox();
