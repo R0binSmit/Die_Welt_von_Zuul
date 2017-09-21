@@ -134,6 +134,7 @@ public class Inventory implements IShowable {
 		int dist = 10;
 		for (Item item : items) {
 			item.showAt(dist, 750);
+			dist += item.getWidth() + 10;
 		}
 	}
 

@@ -3,6 +3,7 @@ package main;
 import java.util.HashMap;
 
 import character.Player;
+import item.Item;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
@@ -109,6 +110,10 @@ public class Game {
 			player.interagieren();
 			break;
 		case F20:
+			int dist = 10;
+			for (Item item : player.getItems()) {
+				dist += item.getWidth() + 10;
+			}
 			player.attack();
 			break;
 		default:
