@@ -1,6 +1,7 @@
 package main;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 
 import character.Player;
 import item.Item;
@@ -105,6 +106,7 @@ public class Game {
 	 */
 	public void processCommand(KeyCode key) {
 		int dist = 10;
+		LinkedList<Item> items;
 		switch (key) {
 		case H:
 			printHelp();
@@ -113,7 +115,9 @@ public class Game {
 			player.interagieren();
 			break;
 		case F20:
-			for (Item item : player.getItems()) {
+			items = player.getItems();
+			for (int i = items.size() - 1; i >= 0; i--) {
+				Item item = items.get(i);
 				if (Usefull.intersects(zuulUI.getMouseX(), zuulUI.getMouseY(), 0, 0, dist, 750,
 						item.getWidth(), item.getHeight())) {
 					item.use(player);
@@ -124,7 +128,9 @@ public class Game {
 			player.attack();
 			break;
 		case F21:
-			for (Item item : player.getItems()) {
+			items = player.getItems();
+			for (int i = items.size() - 1; i >= 0; i--) {
+				Item item = items.get(i);
 				if (Usefull.intersects(zuulUI.getMouseX(), zuulUI.getMouseY(), 0, 0, dist, 750,
 						item.getWidth(), item.getHeight())) {
 					item.setPosition(player.getPosition());
