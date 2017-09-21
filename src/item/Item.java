@@ -18,7 +18,7 @@ public abstract class Item implements IShowable {
 
 	/**
 	 * Konstruktor von Item.
-	 * 
+	 *  
 	 * @param name
 	 *            Der Name von dem Item als String.
 	 * @param description

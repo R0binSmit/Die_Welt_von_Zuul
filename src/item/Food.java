@@ -26,7 +26,7 @@ public class Food extends Item {
 	 *            Stellt die visualisierung dar.
 	 * @param x
 	 *            X Koordinaten
-	 * @param y
+	 * @param y 
 	 *            Y Koordinaten
 	 * @param graphicsContext
 	 *            Wird benötigt um das Objekt in das JavaFX Fenster zu Zeichnen.

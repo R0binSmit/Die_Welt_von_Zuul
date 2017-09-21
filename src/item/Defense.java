@@ -31,7 +31,7 @@ public class Defense extends Item {
 		this.armor = armor;
 		this.defenseType = defenseType;
 	}
-
+ 
 	public double getArmor() {
 		return armor;
 	}
