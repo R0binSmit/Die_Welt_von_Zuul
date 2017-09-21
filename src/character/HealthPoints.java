@@ -92,7 +92,7 @@ public class HealthPoints implements IShowable {
 		return maxHealthPoints;
 	}
 
-	public void setCurrentHealPoints(int healPoints) {
+	public void setCurrentHealPoints(int healPoints) { 
 		this.currentHealthPoints = healPoints;
 	}
 
