@@ -25,7 +25,7 @@ public class Collector extends Landscape {
 	@Override
 	public void onEnterRoom(Player spieler) {
 
-	}
+	} 
 
 	@Override
 	public void onUse(Player player) {
@@ -40,7 +40,7 @@ public class Collector extends Landscape {
 		} else if (amount + 1 == maxAmount) {
 			player.dropItem(key);
 			amount += 1;
-			System.out.println(getResponse(LandscapeResponse.COLLECTFINISH_RESPONSE));
+			textbox.addText(getResponse(LandscapeResponse.COLLECTFINISH_RESPONSE));
 
 			for (Runnable runnable : execute) {
 				runnable.run();
