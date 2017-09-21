@@ -75,8 +75,10 @@ public class Player extends Character {
 	public void interagieren() {
 		Item item = room.getClosestItem(position, (int) image.getWidth());
 		Landscape landscape = room.getClosestLandscape(position, (int) image.getWidth());
-		double itemDist = 0;
-		double landscapeDist = 0;
+		NPC npc = room.getClosestNPC(position, (int) image.getWidth());
+		double itemDist = 1000;
+		double landscapeDist = 1000;
+		double npcDist = 1000;
 
 		// TODO unterscheiden wenn beides 0?
 		if (item != null)
@@ -85,10 +87,17 @@ public class Player extends Character {
 		if (landscape != null)
 			landscapeDist = position.distance(new Point2D(landscape.getX(), landscape.getY()));
 
-		if (itemDist < landscapeDist)
-			landscape.onUse(this);
-		else
+		if(npc != null)
+			npcDist = position.distance(new Point2D(npc.getPosition().getX(), npc.getPosition().getY()));
+		
+		if (itemDist < landscapeDist && itemDist < npcDist)
 			pickUpItem(room.removeItem(item.getName()));
+			
+		if(landscapeDist < itemDist && landscapeDist < npcDist)
+			landscape.onUse(this);
+		
+		if(npcDist < landscapeDist && npcDist < itemDist)
+			npc.interact(this);
 	}
 
 	/**
