@@ -4,7 +4,9 @@ import java.util.LinkedList;
 import java.util.Random;
 
 import equipment.Equipment;
+import item.Defense;
 import item.Item;
+import item.Weapon;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -18,7 +20,7 @@ public abstract class Character {
 	protected Image image;
 	protected Equipment equipment = new Equipment();
 	protected Inventory inventory = new Inventory();
-	protected HealPoints healPoints;
+	protected HealthPoints healPoints;
 	protected GraphicsContext graphicsContext;
 	protected int money;
 
@@ -31,7 +33,7 @@ public abstract class Character {
 		this.image = image;
 		this.graphicsContext = graphicsContext;
 		inventory.addItems(items);
-		healPoints = new HealPoints(this, graphicsContext);
+		healPoints = new HealthPoints(this, graphicsContext);
 	}
 
 	public void show() {
@@ -128,7 +130,7 @@ public abstract class Character {
 	}
 	
 	public int getHP() {
-		return healPoints.getCurrentHealPoints();
+		return healPoints.getCurrentHealthPoints();
 	}
 	
 	public void setHP(int hp) {
@@ -137,5 +139,13 @@ public abstract class Character {
 	
 	public double getDefense() {
 		return equipment.getArmor();
+	}
+	
+	public void equipItem(Weapon weapon) {
+		equipment.equipItem(weapon);
+	}
+	
+	public void equipItem(Defense defense) {
+		equipment.equipItem(defense);
 	}
 }
