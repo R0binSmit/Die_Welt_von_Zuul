@@ -115,9 +115,7 @@ public class Game {
 			player.interagieren();
 			break;
 		case F20:
-			items = player.getItems();
-			for (int i = items.size() - 1; i >= 0; i--) {
-				Item item = items.get(i);
+			for (Item item : player.getItems()) {
 				if (Usefull.intersects(zuulUI.getMouseX(), zuulUI.getMouseY(), 0, 0, dist, 750,
 						item.getWidth(), item.getHeight())) {
 					item.use(player);
@@ -128,9 +126,7 @@ public class Game {
 			player.attack();
 			break;
 		case F21:
-			items = player.getItems();
-			for (int i = items.size() - 1; i >= 0; i--) {
-				Item item = items.get(i);
+			for (Item item : player.getItems()) {
 				if (Usefull.intersects(zuulUI.getMouseX(), zuulUI.getMouseY(), 0, 0, dist, 750,
 						item.getWidth(), item.getHeight())) {
 					item.setPosition(player.getPosition());
