@@ -12,7 +12,7 @@ import location.Room;
  * Klasse mit der alle Gegner dargestellt werden
  */
 public class Enemy extends Character {
-	int cooldown = 100;
+	private int cooldown = 100, range;
 	private double maxSpeed, maxForce;
 	private Point2D velocity = new Point2D(0, 0), acceleration = new Point2D(0, 0);
 
@@ -36,11 +36,12 @@ public class Enemy extends Character {
 	 * @param items
 	 *            Items die der Gegner von anfang an dabei hat
 	 */
-	public Enemy(String name, String description, Room room, int x, int y, Image image, int maxSpeed, int maxForce,
+	public Enemy(String name, String description, Room room, int x, int y, Image image, int maxSpeed, int maxForce, int range,
 			GraphicsContext graphicsContext, LinkedList<Item> items) {
 		super(name, description, room, x, y, image, graphicsContext, items);
 		this.maxSpeed = maxSpeed;
 		this.maxForce = maxForce;
+		this.range = range;
 	}
 
 	/**
@@ -85,7 +86,7 @@ public class Enemy extends Character {
 	 */
 	public void move(Player target) {
 		// Prüfen ob der Gegner nah genug dran ist um anzugreifen, wenn ja angreifen
-		if (target.getPosition().distance(position) < image.getWidth() * 0.5 && cooldown <= 0) {
+		if (target.getPosition().distance(position) < range && cooldown <= 0) {
 			attack(target);
 			cooldown = 100;
 		}

@@ -19,17 +19,19 @@ public class Game {
 	private Worldmap land;
 	private Player player;
 	private TextBox textbox;
+	private ZuulUI zuulUI;
 
 	/**
 	 * Erzeuge ein Spiel und initialisiere die interne Raumkarte.
 	 */
-	public Game(GraphicsContext gc) {
+	public Game(GraphicsContext gc, ZuulUI zuulUI) {
 		land = new Worldmap(gc);
 		land.createRooms();
 		player = new Player("Dave", "Ich liebe dich", land.getStartpoint(), 400, 400,
 				Usefull.linkToImage("/Bilder/Dave.png"), gc, null);
 		this.gc = gc;
 		textbox = TextBox.newTextBox();
+		this.zuulUI = zuulUI;
 
 		setActions();
 		outputWelcomeText();
@@ -109,9 +111,14 @@ public class Game {
 		case E:
 			player.interagieren();
 			break;
-		case F20: 
+		case F20:
 			int dist = 10;
 			for (Item item : player.getItems()) {
+				if (Usefull.intersects(zuulUI.getMouseX(), zuulUI.getMouseY(), 0, 0, item.getX(), item.getY(),
+						item.getWidth(), item.getHeight())) {
+					player.getRoom().addItem(player.dropItem(item.getName()));
+					break;
+				}
 				dist += item.getWidth() + 10;
 			}
 			player.attack();
