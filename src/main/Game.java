@@ -104,6 +104,7 @@ public class Game {
 	 *            Eine Taste die Gedrückt wurde
 	 */
 	public void processCommand(KeyCode key) {
+		int dist = 10;
 		switch (key) {
 		case H:
 			printHelp();
@@ -112,16 +113,26 @@ public class Game {
 			player.interagieren();
 			break;
 		case F20:
-			int dist = 10;
 			for (Item item : player.getItems()) {
 				if (Usefull.intersects(zuulUI.getMouseX(), zuulUI.getMouseY(), 0, 0, item.getX(), item.getY(),
 						item.getWidth(), item.getHeight())) {
-					player.getRoom().addItem(player.dropItem(item.getName()));
+					item.use(player);
 					break;
 				}
 				dist += item.getWidth() + 10;
 			}
 			player.attack();
+			break;
+		case F21:
+			for (Item item : player.getItems()) {
+				if (Usefull.intersects(zuulUI.getMouseX(), zuulUI.getMouseY(), 0, 0, item.getX(), item.getY(),
+						item.getWidth(), item.getHeight())) {
+					item.setPosition(player.getPosition());
+					player.getRoom().addItem(player.dropItem(item.getName()));
+					break;
+				}
+				dist += item.getWidth() + 10;
+			}
 			break;
 		default:
 		}
