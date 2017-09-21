@@ -32,6 +32,11 @@ public class Player extends Character {
 		}
 	}
 
+	@Override
+	public void interact(Player Spieler) {
+
+	}
+
 	public void interagieren() {
 		Item item = room.getClosestItem(position, (int) image.getWidth());
 		Landscape landscape = room.getClosestLandscape(position, (int) image.getWidth());
@@ -49,18 +54,6 @@ public class Player extends Character {
 			landscape.onUse(this);
 		else
 			pickUpItem(room.removeItem(item.getName()));
-	}
-
-	public void show() {
-		super.show();
-		int dist = 10;
-		for (Item item : inventory.getLinkedListFromItems()) {
-			item.showAt(dist, 750);
-		}
-
-		equipment.show();
-
-		cooldown--;
 	}
 
 	public void move(KeyCode key) {
@@ -82,7 +75,16 @@ public class Player extends Character {
 		}
 	}
 
-	public void interact(Player Spieler) {
+	@Override
+	public void show() {
+		super.show();
+		int dist = 10;
+		for (Item item : inventory.getLinkedListFromItems()) {
+			item.showAt(dist, 750);
+		}
 
+		equipment.show();
+
+		cooldown--;
 	}
 }

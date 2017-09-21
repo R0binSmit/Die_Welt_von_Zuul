@@ -12,12 +12,23 @@ import javafx.scene.canvas.GraphicsContext;
 import main.Usefull;
 
 public class Worldmap {
-	private Room startpoint = null;
-	private ArrayList<Room> raeume = new ArrayList<Room>();
 	private GraphicsContext gc;
+	private ArrayList<Room> raeume = new ArrayList<Room>();
+	private Room startpoint = null;
 
 	public Worldmap(GraphicsContext gc) {
 		this.gc = gc;
+	}
+
+	public Room getRandomRoom() {
+		Random randomNumber = new Random();
+		int roomNumber = randomNumber.nextInt(raeume.size());
+
+		return raeume.get(roomNumber);
+	}
+
+	public Room getStartpoint() {
+		return startpoint;
 	}
 
 	/**
@@ -29,7 +40,7 @@ public class Worldmap {
 		Landscape goldteller;
 		HashMap<LandscapeResponse, String> landscapeResponse = new HashMap<LandscapeResponse, String>();
 		LinkedList<Item> items = new LinkedList<Item>();
-		
+
 		draussen = new Room("Haupteingang der Universität" + System.getProperty("line.separator")
 				+ "Das Gelände ist verlassen, in dieser dunklen Nacht. Die Gerüchte besagen in den Tiefen dieses Ortes würde die"
 				+ System.getProperty("line.separator")
@@ -40,32 +51,30 @@ public class Worldmap {
 		raeume.add(draussen);
 		raeume.add(cafeteria);
 		startpoint = draussen;
-		
-		
-		//Ausgänge
+
+		// Ausgänge
 		draussen.setzeAusgang(Usefull.linkToImage("/Bilder/Ente.png"), gc, new Point2D(0, 400), new Point2D(700, 400),
 				cafeteria);
-		cafeteria.setzeAusgang(Usefull.linkToImage("/Bilder/Ente.png"), gc, new Point2D(760, 400), new Point2D(100, 400),
-				draussen);
-		
-		//NPC
+		cafeteria.setzeAusgang(Usefull.linkToImage("/Bilder/Ente.png"), gc, new Point2D(760, 400),
+				new Point2D(100, 400), draussen);
+
+		// NPC
 		schnurrkatze = new NPC("Schnurrkatze", "Ein schnurrende Katze", draussen, 700, 100,
 				Usefull.linkToImage("/Bilder/Schnurrkatze_klein.png"), gc, null);
 		schnurrkatze.setText("Maunz!");
 		draussen.setzeNPC(schnurrkatze);
-		
-		//Landschaft
+
+		// Landschaft
 		landscapeResponse.put(LandscapeResponse.USE_RESPONSE, "Die Schnurrkatze blickt hungrig auf den Teller!");
 
 		goldteller = new Collector("Goldteller", "Ein goldener Teller",
 				Usefull.linkToImage("/Bilder/Goldteller_klein.png"), 600, 160, gc, landscapeResponse, "String", 0, 1,
 				null);
 		draussen.landschaftBauen(goldteller);
-		
-		//Gegenstände
-		
-		//Gegner
-		
+
+		// Gegenstände
+
+		// Gegner
 
 		/*
 		 * Gegenstand kanninchen, lachs; Landscape panther, goldteller; ArrayList<Raum>
@@ -193,16 +202,5 @@ public class Worldmap {
 		 * abstellkammer.setzeAusgang("west", keller);
 		 * abstellkammer.landschaftBauen(panther);
 		 */
-	}
-
-	public Room getStartpoint() {
-		return startpoint;
-	}
-
-	public Room getRandomRoom() {
-		Random randomNumber = new Random();
-		int roomNumber = randomNumber.nextInt(raeume.size());
-
-		return raeume.get(roomNumber);
 	}
 }

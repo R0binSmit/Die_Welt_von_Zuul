@@ -2,6 +2,7 @@ package main;
 
 import java.util.HashMap;
 
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -15,26 +16,31 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class ZuulUI extends Application {
-	private Canvas can;
-	private GraphicsContext gc;
-
-	private Timeline tl;
-
-	Game game;
-	private HashMap<KeyCode, Boolean> keys = new HashMap<KeyCode, Boolean>();
-
-	public void init() throws Exception {
-		tl = new Timeline(new KeyFrame(Duration.millis(1000 / 60), e -> {
-			draw();
-		}));
-		tl.setCycleCount(Timeline.INDEFINITE);
-	}
-
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		launch(args);
+	}
+	private Canvas can;
+
+	Game game;
+
+	private GraphicsContext gc;
+	private HashMap<KeyCode, Boolean> keys = new HashMap<KeyCode, Boolean>();
+
+	private Timeline tl;
+
+	private void draw() {
+		game.update(keys);
+	}
+
+	@Override
+	public void init() throws Exception {
+		tl = new Timeline(new KeyFrame(Duration.millis(1000 / 60), e -> {
+			draw();
+		}));
+		tl.setCycleCount(Animation.INDEFINITE);
 	}
 
 	@Override
@@ -87,9 +93,5 @@ public class ZuulUI extends Application {
 
 		game = new Game(gc);
 		tl.play();
-	}
-
-	private void draw() {
-		game.update(keys);
 	}
 }

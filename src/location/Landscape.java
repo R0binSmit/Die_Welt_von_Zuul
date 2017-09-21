@@ -9,16 +9,17 @@ import javafx.scene.image.Image;
 import main.TextBox;
 
 public abstract class Landscape {
-	protected String name;
 	protected String beschreibung;
-	protected Room raum;
-	protected HashMap<LandscapeResponse, String> landscapeResponse;
-	protected Point2D pos;
-	protected Image image;
 	protected GraphicsContext gc;
+	protected Image image;
+	protected HashMap<LandscapeResponse, String> landscapeResponse;
+	protected String name;
+	protected Point2D pos;
+	protected Room raum;
 	protected TextBox tb = TextBox.newTextBox(gc);
 
-	public Landscape(String name, String beschreibung, Image image, int x, int y, GraphicsContext gc, HashMap<LandscapeResponse, String> landscapeResponse) {
+	public Landscape(String name, String beschreibung, Image image, int x, int y, GraphicsContext gc,
+			HashMap<LandscapeResponse, String> landscapeResponse) {
 		this.name = name;
 		this.beschreibung = beschreibung;
 		this.landscapeResponse = landscapeResponse == null ? new HashMap<LandscapeResponse, String>()
@@ -28,57 +29,57 @@ public abstract class Landscape {
 		this.gc = gc;
 	}
 
-	public abstract void onEnterRoom(Player spieler);
+	public String getBeschreibung() {
+		return beschreibung;
+	}
 
-	public abstract void onUse(Player spieler);
-	
-	public void show() {
-		double x = pos.getX() - image.getWidth() * 0.5;
-		double y = pos.getY() - image.getHeight() * 0.5;
-		gc.drawImage(image, x, y);
+	public double getH() {
+		return image.getHeight();
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public Room getRaum() {
+		return raum;
 	}
 
-	public String getBeschreibung() {
-		return beschreibung;
+	public String getResponse(LandscapeResponse lr) {
+		return landscapeResponse.get(lr);
 	}
+
+	public double getW() {
+		return image.getWidth();
+	}
+
+	public double getX() {
+		return pos.getX();
+	}
+
+	public double getY() {
+		return pos.getY();
+	}
+
+	public abstract void onEnterRoom(Player spieler);
+
+	public abstract void onUse(Player spieler);
 
 	public void setBeschreibung(String beschreibung) {
 		this.beschreibung = beschreibung;
 	}
 
-	public Room getRaum() {
-		return raum;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public void setRaum(Room raum) {
 		this.raum = raum;
 	}
-	
-	public String getResponse(LandscapeResponse lr) {
-		return landscapeResponse.get(lr);
-	}
-	
-	public double getX() {
-		return pos.getX();
-	}
-	
-	public double getY() {
-		return pos.getY();
-	}
-	
-	public double getW() {
-		return image.getWidth();
-	}
-	
-	public double getH() {
-		return image.getHeight();
+
+	public void show() {
+		double x = pos.getX() - image.getWidth() * 0.5;
+		double y = pos.getY() - image.getHeight() * 0.5;
+		gc.drawImage(image, x, y);
 	}
 }

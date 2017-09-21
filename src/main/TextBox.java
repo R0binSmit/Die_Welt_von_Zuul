@@ -8,15 +8,15 @@ import javafx.scene.paint.Paint;
 
 public class TextBox {
 	private static TextBox textBox = null;
-	private GraphicsContext gc;
-	LinkedList<String> texte = new LinkedList<String>();
-	
 	public static TextBox newTextBox(GraphicsContext gc) {
 		if (textBox == null) {
 			textBox = new TextBox(gc);
 		}
 		return textBox;
 	}
+	private GraphicsContext gc;
+
+	LinkedList<String> texte = new LinkedList<String>();
 
 	private TextBox(GraphicsContext gc) {
 		this.gc = gc;
@@ -32,7 +32,7 @@ public class TextBox {
 
 	public void addText(String text, int maxSLength) {
 		String[] texte = text.split(System.getProperty("line.separator"));
-		for (int i = 1; i < texte.length; i++) {
+		for (int i = 0; i < texte.length; i++) {
 			while (texte[i].length() > maxSLength) {
 				int cut = texte[i].lastIndexOf(' ', maxSLength);
 				texte[i] = texte[i].trim();
@@ -45,12 +45,16 @@ public class TextBox {
 		}
 	}
 
+	public GraphicsContext getGc() {
+		return gc;
+	}
+
 	public void refresh() {
 		Paint p = gc.getFill();
 		gc.setFill(Color.rgb(230, 230, 255));
 		gc.fillRect(0, 0, 300, 210);
 		gc.setFill(p);
-		
+
 		int y = 200;
 		for (int i = texte.size() - 1; i >= 0; i--) {
 			if (y < 15) {
@@ -61,10 +65,6 @@ public class TextBox {
 			gc.fillText(texte.get(i), 10, y);
 			y -= 15;
 		}
-	}
-
-	public GraphicsContext getGc() {
-		return gc;
 	}
 
 	public void setGc(GraphicsContext gc) {

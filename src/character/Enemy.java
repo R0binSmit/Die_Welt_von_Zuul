@@ -9,13 +9,17 @@ import javafx.scene.image.Image;
 import location.Room;
 
 public class Enemy extends Character {
-	private Point2D velocity = new Point2D(0, 0), acceleration = new Point2D(0, 0);
-	private double maxSpeed = 5, maxForce = 0.05;
 	int cooldown = 100;
+	private double maxSpeed = 5, maxForce = 0.05;
+	private Point2D velocity = new Point2D(0, 0), acceleration = new Point2D(0, 0);
 
 	public Enemy(String name, String description, Room room, int x, int y, Image image, GraphicsContext graphicsContext,
 			LinkedList<Item> items) {
 		super(name, description, room, x, y, image, graphicsContext, items);
+	}
+
+	private void applyForce(Point2D force) {
+		acceleration = acceleration.add(force);
 	}
 
 	public void attack(Player target) {
@@ -23,6 +27,11 @@ public class Enemy extends Character {
 		int dmg = equipment.getDamage() + 10;
 		hp -= dmg * (1 - target.getDefense());
 		target.setHP(hp);
+	}
+
+	@Override
+	public void interact(Player spieler) {
+
 	}
 
 	public void move(Player target) {
@@ -44,10 +53,6 @@ public class Enemy extends Character {
 		applyForce(steer);
 	}
 
-	private void applyForce(Point2D force) {
-		acceleration = acceleration.add(force);
-	}
-
 	public boolean update() {
 		if (healPoints.getCurrentHealthPoints() <= 0) {
 			return false;
@@ -60,10 +65,5 @@ public class Enemy extends Character {
 		position = position.add(velocity);
 		acceleration = acceleration.multiply(0);
 		return true;
-	}
-
-	@Override
-	public void interact(Player spieler) {
-
 	}
 }
