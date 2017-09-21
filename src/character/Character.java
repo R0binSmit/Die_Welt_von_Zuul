@@ -72,7 +72,7 @@ public abstract class Character implements IShowable {
 		if (healthPoints.getIsUsable()) {
 			item = inventory.getFirstItemByName(itemName);
 			if (item != null) {
-				inventory.removeFirstItemByName(name);
+				inventory.removeFirstItemByName(itemName);
 			}
 		}
 		return item;
