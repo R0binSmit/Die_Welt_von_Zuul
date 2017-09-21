@@ -15,8 +15,8 @@ public class Equipment implements IEquipment {
 	private Defense trousers;
 
 	/**
-	 * Construktor falls das Equipment ein Rüstungsteil ist
-	 * 
+	 * Die Methode wird verwendet, wenn die Methode "use" bei einem Defense Objekt angewendet wird.
+	 * Dabei wird entschiede an welcher Position das Objekt übergeben wird.
 	 * @param defense
 	 *            Rüstungsgegenstand
 	 */
@@ -39,10 +39,11 @@ public class Equipment implements IEquipment {
 	}
 
 	/**
-	 * Construktor falls das Equipment eine Waffe ist
+	 * Die Methode wird verwendet, wenn die Methode "use" bei einem Weapon Objekt angewendet wird.
+	 * Dabei wird entschiede an welcher Position das Objekt übergeben wird.
 	 * 
 	 * @param weapon
-	 *            Waffe
+	 *            Ein Weapon Objekt.
 	 */
 	public void equipItem(Weapon weapon) {
 		if (leftHand == null)
@@ -54,7 +55,8 @@ public class Equipment implements IEquipment {
 	}
 
 	/**
-	 * Gesamtrüstung des Equpments erhalten
+	 * Gibt die Rüstungswerte aller Gegenstände des Equpments zurück.
+	 *@return Gesamtrüstung als double.
 	 */
 	@Override
 	public double getArmor() {
@@ -75,7 +77,8 @@ public class Equipment implements IEquipment {
 	}
 
 	/**
-	 * Gesamtschaden des Equpments erhalten
+	 * Gibt den Gesamtschaden des Equpments zurück.
+	 *@return Gesamtschaden als Integer.
 	 */
 	@Override
 	public int getDamage() {
@@ -90,7 +93,7 @@ public class Equipment implements IEquipment {
 	}
 
 	/**
-	 * Equipment anzeigen
+	 * Equipment wird in dem JavaFX Fenster anzeigen
 	 */
 	public void show() {
 		if (helmet != null) {
@@ -118,6 +121,10 @@ public class Equipment implements IEquipment {
 		}
 	}
 
+	/**
+	 * Gibt alle angelegten Waffen/Rüstungen als String aus.
+	 * @return String von allen Gegenständen.
+	 */
 	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
