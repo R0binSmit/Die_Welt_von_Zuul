@@ -102,7 +102,7 @@ public class HealthPoints implements IShowable {
 	@Override
 	public void show() {
 		double x = character.getPosition().getX() - 50;
-		double y = character.getPosition().getY() + character.getWidth() + 20;
+		double y = character.getPosition().getY() + character.getHeight() * 0.5 + 20;
 		double w = 100;
 
 		Paint p = graphicsContext.getFill();
