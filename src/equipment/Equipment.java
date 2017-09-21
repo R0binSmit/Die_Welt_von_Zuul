@@ -27,6 +27,7 @@ public class Equipment implements IEquipment {
 	 * Dabei wird entschiede an welcher Position das Objekt übergeben wird.
 	 * @param defense
 	 *            Rüstungsgegenstand
+	 * @return Den Rüstungsgegenstand der ersetzt wird (falls schon angelegt).
 	 */
 	public Item equipItem(Defense defense) {
 		Item currentUsedDefense = null;
@@ -66,6 +67,7 @@ public class Equipment implements IEquipment {
 	 * 
 	 * @param weapon
 	 *            Ein Weapon Objekt.
+	 * @return Die Waffe, die ersetzt wird (falls eine ersetzt werden muss).
 	 */
 	public Item equipItem(Weapon weapon) {
 		Item currentUsedDefense = null;
