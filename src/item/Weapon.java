@@ -3,6 +3,7 @@ package item;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import character.Character;
 
 public class Weapon extends Item {
 	private int damage;
@@ -29,6 +30,6 @@ public class Weapon extends Item {
 	}
 	
 	public void use(Character character) {
-		
+		character.equipItem(this);
 	}
 }
