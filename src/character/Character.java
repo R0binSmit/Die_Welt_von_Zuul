@@ -98,6 +98,7 @@ public abstract class Character implements IShowable {
 	 */
 	public void equipItem(Defense defense) {
 		equipment.equipItem(defense);
+		inventory.removeFirstItemByName(defense.getName());
 	}
 
 	/**
