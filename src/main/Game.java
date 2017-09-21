@@ -42,7 +42,7 @@ public class Game {
 	public Game(GraphicsContext gc) {
 		land = new Worldmap(gc);
 		land.raeumeAnlegen();
-		player = new Player("Dave", "Ich liebe dich", land.getStartpoint(), 20, 20,
+		player = new Player("Dave", "Ich liebe dich", land.getStartpoint(), 400, 400,
 				Usefull.linkToImage("/Bilder/Dave.png"), gc, null);
 		this.gc = gc;
 		textbox = TextBox.newTextBox(gc);

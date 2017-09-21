@@ -2,14 +2,14 @@ package location;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Random;
 
 import character.NPC;
+import item.Item;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import main.Usefull;
-import main.ZuulUI;
 
 public class Worldmap {
 	private Room startpoint = null;
@@ -28,7 +28,8 @@ public class Worldmap {
 		NPC schnurrkatze;
 		Landscape goldteller;
 		HashMap<LandscapeResponse, String> landscapeResponse = new HashMap<LandscapeResponse, String>();
-
+		LinkedList<Item> items = new LinkedList<Item>();
+		
 		draussen = new Room("Haupteingang der Universität" + System.getProperty("line.separator")
 				+ "Das Gelände ist verlassen, in dieser dunklen Nacht. Die Gerüchte besagen in den Tiefen dieses Ortes würde die"
 				+ System.getProperty("line.separator")
@@ -39,22 +40,32 @@ public class Worldmap {
 		raeume.add(draussen);
 		raeume.add(cafeteria);
 		startpoint = draussen;
-
+		
+		
+		//Ausgänge
 		draussen.setzeAusgang(Usefull.linkToImage("/Bilder/Ente.png"), gc, new Point2D(0, 400), new Point2D(700, 400),
 				cafeteria);
-
+		cafeteria.setzeAusgang(Usefull.linkToImage("/Bilder/Ente.png"), gc, new Point2D(760, 400), new Point2D(100, 400),
+				draussen);
+		
+		//NPC
 		schnurrkatze = new NPC("Schnurrkatze", "Ein schnurrende Katze", draussen, 700, 100,
 				Usefull.linkToImage("/Bilder/Schnurrkatze_klein.png"), gc, null);
 		schnurrkatze.setText("Maunz!");
 		draussen.setzeNPC(schnurrkatze);
-
+		
+		//Landschaft
 		landscapeResponse.put(LandscapeResponse.USE_RESPONSE, "Die Schnurrkatze blickt hungrig auf den Teller!");
 
 		goldteller = new Collector("Goldteller", "Ein goldener Teller",
-				Usefull.linkToImage("/Bilder/Goldteller_klein.png"), 400, 400, gc, landscapeResponse, "String", 0, 1,
+				Usefull.linkToImage("/Bilder/Goldteller_klein.png"), 600, 160, gc, landscapeResponse, "String", 0, 1,
 				null);
 		draussen.landschaftBauen(goldteller);
-		// LinkedList<Item> items = new LinkedList<Item>();
+		
+		//Gegenstände
+		
+		//Gegner
+		
 
 		/*
 		 * Gegenstand kanninchen, lachs; Landscape panther, goldteller; ArrayList<Raum>
