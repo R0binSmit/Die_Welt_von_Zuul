@@ -41,7 +41,7 @@ public class Game {
 	 *            Eine Liste aller Tasten die momentan gedrückt sind
 	 */
 	public void update(HashMap<KeyCode, Boolean> keys) {
-		//Jeden key durchgehen und versuchen für ihn eine Aktion auszuführen
+		// Jeden key durchgehen und versuchen für ihn eine Aktion auszuführen
 		for (KeyCode key : keys.keySet()) {
 			try {
 				actions.get(key).run();
@@ -49,18 +49,18 @@ public class Game {
 			}
 		}
 
-		//Alles auf dem Screen entfernen
+		// Alles auf dem Screen entfernen
 		gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 
-		//Raum in dem der Spieler sich befindet anzeigen und seine Elemente Updaten
+		// Raum in dem der Spieler sich befindet anzeigen und seine Elemente Updaten
 		player.getRoom().show();
 		player.getRoom().update(player);
 
-		//Leichte Anpassung der Spielerposition um besser damit arbeiten zu können
+		// Leichte Anpassung der Spielerposition um besser damit arbeiten zu können
 		Point2D pos = player.getPosition();
 		pos = new Point2D(pos.getX() - player.getWidth() / 2, pos.getY() - player.getHeight() / 2);
 
-		//Spieler und Textbox anzeigen
+		// Spieler und Textbox anzeigen
 		player.show();
 		textbox.show();
 	}

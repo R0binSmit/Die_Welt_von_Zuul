@@ -58,6 +58,7 @@ public class Player extends Character {
 
 	public void move(KeyCode key) {
 		final int speed = 5;
+		Point2D position = new Point2D(this.position.getX(), this.position.getY());
 		switch (key) {
 		case W:
 			position = position.add(new Point2D(0, -speed));
@@ -72,6 +73,13 @@ public class Player extends Character {
 			position = position.add(new Point2D(speed, 0));
 			break;
 		default:
+		}
+		
+		if (position.getX() - image.getWidth() * 0.5 > 0 &&
+				position.getX() + image.getWidth() * 0.5 < graphicsContext.getCanvas().getWidth() && 
+				position.getY() - image.getHeight() * 0.5 > 0 && 
+				position.getY() + image.getHeight() * 0.5 < graphicsContext.getCanvas().getHeight()) {
+			this.position = position;
 		}
 	}
 

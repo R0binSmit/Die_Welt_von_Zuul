@@ -62,7 +62,14 @@ public class Enemy extends Character {
 			velocity = velocity.normalize();
 			velocity = velocity.multiply(maxSpeed);
 		}
-		position = position.add(velocity);
+		Point2D position = this.position.add(velocity);
+		if (position.getX() - image.getWidth() * 0.5 > 0 &&
+				position.getX() + image.getWidth() * 0.5 < graphicsContext.getCanvas().getWidth() && 
+				position.getY() - image.getHeight() * 0.5 > 0 && 
+				position.getY() + image.getHeight() * 0.5 < graphicsContext.getCanvas().getHeight()) {
+			this.position = position;
+		}
+		
 		acceleration = acceleration.multiply(0);
 		return true;
 	}
