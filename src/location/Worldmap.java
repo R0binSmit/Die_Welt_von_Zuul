@@ -11,6 +11,7 @@ import item.BasicItem;
 import item.Defense;
 import item.EnumDefense;
 import item.Item;
+import item.Weapon;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import main.Usefull;
@@ -38,7 +39,7 @@ public class Worldmap {
 	 * Erzeuge alle R‰ume und verbinde ihre Ausg‰nge miteinander.
 	 */
 	public void createRooms() {
-		Room outside, cafeteria;// , hoersaal, cafeteria, labor, buero, keller, abstellkammer;
+		Room outside, cafeteria, lecturehall;// , hoersaal, cafeteria, labor, buero, keller, abstellkammer;
 		NPC purrCat;
 		Enemy karpfen;
 		Item lachs, schuppenpanzer;
@@ -57,14 +58,23 @@ public class Worldmap {
 		cafeteria = new Room(System.getProperty("line.separator") + "Cafeteria" + System.getProperty("line.separator")
 				+ "Einst f¸r den Festschmaus der Menschen bereitet, herrscht nun der Kˆnig der Karpfen ¸ber diesen Ort!",
 				this, Usefull.linkToImage("/Bilder/Cafeteria.png"), gc);
+		
+		lecturehall = new Room(System.getProperty("line.separator") + "Vorlesungssaal" + System.getProperty("line.separator")
+		+ "Einst ein Ort der Lehrsamkeit, herrscht nun ein gigantisches Meerschweinchen an diesem Ort, thronend auf einem Goldberg, der jeden Drachen vor Neid vom Himmel st¸rzen lassen w¸rde.",
+		this, Usefull.linkToImage("/Bilder/Vorlesungssaal.png"), gc);
 		rooms.add(outside);
 		rooms.add(cafeteria);
+		rooms.add(lecturehall);
 		startPoint = outside;
 
 		// Ausg‰nge
 		outside.setExit(Usefull.linkToImage("/Bilder/tuer1.png"), gc, new Point2D(-20, 400), new Point2D(700, 400),
 				cafeteria);
+		outside.setExit(Usefull.linkToImage("/Bilder/tuer1.png"), gc, new Point2D(730, 400), new Point2D(100, 400),
+				lecturehall);
 		cafeteria.setExit(Usefull.linkToImage("/Bilder/tuer1.png"), gc, new Point2D(730, 400), new Point2D(100, 400),
+				outside);
+		lecturehall.setExit(Usefull.linkToImage("/Bilder/tuer1.png"), gc, new Point2D(-20, 400), new Point2D(700, 400),
 				outside);
 
 		// NPC
@@ -83,12 +93,13 @@ public class Worldmap {
 				+ "Die Schnurrkatze blickt hungrig auf den Teller! Dann blickt sie dich an. Fordernd.");
 		landscapeResponse.put(LandscapeResponse.COLLECTFINISH_RESPONSE, System.getProperty("line.separator")
 				+ "Die Schnurrkatze verspeist den Lachs! Sie maunzt." + System.getProperty("line.separator")
-				+ "''Traue niemals einer Katze', schnurrt sie." + System.getProperty("line.separator")
-				+ "'Besonders nicht dem Panther im Keller. Wie sehr er sich doch nach der Jagd sehnt. Besonders nach weichen, flauschigen Wesen! Jemand hat einst eine Geschichte ¸ber ihn geschrieben."
-				+ System.getProperty("line.separator") + "Nimm dies, nun hinfort!'");
+				+ "''Traue niemals einer Katze, Mensch', schnurrt sie." + System.getProperty("line.separator")
+				+ "'Besonders nicht dem Panther im Keller. Wie sehr er sich doch nach der Jagd sehnt. Besonders nach weichen, flauschigen Wesen! Jemand hat sogar einst eine Geschichte ¸ber ihn geschrieben."
+				+ System.getProperty("line.separator") + "Nimm dies, lesen w¸rde dir gut tun, nun hinfort!'");
 		execute.add(() -> outside.removeLandscape("Goldteller"));
 		execute.add(() -> outside.addItem(new BasicItem("Buch", "Ein Quell immerw‰hrender Weisheit. Theoretisch.", 100,
 				Usefull.linkToImage("/Bilder/assets/item/books/books1.png"), 600, 140, gc)));
+		execute.add(() -> purrCat.setText(System.getProperty("line.separator") + "'Der Panther im Keller sehnt sich nach der Jagd nach weiﬂen, weichen, flauschigen Wesen. Nun hinfort!', maunzt die Schnurrkatze."));
 		goldPlate = new Collector("Goldteller", "Ein goldener Teller",
 				Usefull.linkToImage("/Bilder/Goldteller_klein.png"), 600, 160, gc, landscapeResponse, "Lachs", 0, 1,
 				execute);
@@ -100,6 +111,14 @@ public class Worldmap {
 		schuppenpanzer = new Defense("Karpfenschuppenpanzer", "Ein Panzer aus Karpfenschuppen", 200,
 				EnumDefense.BREASTPLATE, Usefull.linkToImage("/Bilder/assets/item/armor/normal/breastplate.png"), 0, 0,
 				gc, 10);
+		lecturehall.addItem(new BasicItem("Buch", "Ein Quell immerw‰hrender Weisheit. Theoretisch.", 100,
+				Usefull.linkToImage("/Bilder/assets/item/books/book2.png"), 550, 250, gc));
+		lecturehall.addItem(new Defense("Eisenhaut", "Ein Panzer aus Karpfenschuppen", 200,
+				EnumDefense.BREASTPLATE, Usefull.linkToImage("/Bilder/assets/item/armor/iron/breastplate.png"), 200, 600,
+				gc, 10));
+		lecturehall.addItem(new Weapon("Stock", "Ein Panzer aus Karpfenschuppen", 200, Usefull.linkToImage("/Bilder/assets/item/weapon/stick_stick.png"), 300, 600,
+				gc, 100));
+		
 		// Gegner
 		items.add(lachs);
 		items.add(schuppenpanzer);
