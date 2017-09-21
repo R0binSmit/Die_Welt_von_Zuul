@@ -1,6 +1,7 @@
 package equipment;
  
 import item.Defense;
+import item.Item;
 import item.Weapon;
 
 /**
@@ -27,22 +28,36 @@ public class Equipment implements IEquipment {
 	 * @param defense
 	 *            Rüstungsgegenstand
 	 */
-	public void equipItem(Defense defense) {
+	public Item equipItem(Defense defense) {
+		Item currentUsedDefense = null;
 		switch (defense.getDefenseType()) {
 		case HELMET:
+			if(helmet != null) {
+				currentUsedDefense = helmet;
+			}
 			helmet = defense;
 			break;
 		case BREASTPLATE:
+			if(breastplate != null) {
+				currentUsedDefense = helmet;
+			}
 			breastplate = defense;
 			break;
 		case TROUSERS:
+			if(trousers != null) {
+				currentUsedDefense = helmet;
+			}
 			trousers = defense;
 			break;
 		case SHOES:
+			if(shoes != null) {
+				currentUsedDefense = helmet;
+			}
 			shoes = defense;
 			break;
 		default:
 		}
+		return currentUsedDefense;
 	}
 
 	/**
@@ -52,13 +67,18 @@ public class Equipment implements IEquipment {
 	 * @param weapon
 	 *            Ein Weapon Objekt.
 	 */
-	public void equipItem(Weapon weapon) {
+	public Item equipItem(Weapon weapon) {
+		Item currentUsedDefense = null;
+		
 		if (leftHand == null)
 			leftHand = weapon;
 		else if (rightHand == null)
 			rightHand = weapon;
-		else
+		else {
+			currentUsedDefense = leftHand;
 			leftHand = weapon;
+		}
+		return currentUsedDefense;
 	}
 
 	/**

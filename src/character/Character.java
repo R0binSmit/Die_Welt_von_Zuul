@@ -97,8 +97,11 @@ public abstract class Character implements IShowable {
 	 *            Das Rüstungsteil das Ausgerüstet werden soll
 	 */
 	public void equipItem(Defense defense) {
-		equipment.equipItem(defense);
+		Item lastDefense = equipment.equipItem(defense);
 		inventory.removeFirstItemByName(defense.getName());
+		if(lastDefense != null) {
+			inventory.addItem(lastDefense);
+		}
 	}
 
 	/**
@@ -108,7 +111,10 @@ public abstract class Character implements IShowable {
 	 *            Die Waffe die ausgerüstet werden soll
 	 */
 	public void equipItem(Weapon weapon) {
-		equipment.equipItem(weapon);
+		Item lastWeapon = equipment.equipItem(weapon);
+		if(lastWeapon != null) {
+			inventory.addItem(lastWeapon);
+		}
 	}
 
 	public double getDefense() {
