@@ -2,18 +2,18 @@ package Verhalten;
 
 import java.util.Random;
 
-public class SpielerAngriffVerhalten implements AngriffsVerhalten {
-	private static SpielerAngriffVerhalten instance = new SpielerAngriffVerhalten();
+public class PlayerAttackingBehavior implements AttackingBehavior {
+	private static PlayerAttackingBehavior instance = new PlayerAttackingBehavior();
 
-	public static SpielerAngriffVerhalten getInstance() {
+	public static PlayerAttackingBehavior getInstance() {
 		return instance;
 	}
 
-	private SpielerAngriffVerhalten() {
+	private PlayerAttackingBehavior() {
 	}
 
 	@Override
-	public boolean leichtVerletzen() {
+	public boolean hurtSlightly() {
 		Random randomObj = new Random();
 		int randomNumber = randomObj.nextInt(101);
 
@@ -24,7 +24,7 @@ public class SpielerAngriffVerhalten implements AngriffsVerhalten {
 	}
 
 	@Override
-	public boolean schwerVerletzen() {
+	public boolean hurtBadly() {
 		Random randomObj = new Random();
 		int randomNumber = randomObj.nextInt(101);
 

@@ -9,31 +9,31 @@ import javafx.scene.image.Image;
 import main.TextBox;
 
 public abstract class Landscape {
-	protected String beschreibung;
+	protected String desciption;
 	protected GraphicsContext gc;
 	protected Image image;
 	protected HashMap<LandscapeResponse, String> landscapeResponse;
 	protected String name;
-	protected Point2D pos;
-	protected Room raum;
-	protected TextBox tb = TextBox.newTextBox();
+	protected Point2D position;
+	protected Room room;
+	protected TextBox textbox = TextBox.newTextBox();
 
-	public Landscape(String name, String beschreibung, Image image, int x, int y, GraphicsContext gc,
+	public Landscape(String name, String description, Image image, int x, int y, GraphicsContext gc,
 			HashMap<LandscapeResponse, String> landscapeResponse) {
 		this.name = name;
-		this.beschreibung = beschreibung;
+		this.desciption = description;
 		this.landscapeResponse = landscapeResponse == null ? new HashMap<LandscapeResponse, String>()
 				: landscapeResponse;
 		this.image = image;
-		pos = new Point2D(x, y);
+		position = new Point2D(x, y);
 		this.gc = gc;
 	}
 
-	public String getBeschreibung() {
-		return beschreibung;
+	public String getDescription() {
+		return desciption;
 	}
 
-	public double getH() {
+	public double getHeight() {
 		return image.getHeight();
 	}
 
@@ -41,45 +41,45 @@ public abstract class Landscape {
 		return name;
 	}
 
-	public Room getRaum() {
-		return raum;
+	public Room getRoom() {
+		return room;
 	}
 
-	public String getResponse(LandscapeResponse lr) {
-		return landscapeResponse.get(lr);
+	public String getResponse(LandscapeResponse landscapeResponse) {
+		return this.landscapeResponse.get(landscapeResponse);
 	}
 
-	public double getW() {
+	public double getWidth() {
 		return image.getWidth();
 	}
 
 	public double getX() {
-		return pos.getX();
+		return position.getX();
 	}
 
 	public double getY() {
-		return pos.getY();
+		return position.getY();
 	}
 
 	public abstract void onEnterRoom(Player spieler);
 
 	public abstract void onUse(Player spieler);
 
-	public void setBeschreibung(String beschreibung) {
-		this.beschreibung = beschreibung;
+	public void setDescription(String beschreibung) {
+		this.desciption = beschreibung;
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public void setRaum(Room raum) {
-		this.raum = raum;
+	public void setRoom(Room raum) {
+		this.room = raum;
 	}
 
 	public void show() {
-		double x = pos.getX() - image.getWidth() * 0.5;
-		double y = pos.getY() - image.getHeight() * 0.5;
+		double x = position.getX() - image.getWidth() * 0.5;
+		double y = position.getY() - image.getHeight() * 0.5;
 		gc.drawImage(image, x, y);
 	}
 }

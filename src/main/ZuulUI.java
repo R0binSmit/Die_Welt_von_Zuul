@@ -100,10 +100,11 @@ public class ZuulUI extends Application {
 		stage.setScene(scene);
 		stage.show();
 
-		//wichtige Klassen initialisieren
+		//Gameklasse initialisieren
 		game = new Game(gc);
-		TextBox textbox = TextBox.newTextBox();
-		textbox.setGc(gc);
+		
+		//Gc für Textbox festlegen
+		TextBox.newTextBox().setGc(gc);
 		
 		//Timeline starten
 		tl.play();

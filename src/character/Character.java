@@ -16,7 +16,7 @@ public abstract class Character {
 	protected String description;
 	protected Equipment equipment = new Equipment();
 	protected GraphicsContext graphicsContext;
-	protected HealthPoints healPoints;
+	protected HealthPoints healthPoints;
 	protected Image image;
 	protected Inventory inventory = new Inventory();
 	protected int money;
@@ -33,12 +33,12 @@ public abstract class Character {
 		this.image = image;
 		this.graphicsContext = graphicsContext;
 		inventory.addItems(items);
-		healPoints = new HealthPoints(this, graphicsContext);
+		healthPoints = new HealthPoints(this, graphicsContext);
 	}
 
 	public Item dropItem(String itemName) {
 		Item item = null;
-		if (healPoints.getIsUsable()) {
+		if (healthPoints.getIsUsable()) {
 			item = inventory.getFirstItemByName(itemName);
 			if (item != null) {
 				inventory.removeFirstItemByName(name);
@@ -49,7 +49,7 @@ public abstract class Character {
 
 	public void dropItems() {
 		Random r = new Random();
-		for (Item item : inventory.getLinkedListFromItems()) {
+		for (Item item : inventory.getItems()) {
 			item.setPosition(
 					new Point2D(position.getX() + (r.nextInt(101) - 50), position.getY() + (r.nextInt(101) - 50)));
 			room.addItem(item);
@@ -72,11 +72,11 @@ public abstract class Character {
 		return description;
 	}
 
-	public LinkedList<Item> getGegenstaende() {
-		return inventory.getLinkedListFromItems();
+	public LinkedList<Item> getItems() {
+		return inventory.getItems();
 	}
 
-	public Item getGegenstand(String itemName) {
+	public Item getItem(String itemName) {
 		return inventory.getFirstItemByName(itemName);
 	}
 
@@ -85,7 +85,7 @@ public abstract class Character {
 	}
 
 	public int getHP() {
-		return healPoints.getCurrentHealthPoints();
+		return healthPoints.getCurrentHealthPoints();
 	}
 
 	public int getMoney() {
@@ -104,18 +104,6 @@ public abstract class Character {
 		return room;
 	}
 
-	public String getStatus() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Geld: ");
-		sb.append(money);
-		sb.append(System.getProperty("line.separator"));
-		sb.append("Zustand: ");
-		// TODO fix no more zustand.
-		// sb.append(zustand.getName());
-		sb.append(System.getProperty("line.separator"));
-		return sb.toString();
-	}
-
 	public double getWidth() {
 		return image.getWidth();
 	}
@@ -127,7 +115,7 @@ public abstract class Character {
 	}
 
 	public void setHP(int hp) {
-		healPoints.setCurrentHealPoints(hp);
+		healthPoints.setCurrentHealPoints(hp);
 	}
 
 	public void setMoney(int money) {
@@ -147,6 +135,6 @@ public abstract class Character {
 		double y = position.getY() - image.getHeight() * 0.5;
 		graphicsContext.drawImage(image, x, y);
 
-		healPoints.show();
+		healthPoints.show();
 	}
 }

@@ -2,18 +2,18 @@ package Verhalten;
 
 import java.util.Random;
 
-public class NPCAngriffVerhalten implements AngriffsVerhalten {
-	private static NPCAngriffVerhalten instance = new NPCAngriffVerhalten();
+public class NPCAttackingBehavior implements AttackingBehavior {
+	private static NPCAttackingBehavior instance = new NPCAttackingBehavior();
 
-	public static NPCAngriffVerhalten getInstance() {
+	public static NPCAttackingBehavior getInstance() {
 		return instance;
 	}
 
-	private NPCAngriffVerhalten() {
+	private NPCAttackingBehavior() {
 	}
 
 	@Override
-	public boolean leichtVerletzen() {
+	public boolean hurtSlightly() {
 		Random randomObj = new Random();
 		int randomNumber = randomObj.nextInt(101);
 
@@ -24,7 +24,7 @@ public class NPCAngriffVerhalten implements AngriffsVerhalten {
 	}
 
 	@Override
-	public boolean schwerVerletzen() {
+	public boolean hurtBadly() {
 		Random randomObj = new Random();
 		int randomNumber = randomObj.nextInt(101);
 

@@ -7,7 +7,7 @@ import main.IShowable;
 
 public class Inventory implements IShowable {
 	private int currentUsedSpace;
-	private LinkedList<Item> listOfItems = new LinkedList<Item>();
+	private LinkedList<Item> items = new LinkedList<Item>();
 	private int maxSpace;
 
 	public Inventory() {
@@ -29,7 +29,7 @@ public class Inventory implements IShowable {
 
 	public void addItem(Item item) {
 		if (currentUsedSpace + 1 != maxSpace) {
-			listOfItems.add(item);
+			items.add(item);
 		}
 	}
 
@@ -42,7 +42,7 @@ public class Inventory implements IShowable {
 	}
 
 	public Item getFirstItemByName(String itemName) {
-		for (Item item : listOfItems) {
+		for (Item item : items) {
 			if (item.getName().equals(itemName)) {
 				return item;
 			}
@@ -50,34 +50,36 @@ public class Inventory implements IShowable {
 		return null;
 	}
 
-	public LinkedList<Item> getLinkedListFromItems() {
-		return listOfItems;
+	public LinkedList<Item> getItems() {
+		return items;
 	}
 
 	public void removeFirstItemByName(String itemName) {
-		for (Item item : listOfItems) {
+		for (Item item : items) {
 			if (item.getName().equals(itemName)) {
-				listOfItems.remove(item);
+				items.remove(item);
 			}
 		}
 	}
 
 	public void removeItemByIndex(int itemIndex) {
-		if (listOfItems.get(itemIndex) != null) {
-			listOfItems.remove(itemIndex);
+		if (items.get(itemIndex) != null) {
+			items.remove(itemIndex);
 		}
 	}
 
 	@Override
 	public void show() {
-		// TODO SHOW
-
+		int dist = 10;
+		for (Item item : items) {
+			item.showAt(dist, 750);
+		}
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
-		for (Item item : listOfItems) {
+		for (Item item : items) {
 			stringBuilder.append(item.toString());
 			stringBuilder.append("\r\n");
 		}

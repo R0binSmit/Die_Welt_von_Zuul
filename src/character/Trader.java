@@ -13,25 +13,8 @@ public class Trader extends NPC {
 		super(name, description, room, x, y, image, graphicsContext, items);
 	}
 
-	/*
-	 * public void interagieren(Player spieler) { System.out.println(text); Parser
-	 * pr = new Parser(); Befehl befehl; do { System.out.println(getInventory());
-	 * befehl = pr.liefereBefehl(); if
-	 * (befehl.gibBefehlswort().equalsIgnoreCase("take")) { if (trade(this, spieler,
-	 * befehl.gibZweitesWort())) { System.out.println("Handel durchgeführt"); } else
-	 * {
-	 * System.out.println("Der Gegenstand existiert nicht oder ist zu teuer für sie"
-	 * ); } } else if (befehl.gibBefehlswort().equalsIgnoreCase("drop")) { if
-	 * (trade(spieler, this, befehl.gibZweitesWort())) {
-	 * System.out.println("Handel durchgeführt"); } else {
-	 * System.out.println("Der Gegenstand existiert nicht oder ist zu teuer für sie"
-	 * ); } } else if (befehl.gibBefehlswort().equalsIgnoreCase("quit")) {
-	 * System.out.println("Handel beendet"); break; } else {
-	 * System.out.println("Diesen Befehl gibt es hier nicht!"); } } while (true); }
-	 */
-
 	public boolean trade(Character verkauf, Character kauf, String gegenstand) {
-		Item ware = verkauf.getGegenstand(gegenstand);
+		Item ware = verkauf.getItem(gegenstand);
 		if (ware != null && kauf.getMoney() >= ware.getPrice()) {
 			kauf.pickUpItem(verkauf.dropItem(ware.getName()));
 			verkauf.setMoney(verkauf.getMoney() + ware.getPrice());

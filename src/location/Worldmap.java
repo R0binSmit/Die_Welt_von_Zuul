@@ -13,8 +13,8 @@ import main.Usefull;
 
 public class Worldmap {
 	private GraphicsContext gc;
-	private ArrayList<Room> raeume = new ArrayList<Room>();
-	private Room startpoint = null;
+	private ArrayList<Room> rooms = new ArrayList<Room>();
+	private Room startPoint = null;
 
 	public Worldmap(GraphicsContext gc) {
 		this.gc = gc;
@@ -22,55 +22,54 @@ public class Worldmap {
 
 	public Room getRandomRoom() {
 		Random randomNumber = new Random();
-		int roomNumber = randomNumber.nextInt(raeume.size());
-
-		return raeume.get(roomNumber);
+		int roomNumber = randomNumber.nextInt(rooms.size());
+		return rooms.get(roomNumber);
 	}
 
 	public Room getStartpoint() {
-		return startpoint;
+		return startPoint;
 	}
 
 	/**
 	 * Erzeuge alle Räume und verbinde ihre Ausgänge miteinander.
 	 */
-	public void raeumeAnlegen() {
-		Room draussen, cafeteria;// , hoersaal, cafeteria, labor, buero, keller, abstellkammer;
-		NPC schnurrkatze;
-		Landscape goldteller;
+	public void createRooms() {
+		Room outside, cafeteria;// , hoersaal, cafeteria, labor, buero, keller, abstellkammer;
+		NPC purrCat;
+		Landscape goldPlate;
 		HashMap<LandscapeResponse, String> landscapeResponse = new HashMap<LandscapeResponse, String>();
 		LinkedList<Item> items = new LinkedList<Item>();
 
-		draussen = new Room("Haupteingang der Universität" + System.getProperty("line.separator")
+		outside = new Room("Haupteingang der Universität" + System.getProperty("line.separator")
 				+ "Das Gelände ist verlassen, in dieser dunklen Nacht. Die Gerüchte besagen in den Tiefen dieses Ortes würde die"
 				+ System.getProperty("line.separator")
 				+ "Menschheit antworten finden. Vielleicht sogar Erlösung. Bist du deswegen hier?", this,
 				Usefull.linkToImage("/Bilder/Draussen.png"), gc);
 
 		cafeteria = new Room("test", this, Usefull.linkToImage("/Bilder/Cafeteria.png"), gc);
-		raeume.add(draussen);
-		raeume.add(cafeteria);
-		startpoint = draussen;
+		rooms.add(outside);
+		rooms.add(cafeteria);
+		startPoint = outside;
 
 		// Ausgänge
-		draussen.setzeAusgang(Usefull.linkToImage("/Bilder/Ente.png"), gc, new Point2D(0, 400), new Point2D(700, 400),
+		outside.setExit(Usefull.linkToImage("/Bilder/Ente.png"), gc, new Point2D(0, 400), new Point2D(700, 400),
 				cafeteria);
-		cafeteria.setzeAusgang(Usefull.linkToImage("/Bilder/Ente.png"), gc, new Point2D(760, 400),
-				new Point2D(100, 400), draussen);
+		cafeteria.setExit(Usefull.linkToImage("/Bilder/Ente.png"), gc, new Point2D(760, 400),
+				new Point2D(100, 400), outside);
 
 		// NPC
-		schnurrkatze = new NPC("Schnurrkatze", "Ein schnurrende Katze", draussen, 700, 100,
+		purrCat = new NPC("Schnurrkatze", "Ein schnurrende Katze", outside, 700, 100,
 				Usefull.linkToImage("/Bilder/Schnurrkatze_klein.png"), gc, null);
-		schnurrkatze.setText("Maunz!");
-		draussen.setzeNPC(schnurrkatze);
+		purrCat.setText("Maunz!");
+		outside.setNPC(purrCat);
 
 		// Landschaft
 		landscapeResponse.put(LandscapeResponse.USE_RESPONSE, "Die Schnurrkatze blickt hungrig auf den Teller!");
 
-		goldteller = new Collector("Goldteller", "Ein goldener Teller",
+		goldPlate = new Collector("Goldteller", "Ein goldener Teller",
 				Usefull.linkToImage("/Bilder/Goldteller_klein.png"), 600, 160, gc, landscapeResponse, "String", 0, 1,
 				null);
-		draussen.landschaftBauen(goldteller);
+		outside.BuildLandscape(goldPlate);
 
 		// Gegenstände
 

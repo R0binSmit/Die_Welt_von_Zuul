@@ -11,10 +11,6 @@ public class Equipment implements IEquipment {
 	private Defense shoes;
 	private Defense trousers;
 
-	public Equipment() {
-
-	}
-
 	public void equipItem(Defense defense) {
 		switch (defense.getDefenseType()) {
 		case HELMET:

@@ -13,9 +13,9 @@ public class Teleporter extends Landscape {
 	private ArrayList<Room> destination;
 	private String key;
 
-	public Teleporter(String name, String beschreibung, Image image, int x, int y, GraphicsContext gc,
+	public Teleporter(String name, String description, Image image, int x, int y, GraphicsContext gc,
 			HashMap<LandscapeResponse, String> landscapeResponse, String key, ArrayList<Room> destination) {
-		super(name, beschreibung, image, x, y, gc, landscapeResponse);
+		super(name, description, image, x, y, gc, landscapeResponse);
 		this.key = key;
 		this.destination = destination;
 	}
@@ -24,12 +24,10 @@ public class Teleporter extends Landscape {
 	public void onEnterRoom(Player spieler) {
 		Room currentDestination;
 
-		System.out.println();
-
-		if (spieler.getGegenstand(key) != null) {
-			tb.addText(landscapeResponse.get(LandscapeResponse.REMOVE_RESPONSE));
+		if (spieler.getItem(key) != null) {
+			textbox.addText(landscapeResponse.get(LandscapeResponse.REMOVE_RESPONSE));
 			spieler.dropItem(key);
-			getRaum().landschaftEntfernen(getName());
+			getRoom().removeLandscape(getName());
 			return;
 		}
 
@@ -41,20 +39,19 @@ public class Teleporter extends Landscape {
 
 		else {
 			do {
-				currentDestination = getRaum().getLand().getRandomRoom();
-			} while (currentDestination == getRaum());
+				currentDestination = getRoom().getLand().getRandomRoom();
+			} while (currentDestination == getRoom());
 		}
 
 		spieler.setRoom(currentDestination);
 		spieler.setPosition(new Point2D(400, 400));
-		tb.addText(getResponse(LandscapeResponse.ENTER_RESPONSE));
-		tb.addText(spieler.getRoom().getLongDesciption());
+		textbox.addText(getResponse(LandscapeResponse.ENTER_RESPONSE));
+		textbox.addText(spieler.getRoom().getDescription());
 		spieler.getRoom().onEnterRoomEvent(spieler);
 	}
 
 	@Override
 	public void onUse(Player spieler) {
-		tb.addText(getResponse(LandscapeResponse.USE_RESPONSE));
+		textbox.addText(getResponse(LandscapeResponse.USE_RESPONSE));
 	}
-
 }

@@ -28,17 +28,17 @@ public class Collector extends Landscape {
 	}
 
 	@Override
-	public void onUse(Player spieler) {
-		if (spieler.getGegenstand(key) == null) {
-			tb.addText(getResponse(LandscapeResponse.USE_RESPONSE));
+	public void onUse(Player player) {
+		if (player.getItem(key) == null) {
+			textbox.addText(getResponse(LandscapeResponse.USE_RESPONSE));
 		}
 
 		else if (amount + 1 < maxAmount) {
-			spieler.dropItem(key);
+			player.dropItem(key);
 			amount += 1;
-			tb.addText(getResponse(LandscapeResponse.COLLECT_RESPONSE));
+			textbox.addText(getResponse(LandscapeResponse.COLLECT_RESPONSE));
 		} else if (amount + 1 == maxAmount) {
-			spieler.dropItem(key);
+			player.dropItem(key);
 			amount += 1;
 			System.out.println(getResponse(LandscapeResponse.COLLECTFINISH_RESPONSE));
 

@@ -25,14 +25,14 @@ import main.Usefull;
  * @version 2008.03.30
  */
 public class Room {
-	private ArrayList<Door> ausgaenge = new ArrayList<Door>();
-	private String beschreibung;
-	private Image bg;
+	private ArrayList<Door> exits = new ArrayList<Door>();
+	private String description;
+	private Image backGround;
 	protected GraphicsContext gc;
-	private LinkedList<Item> gegenstaende = new LinkedList<Item>();
-	private LinkedList<Enemy> gegner = new LinkedList<Enemy>();
+	private LinkedList<Item> items = new LinkedList<Item>();
+	private LinkedList<Enemy> enemys = new LinkedList<Enemy>();
 	private Worldmap land;
-	private ArrayList<Landscape> landschaft = new ArrayList<Landscape>();
+	private ArrayList<Landscape> landscape = new ArrayList<Landscape>();
 	private LinkedList<NPC> npc = new LinkedList<NPC>();
 	private TextBox textbox = TextBox.newTextBox();
 
@@ -40,77 +40,55 @@ public class Room {
 	 * Erzeuge einen Raum. Ein Raum hat anfangs keine
 	 * AusgÃ¤nge.
 	 * 
-	 * @param beschreibung
+	 * @param description
 	 *            enthält eine Beschreibung
 	 * @param land
 	 *            Die Klasse die die Story und Objekte verwaltet
 	 * @param gc
 	 *            Graphicscontext mit dem der Raumhintergrund dargestellt wird
 	 */
-	public Room(String beschreibung, Worldmap land, Image bg, GraphicsContext gc) {
-		this.beschreibung = beschreibung;
+	public Room(String description, Worldmap land, Image backGround, GraphicsContext gc) {
+		this.description = description;
 		this.land = land;
-		this.bg = bg;
+		this.backGround = backGround;
 		this.gc = gc;
 	}
 
 	/**
 	 * Gegenstand zum Raum hinzufügen
-	 * @param gegenstand
+	 * @param item
 	 * Der Gegenstand der hinzugefügt werden soll
 	 */
-	public void addItem(Item gegenstand) {
-		gegenstaende.add(gegenstand);
+	public void addItem(Item item) {
+		items.add(item);
 	}
 
 	/**
 	 * Gegner aus dem Raum entfernen
-	 * @param gegner
+	 * @param enemy
 	 * der zu erntfernende Gegner
 	 */
-	public void enterneGegner(Enemy gegner) {
-		this.gegner.remove(gegner);
+	public void removeEnemy(Enemy enemy) {
+		this.enemys.remove(enemy);
 	}
 
 	/**
 	 * NPC aus dem Raum entfernen
-	 * @param gegner
+	 * @param enemys
 	 * der zu erntfernende NPC
 	 */
-	public void enterneNPC(NPC npc) {
+	public void removeNPC(NPC npc) {
 		this.npc.remove(npc);
 	}
 
-	public String gegenstaendeToString() {
-		StringBuilder sb = new StringBuilder("");
-		for (Item gegenstand : gegenstaende) {
-			sb.append(gegenstand.getName());
-			sb.append(" ");
-		}
-		return sb.toString();
-	}
-
-	private String gegnerToString() {
-		StringBuilder sb = new StringBuilder("");
-		for (Enemy gn : gegner) {
-			sb.append(gn.getName());
-			sb.append(" ");
-		}
-		return sb.toString();
-	}
-
-	/*
-	 * public Room getExit(String richtung) { return ausgaenge.get(richtung); }
-	 */
-
 	public ArrayList<Door> getAusgaenge() {
-		return ausgaenge;
+		return exits;
 	}
 
 	public Item getClosestItem(Point2D pos, int maxDist) {
 		Item closest = null;
 		double minDist = Double.MAX_VALUE;
-		for (Item item : gegenstaende) {
+		for (Item item : items) {
 			if (Usefull.intersects(pos.getX(), pos.getY(), maxDist, maxDist, item.getX(), item.getY(), item.getWidth(),
 					item.getHeight())) {
 				double dist = pos.distance(new Point2D(item.getX(), item.getY()));
@@ -126,9 +104,9 @@ public class Room {
 	public Landscape getClosestLandscape(Point2D pos, int maxDist) {
 		Landscape closest = null;
 		double minDist = Double.MAX_VALUE;
-		for (Landscape landscape : landschaft) {
+		for (Landscape landscape : landscape) {
 			if (Usefull.intersects(pos.getX(), pos.getY(), maxDist, maxDist, landscape.getX(), landscape.getY(),
-					landscape.getW(), landscape.getH())) {
+					landscape.getWidth(), landscape.getHeight())) {
 				double dist = pos.distance(new Point2D(landscape.getX(), landscape.getY()));
 				if (dist < minDist) {
 					closest = landscape;
@@ -139,8 +117,8 @@ public class Room {
 		return closest;
 	}
 
-	public Item getGegenstand(String name) {
-		for (Item gs : gegenstaende) {
+	public Item getItem(String name) {
+		for (Item gs : items) {
 			if (gs.getName().equalsIgnoreCase(name)) {
 				return gs;
 			}
@@ -149,7 +127,7 @@ public class Room {
 	}
 
 	public LinkedList<Enemy> getGegnerList() {
-		return gegner;
+		return enemys;
 	}
 
 	public Worldmap getLand() {
@@ -157,30 +135,12 @@ public class Room {
 	}
 
 	public Landscape getLandschaft(String name) {
-		for (Landscape ls : landschaft) {
+		for (Landscape ls : landscape) {
 			if (ls.getName().equalsIgnoreCase(name)) {
 				return ls;
 			}
 		}
 		return null;
-	}
-
-	public String getLongDesciption() {
-		StringBuilder sb = new StringBuilder("");
-		sb.append(gibBeschreibung());
-		sb.append(System.getProperty("line.separator"));
-		sb.append("Hier ist: ");
-		sb.append(landschaftToString());
-		sb.append(System.getProperty("line.separator"));
-		sb.append("GegenstÃ¤nde: ");
-		sb.append(gegenstaendeToString());
-		sb.append(System.getProperty("line.separator"));
-		sb.append("Gegner: ");
-		sb.append(gegnerToString());
-		sb.append(System.getProperty("line.separator"));
-		sb.append("NPC's: ");
-		sb.append(npcsToString());
-		return sb.toString();
 	}
 
 	public NPC getNPC(String name) {
@@ -195,53 +155,35 @@ public class Room {
 	/**
 	 * @return Die Beschreibung dieses Raums.
 	 */
-	public String gibBeschreibung() {
-		return beschreibung;
+	public String getDescription() {
+		return description;
 	}
 
-	public void landschaftBauen(Landscape landscape) {
-		landschaft.add(landscape);
-		landscape.setRaum(this);
+	public void BuildLandscape(Landscape landscape) {
+		this.landscape.add(landscape);
+		landscape.setRoom(this);
 	}
 
-	public void landschaftEntfernen(String name) {
-		for (Landscape ls : landschaft) {
+	public void removeLandscape(String name) {
+		for (Landscape ls : landscape) {
 			if (ls.getName().equalsIgnoreCase(name)) {
-				landschaft.remove(ls);
+				landscape.remove(ls);
 				break;
 			}
 		}
 	}
 
-	public String landschaftToString() {
-		StringBuilder sb = new StringBuilder("");
-		for (Landscape landscape : landschaft) {
-			sb.append(landscape.getName());
-			sb.append(" ");
-		}
-		return sb.toString();
-	}
-
-	private String npcsToString() {
-		StringBuilder sb = new StringBuilder("");
-		for (NPC np : npc) {
-			sb.append(np.getName());
-			sb.append(" ");
-		}
-		return sb.toString();
-	}
-
 	public void onEnterRoomEvent(Player spieler) {
-		for (int i = landschaft.size() - 1; i >= 0; i--) {
-			Landscape ls = landschaft.get(i);
+		for (int i = landscape.size() - 1; i >= 0; i--) {
+			Landscape ls = landscape.get(i);
 			ls.onEnterRoom(spieler);
 		}
 	}
 
 	public Item removeItem(String name) {
-		for (Item gs : gegenstaende) {
+		for (Item gs : items) {
 			if (gs.getName().equalsIgnoreCase(name)) {
-				gegenstaende.remove(gs);
+				items.remove(gs);
 				return gs;
 			}
 		}
@@ -252,26 +194,26 @@ public class Room {
 	 * Definiere die AusgÃ¤nge dieses Raums. Jede Richtung fÃ¼hrt entweder in einen
 	 * anderen Raum oder ist 'null' (kein Ausgang).
 	 */
-	public void setzeAusgang(Image image, GraphicsContext gc, Point2D pos, Point2D nextPos, Room nextRoom) {
-		ausgaenge.add(new Door(image, gc, pos, nextPos, nextRoom));
+	public void setExit(Image image, GraphicsContext gc, Point2D position, Point2D nextPlayerPosition, Room nextRoom) {
+		exits.add(new Door(image, gc, position, nextPlayerPosition, nextRoom));
 	}
 
-	public void setzeGegner(Enemy gegner) {
-		this.gegner.add(gegner);
+	public void setEnemy(Enemy gegner) {
+		this.enemys.add(gegner);
 	}
 
-	public void setzeNPC(NPC npc) {
+	public void setNPC(NPC npc) {
 		this.npc.add(npc);
 	}
 
 	public void show() {
-		gc.drawImage(bg, 0, 0);
+		gc.drawImage(backGround, 0, 0);
 
-		for (Item gs : gegenstaende) {
+		for (Item gs : items) {
 			gs.show();
 		}
 
-		for (Landscape ls : landschaft) {
+		for (Landscape ls : landscape) {
 			ls.show();
 		}
 
@@ -279,33 +221,33 @@ public class Room {
 			np.show();
 		}
 
-		for (Enemy g : gegner) {
+		for (Enemy g : enemys) {
 			g.show();
 		}
 
-		for (Door door : ausgaenge) {
+		for (Door door : exits) {
 			door.show();
 		}
 	}
 
 	public void update(Player player) {
-		for (int i = gegner.size() - 1; i >= 0; i--) {
-			Enemy g = gegner.get(i);
+		for (int i = enemys.size() - 1; i >= 0; i--) {
+			Enemy g = enemys.get(i);
 			g.move(player);
 			if (!g.update()) {
 				g.dropItems();
-				gegner.remove(g);
+				enemys.remove(g);
 			}
 		}
 
 		Point2D pos = player.getPosition();
 		pos = new Point2D(pos.getX() - player.getWidth() / 2, pos.getY() - player.getHeight() / 2);
 
-		for (Door door : ausgaenge) {
+		for (Door door : exits) {
 			if (Usefull.intersects(door.getX(), door.getY(), door.getWidth(), door.getHeight(), pos.getX(), pos.getY(),
 					player.getWidth(), player.getHeight())) {
 				door.changeRoom(player);
-				textbox.addText(player.getRoom().getLongDesciption());
+				textbox.addText(player.getRoom().getDescription());
 				break;
 			}
 		}

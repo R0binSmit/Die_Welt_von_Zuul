@@ -78,13 +78,8 @@ public class Player extends Character {
 	@Override
 	public void show() {
 		super.show();
-		int dist = 10;
-		for (Item item : inventory.getLinkedListFromItems()) {
-			item.showAt(dist, 750);
-		}
-
+		inventory.show();
 		equipment.show();
-
 		cooldown--;
 	}
 }
