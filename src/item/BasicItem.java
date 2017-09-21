@@ -5,8 +5,8 @@ import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class BasicItem extends Item {
-	public BasicItem(String name, String description, int price, Image image, int x, int y,
+public class Crafting extends Item {
+	public Crafting(String name, String description, int price, Image image, int x, int y,
 			GraphicsContext graphicsContext, boolean essbar) {
 		super(name, description, price, image, new Point2D(x, y), graphicsContext);
 	}
