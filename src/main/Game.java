@@ -109,7 +109,7 @@ public class Game {
 		case E:
 			player.interagieren();
 			break;
-		case F20:
+		case F20: 
 			int dist = 10;
 			for (Item item : player.getItems()) {
 				dist += item.getWidth() + 10;
