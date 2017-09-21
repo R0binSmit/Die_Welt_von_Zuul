@@ -16,7 +16,7 @@ public abstract class Landscape {
 	protected String name;
 	protected Point2D pos;
 	protected Room raum;
-	protected TextBox tb = TextBox.newTextBox(gc);
+	protected TextBox tb = TextBox.newTextBox();
 
 	public Landscape(String name, String beschreibung, Image image, int x, int y, GraphicsContext gc,
 			HashMap<LandscapeResponse, String> landscapeResponse) {

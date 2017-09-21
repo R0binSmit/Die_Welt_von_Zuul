@@ -10,6 +10,7 @@ import item.Item;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import main.TextBox;
 import main.Usefull;
 
 /**
@@ -33,14 +34,18 @@ public class Room {
 	private Worldmap land;
 	private ArrayList<Landscape> landschaft = new ArrayList<Landscape>();
 	private LinkedList<NPC> npc = new LinkedList<NPC>();
+	private TextBox textbox = TextBox.newTextBox();
 
 	/**
-	 * Erzeuge einen Raum mit einer Beschreibung. Ein Raum hat anfangs keine
+	 * Erzeuge einen Raum. Ein Raum hat anfangs keine
 	 * AusgÃ¤nge.
 	 * 
 	 * @param beschreibung
-	 *            enthÃ¤lt eine Beschreibung in der Form "in einer KÃ¼che" oder "auf
-	 *            einem Sportplatz".
+	 *            enthält eine Beschreibung
+	 * @param land
+	 *            Die Klasse die die Story und Objekte verwaltet
+	 * @param gc
+	 *            Graphicscontext mit dem der Raumhintergrund dargestellt wird
 	 */
 	public Room(String beschreibung, Worldmap land, Image bg, GraphicsContext gc) {
 		this.beschreibung = beschreibung;
@@ -49,14 +54,29 @@ public class Room {
 		this.gc = gc;
 	}
 
+	/**
+	 * Gegenstand zum Raum hinzufügen
+	 * @param gegenstand
+	 * Der Gegenstand der hinzugefügt werden soll
+	 */
 	public void addItem(Item gegenstand) {
 		gegenstaende.add(gegenstand);
 	}
 
+	/**
+	 * Gegner aus dem Raum entfernen
+	 * @param gegner
+	 * der zu erntfernende Gegner
+	 */
 	public void enterneGegner(Enemy gegner) {
 		this.gegner.remove(gegner);
 	}
 
+	/**
+	 * NPC aus dem Raum entfernen
+	 * @param gegner
+	 * der zu erntfernende NPC
+	 */
 	public void enterneNPC(NPC npc) {
 		this.npc.remove(npc);
 	}
@@ -262,6 +282,10 @@ public class Room {
 		for (Enemy g : gegner) {
 			g.show();
 		}
+
+		for (Door door : ausgaenge) {
+			door.show();
+		}
 	}
 
 	public void update(Player player) {
@@ -271,6 +295,18 @@ public class Room {
 			if (!g.update()) {
 				g.dropItems();
 				gegner.remove(g);
+			}
+		}
+
+		Point2D pos = player.getPosition();
+		pos = new Point2D(pos.getX() - player.getWidth() / 2, pos.getY() - player.getHeight() / 2);
+
+		for (Door door : ausgaenge) {
+			if (Usefull.intersects(door.getX(), door.getY(), door.getWidth(), door.getHeight(), pos.getX(), pos.getY(),
+					player.getWidth(), player.getHeight())) {
+				door.changeRoom(player);
+				textbox.addText(player.getRoom().getLongDesciption());
+				break;
 			}
 		}
 	}

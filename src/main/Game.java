@@ -2,31 +2,14 @@ package main;
 
 import java.util.HashMap;
 
-import character.NPC;
 import character.Player;
-import item.Item;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
-import location.Door;
-import location.Landscape;
 import location.Worldmap;
 
 /**
- * Dies ist die Hauptklasse der Anwendung "Die Welt von Zuul". "Die Welt von
- * Zuul" ist ein sehr einfaches, textbasiertes Adventure-Game. Ein Spieler kann
- * sich in einer Umgebung bewegen, mehr nicht. Das Spiel sollte auf jeden Fall
- * ausgebaut werden, damit es interessanter wird!
- * 
- * Zum Spielen muss eine Instanz dieser Klasse erzeugt werden und an ihr die
- * Methode "spielen" aufgerufen werden.
- * 
- * Diese Instanz erzeugt und initialisiert alle anderen Objekte der Anwendung:
- * Sie legt alle Räume und einen Parser an und startet das Spiel. Sie wertet
- * auch die Befehle aus, die der Parser liefert, und sorgt für ihre Ausführung.
- * 
- * @author Michael Kölling und David J. Barnes
- * @version 2008.03.30
+ * Dies ist die Hauptklasse der Welt von Zuul.
  */
 
 public class Game {
@@ -45,36 +28,41 @@ public class Game {
 		player = new Player("Dave", "Ich liebe dich", land.getStartpoint(), 400, 400,
 				Usefull.linkToImage("/Bilder/Dave.png"), gc, null);
 		this.gc = gc;
-		textbox = TextBox.newTextBox(gc);
+		textbox = TextBox.newTextBox();
 
 		setActions();
 		outputWelcomeText();
 	}
 
-	public void legeGegenstandAb(String name) {
-		Item item = player.dropItem(name);
-		if (item != null) {
-			player.getRoom().addItem(item);
-			System.out.println(item.getName() + " abgelegt");
-		} else {
-			System.out.println("Den Gegenstand " + name + " gibt es in deinem Inventar nicht");
+	/**
+	 * Die Hauptmethode zum Spielen. Sie wird jeden Frame aufgerufen.
+	 * 
+	 * @param keys
+	 *            Eine Liste aller Tasten die momentan gedrückt sind
+	 */
+	public void update(HashMap<KeyCode, Boolean> keys) {
+		//Jeden key durchgehen und versuchen für ihn eine Aktion auszuführen
+		for (KeyCode key : keys.keySet()) {
+			try {
+				actions.get(key).run();
+			} catch (Exception ex) {
+			}
 		}
-	}
 
-	public void nimmGegenstand(String name) {
-		Item item = player.getRoom().getGegenstand(name);
-		if (item != null) {
-			player.pickUpItem(item);
-			player.getRoom().removeItem(name);
-			System.out.println(item.getName() + " Aufgehoben");
-		}
-	}
+		//Alles auf dem Screen entfernen
+		gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 
-	public void nutzeLandschaft(String name) {
-		Landscape ls = player.getRoom().getLandschaft(name);
-		if (ls != null) {
-			ls.onUse(player);
-		}
+		//Raum in dem der Spieler sich befindet anzeigen und seine Elemente Updaten
+		player.getRoom().show();
+		player.getRoom().update(player);
+
+		//Leichte Anpassung der Spielerposition um besser damit arbeiten zu können
+		Point2D pos = player.getPosition();
+		pos = new Point2D(pos.getX() - player.getWidth() / 2, pos.getY() - player.getHeight() / 2);
+
+		//Spieler und Textbox anzeigen
+		player.show();
+		textbox.show();
 	}
 
 	/**
@@ -99,8 +87,7 @@ public class Game {
 	}
 
 	/**
-	 * Gib Hilfsinformationen aus. Hier geben wir eine etwas alberne und unklare
-	 * Beschreibung aus, sowie eine Liste der Befehlswörter.
+	 * Gib Hilfsinformationen aus.
 	 */
 	private void printHelp() {
 		textbox.addText("Sie haben sich verlaufen. Sie sind allein.");
@@ -110,9 +97,8 @@ public class Game {
 	/**
 	 * Verarbeite einen gegebenen Befehl (führe ihn aus).
 	 * 
-	 * @param befehl
-	 *            Der zu verarbeitende Befehl.
-	 * @return 'true', wenn der Befehl das Spiel beendet, 'false' sonst.
+	 * @param key
+	 *            Eine Taste die Gedrückt wurde
 	 */
 	public void processCommand(KeyCode key) {
 		switch (key) {
@@ -129,6 +115,10 @@ public class Game {
 		}
 	}
 
+	/**
+	 * Bestimmen welche Aktionen jeden Frame in dem eine Bestimmte Taste gedrückt
+	 * ist ausgeführt werden sollen
+	 */
 	private void setActions() {
 		actions.put(KeyCode.W, () -> {
 			player.move(KeyCode.W);
@@ -147,49 +137,4 @@ public class Game {
 		});
 	}
 
-	public void talk(String name) {
-		NPC npc = player.getRoom().getNPC(name);
-		if (npc != null) {
-			npc.interact(player);
-		} else {
-			System.out.println("Diesen NPC gibt es nicht!");
-		}
-	}
-
-	// Implementierung der Benutzerbefehle:
-
-	/**
-	 * Die Hauptmethode zum Spielen. Läuft bis zum Ende des Spiels in einer
-	 * Schleife.
-	 */
-	public void update(HashMap<KeyCode, Boolean> keys) {
-		for (KeyCode key : keys.keySet()) {
-			try {
-				actions.get(key).run();
-			} catch (Exception ex) {
-			}
-		}
-
-		gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
-
-		player.getRoom().show();
-		player.getRoom().update(player);
-
-		Point2D pos = player.getPosition();
-		pos = new Point2D(pos.getX() - player.getWidth() / 2, pos.getY() - player.getHeight() / 2);
-
-		for (Door door : player.getRoom().getAusgaenge()) {
-			door.show();
-			if (Usefull.intersects(door.getX(), door.getY(), door.getWidth(), door.getHeight(), pos.getX(), pos.getY(),
-					player.getWidth(), player.getHeight())) {
-				door.changeRoom(player);
-				textbox.addText(player.getRoom().getLongDesciption());
-				break;
-			}
-		}
-
-		player.show();
-		textbox.setGc(gc);
-		textbox.refresh();
-	}
 }

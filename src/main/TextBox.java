@@ -8,18 +8,17 @@ import javafx.scene.paint.Paint;
 
 public class TextBox {
 	private static TextBox textBox = null;
-	public static TextBox newTextBox(GraphicsContext gc) {
+	private LinkedList<String> texte = new LinkedList<String>();
+	private GraphicsContext gc;
+
+	public static TextBox newTextBox() {
 		if (textBox == null) {
-			textBox = new TextBox(gc);
+			textBox = new TextBox();
 		}
 		return textBox;
 	}
-	private GraphicsContext gc;
 
-	LinkedList<String> texte = new LinkedList<String>();
-
-	private TextBox(GraphicsContext gc) {
-		this.gc = gc;
+	private TextBox() {
 	}
 
 	public void addText() {
@@ -49,7 +48,7 @@ public class TextBox {
 		return gc;
 	}
 
-	public void refresh() {
+	public void show() {
 		Paint p = gc.getFill();
 		gc.setFill(Color.rgb(230, 230, 255));
 		gc.fillRect(0, 0, 300, 210);
