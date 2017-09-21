@@ -1,5 +1,5 @@
 package item;
-
+ 
 /**
  * Die des Enumerable beschreibt alle möglichen Typen von Rüstungen. 
  */

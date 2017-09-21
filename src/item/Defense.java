@@ -1,5 +1,5 @@
 package item;
-
+ 
 import character.Character;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
