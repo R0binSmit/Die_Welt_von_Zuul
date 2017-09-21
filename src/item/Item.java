@@ -4,9 +4,9 @@ import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.IShowable;
-import main.IUsable;
+import character.Character;
 
-public abstract class Item implements IUsable, IShowable {
+public abstract class Item implements IShowable {
 	protected String name, description;
 	protected int price;
 	protected Image image;
@@ -65,4 +65,6 @@ public abstract class Item implements IUsable, IShowable {
 	public double getHeight() {
 		return image.getHeight();
 	}
+	
+	public abstract void use(Character character);
 }
