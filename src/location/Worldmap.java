@@ -1,6 +1,7 @@
 package location;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Random;
 
 import character.Enemy;
@@ -41,11 +42,13 @@ public class Worldmap {
 		Item ente;
 		
 		ente = new Crafting("Ente", "I A", 5, Usefull.linkToImage("/Bilder/Ente.png"), 10, 200, gc, true);
-		Enemy monster = new Enemy("Waldo", "Ein super toller Gegner", draussen, 700, 700, Usefull.linkToImage("/Bilder/Monster.png"), gc, null);
+		LinkedList<Item> items = new LinkedList<Item>();
+		items.add(ente);
+		Enemy monster = new Enemy("Waldo", "Ein super toller Gegner", draussen, 700, 700, Usefull.linkToImage("/Bilder/Monster.png"), gc, items);
 		
 		draussen.addItem(ente);
 		draussen.setzeGegner(monster);
-		draussen.setzeAusgang(Usefull.linkToImage("/Bilder/tuer1.png"), gc, new Point2D(0, 400), new Point2D(700, 400), cafeteria);
+		draussen.setzeAusgang(Usefull.linkToImage("/Bilder/Ente.png"), gc, new Point2D(0, 400), new Point2D(700, 400), cafeteria);
 		/*
 		 * Gegenstand kanninchen, lachs; Landscape panther, goldteller; ArrayList<Raum>
 		 * destination = new ArrayList<Raum>(); HashMap<LandscapeResponse, String>

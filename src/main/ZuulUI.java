@@ -54,9 +54,11 @@ public class ZuulUI extends Application {
 			MouseButton mb = e.getButton();
 			if (mb == MouseButton.PRIMARY) {
 				keys.put(KeyCode.F20, true);
+				game.processCommand(KeyCode.F20);
 			}
 			if (mb == MouseButton.SECONDARY) {
 				keys.put(KeyCode.F21, true);
+				game.processCommand(KeyCode.F21);
 			}
 		});
 

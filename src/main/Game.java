@@ -140,8 +140,14 @@ public class Game {
 	 * @return 'true', wenn der Befehl das Spiel beendet, 'false' sonst.
 	 */
 	public void processCommand(KeyCode key) {
-		if (key == KeyCode.H) {
+		switch (key) {
+		case H:
 			printHelp();
+			break;
+		case F20:
+			player.attack();
+			break;
+		default:
 		}
 	}
 
