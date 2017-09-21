@@ -17,5 +17,5 @@ public class BasicItem extends Item {
 	@Override
 	public void use(Character character) {
 
-	}
+	} 
 }
