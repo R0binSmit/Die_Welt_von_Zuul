@@ -1,12 +1,10 @@
 package location;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.HashMap;
 import java.util.Random;
 
-import character.Enemy;
-import item.Crafting;
-import item.Item;
+import character.NPC;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -21,34 +19,43 @@ public class Worldmap {
 	public Worldmap(GraphicsContext gc) {
 		this.gc = gc;
 	}
-	
-	
 
 	/**
 	 * Erzeuge alle Räume und verbinde ihre Ausgänge miteinander.
 	 */
 	public void raeumeAnlegen() {
 		Room draussen, cafeteria;// , hoersaal, cafeteria, labor, buero, keller, abstellkammer;
+		NPC schnurrkatze;
+		Landscape goldteller;
+		HashMap<LandscapeResponse, String> landscapeResponse = new HashMap<LandscapeResponse, String>();
 
 		draussen = new Room("Haupteingang der Universität" + System.getProperty("line.separator")
 				+ "Das Gelände ist verlassen, in dieser dunklen Nacht. Die Gerüchte besagen in den Tiefen dieses Ortes würde die"
 				+ System.getProperty("line.separator")
 				+ "Menschheit antworten finden. Vielleicht sogar Erlösung. Bist du deswegen hier?", this,
-				new Image(ZuulUI.class.getResourceAsStream("/Bilder/Draussen.png")), gc);
+				Usefull.linkToImage("/Bilder/Draussen.png"), gc);
+
 		cafeteria = new Room("test", this, Usefull.linkToImage("/Bilder/Cafeteria.png"), gc);
 		raeume.add(draussen);
+		raeume.add(cafeteria);
 		startpoint = draussen;
-		
-		Item ente;
-		
-		ente = new Crafting("Ente", "I A", 5, Usefull.linkToImage("/Bilder/Ente.png"), 10, 200, gc, true);
-		LinkedList<Item> items = new LinkedList<Item>();
-		items.add(ente);
-		Enemy monster = new Enemy("Waldo", "Ein super toller Gegner", draussen, 700, 700, Usefull.linkToImage("/Bilder/Monster.png"), gc, items);
-		
-		draussen.addItem(ente);
-		draussen.setzeGegner(monster);
-		draussen.setzeAusgang(Usefull.linkToImage("/Bilder/Ente.png"), gc, new Point2D(0, 400), new Point2D(700, 400), cafeteria);
+
+		draussen.setzeAusgang(Usefull.linkToImage("/Bilder/Ente.png"), gc, new Point2D(0, 400), new Point2D(700, 400),
+				cafeteria);
+
+		schnurrkatze = new NPC("Schnurrkatze", "Ein schnurrende Katze", draussen, 700, 100,
+				Usefull.linkToImage("/Bilder/Schnurrkatze_klein.png"), gc, null);
+		schnurrkatze.setText("Maunz!");
+		draussen.setzeNPC(schnurrkatze);
+
+		landscapeResponse.put(LandscapeResponse.USE_RESPONSE, "Die Schnurrkatze blickt hungrig auf den Teller!");
+
+		goldteller = new Collector("Goldteller", "Ein goldener Teller",
+				Usefull.linkToImage("/Bilder/Goldteller_klein.png"), 400, 400, gc, landscapeResponse, "String", 0, 1,
+				null);
+		draussen.landschaftBauen(goldteller);
+		// LinkedList<Item> items = new LinkedList<Item>();
+
 		/*
 		 * Gegenstand kanninchen, lachs; Landscape panther, goldteller; ArrayList<Raum>
 		 * destination = new ArrayList<Raum>(); HashMap<LandscapeResponse, String>

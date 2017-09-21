@@ -49,7 +49,7 @@ public class Enemy extends Character {
 	}
 
 	public boolean update() {
-		if (healPoints.getCurrentHealPoints() <= 0) {
+		if (healPoints.getCurrentHealthPoints() <= 0) {
 			return false;
 		}
 		velocity = velocity.add(acceleration);

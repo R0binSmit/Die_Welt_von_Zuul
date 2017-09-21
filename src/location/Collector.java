@@ -9,26 +9,35 @@ import javafx.scene.image.Image;
 
 public class Collector extends Landscape {
 	private String key;
-	private ArrayList<Room> destination;
+	private int amount;
+	private int maxAmount;
 	private ArrayList<Runnable> execute;
 
-	public Collector(String name, String beschreibung, Image image, int x, int y, GraphicsContext gc, HashMap<LandscapeResponse, String> landscapeResponse, String key,
-			ArrayList<Runnable> execute) {
+	public Collector(String name, String beschreibung, Image image, int x, int y, GraphicsContext gc,
+			HashMap<LandscapeResponse, String> landscapeResponse, String key, int amount, int maxAmount, ArrayList<Runnable> execute) {
 		super(name, beschreibung, image, x, y, gc, landscapeResponse);
 		this.key = key;
+		this.amount = amount;
 		this.execute = execute;
 	}
 
 	public void onUse(Player spieler) {
 		if (spieler.getGegenstand(key) == null) {
-			System.out.println(getResponse(LandscapeResponse.USE_RESPONSE));
+			tb.addText(getResponse(LandscapeResponse.USE_RESPONSE));
 		}
 
-		else {
-			System.out.println(getResponse(LandscapeResponse.COLLECT_RESPONSE));
+		else if (amount + 1 < maxAmount){
+			spieler.dropItem(key);
+			amount += 1;
+			tb.addText(getResponse(LandscapeResponse.COLLECT_RESPONSE));
+		}
+		else if (amount + 1 == maxAmount) {
+			spieler.dropItem(key);
+			amount += 1;
+			System.out.println(getResponse(LandscapeResponse.COLLECTFINISH_RESPONSE));
 
-			for (Runnable run : execute) {
-				run.run();
+			for (Runnable runnable : execute) {
+				runnable.run();
 			}
 		}
 	}

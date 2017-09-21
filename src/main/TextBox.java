@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
 public class TextBox {
-	public static TextBox textBox = null;
+	private static TextBox textBox = null;
 	private GraphicsContext gc;
 	LinkedList<String> texte = new LinkedList<String>();
 	

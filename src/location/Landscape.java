@@ -6,6 +6,7 @@ import character.Player;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import main.TextBox;
 
 public abstract class Landscape {
 	protected String name;
@@ -15,6 +16,7 @@ public abstract class Landscape {
 	protected Point2D pos;
 	protected Image image;
 	protected GraphicsContext gc;
+	protected TextBox tb = TextBox.newTextBox(gc);
 
 	public Landscape(String name, String beschreibung, Image image, int x, int y, GraphicsContext gc, HashMap<LandscapeResponse, String> landscapeResponse) {
 		this.name = name;

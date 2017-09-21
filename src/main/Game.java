@@ -108,6 +108,7 @@ public class Game {
 		}
 
 		player.show();
+		textbox.setGc(gc);
 		textbox.refresh();
 	}
 
@@ -119,7 +120,7 @@ public class Game {
 		textbox.addText("Tippen sie 'help', wenn Sie Hilfe brauchen.");
 		textbox.addText();
 		textbox.addText("Seltsame Ereignisse haben ihre Schatten vorausgeworfen." + System.getProperty("line.separator")
-				+ "Über Nacht viel der Goldpreis auf 3 US-Dollar pro Feinunze und die Menscheit strebte nach einen neuen Wertanlage:"
+				+ "Über Nacht fiel der Goldpreis auf 3 US-Dollar pro Feinunze und die Menscheit strebte nach einen neuen Wertanlage:"
 				+ System.getProperty("line.separator") + "Lutetium!" + System.getProperty("line.separator")
 				+ "Niemand weiß, was dann geschah. Vielleicht gruben wir zu tief, vielleicht ließen wir uns auf falsche Götzen ein,"
 				+ System.getProperty("line.separator") + "fest steht, dass das Ende der Welt über uns kam."

@@ -5,13 +5,15 @@ import java.util.HashMap;
 import java.util.Random;
 
 import character.Player;
+import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import main.TextBox;
 
 public class Teleporter extends Landscape {
 	private String key;
 	private ArrayList<Room> destination;
-
+	
 	public Teleporter(String name, String beschreibung, Image image, int x, int y, GraphicsContext gc, HashMap<LandscapeResponse, String> landscapeResponse, String key, ArrayList<Room> destination) {
 		super(name, beschreibung, image, x, y, gc, landscapeResponse);
 		this.key = key;
@@ -19,7 +21,7 @@ public class Teleporter extends Landscape {
 	}
 
 	public void onUse(Player spieler) {
-		System.out.println(getResponse(LandscapeResponse.USE_RESPONSE));
+		tb.addText(getResponse(LandscapeResponse.USE_RESPONSE));
 	}
 
 	public void onEnterRoom(Player spieler) {
@@ -28,7 +30,7 @@ public class Teleporter extends Landscape {
 		System.out.println();
 		
 		if (spieler.getGegenstand(key) != null) {
-			System.out.println(landscapeResponse.get(LandscapeResponse.REMOVE_RESPONSE));
+			tb.addText(landscapeResponse.get(LandscapeResponse.REMOVE_RESPONSE));
 			spieler.dropItem(key);
 			getRaum().landschaftEntfernen(getName());
 			return;
@@ -47,8 +49,9 @@ public class Teleporter extends Landscape {
 		}
 
 		spieler.setRoom(currentDestination);
-		System.out.println(getResponse(LandscapeResponse.ENTER_RESPONSE));
-		System.out.println(spieler.getRoom().getLongDesciption());
+		spieler.setPosition(new Point2D(400,400));
+		tb.addText(getResponse(LandscapeResponse.ENTER_RESPONSE));
+		tb.addText(spieler.getRoom().getLongDesciption());
 		spieler.getRoom().onEnterRoomEvent(spieler);
 	}
 
