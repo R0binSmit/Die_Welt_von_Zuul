@@ -42,6 +42,7 @@ public class Enemy extends Character {
 		this.maxSpeed = maxSpeed;
 		this.maxForce = maxForce;
 		this.range = range;
+		
 	}
 
 	/**

@@ -50,7 +50,7 @@ public class Player extends Character {
 			for (Enemy enemy : room.getGegnerList()) {
 				if (position.distance(enemy.position) < 200) {
 					int hp = enemy.getHP();
-					int dmg = equipment.getDamage() + 1;
+					int dmg = equipment.getDamage() + 10;
 					hp -= dmg * (1 - enemy.getDefense());
 					enemy.setHP(hp);
 				}

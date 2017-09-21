@@ -7,6 +7,9 @@ import java.util.Random;
 
 import character.Enemy;
 import character.NPC;
+import item.BasicItem;
+import item.Defense;
+import item.EnumDefense;
 import item.Item;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
@@ -38,6 +41,7 @@ public class Worldmap {
 		Room outside, cafeteria;// , hoersaal, cafeteria, labor, buero, keller, abstellkammer;
 		NPC purrCat;
 		Enemy karpfen;
+		Item lachs, schuppenpanzer;
 		Landscape goldPlate;
 		HashMap<LandscapeResponse, String> landscapeResponse = new HashMap<LandscapeResponse, String>();
 		LinkedList<Item> items = new LinkedList<Item>();
@@ -49,9 +53,9 @@ public class Worldmap {
 				+ "Menschheit antworten finden. Vielleicht sogar Erlösung. Bist du deswegen hier?", this,
 				Usefull.linkToImage("/Bilder/Draussen.png"), gc);
 
-		cafeteria = new Room(System.getProperty("line.separator")
-		+"Cafeteria" + System.getProperty("line.separator") + "Einst für den Festschmaus der Menschen bereitet, herrscht nun der König der Karpfen über diesen Ort!", this,
-				Usefull.linkToImage("/Bilder/Cafeteria.png"), gc);
+		cafeteria = new Room(System.getProperty("line.separator") + "Cafeteria" + System.getProperty("line.separator")
+				+ "Einst für den Festschmaus der Menschen bereitet, herrscht nun der König der Karpfen über diesen Ort!",
+				this, Usefull.linkToImage("/Bilder/Cafeteria.png"), gc);
 		rooms.add(outside);
 		rooms.add(cafeteria);
 		startPoint = outside;
@@ -65,16 +69,17 @@ public class Worldmap {
 		// NPC
 		purrCat = new NPC("Schnurrkatze", "Ein schnurrende Katze", outside, 700, 100,
 				Usefull.linkToImage("/Bilder/Schnurrkatze_klein.png"), gc, null);
-		purrCat.setText(System.getProperty("line.separator") + "Die Katze schnurrt. Und spricht. Die Menschheit musste sich schnell an derlei Dinge gewöhnen." +
-				 System.getProperty("line.separator") +
-				 "'Lachs', maunzt sie." + System.getProperty("line.separator") +
-				 "'Der Mensch möge mir Lachs aus der Cafeteria im Westen bringen, damit ich ihm ein Geheimnis verrate." + System.getProperty("line.separator") +
-				 "Lege er es auf meinen Teller. Nun hinfort!'" +
-				 System.getProperty("line.separator"));
+		purrCat.setText(System.getProperty("line.separator")
+				+ "Die Katze schnurrt. Und spricht. Die Menschheit musste sich schnell an derlei Dinge gewöhnen."
+				+ System.getProperty("line.separator") + "'Lachs', maunzt sie." + System.getProperty("line.separator")
+				+ "'Der Mensch möge mir Lachs aus der Cafeteria im Westen bringen, damit ich ihm ein Geheimnis verrate."
+				+ System.getProperty("line.separator") + "Lege er es auf meinen Teller. Nun hinfort!'"
+				+ System.getProperty("line.separator"));
 		outside.setNPC(purrCat);
 
 		// Landschaft
-		landscapeResponse.put(LandscapeResponse.USE_RESPONSE, System.getProperty("line.separator") + "Die Schnurrkatze blickt hungrig auf den Teller! Dann blickt sie dich an. Fordernd.");
+		landscapeResponse.put(LandscapeResponse.USE_RESPONSE, System.getProperty("line.separator")
+				+ "Die Schnurrkatze blickt hungrig auf den Teller! Dann blickt sie dich an. Fordernd.");
 
 		goldPlate = new Collector("Goldteller", "Ein goldener Teller",
 				Usefull.linkToImage("/Bilder/Goldteller_klein.png"), 600, 160, gc, landscapeResponse, "String", 0, 1,
@@ -82,10 +87,17 @@ public class Worldmap {
 		outside.BuildLandscape(goldPlate);
 
 		// Gegenstände
-
+		lachs = new BasicItem("Lachs", "Herrlicher, roter Lachs", 10, Usefull.linkToImage("/Bilder/lachs.png"), 0, 0,
+				gc);
+		schuppenpanzer = new Defense("Karpfenschuppenpanzer", "Ein Panzer aus Karpfenschuppen", 200, EnumDefense.BREASTPLATE,
+				Usefull.linkToImage("/Bilder/assets/item/armor/normal/breastplate.png"), 0, 0, gc, 10);
 		// Gegner
-		karpfen = new Enemy("Karpfenkönig", "Der König der Karpfen", cafeteria, 200, 700, Usefull.linkToImage("/Bilder/karpfenkoenig_klein.png"), 3, 0.05, 70, gc, null);
+		items.add(lachs);
+		items.add(schuppenpanzer);
+		karpfen = new Enemy("Karpfenkönig", "Der König der Karpfen", cafeteria, 200, 700,
+				Usefull.linkToImage("/Bilder/karpfenkoenig_klein.png"), 3, 0.05, 70, gc, items);
 		cafeteria.setEnemy(karpfen);
+
 		/*
 		 * Gegenstand kanninchen, lachs; Landscape panther, goldteller; ArrayList<Raum>
 		 * destination = new ArrayList<Raum>(); HashMap<LandscapeResponse, String>
