@@ -10,14 +10,40 @@ import javafx.scene.input.KeyCode;
 import location.Landscape;
 import location.Room;
 
+/**
+ * Klasse mit der alle Spieler dargestellt werden
+ */
 public class Player extends Character {
 	private int cooldown = 100;
 
+	/**
+	 * Konstruktor für alle Spieler
+	 * 
+	 * @param name
+	 *            Name des Spielers
+	 * @param description
+	 *            Beschreibung des Spielers
+	 * @param room
+	 *            Raum in dem sich der Spieler befindet
+	 * @param x
+	 *            X Position des Spielers im Raum
+	 * @param y
+	 *            Y Position des Spielers im Raum
+	 * @param image
+	 *            Aussehen des Spielers
+	 * @param graphicsContext
+	 *            GraphicsContext zum anzeigen des Spielers
+	 * @param items
+	 *            Items die der Spieler von anfang an dabei hat
+	 */
 	public Player(String name, String description, Room room, int x, int y, Image image,
 			GraphicsContext graphicsContext, LinkedList<Item> items) {
 		super(name, description, room, x, y, image, graphicsContext, items);
 	}
 
+	/**
+	 * In einem Radius um sich herum alle Gegner angreifen
+	 */
 	public void attack() {
 		if (cooldown <= 0) {
 			cooldown = 100;
@@ -32,11 +58,20 @@ public class Player extends Character {
 		}
 	}
 
+	/**
+	 * Dadurch können Spieler mit dem Spieler interagieren
+	 * 
+	 * @param spieler
+	 *            Der Spieler mit dem interagiert werden soll
+	 */
 	@Override
 	public void interact(Player Spieler) {
 
 	}
 
+	/**
+	 * Dadurch kann der Spieler mit seiner Umwelt interagieren
+	 */
 	public void interagieren() {
 		Item item = room.getClosestItem(position, (int) image.getWidth());
 		Landscape landscape = room.getClosestLandscape(position, (int) image.getWidth());
@@ -56,6 +91,12 @@ public class Player extends Character {
 			pickUpItem(room.removeItem(item.getName()));
 	}
 
+	/**
+	 * Wird aufgerufen damit der Spieler sich bewegt
+	 * 
+	 * @param key
+	 *            Taste die gedrückt wurde
+	 */
 	public void move(KeyCode key) {
 		final int speed = 5;
 		Point2D position = new Point2D(this.position.getX(), this.position.getY());
@@ -74,15 +115,18 @@ public class Player extends Character {
 			break;
 		default:
 		}
-		
-		if (position.getX() - image.getWidth() * 0.5 > 0 &&
-				position.getX() + image.getWidth() * 0.5 < graphicsContext.getCanvas().getWidth() && 
-				position.getY() - image.getHeight() * 0.5 > 0 && 
-				position.getY() + image.getHeight() * 0.5 < graphicsContext.getCanvas().getHeight()) {
+
+		if (position.getX() - image.getWidth() * 0.5 > 0
+				&& position.getX() + image.getWidth() * 0.5 < graphicsContext.getCanvas().getWidth()
+				&& position.getY() - image.getHeight() * 0.5 > 0
+				&& position.getY() + image.getHeight() * 0.5 < graphicsContext.getCanvas().getHeight()) {
 			this.position = position;
 		}
 	}
 
+	/**
+	 * Anzeige des Spielers
+	 */
 	@Override
 	public void show() {
 		super.show();

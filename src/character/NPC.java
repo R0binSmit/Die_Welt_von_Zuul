@@ -7,6 +7,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import location.Room;
 
+/**
+ * Klasse mit der alle NPCs dargestellt werden
+ */
 public class NPC extends Character {
 	protected String text;
 

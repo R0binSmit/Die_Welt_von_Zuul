@@ -3,6 +3,9 @@ package equipment;
 import item.Defense;
 import item.Weapon;
 
+/**
+ * Klasse die das Equipment des Spielers darstellt
+ */
 public class Equipment implements IEquipment {
 	private Defense breastplate;
 	private Defense helmet;
@@ -11,6 +14,12 @@ public class Equipment implements IEquipment {
 	private Defense shoes;
 	private Defense trousers;
 
+	/**
+	 * Construktor falls das Equipment ein Rüstungsteil ist
+	 * 
+	 * @param defense
+	 *            Rüstungsgegenstand
+	 */
 	public void equipItem(Defense defense) {
 		switch (defense.getDefenseType()) {
 		case HELMET:
@@ -29,6 +38,12 @@ public class Equipment implements IEquipment {
 		}
 	}
 
+	/**
+	 * Construktor falls das Equipment eine Waffe ist
+	 * 
+	 * @param weapon
+	 *            Waffe
+	 */
 	public void equipItem(Weapon weapon) {
 		if (leftHand == null)
 			leftHand = weapon;
@@ -38,6 +53,9 @@ public class Equipment implements IEquipment {
 			leftHand = weapon;
 	}
 
+	/**
+	 * Gesamtrüstung des Equpments erhalten
+	 */
 	@Override
 	public double getArmor() {
 		double armor = 0;
@@ -56,6 +74,9 @@ public class Equipment implements IEquipment {
 		return armor;
 	}
 
+	/**
+	 * Gesamtschaden des Equpments erhalten
+	 */
 	@Override
 	public int getDamage() {
 		int damage = 0;
@@ -68,6 +89,9 @@ public class Equipment implements IEquipment {
 		return damage;
 	}
 
+	/**
+	 * Equipment anzeigen
+	 */
 	public void show() {
 		if (helmet != null) {
 			helmet.showAt(700, 600);
