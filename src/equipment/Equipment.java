@@ -15,6 +15,13 @@ public class Equipment implements IEquipment {
 	private Defense trousers;
 
 	/**
+	 * Standard Konstruktor.
+	 */
+	public Equipment() {
+		
+	}
+	
+	/**
 	 * Die Methode wird verwendet, wenn die Methode "use" bei einem Defense Objekt angewendet wird.
 	 * Dabei wird entschiede an welcher Position das Objekt übergeben wird.
 	 * @param defense
