@@ -75,7 +75,7 @@ public class Weapon extends Item {
 	public int getDamage() {
 		return damage;
 	}
-	 
+	  
 	/**
 	 * Rüstet die Waffe aus.
 	 */
