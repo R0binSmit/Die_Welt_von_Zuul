@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
  */
 public class BasicItem extends Item {
 	public BasicItem(String name, String description, int price, Image image, int x, int y,
-			GraphicsContext graphicsContext, boolean essbar) {
+			GraphicsContext graphicsContext) {
 		super(name, description, price, image, new Point2D(x, y), graphicsContext);
 	}
 
