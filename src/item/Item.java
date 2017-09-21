@@ -16,7 +16,7 @@ public abstract class Item implements IShowable {
 	protected Point2D position;
 	protected int price; // Wird für eine spätere Erweiterung benötigt.
 
-	/**
+	/** 
 	 * Konstruktor von Item.
 	 *  
 	 * @param name

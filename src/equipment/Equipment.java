@@ -15,7 +15,7 @@ public class Equipment implements IEquipment {
 	private Defense trousers;
 
 	/**
-	 * Standard Konstruktor.
+	 * Standard Konstruktor. 
 	 */
 	public Equipment() {
 		

@@ -15,7 +15,7 @@ public class Food extends Item {
 
 	/**
 	 * Konstruktor von Food.
-	 * 
+	 *  
 	 * @param name
 	 *            Name von dem Essen.
 	 * @param description
