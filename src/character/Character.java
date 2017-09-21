@@ -12,6 +12,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import location.Room;
 
+/**
+ * Abstrakte Klasse um alle Charaktere darzustellen.
+ */
 public abstract class Character {
 	protected String description;
 	protected Equipment equipment = new Equipment();
@@ -24,6 +27,26 @@ public abstract class Character {
 	protected Point2D position;
 	protected Room room;
 
+	/**
+	 * Hier wird alles gesetz was bei jeder Charaktererstellung gebraucht wird
+	 * 
+	 * @param name
+	 *            Name des Charakters
+	 * @param description
+	 *            Beschreibung des Charakters
+	 * @param room
+	 *            Raum in dem sich der Charakter befindet
+	 * @param x
+	 *            X Position des Charakters auf dem Bildschirm
+	 * @param y
+	 *            Y Position des Charakters auf dem Bildschirm
+	 * @param image
+	 *            Aussehen des Characters
+	 * @param graphicsContext
+	 *            GraphicsContext zum zeichnen des Charakters
+	 * @param items
+	 *            Items die der Charakter von Anfang an hat
+	 */
 	public Character(String name, String description, Room room, int x, int y, Image image,
 			GraphicsContext graphicsContext, LinkedList<Item> items) {
 		this.name = name;
@@ -36,6 +59,13 @@ public abstract class Character {
 		healthPoints = new HealthPoints(this, graphicsContext);
 	}
 
+	/**
+	 * Item wegwerfen
+	 * 
+	 * @param itemName
+	 *            Name des Items das Weggeworfen werden soll
+	 * @return das Weggeworfene Item
+	 */
 	public Item dropItem(String itemName) {
 		Item item = null;
 		if (healthPoints.getIsUsable()) {
@@ -47,6 +77,9 @@ public abstract class Character {
 		return item;
 	}
 
+	/**
+	 * Alle Items aus dem inventar in den Raum Droppen
+	 */
 	public void dropItems() {
 		Random r = new Random();
 		for (Item item : inventory.getItems()) {
@@ -56,10 +89,22 @@ public abstract class Character {
 		}
 	}
 
+	/**
+	 * Rüstung anziehen
+	 * 
+	 * @param defense
+	 *            Das Rüstungsteil das Ausgerüstet werden soll
+	 */
 	public void equipItem(Defense defense) {
 		equipment.equipItem(defense);
 	}
 
+	/**
+	 * Waffe ausrüsten
+	 * 
+	 * @param weapon
+	 *            Die Waffe die ausgerüstet werden soll
+	 */
 	public void equipItem(Weapon weapon) {
 		equipment.equipItem(weapon);
 	}
@@ -108,6 +153,11 @@ public abstract class Character {
 		return image.getWidth();
 	}
 
+	/**
+	 * Dadurch können Charaktere mit dem Spieler interagieren
+	 * @param spieler
+	 * Der Spieler mit dem interagiert werden soll
+	 */
 	public abstract void interact(Player spieler);
 
 	public void pickUpItem(Item item) {
@@ -130,6 +180,9 @@ public abstract class Character {
 		this.room = aktuellerRaum;
 	}
 
+	/**
+	 * Den Charakter anzeigen
+	 */
 	public void show() {
 		double x = position.getX() - image.getWidth() * 0.5;
 		double y = position.getY() - image.getHeight() * 0.5;
