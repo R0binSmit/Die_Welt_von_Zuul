@@ -25,7 +25,7 @@ public class Collector extends Landscape {
 	@Override
 	public void onEnterRoom(Player spieler) {
 
-	}
+	} 
 
 	@Override
 	public void onUse(Player player) {
