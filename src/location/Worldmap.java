@@ -45,6 +45,7 @@ public class Worldmap {
 		Landscape goldPlate;
 		HashMap<LandscapeResponse, String> landscapeResponse = new HashMap<LandscapeResponse, String>();
 		LinkedList<Item> items = new LinkedList<Item>();
+		ArrayList<Runnable> execute = new ArrayList<Runnable>();
 
 		outside = new Room(System.getProperty("line.separator") + "Haupteingang der Universität"
 				+ System.getProperty("line.separator")
@@ -80,17 +81,25 @@ public class Worldmap {
 		// Landschaft
 		landscapeResponse.put(LandscapeResponse.USE_RESPONSE, System.getProperty("line.separator")
 				+ "Die Schnurrkatze blickt hungrig auf den Teller! Dann blickt sie dich an. Fordernd.");
-
+		landscapeResponse.put(LandscapeResponse.COLLECTFINISH_RESPONSE, System.getProperty("line.separator")
+				+ "Die Schnurrkatze verspeist den Lachs! Sie maunzt." + System.getProperty("line.separator")
+				+ "''Traue niemals einer Katze', schnurrt sie." + System.getProperty("line.separator")
+				+ "'Besonders nicht dem Panther im Keller. Wie sehr er sich doch nach der Jagd sehnt. Besonders nach weichen, flauschigen Wesen! Jemand hat einst eine Geschichte über ihn geschrieben."
+				+ System.getProperty("line.separator") + "Nimm dies, nun hinfort!'");
+		execute.add(() -> outside.removeLandscape("Goldteller"));
+		execute.add(() -> outside.addItem(new BasicItem("Buch", "Ein Quell immerwährender Weisheit. Theoretisch.", 100,
+				Usefull.linkToImage("/Bilder/assets/item/books/books1.png"), 600, 140, gc)));
 		goldPlate = new Collector("Goldteller", "Ein goldener Teller",
-				Usefull.linkToImage("/Bilder/Goldteller_klein.png"), 600, 160, gc, landscapeResponse, "String", 0, 1,
-				null);
+				Usefull.linkToImage("/Bilder/Goldteller_klein.png"), 600, 160, gc, landscapeResponse, "Lachs", 0, 1,
+				execute);
 		outside.BuildLandscape(goldPlate);
 
 		// Gegenstände
 		lachs = new BasicItem("Lachs", "Herrlicher, roter Lachs", 10, Usefull.linkToImage("/Bilder/lachs.png"), 0, 0,
 				gc);
-		schuppenpanzer = new Defense("Karpfenschuppenpanzer", "Ein Panzer aus Karpfenschuppen", 200, EnumDefense.BREASTPLATE,
-				Usefull.linkToImage("/Bilder/assets/item/armor/normal/breastplate.png"), 0, 0, gc, 10);
+		schuppenpanzer = new Defense("Karpfenschuppenpanzer", "Ein Panzer aus Karpfenschuppen", 200,
+				EnumDefense.BREASTPLATE, Usefull.linkToImage("/Bilder/assets/item/armor/normal/breastplate.png"), 0, 0,
+				gc, 10);
 		// Gegner
 		items.add(lachs);
 		items.add(schuppenpanzer);
