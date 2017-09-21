@@ -93,7 +93,12 @@ public class HealthPoints implements IShowable {
 	}
 
 	public void setCurrentHealPoints(int healPoints) { 
-		this.currentHealthPoints = healPoints;
+		if(healPoints > maxHealthPoints) {
+			currentHealthPoints = maxHealthPoints;
+		}
+		else {
+			currentHealthPoints = healPoints;
+		}
 		if(healPoints == 0) {
 			isUsable = false;
 		}

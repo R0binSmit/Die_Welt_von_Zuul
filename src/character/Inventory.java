@@ -110,6 +110,7 @@ public class Inventory implements IShowable {
 		for (Item item : items) {
 			if (item.getName().equals(itemName)) {
 				items.remove(item);
+				break;
 			}
 		}
 	}
