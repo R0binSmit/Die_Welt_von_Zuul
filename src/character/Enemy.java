@@ -63,7 +63,7 @@ public class Enemy extends Character {
 	}
 
 	/**
-	 * Dadurch können Charaktere mit dem Spieler interagieren
+	 * Dadurch können Gegner mit dem Spieler interagieren
 	 * @param spieler
 	 * Der Spieler mit dem interagiert werden soll
 	 */
