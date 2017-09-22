@@ -80,7 +80,7 @@ public class Worldmap {
 		buero = new Room(
 				System.getProperty("line.separator") + "Büro" + System.getProperty("line.separator")
 						+ "Ein majestätischer Rabe residiert nun in diesem Büro und rezitiert Gedichte.",
-				this, Usefull.linkToImage("/Bilder/buero.png"), gc);
+				this, Usefull.linkToImage("/Bilder/Buero.png"), gc);
 
 		underground = new Room(System.getProperty("line.separator") + "Keller" + System.getProperty("line.separator")
 				+ "Ein einfacher Keller. Keine gigantischen Tiere, die sich Götter nennen und seltsame Forderungen stellen. Nur ein Keller. Die Tür im Osten trägt die Aufschrift:"
@@ -94,7 +94,7 @@ public class Worldmap {
 
 		eden = new Room(System.getProperty("line.separator") + "Der Garten Eden" + System.getProperty("line.separator")
 				+ "Nach all den Gefahren und Widerständen stehst du nun im Garten Eden und erwartest die letzten Antworten von der Schlange!!",
-				this, Usefull.linkToImage("/Bilder/eden.png"), gc);
+				this, Usefull.linkToImage("/Bilder/Eden.png"), gc);
 		rooms.add(outside);
 		rooms.add(cafeteria);
 		rooms.add(lecturehall);
@@ -275,7 +275,7 @@ public class Worldmap {
 						+ System.getProperty("line.separator")
 						+ "Aus dem Nichts manifestiert sich ein steinerner Engel!");
 		execute.add(() -> computerRoom.setEnemy(stoneAngel));
-		angelComputer = new Collector("Computer", "Ein Computer", Usefull.linkToImage("/Bilder/computer.png"),
+		angelComputer = new Collector("Computer", "Ein Computer", Usefull.linkToImage("/Bilder/Computer.png"),
 				390, 375, gc, null, "Passwort", 0, 1, null);
 		angelComputer.setExecute(execute);
 		angelComputer.setLandscapeResponse(landscapeResponse);
@@ -325,7 +325,7 @@ public class Worldmap {
 				+ "Du nimmst einen Schluck aus dem Brunnen und fühlst dich erholt!");
 		fountain = new Healfountain("Heilbrunnen",
 				"Womöglich speist sich dieser Brunnen aus dem selben Quell wie der legendäre Jungbrunnen!",
-				Usefull.linkToImage("/Bilder/brunnen.png"), 400, 400, gc, null);
+				Usefull.linkToImage("/Bilder/Brunnen.png"), 400, 400, gc, null);
 		fountain.setLandscapeResponse(landscapeResponse);
 		outside.BuildLandscape(fountain);
 	}
