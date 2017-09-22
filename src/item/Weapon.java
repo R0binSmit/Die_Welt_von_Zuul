@@ -64,7 +64,7 @@ public class Weapon extends Item {
 		this.armor = armor;
 	}
 
-	public int getArmor() {
+	public double getArmor() {
 		return armor;
 	}
 
