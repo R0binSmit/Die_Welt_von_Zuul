@@ -1,5 +1,7 @@
 package equipment;
- 
+
+import java.util.LinkedList;
+
 import item.Defense;
 import item.Item;
 import item.Weapon;
@@ -20,15 +22,45 @@ public class Equipment implements IEquipment {
 	private GraphicsContext graphicsContext;
 
 	/**
-	 * Standard Konstruktor. 
+	 * Standard Konstruktor.
 	 */
 	public Equipment(GraphicsContext graphicsContext) {
-		this.graphicsContext =graphicsContext;
+		this.graphicsContext = graphicsContext;
 	}
-	
+
+	public LinkedList<Item> getItems() {
+		LinkedList<Item> items = new LinkedList<Item>();
+		if (breastplate != null) {
+			items.add(breastplate);
+		}
+
+		if (helmet != null) {
+			items.add(helmet);
+		}
+
+		if (leftHand != null) {
+			items.add(leftHand);
+		}
+
+		if (shoes != null) {
+			items.add(shoes);
+		}
+
+		if (trousers != null) {
+			items.add(trousers);
+		}
+
+		if (rightHand != null) {
+			items.add(rightHand);
+		}
+		return items;
+	}
+
 	/**
-	 * Die Methode wird verwendet, wenn die Methode "use" bei einem Defense Objekt angewendet wird.
-	 * Dabei wird entschiede an welcher Position das Objekt übergeben wird.
+	 * Die Methode wird verwendet, wenn die Methode "use" bei einem Defense Objekt
+	 * angewendet wird. Dabei wird entschiede an welcher Position das Objekt
+	 * übergeben wird.
+	 * 
 	 * @param defense
 	 *            Rüstungsgegenstand
 	 * @return Den Rüstungsgegenstand der ersetzt wird (falls schon angelegt).
@@ -37,25 +69,25 @@ public class Equipment implements IEquipment {
 		Item currentUsedDefense = null;
 		switch (defense.getDefenseType()) {
 		case HELMET:
-			if(helmet != null) {
+			if (helmet != null) {
 				currentUsedDefense = helmet;
 			}
 			helmet = defense;
 			break;
 		case BREASTPLATE:
-			if(breastplate != null) {
+			if (breastplate != null) {
 				currentUsedDefense = breastplate;
 			}
 			breastplate = defense;
 			break;
 		case TROUSERS:
-			if(trousers != null) {
+			if (trousers != null) {
 				currentUsedDefense = trousers;
 			}
 			trousers = defense;
 			break;
 		case SHOES:
-			if(shoes != null) {
+			if (shoes != null) {
 				currentUsedDefense = shoes;
 			}
 			shoes = defense;
@@ -66,8 +98,9 @@ public class Equipment implements IEquipment {
 	}
 
 	/**
-	 * Die Methode wird verwendet, wenn die Methode "use" bei einem Weapon Objekt angewendet wird.
-	 * Dabei wird entschiede an welcher Position das Objekt übergeben wird.
+	 * Die Methode wird verwendet, wenn die Methode "use" bei einem Weapon Objekt
+	 * angewendet wird. Dabei wird entschiede an welcher Position das Objekt
+	 * übergeben wird.
 	 * 
 	 * @param weapon
 	 *            Ein Weapon Objekt.
@@ -75,7 +108,7 @@ public class Equipment implements IEquipment {
 	 */
 	public Item equipItem(Weapon weapon) {
 		Item currentUsedWeapon = null;
-		
+
 		if (leftHand == null)
 			leftHand = weapon;
 		else if (rightHand == null)
@@ -89,7 +122,8 @@ public class Equipment implements IEquipment {
 
 	/**
 	 * Gibt die Rüstungswerte aller Gegenstände des Equpments zurück.
-	 *@return Gesamtrüstung als double.
+	 * 
+	 * @return Gesamtrüstung als double.
 	 */
 	@Override
 	public double getArmor() {
@@ -111,7 +145,8 @@ public class Equipment implements IEquipment {
 
 	/**
 	 * Gibt den Gesamtschaden des Equpments zurück.
-	 *@return Gesamtschaden als Integer.
+	 * 
+	 * @return Gesamtschaden als Integer.
 	 */
 	@Override
 	public int getDamage() {
@@ -134,7 +169,7 @@ public class Equipment implements IEquipment {
 		graphicsContext.fillRect(590, 520, 210, 280);
 		graphicsContext.setFill(p);
 		graphicsContext.fillText("Ausrüstung", 670, 535);
-		
+
 		if (helmet != null) {
 			helmet.showAt(660, 540);
 		}
@@ -162,6 +197,7 @@ public class Equipment implements IEquipment {
 
 	/**
 	 * Gibt alle angelegten Waffen/Rüstungen als String aus.
+	 * 
 	 * @return String von allen Gegenständen.
 	 */
 	@Override

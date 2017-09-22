@@ -86,7 +86,9 @@ public abstract class Character implements IShowable {
 	 */
 	public void dropItems() {
 		Random r = new Random();
-		for (Item item : inventory.getItems()) {
+		LinkedList<Item> items = inventory.getItems();
+		items.addAll(equipment.getItems());
+		for (Item item : items) {
 			item.setPosition(
 					new Point2D(position.getX() + (r.nextInt(101) - 50), position.getY() + (r.nextInt(101) - 50)));
 			room.addItem(item);

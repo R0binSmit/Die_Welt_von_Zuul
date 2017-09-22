@@ -1,7 +1,6 @@
 package main;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 
 import character.Player;
 import item.Item;
