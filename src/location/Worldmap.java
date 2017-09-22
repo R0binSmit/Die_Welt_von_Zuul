@@ -155,7 +155,7 @@ public class Worldmap {
 
 		// NPC
 		purrCat = new NPC("Schnurrkatze", "Ein schnurrende Katze", outside, 700, 100,
-				Usefull.linkToImage("/Bilder/Schnurrkatze_klein.png"), gc, null);
+				Usefull.linkToImage("/Bilder/schnurrkatze_klein.png"), gc, null);
 		purrCat.setText(System.getProperty("line.separator")
 				+ "Die Katze schnurrt. Und spricht. Die Menschheit musste sich schnell an derlei Dinge gewöhnen."
 				+ System.getProperty("line.separator") + "'Lachs', maunzt sie." + System.getProperty("line.separator")
