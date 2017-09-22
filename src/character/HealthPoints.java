@@ -20,7 +20,7 @@ public class HealthPoints implements IShowable {
 	 * Erstellen des Objekts
 	 * 
 	 * @param character
-	 *            der Charakter zu dem die HP gehören
+	 *            der Charakter zu dem die HP gehÃ¶ren
 	 * @param graphicsContext
 	 *            zum Darstellen der HP Leiste
 	 */
@@ -36,7 +36,7 @@ public class HealthPoints implements IShowable {
 	 * Erstellen des Objekts
 	 * 
 	 * @param character
-	 *            der Charakter zu dem die HP gehören
+	 *            der Charakter zu dem die HP gehÃ¶ren
 	 * @param graphicsContext
 	 *            zum Darstellen der HP Leiste
 	 * @param maxHealPoints
@@ -48,36 +48,6 @@ public class HealthPoints implements IShowable {
 		isUsable = true;
 		this.graphicsContext = graphicsContext;
 		this.character = character;
-	}
-
-	/**
-	 * Momentane HP des Charakters erhöhen
-	 * 
-	 * @param healPoints
-	 *            Dazuzuaddierende HP
-	 */
-	public void addHealPoints(int healPoints) {
-		if ((currentHealthPoints + healPoints) > maxHealthPoints) {
-			currentHealthPoints = maxHealthPoints;
-			isUsable = true;
-		} else {
-			currentHealthPoints += healPoints;
-			isUsable = true;
-		}
-	}
-
-	/**
-	 * Momentane HP des Charakters senken
-	 * 
-	 * @param healPoints
-	 *            Zu entfernende HP
-	 */
-	public void dropHealPoints(int healPoints) {
-		if ((currentHealthPoints - healPoints) <= 0) {
-			currentHealthPoints = 0;
-			isUsable = false;
-		} else
-			currentHealthPoints -= healPoints;
 	}
 
 	public int getCurrentHealthPoints() {
@@ -105,7 +75,7 @@ public class HealthPoints implements IShowable {
 	}
 
 	/**
-	 * HP Leiste unter dem zugehörigen Charakter anzeigen
+	 * HP Leiste unter dem zugehÃ¶rigen Charakter anzeigen
 	 */
 	@Override
 	public void show() {

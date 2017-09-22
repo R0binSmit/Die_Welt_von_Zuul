@@ -16,14 +16,13 @@ import main.IShowable;
  * Abstrakte Klasse um alle Charaktere darzustellen.
  */
 public abstract class Character implements IShowable {
+	protected String name;
 	protected String description;
+	protected HealthPoints healthPoints;
+	protected Inventory inventory;
 	protected Equipment equipment;
 	protected GraphicsContext graphicsContext;
-	protected HealthPoints healthPoints;
 	protected Image image;
-	protected Inventory inventory;
-	protected int money;
-	protected String name;
 	protected Point2D position;
 	protected Room room;
 
@@ -95,10 +94,10 @@ public abstract class Character implements IShowable {
 	}
 
 	/**
-	 * Rüstung anziehen
+	 * RÃ¼stung anziehen
 	 * 
 	 * @param defense
-	 *            Das Rüstungsteil das Ausgerüstet werden soll
+	 *            Das RÃ¼stungsteil das AusgerÃ¼stet werden soll
 	 */
 	public void equipItem(Defense defense) {
 		Item lastDefense = equipment.equipItem(defense);
@@ -109,10 +108,10 @@ public abstract class Character implements IShowable {
 	}
 
 	/**
-	 * Waffe ausrüstensaasdw
+	 * Waffe ausrÃ¼stensaasdw
 	 * 
 	 * @param weapon
-	 *            Die Waffe die ausgerüstet werden soll
+	 *            Die Waffe die ausgerÃ¼stet werden soll
 	 */
 	public void equipItem(Weapon weapon) {
 		Item lastWeapon = equipment.equipItem(weapon);
@@ -138,16 +137,8 @@ public abstract class Character implements IShowable {
 		return inventory.getFirstItemByName(itemName);
 	}
 
-	public double getHeight() {
-		return image.getHeight();
-	}
-
 	public int getHP() {
 		return healthPoints.getCurrentHealthPoints();
-	}
-
-	public int getMoney() {
-		return money;
 	}
 
 	public String getName() {
@@ -165,13 +156,10 @@ public abstract class Character implements IShowable {
 	public double getWidth() {
 		return image.getWidth();
 	}
-
-	/**
-	 * Dadurch können Charaktere mit dem Spieler interagieren
-	 * @param spieler
-	 * Der Spieler mit dem interagiert werden soll
-	 */
-	public abstract void interact(Player spieler);
+	
+	public double getHeight() {
+		return image.getHeight();
+	}
 
 	public void pickUpItem(Item item) {
 		inventory.addItem(item);
@@ -179,10 +167,6 @@ public abstract class Character implements IShowable {
 
 	public void setHP(int hp) {
 		healthPoints.setCurrentHealPoints(hp);
-	}
-
-	public void setMoney(int money) {
-		this.money = money;
 	}
 
 	public void setPosition(Point2D pos) {

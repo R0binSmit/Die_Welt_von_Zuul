@@ -17,7 +17,7 @@ public class Enemy extends Character {
 	private Point2D velocity = new Point2D(0, 0), acceleration = new Point2D(0, 0);
 
 	/**
-	 * Konstruktor für alle Gegner
+	 * Konstruktor fÃ¼r alle Gegner
 	 * 
 	 * @param name
 	 *            Name des Gegners
@@ -69,24 +69,13 @@ public class Enemy extends Character {
 	}
 
 	/**
-	 * Dadurch können Gegner mit dem Spieler interagieren
-	 * 
-	 * @param spieler
-	 *            Der Spieler mit dem interagiert werden soll
-	 */
-	@Override
-	public void interact(Player spieler) {
-
-	}
-
-	/**
 	 * Hierdurch soll der Gegner den Charakter verfolgen.
 	 * 
 	 * @param target
 	 *            Der zu verfolgende Spieler
 	 */
 	public void move(Player target) {
-		// Prüfen ob der Gegner nah genug dran ist um anzugreifen, wenn ja angreifen
+		// PrÃ¼fen ob der Gegner nah genug dran ist um anzugreifen, wenn ja angreifen
 		if (target.getPosition().distance(position) < range && cooldown <= 0) {
 			attack(target);
 			cooldown = 100;
