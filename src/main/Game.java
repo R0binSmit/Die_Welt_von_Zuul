@@ -27,8 +27,8 @@ public class Game {
 	public Game(GraphicsContext gc, ZuulUI zuulUI) {
 		land = new Worldmap(gc);
 		land.createRooms();
-		player = new Player("Dave", "Ich liebe dich", land.getStartpoint(), 400, 400,
-				Usefull.linkToImage("/Bilder/Dave.png"), gc, null);
+		player = new Player("Dave", "Ich liebe dich", land.getStartpoint(), 400, 600,
+				Usefull.linkToImage("/Bilder/Superman.png"), gc, null);
 		this.gc = gc;
 		textbox = TextBox.newTextBox();
 		this.zuulUI = zuulUI;
