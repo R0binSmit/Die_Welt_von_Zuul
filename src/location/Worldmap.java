@@ -165,7 +165,7 @@ public class Worldmap {
 		outside.setNPC(purrCat);
 
 		goldHamster = new NPC("Goldhamster", "Ein gigantisches Meerschweinchen", lecturehall, 700, 350,
-				Usefull.linkToImage("/Bilder/Hamster_klein.png"), gc, null);
+				Usefull.linkToImage("/Bilder/hamster_klein.png"), gc, null);
 		goldHamster.setText(System.getProperty("line.separator")
 				+ "Das Meerschweinchen kichert manisch und klimpert mit den Goldm¸nzen zu seinen F¸ﬂen."
 				+ System.getProperty("line.separator")
@@ -234,7 +234,7 @@ public class Worldmap {
 		execute.add(() -> purrCat.setText(System.getProperty("line.separator")
 				+ "'Der Panther im Keller sehnt sich nach der Jagd nach weiﬂen, weichen, flauschigen Wesen. Nun hinfort!', maunzt die Schnurrkatze."));
 		goldPlate = new Collector("Goldteller", "Ein goldener Teller",
-				Usefull.linkToImage("/Bilder/Goldteller_klein.png"), 600, 160, gc, null, "Lachs", 0, 1, null);
+				Usefull.linkToImage("/Bilder/goldteller_klein.png"), 600, 160, gc, null, "Lachs", 0, 1, null);
 		goldPlate.setLandscapeResponse(landscapeResponse);
 		goldPlate.setExecute(execute);
 		outside.BuildLandscape(goldPlate);
@@ -313,7 +313,7 @@ public class Worldmap {
 		destination.add(computerRoom);
 		destination.add(buero);
 		destination.add(underground);
-		panther = new Teleporter("Panther", "Eine schwarze Raubkatze", Usefull.linkToImage("/Bilder/Schnurrkatze_klein.png"), 0, 0, gc, null, "Kanninchen", destination);
+		panther = new Teleporter("Panther", "Eine schwarze Raubkatze", Usefull.linkToImage("/Bilder/schnurrkatze_klein.png"), 0, 0, gc, null, "Kanninchen", destination);
 		panther.setLandscapeResponse(landscapeResponse);
 		worldsend.BuildLandscape(panther);
 		
