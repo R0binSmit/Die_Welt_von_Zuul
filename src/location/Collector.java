@@ -30,8 +30,12 @@ public class Collector extends Landscape {
 
 	@Override
 	public void onUse(Player player) {
-		if (player.getItem(key) == null) {
+		if (player.getItem(key) == null && amount < maxAmount) {
 			textbox.addText(getResponse(LandscapeResponse.USE_RESPONSE));
+		}
+		
+		else if (amount >= maxAmount) {
+			
 		}
 		
 		else if (amount + 1 < maxAmount) {
@@ -48,5 +52,15 @@ public class Collector extends Landscape {
 			}
 		}
 	}
+
+	public ArrayList<Runnable> getExecute() {
+		return execute;
+	}
+
+	public void setExecute(ArrayList<Runnable> execute) {
+		this.execute = new ArrayList<Runnable>(execute);
+	}
+	
+	
 
 }

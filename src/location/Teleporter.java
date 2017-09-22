@@ -43,10 +43,9 @@ public class Teleporter extends Landscape {
 			} while (currentDestination == getRoom());
 		}
 
+		textbox.addText(getResponse(LandscapeResponse.ENTER_RESPONSE));
 		spieler.setRoom(currentDestination);
 		spieler.setPosition(new Point2D(400, 400));
-		textbox.addText(getResponse(LandscapeResponse.ENTER_RESPONSE));
-		textbox.addText(spieler.getRoom().getDescription());
 		spieler.getRoom().onEnterRoomEvent(spieler);
 	}
 

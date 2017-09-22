@@ -77,6 +77,24 @@ public abstract class Landscape {
 		this.room = raum;
 	}
 
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
+	}
+	
+	
+
+	public HashMap<LandscapeResponse, String> getLandscapeResponse() {
+		return landscapeResponse;
+	}
+
+	public void setLandscapeResponse(HashMap<LandscapeResponse, String> landscapeResponse) {
+		this.landscapeResponse = new HashMap<LandscapeResponse, String>(landscapeResponse);
+	}
+
 	public void show() {
 		double x = position.getX() - image.getWidth() * 0.5;
 		double y = position.getY() - image.getHeight() * 0.5;

@@ -79,8 +79,7 @@ public class Game {
 		textbox.addText("Seltsame Ereignisse haben ihre Schatten vorausgeworfen." + System.getProperty("line.separator")
 				+ "Über Nacht fiel der Goldpreis auf 3 US-Dollar pro Feinunze und die Menscheit strebte nach einen neuen Wertanlage:"
 				+ System.getProperty("line.separator") + "Lutetium!" + System.getProperty("line.separator")
-				+ "Niemand weiß, was dann geschah. Vielleicht gruben wir zu tief, vielleicht ließen wir uns auf falsche Götzen ein,"
-				+ System.getProperty("line.separator") + "fest steht, dass das Ende der Welt über uns kam."
+				+ "Niemand weiß, was dann geschah, fest steht, dass das Ende der Welt über uns kam."
 				+ System.getProperty("line.separator")
 				+ "Nur hatten die Propheten keine Ahnung, wie seltsam das Ende werden würde."
 				+ System.getProperty("line.separator")
