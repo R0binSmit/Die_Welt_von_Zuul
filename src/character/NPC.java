@@ -16,7 +16,7 @@ public class NPC extends Character {
 	protected TextBox textbox = TextBox.newTextBox();
 	
 	/**
-	 * Konstruktor für alle NPCs
+	 * Konstruktor fÃ¼r alle NPCs
 	 * 
 	 * @param name
 	 *            Name des NPCs
@@ -45,11 +45,10 @@ public class NPC extends Character {
 	}
 
 	/**
-	 * Dadurch können NPCs mit dem Spieler interagieren
+	 * Dadurch kÃ¶nnen NPCs mit dem Spieler interagieren
 	 * @param spieler
 	 * Der Spieler mit dem interagiert werden soll
 	 */
-	@Override
 	public void interact(Player spieler) {
 		textbox.addText(text);
 	}
