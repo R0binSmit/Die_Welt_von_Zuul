@@ -135,9 +135,9 @@ public class Worldmap {
 		lachs = new BasicItem("Lachs", "Herrlicher, roter Lachs", 10, Usefull.linkToImage("/Bilder/lachs.png"), 0, 0,
 				gc);
 		rabbit = new BasicItem("Kanninchen", "Ein weißes Kanninchen", 1,
-				Usefull.linkToImage("/Bilder/kanninchen_klein2.png"), 650, 600, gc);
+				Usefull.linkToImage("/Bilder/kanninchen.png"), 650, 600, gc);
 		goldKey = new BasicItem("Goldschlüssel", "Ein goldener Schlüssel", 1000,
-				Usefull.linkToImage("/Bilder/goldschluessel_klein.png"), 400, 400, gc);
+				Usefull.linkToImage("/Bilder/goldschluessel.png"), 400, 400, gc);
 		schuppenpanzer = new Defense("Karpfenschuppenpanzer", "Ein Panzer aus Karpfenschuppen", 200,
 				EnumDefense.BREASTPLATE, Usefull.linkToImage("/Bilder/assets/item/armor/normal/breastplate.png"), 0, 0,
 				gc, 0.1);
@@ -154,7 +154,7 @@ public class Worldmap {
 
 		// NPC
 		purrCat = new NPC("Schnurrkatze", "Ein schnurrende Katze", outside, 700, 100,
-				Usefull.linkToImage("/Bilder/schnurrkatze_klein.png"), gc, null);
+				Usefull.linkToImage("/Bilder/schnurrkatze.png"), gc, null);
 		purrCat.setText(System.getProperty("line.separator")
 				+ "Die Katze schnurrt. Und spricht. Die Menschheit musste sich schnell an derlei Dinge gewöhnen."
 				+ System.getProperty("line.separator") + "'Lachs', maunzt sie." + System.getProperty("line.separator")
@@ -164,7 +164,7 @@ public class Worldmap {
 		outside.setNPC(purrCat);
 
 		goldHamster = new NPC("Goldhamster", "Ein gigantisches Meerschweinchen", lecturehall, 700, 350,
-				Usefull.linkToImage("/Bilder/hamster_klein.png"), gc, null);
+				Usefull.linkToImage("/Bilder/hamster.png"), gc, null);
 		goldHamster.setText(System.getProperty("line.separator")
 				+ "Das Meerschweinchen kichert manisch und klimpert mit den Goldmünzen zu seinen Füßen."
 				+ System.getProperty("line.separator")
@@ -176,7 +176,7 @@ public class Worldmap {
 		lecturehall.setNPC(goldHamster);
 
 		raven = new NPC("Rabe", "Ein majestätischer Rabe", buero, 420, 350,
-				Usefull.linkToImage("/Bilder/rabe_klein.png"), gc, null);
+				Usefull.linkToImage("/Bilder/rabe.png"), gc, null);
 		raven.setText(System.getProperty("line.separator") + "Der Rabe beachtet dich nicht und rezitiert Gedichtzeilen:"
 				+ System.getProperty("line.separator")
 				+ "'Und es hebt sich meiner Seele Schatten nimmer, nimmer, Nimmermehr!"
@@ -189,7 +189,7 @@ public class Worldmap {
 		buero.setNPC(raven);
 
 		snake = new NPC("Schlange", "Die Schlange im Garten Eden", eden, 450, 500,
-				Usefull.linkToImage("/Bilder/schlange_klein2.png"), gc, null);
+				Usefull.linkToImage("/Bilder/schlange.png"), gc, null);
 		snake.setText(System.getProperty("line.separator") + "Die Schlange nickt dir anerkennend zu und zischelt:"
 				+ System.getProperty("line.separator") + "'Endlich! Lange habe ich auf diesen Tag gewartet!"
 				+ System.getProperty("line.separator")
@@ -205,20 +205,20 @@ public class Worldmap {
 		items.add(lachs);
 		items.add(schuppenpanzer);
 		karpfen = new Enemy("Karpfenkönig", "Der König der Karpfen", cafeteria, 200, 700,
-				Usefull.linkToImage("/Bilder/karpfenkoenig_klein.png"), 3, 0.05, 70, gc, items);
+				Usefull.linkToImage("/Bilder/karpfenkoenig.png"), 3, 0.05, 70, gc, items);
 		cafeteria.setEnemy(karpfen);
 
 		items.clear();
 		items.add(heavensbane);
 		evilGoldHamster = new Enemy("Hamstergott", "Der Güldene Hamstergott ist ein Meerschweinchen", lecturehall, 700,
-				350, Usefull.linkToImage("/Bilder/hamster_klein.png"), 2, 0.1, 80, gc, items);
+				350, Usefull.linkToImage("/Bilder/hamster.png"), 2, 0.1, 80, gc, items);
 		evilGoldHamster.equipItem(hamsterhaut);
 
 		items.clear();
 		items.add(angelsword);
 		items.add(goldKey);
 		stoneAngel = new Enemy("Steinengel", "Ein Engel aus Stein", computerRoom, 100, 100,
-				Usefull.linkToImage("/Bilder/engel_klein.png"), 4, 0.125, 60, gc, items);
+				Usefull.linkToImage("/Bilder/engel.png"), 4, 0.125, 60, gc, items);
 
 		// Landschaft
 		landscapeResponse.put(LandscapeResponse.USE_RESPONSE, System.getProperty("line.separator")
@@ -234,7 +234,7 @@ public class Worldmap {
 		execute.add(() -> purrCat.setText(System.getProperty("line.separator")
 				+ "'Der Panther im Keller sehnt sich nach der Jagd nach weißen, weichen, flauschigen Wesen. Nun hinfort!', maunzt die Schnurrkatze."));
 		goldPlate = new Collector("Goldteller", "Ein goldener Teller",
-				Usefull.linkToImage("/Bilder/goldteller_klein.png"), 600, 160, gc, null, "Lachs", 0, 1, null);
+				Usefull.linkToImage("/Bilder/goldteller.png"), 600, 160, gc, null, "Lachs", 0, 1, null);
 		goldPlate.setLandscapeResponse(landscapeResponse);
 		goldPlate.setExecute(execute);
 		outside.BuildLandscape(goldPlate);
@@ -255,9 +255,9 @@ public class Worldmap {
 		execute.add(() -> lecturehall.setEnemy(evilGoldHamster));
 		execute.add(() -> lecturehall.addItem(rabbit));
 		goldCage = new Collector("Goldkäfig", "Ein goldener Käfig",
-				Usefull.linkToImage("/Bilder/kaefig_klein_mit_kanninchen2.png"), 675, 550, gc, null, "Goldschlüssel", 0,
+				Usefull.linkToImage("/Bilder/kaefig_mit_kanninchen.png"), 675, 550, gc, null, "Goldschlüssel", 0,
 				1, null);
-		execute.add(() -> goldCage.setImage(Usefull.linkToImage("/Bilder/kaefig_klein2.png")));
+		execute.add(() -> goldCage.setImage(Usefull.linkToImage("/Bilder/kaefig.png")));
 		goldCage.setExecute(execute);
 		goldCage.setLandscapeResponse(landscapeResponse);
 		lecturehall.BuildLandscape(goldCage);
@@ -275,7 +275,7 @@ public class Worldmap {
 						+ System.getProperty("line.separator")
 						+ "Aus dem Nichts manifestiert sich ein steinerner Engel!");
 		execute.add(() -> computerRoom.setEnemy(stoneAngel));
-		angelComputer = new Collector("Computer", "Ein Computer", Usefull.linkToImage("/Bilder/computer_klein.png"),
+		angelComputer = new Collector("Computer", "Ein Computer", Usefull.linkToImage("/Bilder/computer.png"),
 				390, 375, gc, null, "Passwort", 0, 1, null);
 		angelComputer.setExecute(execute);
 		angelComputer.setLandscapeResponse(landscapeResponse);
@@ -295,7 +295,7 @@ public class Worldmap {
 		execute.add(() -> buero.addItem(new BasicItem("Passwort", "Gewährt dieses Wort Zugang zu Eden?.", 20,
 				Usefull.linkToImage("/Bilder/assets/item/books/book4.png"), 700, 400, gc)));
 		typewriter = new Collector("Schreibmaschine", "Eine Schreibmaschine",
-				Usefull.linkToImage("/Bilder/schreibmaschine_klein.png"), 750, 375, gc, null, "Buch", 0, 3, null);
+				Usefull.linkToImage("/Bilder/schreibmaschine.png"), 750, 375, gc, null, "Buch", 0, 3, null);
 		typewriter.setExecute(execute);
 		typewriter.setLandscapeResponse(landscapeResponse);
 		buero.BuildLandscape(typewriter);
@@ -315,7 +315,7 @@ public class Worldmap {
 		destination.add(buero);
 		destination.add(underground);
 		panther = new Teleporter("Panther", "Eine schwarze Raubkatze",
-				Usefull.linkToImage("/Bilder/schnurrkatze_klein.png"), 0, 0, gc, null, "Kanninchen", destination);
+				Usefull.linkToImage("/Bilder/schnurrkatze.png"), 0, 0, gc, null, "Kanninchen", destination);
 		panther.setLandscapeResponse(landscapeResponse);
 		worldsend.BuildLandscape(panther);
 
@@ -325,7 +325,7 @@ public class Worldmap {
 				+ "Du nimmst einen Schluck aus dem Brunnen und fühlst dich erholt!");
 		fountain = new Healfountain("Heilbrunnen",
 				"Womöglich speist sich dieser Brunnen aus dem selben Quell wie der legendäre Jungbrunnen!",
-				Usefull.linkToImage("/Bilder/brunnen_klein.png"), 400, 400, gc, null);
+				Usefull.linkToImage("/Bilder/brunnen.png"), 400, 400, gc, null);
 		fountain.setLandscapeResponse(landscapeResponse);
 		outside.BuildLandscape(fountain);
 	}
