@@ -1,4 +1,4 @@
-package equipment;
+package character;
 
 import java.util.LinkedList;
 
@@ -12,7 +12,7 @@ import javafx.scene.paint.Paint;
 /**
  * Klasse die das Equipment des Spielers darstellt
  */
-public class Equipment implements IEquipment {
+public class Equipment {
 	private Defense breastplate;
 	private Defense helmet;
 	private Weapon leftHand;
@@ -125,7 +125,6 @@ public class Equipment implements IEquipment {
 	 * 
 	 * @return Gesamtrüstung als double.
 	 */
-	@Override
 	public double getArmor() {
 		double armor = 0;
 		if (helmet != null)
@@ -148,7 +147,6 @@ public class Equipment implements IEquipment {
 	 * 
 	 * @return Gesamtschaden als Integer.
 	 */
-	@Override
 	public int getDamage() {
 		int damage = 0;
 		if (leftHand != null)

@@ -3,7 +3,6 @@ package character;
 import java.util.LinkedList;
 import java.util.Random;
 
-import equipment.Equipment;
 import item.Defense;
 import item.Item;
 import item.Weapon;
