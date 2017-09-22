@@ -37,7 +37,7 @@ public class Healfountain extends Landscape {
 	}
 
 	@Override
-	public void onEnterRoom(Player spieler) {
+	public void onEnterRoom(Player player) {
 
 	}
 
@@ -46,8 +46,8 @@ public class Healfountain extends Landscape {
 	 * Heilt den Spieler
 	 * @param spieler Spieler der mit dem Objekt interagiert
 	 */
-	public void onUse(Player spieler) {
+	public void onUse(Player player) {
 		textbox.addText(getResponse(LandscapeResponse.USE_RESPONSE));
-		spieler.setHP(spieler.getHP() + 20);
+		player.setHP(player.getHP() + 20);
 	}
 }

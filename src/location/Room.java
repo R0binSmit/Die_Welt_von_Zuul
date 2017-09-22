@@ -28,7 +28,7 @@ public class Room {
 	private ArrayList<Door> exits = new ArrayList<Door>();
 	private String description;
 	private Image backGround;
-	protected GraphicsContext gc;
+	private GraphicsContext gc;
 	private LinkedList<Item> items = new LinkedList<Item>();
 	private LinkedList<Enemy> enemys = new LinkedList<Enemy>();
 	private Worldmap land;
