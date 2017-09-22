@@ -12,8 +12,8 @@ import main.TextBox;
  * Klasse mit der alle NPCs dargestellt werden
  */
 public class NPC extends Character {
-	protected String text;
-	protected TextBox textbox = TextBox.newTextBox();
+	private String text;
+	private TextBox textbox = TextBox.newTextBox();
 	
 	/**
 	 * Konstruktor für alle NPCs
@@ -46,10 +46,10 @@ public class NPC extends Character {
 
 	/**
 	 * Dadurch können NPCs mit dem Spieler interagieren
-	 * @param spieler
+	 * @param player
 	 * Der Spieler mit dem interagiert werden soll
 	 */
-	public void interact(Player spieler) {
+	public void interact(Player player) {
 		textbox.addText(text);
 	}
 
