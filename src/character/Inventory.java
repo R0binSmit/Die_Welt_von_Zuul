@@ -27,19 +27,6 @@ public class Inventory implements IShowable {
 	}
 
 	/**
-	 * Konstruktor mit der Eingabemöglichkeit für Items direkt beim Erstellen des
-	 * Inventars
-	 * 
-	 * @param items
-	 *            Items die sich von Beginn an im Inventar befinden sollen
-	 */
-	Inventory(LinkedList<Item> items) {
-		this.maxSpace = 10;
-		currentUsedSpace = 0;
-		addItems(items);
-	}
-
-	/**
 	 * Item zum Inventar hinzufügen
 	 * 
 	 * @param item
