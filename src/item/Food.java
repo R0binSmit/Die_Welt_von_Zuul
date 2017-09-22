@@ -20,8 +20,6 @@ public class Food extends Item {
 	 *            Name von dem Essen.
 	 * @param description
 	 *            Beschreibung von dem Essen
-	 * @param price
-	 *            Wird benötigt für eine spätere Erweiterung.
 	 * @param image
 	 *            Stellt die visualisierung dar.
 	 * @param x
@@ -34,9 +32,9 @@ public class Food extends Item {
 	 *            Beschreibt den Integer Wert wie die Lebenspunkte eines Charakters
 	 *            geändert werden sollen.
 	 */
-	public Food(String name, String description, int price, Image image, int x, int y, GraphicsContext graphicsContext,
+	public Food(String name, String description, Image image, int x, int y, GraphicsContext graphicsContext,
 			int changeHealthPoints) {
-		super(name, description, price, image, new Point2D(x, y), graphicsContext);
+		super(name, description, image, new Point2D(x, y), graphicsContext);
 		this.changeHealthPoints = changeHealthPoints;
 	}
 

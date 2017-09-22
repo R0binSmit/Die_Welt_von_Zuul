@@ -9,9 +9,9 @@ import javafx.scene.image.Image;
  * Diese Klasse definiert ein einfaches Item Objekt (da Item abstrakt ist).
  */
 public class BasicItem extends Item {
-	public BasicItem(String name, String description, int price, Image image, int x, int y,
+	public BasicItem(String name, String description, Image image, int x, int y,
 			GraphicsContext graphicsContext) {
-		super(name, description, price, image, new Point2D(x, y), graphicsContext);
+		super(name, description, image, new Point2D(x, y), graphicsContext);
 	}
 
 	@Override

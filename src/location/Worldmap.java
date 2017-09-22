@@ -132,24 +132,24 @@ public class Worldmap {
 				eden);
 
 		// Gegenstände
-		lachs = new BasicItem("Lachs", "Herrlicher, roter Lachs", 10, Usefull.linkToImage("/Bilder/lachs.png"), 0, 0,
+		lachs = new BasicItem("Lachs", "Herrlicher, roter Lachs", Usefull.linkToImage("/Bilder/lachs.png"), 0, 0,
 				gc);
-		rabbit = new BasicItem("Kanninchen", "Ein weißes Kanninchen", 1,
+		rabbit = new BasicItem("Kanninchen", "Ein weißes Kanninchen",
 				Usefull.linkToImage("/Bilder/kanninchen.png"), 650, 600, gc);
-		goldKey = new BasicItem("Goldschlüssel", "Ein goldener Schlüssel", 1000,
+		goldKey = new BasicItem("Goldschlüssel", "Ein goldener Schlüssel",
 				Usefull.linkToImage("/Bilder/goldschluessel.png"), 400, 400, gc);
-		schuppenpanzer = new Defense("Karpfenschuppenpanzer", "Ein Panzer aus Karpfenschuppen", 200,
+		schuppenpanzer = new Defense("Karpfenschuppenpanzer", "Ein Panzer aus Karpfenschuppen",
 				EnumDefense.BREASTPLATE, Usefull.linkToImage("/Bilder/assets/item/armor/normal/breastplate.png"), 0, 0,
 				gc, 0.1);
-		hamsterhaut = new Defense("Goldhaut", "Ein Panzer aus Goldfell", 200, EnumDefense.BREASTPLATE,
+		hamsterhaut = new Defense("Goldhaut", "Ein Panzer aus Goldfell", EnumDefense.BREASTPLATE,
 				Usefull.linkToImage("/Bilder/assets/item/armor/normal/breastplate.png"), 0, 0, gc, 0.9);
-		heavensbane = new Weapon("Himmelsfluch", "Ein Zweig vom Baum der Erkenntnis", 200,
+		heavensbane = new Weapon("Himmelsfluch", "Ein Zweig vom Baum der Erkenntnis",
 				Usefull.linkToImage("/Bilder/assets/item/weapon/stick_of_truth.png"), 0, 0, gc, 45);
-		angelsword = new Weapon("Engelsschwert", "Schwert eines Engels", 200,
+		angelsword = new Weapon("Engelsschwert", "Schwert eines Engels",
 				Usefull.linkToImage("/Bilder/assets/item/weapon/sword.png"), 0, 0, gc, 20);
-		lecturehall.addItem(new BasicItem("Buch", "Ein Quell immerwährender Weisheit. Theoretisch.", 100,
+		lecturehall.addItem(new BasicItem("Buch", "Ein Quell immerwährender Weisheit. Theoretisch.",
 				Usefull.linkToImage("/Bilder/assets/item/books/book2.png"), 550, 250, gc));
-		computerRoom.addItem(new BasicItem("Buch", "Ein Quell immerwährender Weisheit. Theoretisch.", 100,
+		computerRoom.addItem(new BasicItem("Buch", "Ein Quell immerwährender Weisheit. Theoretisch.",
 				Usefull.linkToImage("/Bilder/assets/item/books/book3.png"), 440, 400, gc));
 
 		// NPC
@@ -229,7 +229,7 @@ public class Worldmap {
 				+ "'Besonders nicht dem Panther im Keller. Wie sehr er sich doch nach der Jagd sehnt. Besonders nach weichen, flauschigen Wesen! Jemand hat sogar einst eine Geschichte über ihn geschrieben."
 				+ System.getProperty("line.separator") + "Nimm dies, lesen würde dir gut tun, nun hinfort!'");
 		execute.add(() -> outside.removeLandscape("Goldteller"));
-		execute.add(() -> outside.addItem(new BasicItem("Buch", "Ein Quell immerwährender Weisheit. Theoretisch.", 100,
+		execute.add(() -> outside.addItem(new BasicItem("Buch", "Ein Quell immerwährender Weisheit. Theoretisch.",
 				Usefull.linkToImage("/Bilder/assets/item/books/books1.png"), 600, 140, gc)));
 		execute.add(() -> purrCat.setText(System.getProperty("line.separator")
 				+ "'Der Panther im Keller sehnt sich nach der Jagd nach weißen, weichen, flauschigen Wesen. Nun hinfort!', maunzt die Schnurrkatze."));
@@ -292,7 +292,7 @@ public class Worldmap {
 				System.getProperty("line.separator") + "Die Schreibmaschine klickt froh. Sie schreibt die Worte:"
 						+ System.getProperty("line.separator") + "'Generiere Passwort für den Zugang zu Eden!"
 						+ System.getProperty("line.separator") + "Benutzung auf eigene Gefahr!'");
-		execute.add(() -> buero.addItem(new BasicItem("Passwort", "Gewährt dieses Wort Zugang zu Eden?.", 20,
+		execute.add(() -> buero.addItem(new BasicItem("Passwort", "Gewährt dieses Wort Zugang zu Eden?.",
 				Usefull.linkToImage("/Bilder/assets/item/books/book4.png"), 700, 400, gc)));
 		typewriter = new Collector("Schreibmaschine", "Eine Schreibmaschine",
 				Usefull.linkToImage("/Bilder/schreibmaschine.png"), 750, 375, gc, null, "Buch", 0, 3, null);

@@ -19,8 +19,6 @@ public class Weapon extends Item {
 	 *            Name der Waffe
 	 * @param description
 	 *            Beschreibung der Waffe
-	 * @param price
-	 *            Wird für eine spätere Erweiterung benötig.
 	 * @param image
 	 *            Die Visualisierung der Waffe (ein Bild).
 	 * @param x
@@ -32,9 +30,9 @@ public class Weapon extends Item {
 	 * @param damage
 	 *            Beschreibt den Schaden die die Waffe verursachen kann.
 	 */
-	public Weapon(String name, String description, int price, Image image, int x, int y,
+	public Weapon(String name, String description, Image image, int x, int y,
 			GraphicsContext graphicsContext, int damage) {
-		super(name, description, price, image, new Point2D(x, y), graphicsContext);
+		super(name, description, image, new Point2D(x, y), graphicsContext);
 		this.damage = damage;
 		this.armor = 0;
 	}
@@ -46,8 +44,6 @@ public class Weapon extends Item {
 	 *            Name der Waffe
 	 * @param description
 	 *            Beschreibung der Waffe
-	 * @param price
-	 *            Wird für eine spätere Erweiterung benötig.
 	 * @param image
 	 *            Die Visualisierung der Waffe (ein Bild).
 	 * @param x
@@ -61,9 +57,9 @@ public class Weapon extends Item {
 	 * @param armor
 	 *            Beschreibt den Rüstungswert der Waffe.
 	 */
-	public Weapon(String name, String description, int price, Image image, int x, int y,
+	public Weapon(String name, String description, Image image, int x, int y,
 			GraphicsContext graphicsContext, int damage, int armor) {
-		super(name, description, price, image, new Point2D(x, y), graphicsContext);
+		super(name, description, image, new Point2D(x, y), graphicsContext);
 		this.damage = damage;
 		this.armor = armor;
 	}

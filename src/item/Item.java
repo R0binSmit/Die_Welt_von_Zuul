@@ -14,7 +14,6 @@ public abstract class Item implements IShowable {
 	protected Image image;
 	protected String name, description;
 	protected Point2D position;
-	protected int price; // Wird für eine spätere Erweiterung benötigt.
 
 	/** 
 	 * Konstruktor von Item.
@@ -23,8 +22,6 @@ public abstract class Item implements IShowable {
 	 *            Der Name von dem Item als String.
 	 * @param description
 	 *            Die Beschreibung des Items als String.
-	 * @param price
-	 *            Wird für eine spätere Erweiterung benötigt.
 	 * @param image
 	 *            Wird verwendet um Items zu visualisieren.
 	 * @param position
@@ -32,11 +29,10 @@ public abstract class Item implements IShowable {
 	 * @param graphicsContext
 	 *            Wird verwendet um Items im Fenster zu Zeichnen.
 	 */
-	public Item(String name, String description, int price, Image image, Point2D position,
+	public Item(String name, String description, Image image, Point2D position,
 			GraphicsContext graphicsContext) {
 		this.name = name;
 		this.description = description;
-		this.price = price;
 		this.image = image;
 		this.position = position;
 		this.graphicsContext = graphicsContext;
@@ -52,10 +48,6 @@ public abstract class Item implements IShowable {
 
 	public String getName() {
 		return name;
-	}
-
-	public int getPrice() {
-		return price;
 	}
 
 	public double getWidth() {
@@ -104,7 +96,7 @@ public abstract class Item implements IShowable {
 	 */
 	@Override
 	public String toString() {
-		return "Item = name: " + getName() + ", description: " + getDescription() + ", price: " + getPrice();
+		return "Item = name: " + getName() + ", description: " + getDescription();
 	}
 
 	public abstract void use(Character character);
