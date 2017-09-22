@@ -17,7 +17,7 @@ public class Player extends Character {
 	private int cooldown = 100;
 
 	/**
-	 * Konstruktor für alle Spieler
+	 * Konstruktor fÃ¼r alle Spieler
 	 * 
 	 * @param name
 	 *            Name des Spielers
@@ -61,19 +61,6 @@ public class Player extends Character {
 	}
 
 	/**
-	 * Dadurch können Spieler mit dem Spieler interagieren
-	 * 
-	 * @param spieler
-	 *            Der Spieler mit dem interagiert werden soll
-	 */
-	@Override
-	public void interact(Player Spieler) {
-		if(healthPoints.getIsUsable()) {
-			
-		}
-	}
-
-	/**
 	 * Dadurch kann der Spieler mit seiner Umwelt interagieren
 	 */
 	public void interagieren() {
@@ -110,7 +97,7 @@ public class Player extends Character {
 	 * Wird aufgerufen damit der Spieler sich bewegt
 	 * 
 	 * @param key
-	 *            Taste die gedrückt wurde
+	 *            Taste die gedrÃ¼ckt wurde
 	 */
 	public void move(KeyCode key) {
 		if(healthPoints.getIsUsable()){
