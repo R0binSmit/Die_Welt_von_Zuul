@@ -28,7 +28,7 @@ public class Game {
 		land = new Worldmap(gc);
 		land.createRooms();
 		player = new Player("Dave", "Ich liebe dich", land.getStartpoint(), 400, 600,
-				Usefull.linkToImage("/Bilder/Superman.png"), gc, null);
+				Usefull.linkToImage("/Bilder/player.png"), gc, null);
 		this.gc = gc;
 		textbox = TextBox.newTextBox();
 		this.zuulUI = zuulUI;
