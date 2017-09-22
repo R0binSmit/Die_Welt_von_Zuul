@@ -26,7 +26,7 @@ public class Defense extends Item {
 	 * @param armor = Der Rüstungswert von der Rüstung.
 	 */
 	public Defense(String name, String description, int price, EnumDefense defenseType, Image image, int x, int y,
-			GraphicsContext graphicsContext, int armor) {
+			GraphicsContext graphicsContext, double armor) {
 		super(name, description, price, image, new Point2D(x, y), graphicsContext);
 		this.armor = armor;
 		this.defenseType = defenseType;

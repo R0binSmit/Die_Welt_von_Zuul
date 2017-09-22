@@ -114,7 +114,7 @@ public class Game {
 			break;
 		case F20:
 			for (Item item : player.getItems()) {
-				if (Usefull.intersects(zuulUI.getMouseX(), zuulUI.getMouseY(), 0, 0, dist, 750,
+				if (Usefull.intersects(zuulUI.getMouseX(), zuulUI.getMouseY(), 0, 0, dist, 720,
 						item.getWidth(), item.getHeight())) {
 					item.use(player);
 					break;
@@ -125,7 +125,7 @@ public class Game {
 			break;
 		case F21:
 			for (Item item : player.getItems()) {
-				if (Usefull.intersects(zuulUI.getMouseX(), zuulUI.getMouseY(), 0, 0, dist, 750,
+				if (Usefull.intersects(zuulUI.getMouseX(), zuulUI.getMouseY(), 0, 0, dist, 720,
 						item.getWidth(), item.getHeight())) {
 					item.setPosition(player.getPosition());
 					player.getRoom().addItem(player.dropItem(item.getName()));

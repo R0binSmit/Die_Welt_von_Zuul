@@ -3,6 +3,9 @@ package equipment;
 import item.Defense;
 import item.Item;
 import item.Weapon;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 /**
  * Klasse die das Equipment des Spielers darstellt
@@ -14,12 +17,13 @@ public class Equipment implements IEquipment {
 	private Weapon rightHand;
 	private Defense shoes;
 	private Defense trousers;
+	private GraphicsContext graphicsContext;
 
 	/**
 	 * Standard Konstruktor. 
 	 */
-	public Equipment() {
-		
+	public Equipment(GraphicsContext graphicsContext) {
+		this.graphicsContext =graphicsContext;
 	}
 	
 	/**
@@ -125,28 +129,34 @@ public class Equipment implements IEquipment {
 	 * Equipment wird in dem JavaFX Fenster anzeigen
 	 */
 	public void show() {
+		Paint p = graphicsContext.getFill();
+		graphicsContext.setFill(Color.rgb(230, 230, 255, 0.5));
+		graphicsContext.fillRect(590, 520, 210, 280);
+		graphicsContext.setFill(p);
+		graphicsContext.fillText("Ausrüstung", 670, 535);
+		
 		if (helmet != null) {
-			helmet.showAt(700, 600);
+			helmet.showAt(660, 540);
 		}
 
 		if (breastplate != null) {
-			breastplate.showAt(700, 650);
+			breastplate.showAt(660, 600);
 		}
 
 		if (leftHand != null) {
-			leftHand.showAt(650, 650);
+			leftHand.showAt(600, 600);
 		}
 
 		if (rightHand != null) {
-			rightHand.showAt(750, 650);
+			rightHand.showAt(720, 600);
 		}
 
 		if (trousers != null) {
-			trousers.showAt(700, 700);
+			trousers.showAt(660, 680);
 		}
 
 		if (shoes != null) {
-			shoes.showAt(700, 750);
+			shoes.showAt(660, 740);
 		}
 	}
 

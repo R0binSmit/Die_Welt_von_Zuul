@@ -7,7 +7,6 @@ import java.util.Random;
 
 import character.Enemy;
 import character.NPC;
-import character.Player;
 import item.BasicItem;
 import item.Defense;
 import item.EnumDefense;
@@ -142,9 +141,9 @@ public class Worldmap {
 				Usefull.linkToImage("/Bilder/goldschluessel_klein.png"), 400, 400, gc);
 		schuppenpanzer = new Defense("Karpfenschuppenpanzer", "Ein Panzer aus Karpfenschuppen", 200,
 				EnumDefense.BREASTPLATE, Usefull.linkToImage("/Bilder/assets/item/armor/normal/breastplate.png"), 0, 0,
-				gc, 10);
+				gc, 0.1);
 		hamsterhaut = new Defense("Goldhaut", "Ein Panzer aus Goldfell", 200, EnumDefense.BREASTPLATE,
-				Usefull.linkToImage("/Bilder/assets/item/armor/normal/breastplate.png"), 0, 0, gc, 90);
+				Usefull.linkToImage("/Bilder/assets/item/armor/normal/breastplate.png"), 0, 0, gc, 0.9);
 		heavensbane = new Weapon("Himmelsfluch", "Ein Zweig vom Baum der Erkenntnis", 200,
 				Usefull.linkToImage("/Bilder/assets/item/weapon/stick_of_truth.png"), 0, 0, gc, 45);
 		angelsword = new Weapon("Engelsschwert", "Schwert eines Engels", 200,

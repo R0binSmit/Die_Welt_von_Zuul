@@ -18,11 +18,11 @@ import main.IShowable;
  */
 public abstract class Character implements IShowable {
 	protected String description;
-	protected Equipment equipment = new Equipment();
+	protected Equipment equipment;
 	protected GraphicsContext graphicsContext;
 	protected HealthPoints healthPoints;
 	protected Image image;
-	protected Inventory inventory = new Inventory();
+	protected Inventory inventory;
 	protected int money;
 	protected String name;
 	protected Point2D position;
@@ -56,6 +56,9 @@ public abstract class Character implements IShowable {
 		position = new Point2D(x, y);
 		this.image = image;
 		this.graphicsContext = graphicsContext;
+		
+		equipment = new Equipment(graphicsContext);
+		inventory = new Inventory(graphicsContext);
 		inventory.addItems(items);
 		healthPoints = new HealthPoints(this, graphicsContext);
 	}
@@ -105,7 +108,7 @@ public abstract class Character implements IShowable {
 	}
 
 	/**
-	 * Waffe ausrüsten
+	 * Waffe ausrüstensaasdw
 	 * 
 	 * @param weapon
 	 *            Die Waffe die ausgerüstet werden soll

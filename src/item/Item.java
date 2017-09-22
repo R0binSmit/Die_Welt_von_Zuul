@@ -79,7 +79,9 @@ public abstract class Item implements IShowable {
 	 */
 	@Override
 	public void show() {
-		graphicsContext.drawImage(image, position.getX(), position.getY());
+		double x = position.getX() - image.getWidth() * 0.5;
+		double y = position.getY() - image.getHeight() * 0.5;
+		graphicsContext.drawImage(image, x, y);
 	}
 
 	/**

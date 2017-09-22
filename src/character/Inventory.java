@@ -3,6 +3,9 @@ package character;
 import java.util.LinkedList;
 
 import item.Item;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import main.IShowable;
 
 /**
@@ -12,13 +15,15 @@ public class Inventory implements IShowable {
 	private int currentUsedSpace;
 	private LinkedList<Item> items = new LinkedList<Item>();
 	private int maxSpace;
+	private GraphicsContext graphicsContext;
 
 	/**
 	 * Standardkonstruktor
 	 */
-	public Inventory() {
+	public Inventory(GraphicsContext graphicsContext) {
 		maxSpace = 5;
 		currentUsedSpace = 0;
+		this.graphicsContext = graphicsContext;
 	}
 
 	/**
@@ -132,9 +137,14 @@ public class Inventory implements IShowable {
 	 */
 	@Override
 	public void show() {
+		Paint p = graphicsContext.getFill();
+		graphicsContext.setFill(Color.rgb(230, 230, 255, 0.5));
+		graphicsContext.fillRect(0, 700, 350, 100);
+		graphicsContext.setFill(p);
+		
 		int dist = 10;
 		for (Item item : items) {
-			item.showAt(dist, 750);
+			item.showAt(dist, 720);
 			dist += item.getWidth() + 10;
 		}
 	}
