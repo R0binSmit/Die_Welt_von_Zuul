@@ -42,9 +42,9 @@ public class HealthPoints implements IShowable {
 	 * @param maxHealPoints
 	 *            maximale HP des Charakters
 	 */
-	 public HealthPoints(Character character, GraphicsContext graphicsContext, int maxHealPoints) {
-		this.maxHealthPoints = maxHealPoints;
-		currentHealthPoints = maxHealPoints;
+	 public HealthPoints(Character character, GraphicsContext graphicsContext, int maxHealthPoints) {
+		this.maxHealthPoints = maxHealthPoints;
+		currentHealthPoints = maxHealthPoints;
 		isUsable = true;
 		this.graphicsContext = graphicsContext;
 		this.character = character;
