@@ -27,22 +27,7 @@ public class Inventory implements IShowable {
 	}
 
 	/**
-	 * Konstruktor mit der Eingabemöglichkeit für maximale Plätze und Items direkt
-	 * beim Erstellen des Inventars
-	 * 
-	 * @param maxSpace
-	 *            Maximale inventarplätze
-	 * @param items
-	 *            Items die sich von Beginn an im Inventar befinden sollen
-	 */
-	Inventory(int maxSpace, LinkedList<Item> items) {
-		this.maxSpace = maxSpace;
-		currentUsedSpace = 0;
-		addItems(items);
-	}
-
-	/**
-	 * Konstruktor mit der Eingabemöglichkeit für Items direkt beim Erstellen des
+	 * Konstruktor mit der EingabemÃ¶glichkeit fÃ¼r Items direkt beim Erstellen des
 	 * Inventars
 	 * 
 	 * @param items
@@ -55,10 +40,10 @@ public class Inventory implements IShowable {
 	}
 
 	/**
-	 * Item zum Inventar hinzufügen
+	 * Item zum Inventar hinzufÃ¼gen
 	 * 
 	 * @param item
-	 *            Item das hinzugefügt werden soll
+	 *            Item das hinzugefÃ¼gt werden soll
 	 */
 	public void addItem(Item item) {
 		if (currentUsedSpace + 1 != maxSpace) {
@@ -67,10 +52,10 @@ public class Inventory implements IShowable {
 	}
 
 	/**
-	 * Mehrere Items gleichzeitig zum Inventar hinzufügen
+	 * Mehrere Items gleichzeitig zum Inventar hinzufÃ¼gen
 	 * 
 	 * @param items
-	 *            Items die hinzugefügt werden sollen
+	 *            Items die hinzugefÃ¼gt werden sollen
 	 */
 	public void addItems(LinkedList<Item> items) {
 		if (items != null) {
@@ -81,7 +66,7 @@ public class Inventory implements IShowable {
 	}
 
 	/**
-	 * Item anhand des Namens zurückgeliefert bekommen
+	 * Item anhand des Namens zurÃ¼ckgeliefert bekommen
 	 * 
 	 * @param itemName
 	 *            Name des Items
@@ -106,7 +91,7 @@ public class Inventory implements IShowable {
 	}
 
 	/**
-	 * Item anhand des Namens Löschen
+	 * Item anhand des Namens LÃ¶schen
 	 * 
 	 * @param itemName
 	 *            Name des Items
@@ -121,7 +106,7 @@ public class Inventory implements IShowable {
 	}
 
 	/**
-	 * Item anhand des Idexes Löschen
+	 * Item anhand des Idexes LÃ¶schen
 	 * 
 	 * @param itemIndex
 	 *            Index des Items
@@ -149,6 +134,10 @@ public class Inventory implements IShowable {
 		}
 	}
 
+	/**
+	 * Diese Metode gibt den Inhalt von Inventory als String zurÃ¼ck.
+	 * @return Alle Items aus Inventory als String.
+	 */
 	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
