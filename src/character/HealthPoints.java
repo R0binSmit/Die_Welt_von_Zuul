@@ -11,10 +11,10 @@ import main.Usefull;
  */
 public class HealthPoints implements IShowable {
 	private Character character;
-	int currentHealthPoints;
+	private int currentHealthPoints;
 	private GraphicsContext graphicsContext;
 	boolean isUsable;
-	int maxHealthPoints;
+	private int maxHealthPoints;
 
 	/**
 	 * Erstellen des Objekts
@@ -24,7 +24,7 @@ public class HealthPoints implements IShowable {
 	 * @param graphicsContext
 	 *            zum Darstellen der HP Leiste
 	 */
-	HealthPoints(Character character, GraphicsContext graphicsContext) {
+	public HealthPoints(Character character, GraphicsContext graphicsContext) {
 		maxHealthPoints = 100;
 		currentHealthPoints = maxHealthPoints;
 		isUsable = true;
@@ -42,7 +42,7 @@ public class HealthPoints implements IShowable {
 	 * @param maxHealPoints
 	 *            maximale HP des Charakters
 	 */
-	HealthPoints(Character character, GraphicsContext graphicsContext, int maxHealPoints) {
+	 public HealthPoints(Character character, GraphicsContext graphicsContext, int maxHealPoints) {
 		this.maxHealthPoints = maxHealPoints;
 		currentHealthPoints = maxHealPoints;
 		isUsable = true;
