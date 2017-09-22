@@ -166,7 +166,7 @@ public abstract class Character implements IShowable {
 	}
 
 	public void setHP(int hp) {
-		healthPoints.setCurrentHealPoints(hp);
+		healthPoints.setCurrentHealthPoints(hp);
 	}
 
 	public void setPosition(Point2D pos) {

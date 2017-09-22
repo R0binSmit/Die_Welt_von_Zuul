@@ -62,7 +62,7 @@ public class HealthPoints implements IShowable {
 		return maxHealthPoints;
 	}
 
-	public void setCurrentHealPoints(int healPoints) { 
+	public void setCurrentHealthPoints(int healPoints) { 
 		if(healPoints > maxHealthPoints) {
 			currentHealthPoints = maxHealthPoints;
 		}
