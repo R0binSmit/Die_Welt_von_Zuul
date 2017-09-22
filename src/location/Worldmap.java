@@ -91,9 +91,8 @@ public class Worldmap {
 				+ System.getProperty("line.separator")
 				+ "Die Wirklichkeit zerfällt an diesem Ort. Ein einsamer Wächter ist auf der Jagd. Eden erwartet dich!",
 				this, Usefull.linkToImage("/Bilder/world_end.png"), gc);
-		
-		eden = new Room(System.getProperty("line.separator") + "Der Garten Eden"
-				+ System.getProperty("line.separator")
+
+		eden = new Room(System.getProperty("line.separator") + "Der Garten Eden" + System.getProperty("line.separator")
 				+ "Nach all den Gefahren und Widerständen stehst du nun im Garten Eden und erwartest die letzten Antworten von der Schlange!!",
 				this, Usefull.linkToImage("/Bilder/eden.png"), gc);
 		rooms.add(outside);
@@ -188,16 +187,17 @@ public class Worldmap {
 				+ System.getProperty("line.separator") + "und die Schreibmaschine druckt des Engels Hohn!'"
 				+ System.getProperty("line.separator") + "Der Rabe wiederholt diese Zeilen immer wieder.");
 		buero.setNPC(raven);
-		
+
 		snake = new NPC("Schlange", "Die Schlange im Garten Eden", eden, 450, 500,
 				Usefull.linkToImage("/Bilder/schlange_klein2.png"), gc, null);
 		snake.setText(System.getProperty("line.separator") + "Die Schlange nickt dir anerkennend zu und zischelt:"
+				+ System.getProperty("line.separator") + "'Endlich! Lange habe ich auf diesen Tag gewartet!"
 				+ System.getProperty("line.separator")
-				+ "'Endlich! Lange habe ich auf diesen Tag gewartet!"
-				+ System.getProperty("line.separator") + "Nachdem der Apfel verspeist wurde, ging der Garten verloren und die Menschheit mit ihm."
+				+ "Nachdem der Apfel verspeist wurde, ging der Garten verloren und die Menschheit mit ihm."
 				+ System.getProperty("line.separator") + "Ich habe alle Welten abgesucht um euch Menschen zu finden!"
 				+ System.getProperty("line.separator") + "Das Ende kam über eure Welt, als ich euch fand,"
-				+ System.getProperty("line.separator") + "doch nur so konntet ihr den Garten des Ursprungs wiederfinden,"
+				+ System.getProperty("line.separator")
+				+ "doch nur so konntet ihr den Garten des Ursprungs wiederfinden,"
 				+ System.getProperty("line.separator") + "einen Ort, der Heimat verheißt. Die Reise endet hier.'"
 				+ System.getProperty("line.separator") + "Die Schlange lächelt.");
 		eden.setNPC(snake);
@@ -270,7 +270,8 @@ public class Worldmap {
 						+ System.getProperty("line.separator") + "'Insert Password To Enter Eden!'");
 		landscapeResponse.put(LandscapeResponse.COLLECTFINISH_RESPONSE,
 				System.getProperty("line.separator") + "Der Computer fiept:" + System.getProperty("line.separator")
-						+ "'The PANTHER Shall Not Be TEMPTED! EDEN Must BE Protected!" + System.getProperty("line.separator") + "Launch ANGEL Upon HUMAN! SEAL The RABBIT!'"
+						+ "'The PANTHER Shall Not Be TEMPTED! EDEN Must BE Protected!"
+						+ System.getProperty("line.separator") + "Launch ANGEL Upon HUMAN! SEAL The RABBIT!'"
 						+ System.getProperty("line.separator")
 						+ "Aus dem Nichts manifestiert sich ein steinerner Engel!");
 		execute.add(() -> computerRoom.setEnemy(stoneAngel));
@@ -303,25 +304,27 @@ public class Worldmap {
 		landscapeResponse.clear();
 
 		landscapeResponse.put(LandscapeResponse.USE_RESPONSE, "Du streichelst den Panther!");
-		landscapeResponse.put(LandscapeResponse.ENTER_RESPONSE,
-				System.getProperty("line.separator") + "Ein Panther springt aus der Dunkelheit, packt dich im Nacken und verschleppt dich in einen anderen Raum!");
-		landscapeResponse.put(LandscapeResponse.REMOVE_RESPONSE,
-				System.getProperty("line.separator") + "Ein Panther springt aus der Dunkelheit und faucht. Dein weißes Kanninchen hoppelt davon und der Panther jagt ihm nach!");
+		landscapeResponse.put(LandscapeResponse.ENTER_RESPONSE, System.getProperty("line.separator")
+				+ "Ein Panther springt aus der Dunkelheit, packt dich im Nacken und verschleppt dich in einen anderen Raum!");
+		landscapeResponse.put(LandscapeResponse.REMOVE_RESPONSE, System.getProperty("line.separator")
+				+ "Ein Panther springt aus der Dunkelheit und faucht. Dein weißes Kanninchen hoppelt davon und der Panther jagt ihm nach!");
 		destination.add(outside);
 		destination.add(cafeteria);
 		destination.add(lecturehall);
 		destination.add(computerRoom);
 		destination.add(buero);
 		destination.add(underground);
-		panther = new Teleporter("Panther", "Eine schwarze Raubkatze", Usefull.linkToImage("/Bilder/schnurrkatze_klein.png"), 0, 0, gc, null, "Kanninchen", destination);
+		panther = new Teleporter("Panther", "Eine schwarze Raubkatze",
+				Usefull.linkToImage("/Bilder/schnurrkatze_klein.png"), 0, 0, gc, null, "Kanninchen", destination);
 		panther.setLandscapeResponse(landscapeResponse);
 		worldsend.BuildLandscape(panther);
-		
+
 		landscapeResponse.clear();
-		
-		landscapeResponse.put(LandscapeResponse.USE_RESPONSE,
-				System.getProperty("line.separator") + "Du nimmst einen Schluck aus dem Brunnen und fühlst dich erholt!");
-		fountain = new Healfountain("Heilbrunnen", "Womöglich speist sich dieser Brunnen aus dem selben Quell wie der legendäre Jungbrunnen!",
+
+		landscapeResponse.put(LandscapeResponse.USE_RESPONSE, System.getProperty("line.separator")
+				+ "Du nimmst einen Schluck aus dem Brunnen und fühlst dich erholt!");
+		fountain = new Healfountain("Heilbrunnen",
+				"Womöglich speist sich dieser Brunnen aus dem selben Quell wie der legendäre Jungbrunnen!",
 				Usefull.linkToImage("/Bilder/brunnen_klein.png"), 400, 400, gc, null);
 		fountain.setLandscapeResponse(landscapeResponse);
 		outside.BuildLandscape(fountain);
