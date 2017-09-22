@@ -14,13 +14,13 @@ public class Healfountain extends Landscape {
 	}
 
 	@Override
-	public void onEnterRoom(Player player) {
+	public void onEnterRoom(Player spieler) {
 		
 	}
 
 	@Override
-	public void onUse(Player player) {
+	public void onUse(Player spieler) {
 		textbox.addText(getResponse(LandscapeResponse.USE_RESPONSE));
-		player.setHP(150);
+		spieler.setHP(150);
 	}
 }
